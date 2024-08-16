@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
+      - run: apt-get install capnproto
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test:gen
