@@ -1,4 +1,4 @@
-# 🫡 capnp-es
+#  capnp-es
 
 <!-- automd:badges color=yellow -->
 
@@ -7,18 +7,16 @@
 
 <!-- /automd -->
 
-> [!WARNING]
-> WARNING: THIS IS ALPHA QUALITY SOFTWARE. USE AT YOUR OWN RISK. AUTHORS ARE NOT RESPONSIBLE FOR LOSS OF LIMB, LIFE, SANITY, OR RETIREMENT FUNDS DUE TO USE OF THIS SOFTWARE. Feedbacks and contributions are welcome.
+> TypeScript implementation of the [Cap'n Proto](https://capnproto.org) serialization protocol.
 
-TypeScript implementation of the [Cap'n Proto](https://capnproto.org) serialization protocol.
-
-Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. Think JSON, except binary. Or think [Protocol Buffers](https://github.com/protocolbuffers/protobuf), except faster. In fact, in benchmarks, Cap’n Proto is INFINITY TIMES faster than Protocol Buffers, because there is no encoding/decoding step!
-
-Start with the [Cap'n Proto Introduction](https://capnproto.org/index.html) for more detailed information on what this is about.
+Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. Think JSON, except binary. Or think [Protocol Buffers](https://github.com/protocolbuffers/protobuf), except faster. In fact, in benchmarks, Cap’n Proto is INFINITY TIMES faster than Protocol Buffers, because there is no encoding/decoding step. Start with the [Cap'n Proto Introduction](https://capnproto.org/index.html) for more detailed information on what this is about.
 
 ## Status
 
-This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by Julián Díaz and under development (honestly more a playground at this stage). Until version 1.x.x lands, the API can change from 0.x to 0.y version.
+> [!WARNING]
+> WARNING: THIS IS ALPHA QUALITY SOFTWARE. USE AT YOUR OWN RISK. AUTHORS ARE NOT RESPONSIBLE FOR LOSS OF LIMB, LIFE, SANITY, OR RETIREMENT FUNDS DUE TO THE USE OF THIS SOFTWARE. Feedback and contributions are welcome.
+
+This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by Julián Díaz and under development (honestly more a playground at this stage). Until version `1.x.x` lands, the API can change from `0.x` to `0.y`.
 
 - Serialization: working, may be missing features
 - Schema Compiler: working, may be missing features
@@ -27,14 +25,15 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 **<sup>1</sup> Changes from `capnp-ts`:**
 
 - [x] Internal refactors and simplifications as was playing around.
-- [x] Compiler, runtime and std lib published via a single and compact ESM-only package with subpath exports.
-- [x] Output files can be `.ts` (new), `.js` (ESM instead of CJS) and `.d.ts` and has no `.capnp` suffix.
-- [x] Compiler API can be used via `/compiler` subpath exports programmatically.
+- [x] Compiler, runtime, and std lib published via a single and compact ESM-only package with subpath exports.
+- [x] Output files can be `.ts` (new), `.js` (ESM instead of CJS), and `.d.ts` and has no `.capnp` suffix.
+- [x] Compiler API can be used via the `capnp-es/compiler` subpath export programmatically.
 - [ ] (planned) Use TextEncoder/TextDecoder for utf8
 - [ ] (planned) Investigate reducing runtime bundle impact
 - [ ] (planned) Use getter/setters for generated objects.
 - [ ] (planned) Standalone object exports.
 - [ ] (planned) Investigate RPC level 1 (some progress [here](https://github.com/jdiaz5513/capnp-ts/pull/169))
+- [ ] (planned) Investigate possibility of bundling wasm version of `capnpc`
 
 ## Usage
 
@@ -70,7 +69,7 @@ const struct = message.getRoot(MyStruct);
 <summary>local development</summary>
 
 - Clone this repository
-- Install latest LTS version of [Node.js](https://nodejs.org/en/)
+- Install the latest LTS version of [Node.js](https://nodejs.org/en/)
 - Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`
 - Install dependencies using `pnpm install`
 - Run interactive tests using `pnpm dev`
