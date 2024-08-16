@@ -1,8 +1,6 @@
 # Changelog
 
-
 ## v0.0.1
-
 
 ### 🏡 Chore
 
@@ -18,4 +16,3 @@
 ### ❤️ Contributors
 
 - Pooya Parsa ([@pi0](http://github.com/pi0))
-
