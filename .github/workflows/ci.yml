@@ -20,12 +20,14 @@ jobs:
           cache: "pnpm"
       - name: Install capnp
         run: |
+          cd /tmp &&
           curl -O https://capnproto.org/capnproto-c++-1.0.2.tar.gz &&
           tar zxf capnproto-c++-1.0.2.tar.gz &&
           cd capnproto-c++-1.0.2 &&
           ./configure &&
-          make -j6 check &&
-          sudo make install
+          make -j8 &&
+          sudo make install &&
+          rm -rf capnproto-c++-1.0.2.tar.gz capnproto-c++-1.0.2
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test:gen
