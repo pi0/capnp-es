@@ -1,4 +1,4 @@
-#  capnp-es
+# capnp-es
 
 <!-- automd:badges color=yellow -->
 
