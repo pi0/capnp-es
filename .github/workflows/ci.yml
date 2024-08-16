@@ -18,7 +18,14 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
-      - run: sudo apt-get install capnproto
+      - name: Install capnp
+        run: |
+          curl -O https://capnproto.org/capnproto-c++-1.0.2.tar.gz &&
+          tar zxf capnproto-c++-1.0.2.tar.gz &&
+          cd capnproto-c++-1.0.2 &&
+          ./configure &&
+          make -j6 check &&
+          sudo make install
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test:gen
