@@ -1,9 +1,9 @@
 # capnp-es
 
-<!-- automd:badges color=yellow -->
+<!-- automd:badges no-npmDownloads bundlephobia -->
 
-[![npm version](https://img.shields.io/npm/v/capnp-es?color=yellow)](https://npmjs.com/package/capnp-es)
-[![npm downloads](https://img.shields.io/npm/dm/capnp-es?color=yellow)](https://npmjs.com/package/capnp-es)
+[![npm version](https://img.shields.io/npm/v/capnp-es)](https://npmjs.com/package/capnp-es)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/capnp-es)](https://bundlephobia.com/package/capnp-es)
 
 <!-- /automd -->
 
