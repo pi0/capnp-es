@@ -1,0 +1,36 @@
+{
+  "people": [
+    {
+      "id": 456,
+      "name": "Alice",
+      "email": "alice@example.com",
+      "phones": [
+        {
+          "number": "555-1212",
+          "type": "mobile"
+        }
+      ],
+      "employment": {
+        "school": "MIT"
+      }
+    },
+    {
+      "id": 456,
+      "name": "Bob",
+      "email": "bob@example.com",
+      "phones": [
+        {
+          "number": "555-4567",
+          "type": "home"
+        },
+        {
+          "number": "555-7654",
+          "type": "work"
+        }
+      ],
+      "employment": {
+        "unemployed": null
+      }
+    }
+  ]
+}

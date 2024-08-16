@@ -1,0 +1,3 @@
+test/fixtures/*.*
+playground/*.{js,ts}
+playground/*.d.ts

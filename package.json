@@ -1,0 +1,71 @@
+{
+  "name": "capnp-es",
+  "version": "0.0.0",
+  "description": "",
+  "repository": "pi0/capnp-es",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./compiler": {
+      "types": "./dist/compiler/index.d.mts",
+      "default": "./dist/compiler/index.mjs"
+    },
+    "./std/*": {
+      "types": "./dist/std/*.d.mts",
+      "default": "./dist/std/*.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "capnp-es": "./dist/compiler/main.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "capnp-es": "node --import jiti/register ./src/compiler/main.ts",
+    "dev": "vitest dev",
+    "play": "capnpc -o- playground/addressbook.capnp | pnpm capnp-es",
+    "lint": "eslint . && prettier -c .",
+    "lint:fix": "automd && eslint . --fix && prettier -w .",
+    "prepack": "pnpm build",
+    "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
+    "test:gen": "capnpc -o- test/fixtures/*.capnp | pnpm capnp-es",
+    "test": "pnpm lint && pnpm test:gen && pnpm test:types && vitest run --coverage",
+    "test:types": "tsc --noEmit --skipLibCheck"
+  },
+  "dependencies": {
+    "hex2dec": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/benchmark": "^2.1.5",
+    "@types/hex2dec": "^1.1.4",
+    "@types/node": "^22.1.0",
+    "@vitest/coverage-v8": "^2.0.5",
+    "automd": "^0.3.8",
+    "benchmark": "^2.1.4",
+    "changelogen": "^0.5.5",
+    "esbuild": "^0.23.0",
+    "eslint": "^9.8.0",
+    "eslint-config-unjs": "^0.3.2",
+    "jiti": "^2.0.0-beta.3",
+    "mitata": "^0.1.11",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "unbuild": "^3.0.0-rc.7",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.0.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "pnpm@9.7.0"
+}

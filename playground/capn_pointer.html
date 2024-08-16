@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>JS Bin</title>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Cap'n Pointer</h1>
+          <h2 class="subtitle">
+            Enter a word of hex bytes <code>08 6d 00 00 9f ff 00 00</code> in
+            little endian order to interpret them as a pointer.
+          </h2>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="field">
+        <p class="control">
+          <input
+            id="ptr-input"
+            class="input"
+            type="text"
+            placeholder="Pointer bytes"
+          />
+        </p>
+      </div>
+      <div
+        class="notification is-danger"
+        id="ptr-invalid"
+        style="display: none"
+      >
+        Invalid pointer data! Please enter exactly 16 hexadecimal digits (spaces
+        are ignored).
+      </div>
+    </section>
+    <section class="section">
+      <table class="table is-bordered">
+        <tbody>
+          <tr id="row-type" class="is-selected">
+            <td>Pointer Type</td>
+            <td><code id="ptr-type">STRUCT</code></td>
+          </tr>
+          <tr id="row-offset">
+            <td>Offset Words</td>
+            <td><code id="ptr-offset">0x00000000</code></td>
+          </tr>
+          <tr id="row-struct-data-size">
+            <td>Struct Data Words</td>
+            <td><code id="ptr-struct-data-size">0x0000</code></td>
+          </tr>
+          <tr id="row-struct-pointers">
+            <td>Struct Pointer Count</td>
+            <td><code id="ptr-struct-pointers">0x0000</code></td>
+          </tr>
+          <tr id="row-list-size">
+            <td>List Element Size</td>
+            <td><code id="ptr-list-size">VOID</code></td>
+          </tr>
+          <tr id="row-list-length">
+            <td>List Length</td>
+            <td><code id="ptr-list-length">0x00000000</code></td>
+          </tr>
+          <tr id="row-double-far">
+            <td>Double Far</td>
+            <td><code id="ptr-double-far">NO</code></td>
+          </tr>
+          <tr id="row-far-offset">
+            <td>Far Target Offset</td>
+            <td><code id="ptr-far-offset">0x00000000</code></td>
+          </tr>
+          <tr id="row-far-segment">
+            <td>Far Target Segment</td>
+            <td><code id="ptr-far-segment">0x00000000</code></td>
+          </tr>
+          <tr id="row-cap-id">
+            <td>Capability Index</td>
+            <td><code id="ptr-cap-id">0x00000000</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <script>
+      var STRUCT_PTR = 0x00;
+      var LIST_PTR = 0x01;
+      var FAR_PTR = 0x02;
+      var OTHER_PTR = 0x03;
+      var VOID_LIST = 0x00;
+      var BIT_LIST = 0x01;
+      var BYTE_LIST = 0x02;
+      var BYTE_2_LIST = 0x03;
+      var BYTE_4_LIST = 0x04;
+      var BYTE_8_LIST = 0x05;
+      var POINTER_LIST = 0x06;
+      var COMPOSITE_LIST = 0x07;
+
+      var $$ = document.getElementById.bind(document);
+
+      var input = $$("ptr-input");
+      var invalidDiv = $$("ptr-invalid");
+      var typeRow = $$("row-type");
+      var typeEl = $$("ptr-type");
+      var offsetRow = $$("row-offset");
+      var offsetEl = $$("ptr-offset");
+      var structDataSizeRow = $$("row-struct-data-size");
+      var structDataSizeEl = $$("ptr-struct-data-size");
+      var structPointersRow = $$("row-struct-pointers");
+      var structPointersEl = $$("ptr-struct-pointers");
+      var listSizeRow = $$("row-list-size");
+      var listSizeEl = $$("ptr-list-size");
+      var listLengthRow = $$("row-list-length");
+      var listLengthEl = $$("ptr-list-length");
+      var doubleFarRow = $$("row-double-far");
+      var doubleFarEl = $$("ptr-double-far");
+      var farOffsetRow = $$("row-far-offset");
+      var farOffsetEl = $$("ptr-far-offset");
+      var farSegmentRow = $$("row-far-segment");
+      var farSegmentEl = $$("ptr-far-segment");
+      var capIdRow = $$("row-cap-id");
+      var capIdEl = $$("ptr-cap-id");
+
+      var PTR_TYPE_NAME = ["STRUCT", "LIST", "FAR", "OTHER"];
+      var LIST_SIZE_NAME = [
+        "VOID",
+        "BIT",
+        "BYTE",
+        "2 BYTES",
+        "4 BYTES",
+        "8 BYTES",
+        "POINTER",
+        "COMPOSITE",
+      ];
+
+      function pad(s, width, paddingChar) {
+        if (width === undefined) width = 8;
+
+        if (paddingChar === undefined) paddingChar = "0";
+
+        return s.length >= width
+          ? s
+          : new Array(width - s.length + 1).join(paddingChar) + s;
+      }
+
+      function formatHex(x, width) {
+        return "0x" + pad(x.toString(16), width);
+      }
+
+      function showWarning(m) {
+        invalidDiv.style.display = "inherit";
+        invalidDiv.innerHTML = m;
+      }
+
+      function hideWarning() {
+        invalidDiv.style.display = "none";
+      }
+
+      function setSelected(el, selected) {
+        if (selected) {
+          el.classList.add("is-selected");
+        } else {
+          el.classList.remove("is-selected");
+        }
+      }
+
+      input.addEventListener("input", function (ev) {
+        hideWarning();
+
+        var x = ev.target.value.toLowerCase().replace(/[^\da-f]/g, "");
+
+        if (x.length !== 16) {
+          showWarning(
+            "Invalid pointer data! Please enter exactly 16 hexadecimal digits (spaces are ignored).",
+          );
+
+          return;
+        }
+
+        var buf = new Uint8Array(8);
+        var dv = new DataView(buf.buffer);
+
+        for (var i = 0; i < 16; i += 2)
+          buf[i / 2] = parseInt(x.substring(i, i + 2), 16);
+
+        var lo = dv.getUint32(0, true);
+        var hi = dv.getUint32(4, true);
+
+        // pointer type
+
+        var pointerType = lo & 0x03;
+
+        setSelected(typeRow, true);
+        typeEl.innerHTML = PTR_TYPE_NAME[pointerType];
+
+        // offset words
+
+        var offset = lo >> 2;
+        offsetEl.innerHTML = formatHex(offset);
+
+        if (pointerType === STRUCT_PTR || pointerType === LIST_PTR) {
+          setSelected(offsetRow, true);
+        } else if (pointerType === OTHER_PTR) {
+          setSelected(offsetRow, true);
+
+          if (offset !== 0) {
+            showWarning(
+              "Possibly corrupt pointer data: interface pointers should always have an offset of zero!",
+            );
+          }
+        } else {
+          setSelected(offsetRow, false);
+        }
+
+        // struct data words
+
+        var structDataSize = dv.getUint16(4, true);
+        structDataSizeEl.innerHTML = formatHex(structDataSize, 4);
+        setSelected(structDataSizeRow, pointerType === STRUCT_PTR);
+
+        // struct pointer count
+
+        var structPointers = dv.getUint16(6, true);
+        structPointersEl.innerHTML = formatHex(structPointers, 4);
+        setSelected(structPointersRow, pointerType === STRUCT_PTR);
+
+        // list element size
+
+        var listSize = hi & 0x07;
+        listSizeEl.innerHTML = LIST_SIZE_NAME[listSize];
+        setSelected(listSizeRow, pointerType === LIST_PTR);
+
+        // list length
+
+        var listLength = hi >>> 3;
+        listLengthEl.innerHTML = formatHex(listLength);
+        setSelected(listLengthRow, pointerType === LIST_PTR);
+
+        // double far
+
+        var doubleFar = lo & 0x04;
+        doubleFarEl.innerHTML = doubleFar !== 0 ? "YES" : "NO";
+        setSelected(doubleFarRow, pointerType === FAR_PTR);
+
+        // far target offset
+
+        var farOffset = lo >>> 3;
+        farOffsetEl.innerHTML = formatHex(farOffset);
+        setSelected(farOffsetRow, pointerType === FAR_PTR);
+
+        // far target segment
+
+        var farSegment = hi;
+        farSegmentEl.innerHTML = formatHex(farSegment);
+        setSelected(farSegmentRow, pointerType === FAR_PTR);
+
+        // capability index
+
+        var capId = hi;
+        capIdEl.innerHTML = formatHex(capId);
+        setSelected(capIdRow, pointerType === OTHER_PTR);
+      });
+    </script>
+  </body>
+</html>
