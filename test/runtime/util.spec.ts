@@ -50,28 +50,6 @@ test("checkUint32()", () => {
   t.doesNotThrow(() => util.checkUint32(0));
 });
 
-test("decodeUtf8()", () => {
-  for (const { buf, str } of UTF8_BUFFERS) {
-    t.equal(util.decodeUtf8(buf), str);
-  }
-
-  for (const b of BAD_UTF8) {
-    t.throws(
-      () => util.decodeUtf8(b),
-      // new RangeError(RANGE_INVALID_UTF8)
-    );
-  }
-});
-
-// TODO
-// test("decodeUtf8(encodeUtf8())", () => {
-//   runTestCheck(
-//     t,
-//     property(gen.string, (s) => util.decodeUtf8(util.encodeUtf8(s)) === s),
-//     { numTests: 1000 },
-//   );
-// });
-
 test("dumpBuffer()", () => {
   const buf1 = new Uint8Array(64);
 
@@ -108,15 +86,6 @@ test("dumpBuffer()", () => {
 
   t.equal(util.dumpBuffer(buf2), buf2Wanted);
   t.equal(util.dumpBuffer(buf2.buffer), buf2Wanted);
-});
-
-test("encodeUtf8()", () => {
-  for (const { buf, str } of UTF8_BUFFERS) {
-    // The output buffer might be longer than its contents so we need to slice it.
-
-    const out = util.encodeUtf8(str);
-    compareBuffers(out.buffer.slice(0, out.byteLength), buf.buffer);
-  }
 });
 
 test("format()", () => {

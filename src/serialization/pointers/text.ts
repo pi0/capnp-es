@@ -1,10 +1,12 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
-import { decodeUtf8, encodeUtf8 } from "../../util";
 import { ListElementSize } from "../list-element-size";
 import { List, initList } from "./list";
 import { Pointer, validate, isNull, getContent, erase } from "./pointer";
 import { PointerType } from "./pointer-type";
+
+const textEncoder = new TextEncoder();
+const textDecoder = new TextDecoder();
 
 export class Text extends List<string> {
   static fromPointer(pointer: Pointer): Text {
@@ -27,7 +29,7 @@ export class Text extends List<string> {
 
     // Remember to exclude the NUL byte.
 
-    return decodeUtf8(
+    return textDecoder.decode(
       new Uint8Array(
         c.segment.buffer,
         c.byteOffset + index,
@@ -56,7 +58,7 @@ export class Text extends List<string> {
    */
 
   set(index: number, value: string): void {
-    const src = encodeUtf8(value);
+    const src = textEncoder.encode(value);
     const dstLength = src.byteLength + index;
     let c: Pointer;
     let original: Uint8Array | undefined;
