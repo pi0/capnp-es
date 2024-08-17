@@ -1,0 +1,31 @@
+syntax = "proto3";
+package pi0.capnpes.test;
+
+message AddressBook {
+  repeated Person people = 1;
+}
+
+message Person {
+  uint32 id = 1;
+  string name = 2;
+  string email = 3;
+
+  repeated PhoneNumber phones = 4;
+  message PhoneNumber {
+    string number = 1;
+    Type type = 2;
+    enum Type {
+      mobile = 0;
+      home = 1;
+      work = 2;
+    }
+  }
+
+  oneof employment {
+    string employer = 5;
+    string school = 6;
+    bool unemployed = 7;
+    bool selfEmployed = 8;
+  }
+}
+
