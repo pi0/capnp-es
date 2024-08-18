@@ -18,16 +18,16 @@ test("schema upgrade with legacy data", () => {
   const m = new capnp.Message();
   const u1 = m.initRoot(UpgradeV1);
 
-  u1.setLegacyId(0x55_55);
-  u1.setLegacyName("hi");
+  u1.legacyId = 0x55_55;
+  u1.legacyName = "hi";
 
   const v1Child = u1.initSelfReference();
-  v1Child.setLegacyId(0x66_66);
-  v1Child.setLegacyName("hihi");
+  v1Child.legacyId = 0x66_66;
+  v1Child.legacyName = "hihi";
 
   const v1ListChild = u1.initSelfReferences(1).get(0);
-  v1ListChild.setLegacyId(0x99_99);
-  v1ListChild.setLegacyName("hihihi");
+  v1ListChild.legacyId = 0x99_99;
+  v1ListChild.legacyName = "hihihi";
 
   const u2 = m.getRoot(UpgradeV2);
 
@@ -42,58 +42,50 @@ test("schema upgrade with legacy data", () => {
   );
 
   // t.comment("should still be able to access the legacy data from both classes");
-  t.equal(u1.getLegacyId(), 0x55_55);
-  t.equal(u1.getLegacyName(), "hi");
-  t.equal(u2.getLegacyId(), 0x55_55);
-  t.equal(u2.getLegacyName(), "hi");
+  t.equal(u1.legacyId, 0x55_55);
+  t.equal(u1.legacyName, "hi");
+  t.equal(u2.legacyId, 0x55_55);
+  t.equal(u2.legacyName, "hi");
 
   // t.comment("should be able to set new fields");
   t.doesNotThrow(() => {
-    u2.setNewHotnessId(0x77_77);
-    u2.setNewHotnessName("HI");
+    u2.newHotnessId = 0x77_77;
+    u2.newHotnessName = "HI";
   });
 
-  const v2Child = u2.getSelfReference();
+  const v2Child = u2.selfReference;
 
   // The child should have been resized now. Make sure the old contents were erased, the old data is still intact and
   // that there's room for the new fields now.
 
   t.doesNotThrow(() => {
-    v2Child.setNewHotnessId(0x88_88);
-    v2Child.setNewHotnessName("HIHI");
+    v2Child.newHotnessId = 0x88_88;
+    v2Child.newHotnessName = "HIHI";
   }, "should be able to set new child fields");
 
   t.ok(
     capnp.Pointer.isNull(v1Child),
     "should not be able to access the old child",
   );
+  t.equal(v2Child.legacyId, 0x66_66, "should preserve the child's legacy id");
   t.equal(
-    v2Child.getLegacyId(),
-    0x66_66,
-    "should preserve the child's legacy id",
-  );
-  t.equal(
-    v2Child.getLegacyName(),
+    v2Child.legacyName,
     "hihi",
     "should preserve the child's legacy name",
   );
 
   // Make sure that composite lists get resized too.
-  const v2ListChild = u2.getSelfReferences().get(0);
+  const v2ListChild = u2.selfReferences.get(0);
 
   t.doesNotThrow(() => {
-    v2ListChild.setNewHotnessId(0xaa_aa);
-    v2ListChild.setNewHotnessName("HIHIHI");
+    v2ListChild.newHotnessId = 0xaa_aa;
+    v2ListChild.newHotnessName = "HIHIHI";
   }, "should be able to set new composite list fields");
 
   // t.comment("should preserve composite list data");
+  t.equal(v2ListChild.legacyId, 0x99_99, "should preserve composite list data");
   t.equal(
-    v2ListChild.getLegacyId(),
-    0x99_99,
-    "should preserve composite list data",
-  );
-  t.equal(
-    v2ListChild.getLegacyName(),
+    v2ListChild.legacyName,
     "hihihi",
     "should preserve composite list data",
   );

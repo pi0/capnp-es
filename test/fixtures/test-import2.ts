@@ -14,9 +14,9 @@ export class TestImport2 extends $.Struct {
     $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
   disownFoo(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.getFoo());
+    return $.Struct.disown(this.foo);
   }
-  getFoo(): TestAllTypes {
+  get foo(): TestAllTypes {
     return $.Struct.getStruct(0, TestAllTypes, this);
   }
   hasFoo(): boolean {
@@ -25,16 +25,16 @@ export class TestImport2 extends $.Struct {
   initFoo(): TestAllTypes {
     return $.Struct.initStructAt(0, TestAllTypes, this);
   }
-  setFoo(value: TestAllTypes): void {
+  set foo(value: TestAllTypes) {
     $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   adoptBar(value: $.Orphan<Node>): void {
     $.Struct.adopt(value, $.Struct.getPointer(1, this));
   }
   disownBar(): $.Orphan<Node> {
-    return $.Struct.disown(this.getBar());
+    return $.Struct.disown(this.bar);
   }
-  getBar(): Node {
+  get bar(): Node {
     return $.Struct.getStruct(1, Node, this);
   }
   hasBar(): boolean {
@@ -43,16 +43,16 @@ export class TestImport2 extends $.Struct {
   initBar(): Node {
     return $.Struct.initStructAt(1, Node, this);
   }
-  setBar(value: Node): void {
+  set bar(value: Node) {
     $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
   }
   adoptBaz(value: $.Orphan<TestImport>): void {
     $.Struct.adopt(value, $.Struct.getPointer(2, this));
   }
   disownBaz(): $.Orphan<TestImport> {
-    return $.Struct.disown(this.getBaz());
+    return $.Struct.disown(this.baz);
   }
-  getBaz(): TestImport {
+  get baz(): TestImport {
     return $.Struct.getStruct(2, TestImport, this);
   }
   hasBaz(): boolean {
@@ -61,16 +61,16 @@ export class TestImport2 extends $.Struct {
   initBaz(): TestImport {
     return $.Struct.initStructAt(2, TestImport, this);
   }
-  setBaz(value: TestImport): void {
+  set baz(value: TestImport) {
     $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
   }
   adoptBox(value: $.Orphan<Node_Parameter>): void {
     $.Struct.adopt(value, $.Struct.getPointer(3, this));
   }
   disownBox(): $.Orphan<Node_Parameter> {
-    return $.Struct.disown(this.getBox());
+    return $.Struct.disown(this.box);
   }
-  getBox(): Node_Parameter {
+  get box(): Node_Parameter {
     return $.Struct.getStruct(3, Node_Parameter, this);
   }
   hasBox(): boolean {
@@ -79,16 +79,16 @@ export class TestImport2 extends $.Struct {
   initBox(): Node_Parameter {
     return $.Struct.initStructAt(3, Node_Parameter, this);
   }
-  setBox(value: Node_Parameter): void {
+  set box(value: Node_Parameter) {
     $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
   }
   adoptBee(value: $.Orphan<Node_NestedNode>): void {
     $.Struct.adopt(value, $.Struct.getPointer(4, this));
   }
   disownBee(): $.Orphan<Node_NestedNode> {
-    return $.Struct.disown(this.getBee());
+    return $.Struct.disown(this.bee);
   }
-  getBee(): Node_NestedNode {
+  get bee(): Node_NestedNode {
     return $.Struct.getStruct(4, Node_NestedNode, this);
   }
   hasBee(): boolean {
@@ -97,16 +97,16 @@ export class TestImport2 extends $.Struct {
   initBee(): Node_NestedNode {
     return $.Struct.initStructAt(4, Node_NestedNode, this);
   }
-  setBee(value: Node_NestedNode): void {
+  set bee(value: Node_NestedNode) {
     $.Struct.copyFrom(value, $.Struct.getPointer(4, this));
   }
   adoptBok(value: $.Orphan<Brand_Scope>): void {
     $.Struct.adopt(value, $.Struct.getPointer(5, this));
   }
   disownBok(): $.Orphan<Brand_Scope> {
-    return $.Struct.disown(this.getBok());
+    return $.Struct.disown(this.bok);
   }
-  getBok(): Brand_Scope {
+  get bok(): Brand_Scope {
     return $.Struct.getStruct(5, Brand_Scope, this);
   }
   hasBok(): boolean {
@@ -115,16 +115,16 @@ export class TestImport2 extends $.Struct {
   initBok(): Brand_Scope {
     return $.Struct.initStructAt(5, Brand_Scope, this);
   }
-  setBok(value: Brand_Scope): void {
+  set bok(value: Brand_Scope) {
     $.Struct.copyFrom(value, $.Struct.getPointer(5, this));
   }
   adoptBip(value: $.Orphan<Brand_Binding>): void {
     $.Struct.adopt(value, $.Struct.getPointer(6, this));
   }
   disownBip(): $.Orphan<Brand_Binding> {
-    return $.Struct.disown(this.getBip());
+    return $.Struct.disown(this.bip);
   }
-  getBip(): Brand_Binding {
+  get bip(): Brand_Binding {
     return $.Struct.getStruct(6, Brand_Binding, this);
   }
   hasBip(): boolean {
@@ -133,13 +133,13 @@ export class TestImport2 extends $.Struct {
   initBip(): Brand_Binding {
     return $.Struct.initStructAt(6, Brand_Binding, this);
   }
-  setBip(value: Brand_Binding): void {
+  set bip(value: Brand_Binding) {
     $.Struct.copyFrom(value, $.Struct.getPointer(6, this));
   }
-  getBep(): ElementSize {
+  get bep(): ElementSize {
     return $.Struct.getUint16(0, this) as ElementSize;
   }
-  setBep(value: ElementSize): void {
+  set bep(value: ElementSize) {
     $.Struct.setUint16(0, value, this);
   }
   toString(): string {

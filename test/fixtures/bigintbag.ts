@@ -9,28 +9,28 @@ export class BigIntBag extends $.Struct {
     defaultDefaultSigned: $.getInt64Mask(-BigInt("0xdb4da5f7ef412b1")),
     defaultDefaultUnsigned: $.getUint64Mask(BigInt("0xdb4da5f7ef412b1"))
   };
-  getSigned(): bigint {
+  get signed(): bigint {
     return $.Struct.getInt64(0, this);
   }
-  setSigned(value: bigint): void {
+  set signed(value: bigint) {
     $.Struct.setInt64(0, value, this);
   }
-  getUnsigned(): bigint {
+  get unsigned(): bigint {
     return $.Struct.getUint64(8, this);
   }
-  setUnsigned(value: bigint): void {
+  set unsigned(value: bigint) {
     $.Struct.setUint64(8, value, this);
   }
-  getDefaultSigned(): bigint {
+  get defaultSigned(): bigint {
     return $.Struct.getInt64(16, this, BigIntBag._capnp.defaultDefaultSigned);
   }
-  setDefaultSigned(value: bigint): void {
+  set defaultSigned(value: bigint) {
     $.Struct.setInt64(16, value, this, BigIntBag._capnp.defaultDefaultSigned);
   }
-  getDefaultUnsigned(): bigint {
+  get defaultUnsigned(): bigint {
     return $.Struct.getUint64(24, this, BigIntBag._capnp.defaultDefaultUnsigned);
   }
-  setDefaultUnsigned(value: bigint): void {
+  set defaultUnsigned(value: bigint) {
     $.Struct.setUint64(24, value, this, BigIntBag._capnp.defaultDefaultUnsigned);
   }
   toString(): string {

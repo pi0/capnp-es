@@ -12,9 +12,9 @@ export class TestImport extends $.Struct {
     $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
   disownField(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.getField());
+    return $.Struct.disown(this.field);
   }
-  getField(): TestAllTypes {
+  get field(): TestAllTypes {
     return $.Struct.getStruct(0, TestAllTypes, this);
   }
   hasField(): boolean {
@@ -23,13 +23,13 @@ export class TestImport extends $.Struct {
   initField(): TestAllTypes {
     return $.Struct.initStructAt(0, TestAllTypes, this);
   }
-  setField(value: TestAllTypes): void {
+  set field(value: TestAllTypes) {
     $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  getEnumField(): TestEnum {
+  get enumField(): TestEnum {
     return $.Struct.getUint16(0, this) as TestEnum;
   }
-  setEnumField(value: TestEnum): void {
+  set enumField(value: TestEnum) {
     $.Struct.setUint16(0, value, this);
   }
   toString(): string {

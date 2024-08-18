@@ -7,10 +7,10 @@ export class Foo extends $.Struct {
     id: "9e8e6186e9348688",
     size: new $.ObjectSize(0, 1)
   };
-  getBar(): string {
+  get bar(): string {
     return $.Struct.getText(0, this);
   }
-  setBar(value: string): void {
+  set bar(value: string) {
     $.Struct.setText(0, value, this);
   }
   toString(): string {

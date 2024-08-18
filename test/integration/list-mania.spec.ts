@@ -15,13 +15,13 @@ test("loop de loop", () => {
 
     listMania.initCompositeList(1);
 
-    const compositeList = listMania.getCompositeList();
+    const compositeList = listMania.compositeList;
     // TODO: Interfaces are not implemented yet.
     // const interfaceList = listMania.getInterfaceList();
 
-    compositeList.get(0).setSelf(listMania);
+    compositeList.get(0).self = listMania;
     compositeList.set(0, compositeList.get(0));
-    compositeList.get(0).setSelf(listMania);
+    compositeList.get(0).self = listMania;
 
     // t.comment("should zero out overwritten regions");
 
@@ -53,22 +53,22 @@ test("1 of each list", () => {
     listMania.initUint64List(1);
     listMania.initVoidList(1);
 
-    const boolList = listMania.getBoolList();
-    const compositeList = listMania.getCompositeList();
-    const dataList = listMania.getDataList();
-    const float32List = listMania.getFloat32List();
-    const float64List = listMania.getFloat64List();
-    const int8List = listMania.getInt8List();
-    const int16List = listMania.getInt16List();
-    const int32List = listMania.getInt32List();
-    const int64List = listMania.getInt64List();
-    const interfaceList = listMania.getInterfaceList();
-    const textList = listMania.getTextList();
-    const uint8List = listMania.getUint8List();
-    const uint16List = listMania.getUint16List();
-    const uint32List = listMania.getUint32List();
-    const uint64List = listMania.getUint64List();
-    const voidList = listMania.getVoidList();
+    const boolList = listMania.boolList;
+    const compositeList = listMania.compositeList;
+    const dataList = listMania.dataList;
+    const float32List = listMania.float32List;
+    const float64List = listMania.float64List;
+    const int8List = listMania.int8List;
+    const int16List = listMania.int16List;
+    const int32List = listMania.int32List;
+    const int64List = listMania.int64List;
+    const interfaceList = listMania.interfaceList;
+    const textList = listMania.textList;
+    const uint8List = listMania.uint8List;
+    const uint16List = listMania.uint16List;
+    const uint32List = listMania.uint32List;
+    const uint64List = listMania.uint64List;
+    const voidList = listMania.voidList;
 
     // Write some junk data to test erasure after disposal.
 

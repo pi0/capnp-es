@@ -34,11 +34,9 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 - [x] Use native `TextEncoder` and `TextDecoder` for utf8 encoding
 - [x] Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
 - [x] Compiler CLI can directly accept path to `.capnp` files and internally use `capnpc`
-- [ ] (planned) Investigate reducing runtime bundle impact
-- [ ] (planned) Use getter/setters for generated objects.
-- [ ] (planned) Standalone object exports.
+- [ ] (wip) Support reflection and getter setters to access objects.
 - [ ] (planned) Investigate RPC level 1 (some progress [here](https://github.com/jdiaz5513/capnp-ts/pull/169))
-- [ ] (planned) Investigate possibility of bundling wasm version of `capnpc`
+- [ ] (planned) Investigate possibility of bundling wasm version of `capnp`
 
 ## Usage
 

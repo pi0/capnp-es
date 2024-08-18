@@ -11,7 +11,7 @@ test("foo regression", () => {
   const oldMessage = new capnp.Message();
   const oldFoo = oldMessage.initRoot(OldFoo);
 
-  oldFoo.setBar("bar");
+  oldFoo.bar = "bar";
 
   const packed = Buffer.from(oldMessage.toPackedArrayBuffer());
 

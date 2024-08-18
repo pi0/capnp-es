@@ -8,6 +8,7 @@ import {
   createClassExtends,
   createConcreteListProperty,
   createConstProperty,
+  createExpressionBlock,
   createMethod,
   createNestedNodeProperty,
   createUnionConstProperty,
@@ -653,11 +654,7 @@ export function generateStructFieldMethods(
 
   // disownFoo(): capnp.Orphan<Foo> { return __S.disown(this.getFoo()); }
   if (disown) {
-    const getter = f.createCallExpression(
-      f.createPropertyAccessExpression(THIS, `get${properName}`),
-      undefined,
-      [],
-    );
+    const getter = f.createPropertyAccessExpression(THIS, name);
     const expressions = [
       f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "disown"),
@@ -691,7 +688,13 @@ export function generateStructFieldMethods(
     }
 
     members.push(
-      createMethod(`get${properName}`, [], jsTypeReference, expressions),
+      f.createGetAccessorDeclaration(
+        [],
+        name,
+        [],
+        jsTypeReference,
+        createExpressionBlock(expressions, true),
+      ),
     );
   }
 
@@ -787,8 +790,25 @@ export function generateStructFieldMethods(
       expressions.unshift(setDiscriminant);
     }
 
+    if (parameters.length === 0) {
+      parameters.unshift(
+        f.createParameterDeclaration(
+          undefined,
+          undefined,
+          "_",
+          undefined,
+          f.createTypeReferenceNode("true"),
+        ),
+      );
+    }
+
     members.push(
-      createMethod(`set${properName}`, parameters, VOID_TYPE, expressions),
+      f.createSetAccessorDeclaration(
+        [],
+        name,
+        parameters,
+        createExpressionBlock(expressions, false),
+      ),
     );
   }
 }

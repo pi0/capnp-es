@@ -13,9 +13,9 @@ export class Foo extends $.Struct {
     $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
   disownBaz(): $.Orphan<Baz> {
-    return $.Struct.disown(this.getBaz());
+    return $.Struct.disown(this.baz);
   }
-  getBaz(): Baz {
+  get baz(): Baz {
     return $.Struct.getStruct(0, Baz, this);
   }
   hasBaz(): boolean {
@@ -24,7 +24,7 @@ export class Foo extends $.Struct {
   initBaz(): Baz {
     return $.Struct.initStructAt(0, Baz, this);
   }
-  setBaz(value: Baz): void {
+  set baz(value: Baz) {
     $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {

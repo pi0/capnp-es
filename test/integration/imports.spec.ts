@@ -8,7 +8,7 @@ import { Foo } from "../fixtures/import-foo.ts";
 
 test("schema imports", () => {
   t.doesNotThrow(() => {
-    new capnp.Message().initRoot(Baz).setBar("bar");
-    new capnp.Message().initRoot(Foo).initBaz().setBar("bar");
+    new capnp.Message().initRoot(Baz).bar = "bar";
+    new capnp.Message().initRoot(Foo).initBaz().bar = "bar";
   });
 });

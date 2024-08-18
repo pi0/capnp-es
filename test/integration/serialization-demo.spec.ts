@@ -4,7 +4,11 @@ import { test, assert as t } from "vitest";
 
 import * as capnp from "capnp-es";
 import { compareBuffers, readFileBuffer } from "test/utils";
-import { AddressBook, Person } from "./serialization-demo";
+import {
+  AddressBook,
+  Person,
+  Person_Employment_Which,
+} from "test/fixtures/serialization-demo";
 
 const SERIALIZATION_DEMO = readFileBuffer(
   "test/fixtures/data/serialization-demo.bin",
@@ -18,28 +22,27 @@ test("write address book", () => {
 
   const people = addressBook.initPeople(2);
 
-  // t.type(people, AddressBook.People);
+  // t.type(people, AddressBook.people);
 
   const alice = people.get(0);
 
   // t.type(alice, Person);
-
-  alice.setId(456);
-  alice.setName("Alice");
-  alice.setEmail("alice@example.com");
+  alice.id = 456;
+  alice.name = "Alice";
+  alice.email = "alice@example.com";
 
   // t.comment("should not crash while calling setters");
 
   const alicePhones = alice.initPhones(1);
 
-  // t.type(alicePhones, Person.Phones);
+  // t.type(alicePhones, Person.phones);
 
-  alicePhones.get(0).setNumber("555-1212");
-  alicePhones.get(0).setType(Person.PhoneNumber.Type.MOBILE);
+  alicePhones.get(0).number = "555-1212";
+  alicePhones.get(0).type = Person.PhoneNumber.Type.MOBILE;
 
   // t.comment("should not crash while chaining getter calls");
 
-  alice.getEmployment().setSchool("MIT");
+  alice.employment.school = "MIT";
 
   // t.comment("should not crash while accessing groups and unions");
 
@@ -47,9 +50,9 @@ test("write address book", () => {
 
   // t.type(bob, Person);
 
-  bob.setId(456);
-  bob.setName("Bob");
-  bob.setEmail("bob@example.com");
+  bob.id = 456;
+  bob.name = "Bob";
+  bob.email = "bob@example.com";
 
   // t.comment(
   //   "should not crash while calling setters on composite struct with nonzero index",
@@ -57,16 +60,16 @@ test("write address book", () => {
 
   const bobPhones = bob.initPhones(2);
 
-  // t.type(bobPhones, Person.Phones);
+  // t.type(bobPhones, Person.phones);
 
-  bobPhones.get(0).setNumber("555-4567");
-  bobPhones.get(0).setType(Person.PhoneNumber.Type.HOME);
-  bobPhones.get(1).setNumber("555-7654");
-  bobPhones.get(1).setType(Person.PhoneNumber.Type.WORK);
+  bobPhones.get(0).number = "555-4567";
+  bobPhones.get(0).type = Person.PhoneNumber.Type.HOME;
+  bobPhones.get(1).number = "555-7654";
+  bobPhones.get(1).type = Person.PhoneNumber.Type.WORK;
 
   // t.comment("should not crash while chaining getters");
 
-  bob.getEmployment().setUnemployed();
+  bob.employment.unemployed = true;
 
   // t.comment("should not crash while setting void union");
 
@@ -80,47 +83,47 @@ test("read address book", () => {
 
   const addressBook = message.getRoot(AddressBook);
 
-  const people = addressBook.getPeople();
+  const people = addressBook.people;
 
   t.equal(people.getLength(), 2);
 
   const alice = people.get(0);
 
-  t.equal(alice.getId(), 456);
-  t.equal(alice.getName(), "Alice");
-  t.equal(alice.getEmail(), "alice@example.com");
+  t.equal(alice.id, 456);
+  t.equal(alice.name, "Alice");
+  t.equal(alice.email, "alice@example.com");
 
-  const alicePhones = alice.getPhones();
+  const alicePhones = alice.phones;
 
   t.equal(alicePhones.getLength(), 1);
 
-  t.equal(alicePhones.get(0).getNumber(), "555-1212");
-  t.equal(alicePhones.get(0).getType(), Person.PhoneNumber.Type.MOBILE);
+  t.equal(alicePhones.get(0).number, "555-1212");
+  t.equal(alicePhones.get(0).type, Person.PhoneNumber.Type.MOBILE);
 
-  const aliceEmployment = alice.getEmployment();
+  const aliceEmployment = alice.employment;
 
-  t.equal(aliceEmployment.which(), Person.Employment.SCHOOL);
+  t.equal(aliceEmployment.which(), Person_Employment_Which.SCHOOL);
   t.ok(aliceEmployment.isSchool());
-  t.equal(aliceEmployment.getSchool(), "MIT");
+  t.equal(aliceEmployment.school, "MIT");
 
   const bob = people.get(1);
 
-  t.equal(bob.getId(), 456);
-  t.equal(bob.getName(), "Bob");
-  t.equal(bob.getEmail(), "bob@example.com");
+  t.equal(bob.id, 456);
+  t.equal(bob.name, "Bob");
+  t.equal(bob.email, "bob@example.com");
 
-  const bobPhones = bob.getPhones();
+  const bobPhones = bob.phones;
 
   t.equal(bobPhones.getLength(), 2);
 
-  t.equal(bobPhones.get(0).getNumber(), "555-4567");
-  t.equal(bobPhones.get(0).getType(), Person.PhoneNumber.Type.HOME);
-  t.equal(bobPhones.get(1).getNumber(), "555-7654");
-  t.equal(bobPhones.get(1).getType(), Person.PhoneNumber.Type.WORK);
+  t.equal(bobPhones.get(0).number, "555-4567");
+  t.equal(bobPhones.get(0).type, Person.PhoneNumber.Type.HOME);
+  t.equal(bobPhones.get(1).number, "555-7654");
+  t.equal(bobPhones.get(1).type, Person.PhoneNumber.Type.WORK);
 
-  const bobEmployment = bob.getEmployment();
+  const bobEmployment = bob.employment;
 
-  t.equal(bobEmployment.which(), Person.Employment.UNEMPLOYED);
+  t.equal(bobEmployment.which(), Person_Employment_Which.UNEMPLOYED);
   t.ok(bobEmployment.isUnemployed());
 });
 
@@ -130,22 +133,22 @@ test("copy pointers from other message", () => {
   const people1 = addressBook1.initPeople(2);
   const alice1 = people1.get(1);
 
-  alice1.setName("Alice");
-  alice1.setEmail("alice@example.com");
-  alice1.setId(456);
+  alice1.name = "Alice";
+  alice1.email = "alice@example.com";
+  alice1.id = 456;
 
   const message2 = new capnp.Message();
   const addressBook2 = message2.initRoot(AddressBook);
 
-  addressBook2.setPeople(people1);
+  addressBook2.people = people1;
 
-  const people2 = addressBook2.getPeople();
+  const people2 = addressBook2.people;
   const alice2 = people2.get(1);
 
   t.equal(people2.getLength(), 2);
-  t.equal(alice2.getName(), "Alice");
-  t.equal(alice2.getEmail(), "alice@example.com");
-  t.equal(alice2.getId(), 456);
+  t.equal(alice2.name, "Alice");
+  t.equal(alice2.email, "alice@example.com");
+  t.equal(alice2.id, 456);
 });
 
 test("adoption", () => {
@@ -155,9 +158,9 @@ test("adoption", () => {
   const people1 = addressBook.initPeople(1);
   const alice1 = people1.get(0);
 
-  alice1.setName("Alice");
-  alice1.setEmail("alice@example.com");
-  alice1.setId(456);
+  alice1.name = "Alice";
+  alice1.email = "alice@example.com";
+  alice1.id = 456;
 
   const o = addressBook.disownPeople();
 
@@ -171,13 +174,13 @@ test("adoption", () => {
 
   addressBook.adoptPeople(o);
 
-  const people2 = addressBook.getPeople();
+  const people2 = addressBook.people;
   const alice2 = people2.get(0);
 
-  t.equal(alice2.getName(), "Alice");
-  t.equal(alice2.getEmail(), "alice@example.com");
-  t.equal(alice2.getId(), 456);
-  t.equal(alice1.getId(), 456);
+  t.equal(alice2.name, "Alice");
+  t.equal(alice2.email, "alice@example.com");
+  t.equal(alice2.id, 456);
+  t.equal(alice1.id, 456);
 
   t.throws(
     () => addressBook.adoptPeople(o),
@@ -191,8 +194,8 @@ test("overwrite", () => {
   const addressBook = m.initRoot(AddressBook);
   const alice = addressBook.initPeople(1).get(0);
 
-  alice.setName("Alex");
-  alice.setName("Alice");
+  alice.name = "Alex";
+  alice.name = "Alice";
 
   t.ok(s.isWordZero(0x40), "should zero out the old string");
 

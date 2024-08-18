@@ -8,25 +8,25 @@ export class Upgrade extends $.Struct {
     size: new $.ObjectSize(8, 3)
   };
   static _SelfReferences: $.ListCtor<Upgrade>;
-  getLegacyName(): string {
+  get legacyName(): string {
     return $.Struct.getText(0, this);
   }
-  setLegacyName(value: string): void {
+  set legacyName(value: string) {
     $.Struct.setText(0, value, this);
   }
-  getLegacyId(): number {
+  get legacyId(): number {
     return $.Struct.getInt32(0, this);
   }
-  setLegacyId(value: number): void {
+  set legacyId(value: number) {
     $.Struct.setInt32(0, value, this);
   }
   adoptSelfReference(value: $.Orphan<Upgrade>): void {
     $.Struct.adopt(value, $.Struct.getPointer(1, this));
   }
   disownSelfReference(): $.Orphan<Upgrade> {
-    return $.Struct.disown(this.getSelfReference());
+    return $.Struct.disown(this.selfReference);
   }
-  getSelfReference(): Upgrade {
+  get selfReference(): Upgrade {
     return $.Struct.getStruct(1, Upgrade, this);
   }
   hasSelfReference(): boolean {
@@ -35,16 +35,16 @@ export class Upgrade extends $.Struct {
   initSelfReference(): Upgrade {
     return $.Struct.initStructAt(1, Upgrade, this);
   }
-  setSelfReference(value: Upgrade): void {
+  set selfReference(value: Upgrade) {
     $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
   }
   adoptSelfReferences(value: $.Orphan<$.List<Upgrade>>): void {
     $.Struct.adopt(value, $.Struct.getPointer(2, this));
   }
   disownSelfReferences(): $.Orphan<$.List<Upgrade>> {
-    return $.Struct.disown(this.getSelfReferences());
+    return $.Struct.disown(this.selfReferences);
   }
-  getSelfReferences(): $.List<Upgrade> {
+  get selfReferences(): $.List<Upgrade> {
     return $.Struct.getList(2, Upgrade._SelfReferences, this);
   }
   hasSelfReferences(): boolean {
@@ -53,7 +53,7 @@ export class Upgrade extends $.Struct {
   initSelfReferences(length: number): $.List<Upgrade> {
     return $.Struct.initList(2, Upgrade._SelfReferences, length, this);
   }
-  setSelfReferences(value: $.List<Upgrade>): void {
+  set selfReferences(value: $.List<Upgrade>) {
     $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
   }
   toString(): string {

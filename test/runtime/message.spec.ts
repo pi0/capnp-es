@@ -10,7 +10,7 @@ import {
   preallocateSegments,
 } from "src/serialization/message";
 
-import { Person } from "../integration/serialization-demo";
+import { Person } from "test/fixtures/serialization-demo";
 
 const SEGMENTED_PACKED = readFileBuffer(
   "test/fixtures/data/segmented-packed.bin",
@@ -207,7 +207,9 @@ test("Message.onCreatePointer()", () => {
 
   t.throws(
     () => {
-      for (let i = 0; i < C.DEFAULT_TRAVERSE_LIMIT + 1; i++) p.getPhones();
+      for (let i = 0; i < C.DEFAULT_TRAVERSE_LIMIT + 1; i++) {
+        p.phones;
+      }
     },
     // "should throw when exceeding the pointer traversal limit",
   );

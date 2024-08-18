@@ -11,18 +11,18 @@ test("64 bit with bigint support", () => {
   const unsigned = BigInt("999999");
   const signed = BigInt("-999999");
 
-  t.equal(b.getSigned(), BigInt(0));
-  t.equal(b.getUnsigned(), BigInt(0));
-  t.equal(b.getDefaultSigned(), BigInt("-987654321987654321"));
-  t.equal(b.getDefaultUnsigned(), BigInt("987654321987654321"));
+  t.equal(b.signed, BigInt(0));
+  t.equal(b.unsigned, BigInt(0));
+  t.equal(b.defaultSigned, BigInt("-987654321987654321"));
+  t.equal(b.defaultUnsigned, BigInt("987654321987654321"));
 
-  b.setSigned(signed);
-  b.setUnsigned(unsigned);
-  b.setDefaultSigned(signed);
-  b.setDefaultUnsigned(unsigned);
+  b.signed = signed;
+  b.unsigned = unsigned;
+  b.defaultSigned = signed;
+  b.defaultUnsigned = unsigned;
 
-  t.equal(b.getUnsigned(), unsigned);
-  t.equal(b.getSigned(), signed);
-  t.equal(b.getDefaultSigned(), signed);
-  t.equal(b.getDefaultUnsigned(), unsigned);
+  t.equal(b.unsigned, unsigned);
+  t.equal(b.signed, signed);
+  t.equal(b.defaultSigned, signed);
+  t.equal(b.defaultUnsigned, unsigned);
 });
