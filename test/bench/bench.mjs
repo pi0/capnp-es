@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { group, bench, run } from "mitata";
+import { group, baseline, bench, run } from "mitata";
 import * as capnp from "capnp-es";
+import * as capnpts from "capnp-ts";
 import protobuf from "protobufjs";
 
 // JSON
@@ -20,6 +21,7 @@ const protobufData = protobufType.encode(protobufType.create(jsonObj)).finish();
 
 // Capnp
 const { AddressBook: capnpStruct } = await import("./data/capnp/data.js");
+const { AddressBook: capnptsStruct } = await import("./data/capnp/data-ts.cjs");
 const capnpUrl = new URL("data/capnp/data-flat.bin", import.meta.url);
 const capnpData = await readFile(capnpUrl).then((r) => new Uint8Array(r));
 
@@ -31,8 +33,12 @@ const capnpData = await readFile(capnpUrl).then((r) => new Uint8Array(r));
 // });
 
 group("parse", () => {
-  bench("capnp.Message(<buff>).getRoot()", () => {
+  baseline("capnp-es.Message(<buff>).getRoot()", () => {
     new capnp.Message(capnpData, false, true).getRoot(capnpStruct);
+  });
+
+  bench("capnp-ts.Message(<buff>).getRoot()", () => {
+    new capnpts.Message(capnpData, false, true).getRoot(capnptsStruct);
   });
 
   bench("protobuf.decode(<buff>)", () => {
@@ -49,9 +55,15 @@ group("parse", () => {
 });
 
 group("top level list length access", () => {
-  bench("capnp.Message(<buff>)", () => {
+  baseline("capnp-es.Message(<buff>)", () => {
     const message = new capnp.Message(capnpData, false, true);
     const addressBook = message.getRoot(capnpStruct);
+    addressBook.getPeople().getLength().toFixed(0);
+  });
+
+  bench("capnp-ts.Message(<buff>)", () => {
+    const message = new capnpts.Message(capnpData, false, true);
+    const addressBook = message.getRoot(capnptsStruct);
     addressBook.getPeople().getLength().toFixed(0);
   });
 
@@ -72,9 +84,24 @@ group("top level list length access", () => {
 });
 
 group("iteration over deeply nested lists", () => {
-  bench("capnp.Message(<buff>)", () => {
+  baseline("capnp-es.Message(<buff>)", () => {
     const message = new capnp.Message(capnpData, false, true);
     const addressBook = message.getRoot(capnpStruct);
+    // eslint-disable-next-line unicorn/no-array-for-each
+    addressBook.getPeople().forEach((person) => {
+      person.getId().toFixed(0);
+      person.getName().toUpperCase();
+      person.getEmail().toUpperCase();
+      // eslint-disable-next-line unicorn/no-array-for-each
+      person.getPhones().forEach((phone) => {
+        phone.getNumber().toUpperCase();
+      });
+    });
+  });
+
+  bench("capnp-ts.Message(<buff>)", () => {
+    const message = new capnpts.Message(capnpData, false, true);
+    const addressBook = message.getRoot(capnptsStruct);
     // eslint-disable-next-line unicorn/no-array-for-each
     addressBook.getPeople().forEach((person) => {
       person.getId().toFixed(0);
