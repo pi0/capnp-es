@@ -1,27 +1,9 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import { test, assert as t } from "vitest";
-import { compareBuffers } from "test/utils";
 import * as C from "src/constants";
 // import { RANGE_INVALID_UTF8 } from "src/errors";
 import * as util from "src/util";
-
-const BAD_UTF8 = [
-  new Uint8Array([0xff, 0xff]),
-  new Uint8Array([0xf4, 0xaf, 0x92, 0xa9]),
-  new Uint8Array([0xc3]),
-  new Uint8Array([0xe0]),
-  new Uint8Array([0xe0, 0xbc]),
-  new Uint8Array([0xf0]),
-  new Uint8Array([0xf0, 0x9f]),
-  new Uint8Array([0xf0, 0x9f, 0x92]),
-];
-const UTF8_BUFFERS = [
-  { buf: new Uint8Array([0x21]), str: "!" },
-  { buf: new Uint8Array([0xc3, 0xad]), str: "í" },
-  { buf: new Uint8Array([0xe0, 0xbc, 0x80]), str: "ༀ" },
-  { buf: new Uint8Array([0xf0, 0x9f, 0x92, 0xa9]), str: "💩" },
-];
 
 test("bufferToHex()", () => {
   t.equal(
