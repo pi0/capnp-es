@@ -69,18 +69,6 @@ const message = capnp.Message.fromArrayBuffer(buffer);
 const struct = message.getRoot(MyStruct);
 ```
 
-## Benchmarks
-
-In theory, since capnp does not needs any serialization and deserialization, it is INFINITY TIMES faster than any other protocol as "parse" only happens on field access.
-
-To be more fair, we [benchmark](./test//benchmark) by accessing fields in different ways. It is still up to **%65** faster even on a small JSON payload than `JSON.parse`.
-
-You can run benchmarks locally using `bench:node` and `bench:bun` scripts.
-
-<!-- <details>
-<summary>results</summary>
-</details> -->
-
 ## Development
 
 <details>
