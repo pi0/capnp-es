@@ -31,8 +31,8 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "bench:node": "node --import jiti/register ./test/bench/bench.mjs",
-    "bench:bun": "bun run ./test/bench/bench.mjs",
+    "bench:node": "node --import jiti/register ./test/bench/bench.ts",
+    "bench:bun": "bun run ./test/bench/bench.ts",
     "capnp-es": "node --import jiti/register ./src/compiler/main.ts",
     "dev": "vitest dev",
     "lint": "eslint . && prettier -c .",

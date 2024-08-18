@@ -1,5 +1,5 @@
 syntax = "proto3";
-package pi0.capnpes.test;
+package pi0.test;
 
 message AddressBook {
   repeated Person people = 1;

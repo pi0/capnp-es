@@ -5,27 +5,28 @@ export const Person_PhoneNumber_Type = {
   MOBILE: 0,
   HOME: 1,
   WORK: 2
-};
+} as const;
+export type Person_PhoneNumber_Type = (typeof Person_PhoneNumber_Type)[keyof typeof Person_PhoneNumber_Type];
 export class Person_PhoneNumber extends $.Struct {
-  static Type = Person_PhoneNumber_Type;
-  static _capnp = {
+  static readonly Type = Person_PhoneNumber_Type;
+  static readonly _capnp = {
     displayName: "PhoneNumber",
     id: "af663da31c027e0e",
     size: new $.ObjectSize(8, 1)
   };
-  get number() {
+  get number(): string {
     return $.Struct.getText(0, this);
   }
-  set number(value) {
+  set number(value: string) {
     $.Struct.setText(0, value, this);
   }
-  get type() {
-    return $.Struct.getUint16(0, this);
+  get type(): Person_PhoneNumber_Type {
+    return $.Struct.getUint16(0, this) as Person_PhoneNumber_Type;
   }
-  set type(value) {
+  set type(value: Person_PhoneNumber_Type) {
     $.Struct.setUint16(0, value, this);
   }
-  toString() {
+  toString(): string {
     return "Person_PhoneNumber_" + super.toString();
   }
 }
@@ -34,138 +35,139 @@ export const Person_Employment_Which = {
   EMPLOYER: 1,
   SCHOOL: 2,
   SELF_EMPLOYED: 3
-};
+} as const;
+export type Person_Employment_Which = (typeof Person_Employment_Which)[keyof typeof Person_Employment_Which];
 export class Person_Employment extends $.Struct {
-  static UNEMPLOYED = Person_Employment_Which.UNEMPLOYED;
-  static EMPLOYER = Person_Employment_Which.EMPLOYER;
-  static SCHOOL = Person_Employment_Which.SCHOOL;
-  static SELF_EMPLOYED = Person_Employment_Which.SELF_EMPLOYED;
-  static _capnp = {
+  static readonly UNEMPLOYED = Person_Employment_Which.UNEMPLOYED;
+  static readonly EMPLOYER = Person_Employment_Which.EMPLOYER;
+  static readonly SCHOOL = Person_Employment_Which.SCHOOL;
+  static readonly SELF_EMPLOYED = Person_Employment_Which.SELF_EMPLOYED;
+  static readonly _capnp = {
     displayName: "employment",
     id: "e88780a90af3da0c",
     size: new $.ObjectSize(8, 4)
   };
-  isUnemployed() {
+  isUnemployed(): boolean {
     return $.Struct.getUint16(4, this) === 0;
   }
-  set unemployed(_) {
+  set unemployed(_: true) {
     $.Struct.setUint16(4, 0, this);
   }
-  get employer() {
+  get employer(): string {
     $.Struct.testWhich("employer", $.Struct.getUint16(4, this), 1, this);
     return $.Struct.getText(3, this);
   }
-  isEmployer() {
+  isEmployer(): boolean {
     return $.Struct.getUint16(4, this) === 1;
   }
-  set employer(value) {
+  set employer(value: string) {
     $.Struct.setUint16(4, 1, this);
     $.Struct.setText(3, value, this);
   }
-  get school() {
+  get school(): string {
     $.Struct.testWhich("school", $.Struct.getUint16(4, this), 2, this);
     return $.Struct.getText(3, this);
   }
-  isSchool() {
+  isSchool(): boolean {
     return $.Struct.getUint16(4, this) === 2;
   }
-  set school(value) {
+  set school(value: string) {
     $.Struct.setUint16(4, 2, this);
     $.Struct.setText(3, value, this);
   }
-  isSelfEmployed() {
+  isSelfEmployed(): boolean {
     return $.Struct.getUint16(4, this) === 3;
   }
-  set selfEmployed(_) {
+  set selfEmployed(_: true) {
     $.Struct.setUint16(4, 3, this);
   }
-  toString() {
+  toString(): string {
     return "Person_Employment_" + super.toString();
   }
-  which() {
-    return $.Struct.getUint16(4, this);
+  which(): Person_Employment_Which {
+    return $.Struct.getUint16(4, this) as Person_Employment_Which;
   }
 }
 export class Person extends $.Struct {
-  static PhoneNumber = Person_PhoneNumber;
-  static _capnp = {
+  static readonly PhoneNumber = Person_PhoneNumber;
+  static readonly _capnp = {
     displayName: "Person",
     id: "d94307c4985be8e7",
     size: new $.ObjectSize(8, 4)
   };
-  static _Phones;
-  get id() {
+  static _Phones: $.ListCtor<Person_PhoneNumber>;
+  get id(): number {
     return $.Struct.getUint32(0, this);
   }
-  set id(value) {
+  set id(value: number) {
     $.Struct.setUint32(0, value, this);
   }
-  get name() {
+  get name(): string {
     return $.Struct.getText(0, this);
   }
-  set name(value) {
+  set name(value: string) {
     $.Struct.setText(0, value, this);
   }
-  get email() {
+  get email(): string {
     return $.Struct.getText(1, this);
   }
-  set email(value) {
+  set email(value: string) {
     $.Struct.setText(1, value, this);
   }
-  adoptPhones(value) {
+  adoptPhones(value: $.Orphan<$.List<Person_PhoneNumber>>): void {
     $.Struct.adopt(value, $.Struct.getPointer(2, this));
   }
-  disownPhones() {
+  disownPhones(): $.Orphan<$.List<Person_PhoneNumber>> {
     return $.Struct.disown(this.phones);
   }
-  get phones() {
+  get phones(): $.List<Person_PhoneNumber> {
     return $.Struct.getList(2, Person._Phones, this);
   }
-  hasPhones() {
+  hasPhones(): boolean {
     return !$.Struct.isNull($.Struct.getPointer(2, this));
   }
-  initPhones(length) {
+  initPhones(length: number): $.List<Person_PhoneNumber> {
     return $.Struct.initList(2, Person._Phones, length, this);
   }
-  set phones(value) {
+  set phones(value: $.List<Person_PhoneNumber>) {
     $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
   }
-  get employment() {
+  get employment(): Person_Employment {
     return $.Struct.getAs(Person_Employment, this);
   }
-  initEmployment() {
+  initEmployment(): Person_Employment {
     return $.Struct.getAs(Person_Employment, this);
   }
-  toString() {
+  toString(): string {
     return "Person_" + super.toString();
   }
 }
 export class AddressBook extends $.Struct {
-  static _capnp = {
+  static readonly _capnp = {
     displayName: "AddressBook",
     id: "c06ea6d038a357bb",
     size: new $.ObjectSize(0, 1)
   };
-  static _People;
-  adoptPeople(value) {
+  static _People: $.ListCtor<Person>;
+  adoptPeople(value: $.Orphan<$.List<Person>>): void {
     $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownPeople() {
+  disownPeople(): $.Orphan<$.List<Person>> {
     return $.Struct.disown(this.people);
   }
-  get people() {
+  get people(): $.List<Person> {
     return $.Struct.getList(0, AddressBook._People, this);
   }
-  hasPeople() {
+  hasPeople(): boolean {
     return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  initPeople(length) {
+  initPeople(length: number): $.List<Person> {
     return $.Struct.initList(0, AddressBook._People, length, this);
   }
-  set people(value) {
+  set people(value: $.List<Person>) {
     $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  toString() {
+  toString(): string {
     return "AddressBook_" + super.toString();
   }
 }
