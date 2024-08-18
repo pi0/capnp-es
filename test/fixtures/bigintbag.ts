@@ -2,14 +2,38 @@
 import * as capnp from "capnp-es";
 export const _capnpFileId = BigInt("0xe3fca095c1cb2e87");
 export class BigIntBag extends capnp.Struct {
-    static readonly _capnp = { displayName: "BigIntBag", id: "86748469b18e4943", size: new capnp.ObjectSize(32, 0), defaultDefaultSigned: capnp.getInt64Mask(-BigInt("0xdb4da5f7ef412b1")), defaultDefaultUnsigned: capnp.getUint64Mask(BigInt("0xdb4da5f7ef412b1")) };
-    getSigned(): bigint { return capnp.Struct.getInt64(0, this); }
-    setSigned(value: bigint): void { capnp.Struct.setInt64(0, value, this); }
-    getUnsigned(): bigint { return capnp.Struct.getUint64(8, this); }
-    setUnsigned(value: bigint): void { capnp.Struct.setUint64(8, value, this); }
-    getDefaultSigned(): bigint { return capnp.Struct.getInt64(16, this, BigIntBag._capnp.defaultDefaultSigned); }
-    setDefaultSigned(value: bigint): void { capnp.Struct.setInt64(16, value, this, BigIntBag._capnp.defaultDefaultSigned); }
-    getDefaultUnsigned(): bigint { return capnp.Struct.getUint64(24, this, BigIntBag._capnp.defaultDefaultUnsigned); }
-    setDefaultUnsigned(value: bigint): void { capnp.Struct.setUint64(24, value, this, BigIntBag._capnp.defaultDefaultUnsigned); }
-    toString(): string { return "BigIntBag_" + super.toString(); }
+  static readonly _capnp = {
+    displayName: "BigIntBag",
+    id: "86748469b18e4943",
+    size: new capnp.ObjectSize(32, 0),
+    defaultDefaultSigned: capnp.getInt64Mask(-BigInt("0xdb4da5f7ef412b1")),
+    defaultDefaultUnsigned: capnp.getUint64Mask(BigInt("0xdb4da5f7ef412b1"))
+  };
+  getSigned(): bigint {
+    return capnp.Struct.getInt64(0, this);
+  }
+  setSigned(value: bigint): void {
+    capnp.Struct.setInt64(0, value, this);
+  }
+  getUnsigned(): bigint {
+    return capnp.Struct.getUint64(8, this);
+  }
+  setUnsigned(value: bigint): void {
+    capnp.Struct.setUint64(8, value, this);
+  }
+  getDefaultSigned(): bigint {
+    return capnp.Struct.getInt64(16, this, BigIntBag._capnp.defaultDefaultSigned);
+  }
+  setDefaultSigned(value: bigint): void {
+    capnp.Struct.setInt64(16, value, this, BigIntBag._capnp.defaultDefaultSigned);
+  }
+  getDefaultUnsigned(): bigint {
+    return capnp.Struct.getUint64(24, this, BigIntBag._capnp.defaultDefaultUnsigned);
+  }
+  setDefaultUnsigned(value: bigint): void {
+    capnp.Struct.setUint64(24, value, this, BigIntBag._capnp.defaultDefaultUnsigned);
+  }
+  toString(): string {
+    return "BigIntBag_" + super.toString();
+  }
 }

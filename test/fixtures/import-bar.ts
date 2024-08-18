@@ -3,9 +3,19 @@ import * as capnp from "capnp-es";
 import { Foo } from "./import-foo.js";
 export const _capnpFileId = BigInt("0x9cbc682922e84ff9");
 export class Baz extends capnp.Struct {
-    static readonly FOO_CONST = capnp.readRawPointer(new Uint8Array([0x10, 0x02, 0x40, 0x01, 0x00, 0x00]).buffer);
-    static readonly _capnp = { displayName: "Baz", id: "f2f28862b8e82db7", size: new capnp.ObjectSize(0, 1) };
-    getBar(): string { return capnp.Struct.getText(0, this); }
-    setBar(value: string): void { capnp.Struct.setText(0, value, this); }
-    toString(): string { return "Baz_" + super.toString(); }
+  static readonly FOO_CONST = capnp.readRawPointer(new Uint8Array([0x10, 0x02, 0x40, 0x01, 0x00, 0x00]).buffer);
+  static readonly _capnp = {
+    displayName: "Baz",
+    id: "f2f28862b8e82db7",
+    size: new capnp.ObjectSize(0, 1)
+  };
+  getBar(): string {
+    return capnp.Struct.getText(0, this);
+  }
+  setBar(value: string): void {
+    capnp.Struct.setText(0, value, this);
+  }
+  toString(): string {
+    return "Baz_" + super.toString();
+  }
 }

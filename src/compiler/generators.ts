@@ -199,21 +199,6 @@ export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
   return f.createPropertyAssignment(`default${util.c2t(name)}`, initializer);
 }
 
-export function generateEnumNode(
-  ctx: CodeGeneratorFileContext,
-  node: s.Node,
-): void {
-  const members = node
-    .getEnum()
-    .getEnumerants()
-    .toArray()
-    .sort(compareCodeOrder)
-    .map((e) => f.createEnumMember(util.c2s(e.getName())));
-  const d = f.createEnumDeclaration([EXPORT], getFullClassName(node), members);
-
-  ctx.statements.push(d);
-}
-
 export function generateFileId(ctx: CodeGeneratorFileContext): void {
   // export const _capnpFileId = BigInt('0xabcdef');
   const fileId = f.createCallExpression(BIGINT, undefined, [
@@ -287,7 +272,11 @@ export function generateNode(
     }
 
     case s.Node.ENUM: {
-      generateEnumNode(ctx, node);
+      generateEnumNode(
+        ctx,
+        getFullClassName(node),
+        node.getEnum().getEnumerants().toArray(),
+      );
 
       break;
     }
@@ -393,7 +382,9 @@ export function generateStructFieldMethods(
     case s.Type.ANY_POINTER: {
       getArgs = [offsetLiteral, THIS];
 
-      if (defaultValue) getArgs.push(defaultValue);
+      if (defaultValue) {
+        getArgs.push(defaultValue);
+      }
 
       adopt = true;
       disown = true;
@@ -451,6 +442,10 @@ export function generateStructFieldMethods(
         undefined,
         setArgs,
       );
+
+      if (whichType === s.Type.ENUM) {
+        get = f.createAsExpression(get, jsTypeReference);
+      }
 
       break;
     }
@@ -532,6 +527,9 @@ export function generateStructFieldMethods(
         undefined,
         getArgs,
       );
+      if (whichElementType === s.Type.ENUM) {
+        get = f.createAsExpression(get, jsTypeReference);
+      }
       has = true;
       /** __S.initList(0, MyStruct._Foo, length, this) */
       init = f.createCallExpression(
@@ -544,6 +542,9 @@ export function generateStructFieldMethods(
           THIS,
         ],
       );
+      if (whichElementType === s.Type.ENUM) {
+        init = f.createAsExpression(init, jsTypeReference);
+      }
       set = copyFromValue;
 
       break;
@@ -830,7 +831,7 @@ export function generateStructNode(
   const hasUnnamedUnion = discriminantCount !== 0;
 
   if (hasUnnamedUnion) {
-    generateUnnamedUnionEnum(ctx, fullClassName, unionFields);
+    generateEnumNode(ctx, fullClassName + "_Which", unionFields);
   }
 
   const members: ts.ClassElement[] = [];
@@ -875,21 +876,24 @@ export function generateStructNode(
       "_capnp",
       undefined,
       undefined,
-      f.createObjectLiteralExpression([
-        f.createPropertyAssignment(
-          "displayName",
-          f.createStringLiteral(displayNamePrefix),
-        ),
-        f.createPropertyAssignment("id", f.createStringLiteral(nodeIdHex)),
-        f.createPropertyAssignment(
-          "size",
-          f.createNewExpression(OBJECT_SIZE, undefined, [
-            f.createNumericLiteral(dataByteLength.toString()),
-            f.createNumericLiteral(pointerCount.toString()),
-          ]),
-        ),
-        ...defaultValues,
-      ]),
+      f.createObjectLiteralExpression(
+        [
+          f.createPropertyAssignment(
+            "displayName",
+            f.createStringLiteral(displayNamePrefix),
+          ),
+          f.createPropertyAssignment("id", f.createStringLiteral(nodeIdHex)),
+          f.createPropertyAssignment(
+            "size",
+            f.createNewExpression(OBJECT_SIZE, undefined, [
+              f.createNumericLiteral(dataByteLength.toString()),
+              f.createNumericLiteral(pointerCount.toString()),
+            ]),
+          ),
+          ...defaultValues,
+        ],
+        true,
+      ),
     ),
   );
 
@@ -897,7 +901,9 @@ export function generateStructNode(
   members.push(...concreteLists.map((f) => createConcreteListProperty(ctx, f)));
 
   // getFoo() { ... } initFoo() { ... } setFoo() { ... }
-  for (const f of fields) generateStructFieldMethods(ctx, members, node, f);
+  for (const f of fields) {
+    generateStructFieldMethods(ctx, members, node, f);
+  }
 
   // toString(): string { return 'MyStruct_' + super.toString(); }
   const toStringExpression = f.createBinaryExpression(
@@ -905,16 +911,17 @@ export function generateStructNode(
     ts.SyntaxKind.PlusToken,
     f.createCallExpression(f.createIdentifier("super.toString"), undefined, []),
   );
-  members.push(
-    createMethod("toString", [], STRING_TYPE, [toStringExpression], true),
-  );
+  members.push(createMethod("toString", [], STRING_TYPE, [toStringExpression]));
 
   if (hasUnnamedUnion) {
     // which(): MyStruct_Which { return __S.getUint16(12, this); }
-    const whichExpression = f.createCallExpression(
-      f.createPropertyAccessExpression(STRUCT, "getUint16"),
-      undefined,
-      [f.createNumericLiteral((discriminantOffset * 2).toString()), THIS],
+    const whichExpression = f.createAsExpression(
+      f.createCallExpression(
+        f.createPropertyAccessExpression(STRUCT, "getUint16"),
+        undefined,
+        [f.createNumericLiteral((discriminantOffset * 2).toString()), THIS],
+      ),
+      f.createTypeReferenceNode(`${fullClassName}_Which`, undefined),
     );
     members.push(
       createMethod(
@@ -922,7 +929,6 @@ export function generateStructNode(
         [],
         f.createTypeReferenceNode(`${fullClassName}_Which`, undefined),
         [whichExpression],
-        true,
       ),
     );
   }
@@ -952,26 +958,51 @@ export function generateStructNode(
   );
 }
 
-export function generateUnnamedUnionEnum(
+export function generateEnumNode(
   ctx: CodeGeneratorFileContext,
-  fullClassName: string,
-  unionFields: s.Field[],
+  className: string,
+  fields: s.Enumerant[] | s.Field[],
 ): void {
-  const members = unionFields
-    .sort(compareCodeOrder)
-    .map((field) =>
-      f.createEnumMember(
-        util.c2s(field.getName()),
-        f.createNumericLiteral(field.getDiscriminantValue().toString()),
-      ),
-    );
-  const d = f.createEnumDeclaration(
+  const members = fields.sort(compareCodeOrder).map((e, index) => {
+    const key = f.createIdentifier(util.c2s(e.getName()));
+    const val = f.createNumericLiteral(index.toString());
+    return f.createPropertyAssignment(key, val);
+  });
+
+  // export const MyEnum = { FOO: 1, BAR: 2 } as const
+  const d = f.createVariableStatement(
     [EXPORT],
-    `${fullClassName}_Which`,
-    members,
+    f.createVariableDeclarationList(
+      [
+        f.createVariableDeclaration(
+          className,
+          undefined,
+          undefined,
+          f.createAsExpression(
+            f.createObjectLiteralExpression(members, true),
+            f.createTypeReferenceNode("const", undefined),
+          ),
+        ),
+      ],
+      ts.NodeFlags.Const,
+    ),
   );
 
-  ctx.statements.push(d);
+  // export type MyEnum = (typeof MyEnum)[keyof typeof MyEnum]
+  const t = f.createTypeAliasDeclaration(
+    [EXPORT],
+    className,
+    undefined,
+    f.createIndexedAccessTypeNode(
+      f.createTypeQueryNode(f.createIdentifier(className)),
+      f.createTypeOperatorNode(
+        ts.SyntaxKind.KeyOfKeyword,
+        f.createTypeQueryNode(f.createIdentifier(className)),
+      ),
+    ),
+  );
+
+  ctx.statements.push(d, t);
 }
 
 export function getImportNodes(

@@ -10,9 +10,14 @@ try {
     js: process.argv.includes("--js"),
     dts: process.argv.includes("--dts"),
   });
-  for (const [path, content] of files) {
+  for (const [path, source] of files) {
     console.log(`Compiled ${path}`);
-    await writeFile(path, content);
+    // Replace four spaces with two spaces
+    // https://github.com/microsoft/TypeScript/issues/54632
+    const _content = source.replace(/^\s+/gm, (match) =>
+      " ".repeat(match.length / 2),
+    );
+    await writeFile(path, _content);
   }
 } catch (error) {
   console.error(error);

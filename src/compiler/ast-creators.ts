@@ -51,7 +51,7 @@ export function createConstProperty(node: s.Node): ts.PropertyDeclaration {
 export function createExpressionBlock(
   expressions: ts.Expression[],
   returns: boolean,
-  allowSingleLine: boolean,
+  allowSingleLine?: boolean,
 ): ts.Block {
   const statements = expressions.map((e, i) =>
     i === expressions.length - 1 && returns
@@ -70,7 +70,7 @@ export function createMethod(
   parameters: ts.ParameterDeclaration[],
   type: ts.TypeNode | undefined,
   expressions: ts.Expression[],
-  allowSingleLine = true,
+  allowSingleLine?: boolean,
 ): ts.MethodDeclaration {
   return f.createMethodDeclaration(
     undefined,

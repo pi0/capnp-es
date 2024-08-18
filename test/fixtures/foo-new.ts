@@ -2,10 +2,24 @@
 import * as capnp from "capnp-es";
 export const _capnpFileId = BigInt("0xe0b7ff464fbc7ee2");
 export class Foo extends capnp.Struct {
-    static readonly _capnp = { displayName: "Foo", id: "ebf41ad8c4cd4576", size: new capnp.ObjectSize(0, 2) };
-    getBar(): string { return capnp.Struct.getText(0, this); }
-    setBar(value: string): void { capnp.Struct.setText(0, value, this); }
-    getBaz(): string { return capnp.Struct.getText(1, this); }
-    setBaz(value: string): void { capnp.Struct.setText(1, value, this); }
-    toString(): string { return "Foo_" + super.toString(); }
+  static readonly _capnp = {
+    displayName: "Foo",
+    id: "ebf41ad8c4cd4576",
+    size: new capnp.ObjectSize(0, 2)
+  };
+  getBar(): string {
+    return capnp.Struct.getText(0, this);
+  }
+  setBar(value: string): void {
+    capnp.Struct.setText(0, value, this);
+  }
+  getBaz(): string {
+    return capnp.Struct.getText(1, this);
+  }
+  setBaz(value: string): void {
+    capnp.Struct.setText(1, value, this);
+  }
+  toString(): string {
+    return "Foo_" + super.toString();
+  }
 }

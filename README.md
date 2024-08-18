@@ -28,7 +28,8 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 - [x] Compiler, runtime, and std lib published via a single and compact ESM-only package with subpath exports.
 - [x] Output files can be `.ts` (new), `.js` (ESM instead of CJS), and `.d.ts` and has no `.capnp` suffix.
 - [x] Compiler API can be used via the `capnp-es/compiler` subpath export programmatically.
-- [x] Use native `TextEncoder` and `TextDncoder` for text
+- [x] Use native `TextEncoder` and `TextDecoder` for utf8 encoding
+- [x] Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
 - [ ] (planned) Investigate reducing runtime bundle impact
 - [ ] (planned) Use getter/setters for generated objects.
 - [ ] (planned) Standalone object exports.
