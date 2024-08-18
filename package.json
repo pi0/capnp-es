@@ -40,8 +40,7 @@
     "prepack": "pnpm build",
     "play": "capnpc -o- playground/addressbook.capnp | pnpm capnp-es --ts",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
-    "test": "pnpm lint && pnpm test:gen && pnpm test:types && vitest run --coverage",
-    "test:gen": "capnpc -o- test/fixtures/*.capnp | pnpm capnp-es",
+    "test": "pnpm lint && vitest run --coverage && pnpm test:types",
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
