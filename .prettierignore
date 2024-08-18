@@ -1,4 +1,9 @@
-test/fixtures/*.*
-playground/*.{js,ts}
-playground/*.d.ts
 CHANGELOG.md
+pnpm-lock.yaml
+
+test/fixtures/*.*
+
+playground/*.ts
+playground/*.d.ts
+playground/*.js
+

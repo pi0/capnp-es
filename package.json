@@ -38,7 +38,7 @@
     "lint": "eslint . && prettier -c .",
     "lint:fix": "automd && eslint . --fix && prettier -w .",
     "prepack": "pnpm build",
-    "play": "capnpc -o- playground/addressbook.capnp | pnpm capnp-es --ts",
+    "play": "pnpm capnp-es --ts --js --dts playground/*.capnp",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
     "test": "pnpm lint && vitest run --coverage && pnpm test:types",
     "test:types": "tsc --noEmit --skipLibCheck"

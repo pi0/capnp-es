@@ -46,6 +46,8 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 Run the following to compile a schema file into typeScript/javascript source code:
 
 ```shell
+npx capnp-es --ts --dts --js path/to/myschema.capnp
+# or pipe
 capnpc -o- path/to/myschema.capnp | npx capnp-es --ts --dts --js
 ```
 

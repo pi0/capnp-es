@@ -16,5 +16,6 @@
       "test/*": ["./test/*"]
     }
   },
-  "include": ["src", "test", "playground"]
+  "include": ["src", "test", "playground"],
+  "exclude": ["**/*.d.ts"]
 }
