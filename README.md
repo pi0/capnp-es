@@ -1,9 +1,11 @@
 # capnp-es
 
-<!-- automd:badges no-npmDownloads bundlephobia -->
+<!-- automd:badges bundlephobia codecov -->
 
 [![npm version](https://img.shields.io/npm/v/capnp-es)](https://npmjs.com/package/capnp-es)
+[![npm downloads](https://img.shields.io/npm/dm/capnp-es)](https://npmjs.com/package/capnp-es)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/capnp-es)](https://bundlephobia.com/package/capnp-es)
+[![codecov](https://img.shields.io/codecov/c/gh/pi0/capnp-es)](https://codecov.io/gh/pi0/capnp-es)
 
 <!-- /automd -->
 
