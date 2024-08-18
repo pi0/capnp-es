@@ -13,30 +13,30 @@ export const BOOLEAN_TYPE = f.createTypeReferenceNode("boolean");
 
 /** capnp */
 
-export const CAPNP = f.createIdentifier("capnp");
+export const CAPNP = f.createIdentifier("$");
 
 /** A Mapping of various types to their list type constructor. */
 
 export const ConcreteListType = {
-  [s.Type.ANY_POINTER]: "capnp.AnyPointerList",
-  [s.Type.BOOL]: "capnp.BoolList",
-  [s.Type.DATA]: "capnp.DataList",
-  [s.Type.ENUM]: "capnp.Uint16List",
-  [s.Type.FLOAT32]: "capnp.Float32List",
-  [s.Type.FLOAT64]: "capnp.Float64List",
-  [s.Type.INT16]: "capnp.Int16List",
-  [s.Type.INT32]: "capnp.Int32List",
-  [s.Type.INT64]: "capnp.Int64List",
-  [s.Type.INT8]: "capnp.Int8List",
-  [s.Type.INTERFACE]: "capnp.InterfaceList",
-  [s.Type.LIST]: "capnp.PointerList",
-  [s.Type.STRUCT]: "capnp.CompositeList",
-  [s.Type.TEXT]: "capnp.TextList",
-  [s.Type.UINT16]: "capnp.Uint16List",
-  [s.Type.UINT32]: "capnp.Uint32List",
-  [s.Type.UINT64]: "capnp.Uint64List",
-  [s.Type.UINT8]: "capnp.Uint8List",
-  [s.Type.VOID]: "capnp.VoidList",
+  [s.Type.ANY_POINTER]: "$.AnyPointerList",
+  [s.Type.BOOL]: "$.BoolList",
+  [s.Type.DATA]: "$.DataList",
+  [s.Type.ENUM]: "$.Uint16List",
+  [s.Type.FLOAT32]: "$.Float32List",
+  [s.Type.FLOAT64]: "$.Float64List",
+  [s.Type.INT16]: "$.Int16List",
+  [s.Type.INT32]: "$.Int32List",
+  [s.Type.INT64]: "$.Int64List",
+  [s.Type.INT8]: "$.Int8List",
+  [s.Type.INTERFACE]: "$.InterfaceList",
+  [s.Type.LIST]: "$.PointerList",
+  [s.Type.STRUCT]: "$.CompositeList",
+  [s.Type.TEXT]: "$.TextList",
+  [s.Type.UINT16]: "$.Uint16List",
+  [s.Type.UINT32]: "$.Uint32List",
+  [s.Type.UINT64]: "$.Uint64List",
+  [s.Type.UINT8]: "$.Uint8List",
+  [s.Type.VOID]: "$.VoidList",
 };
 
 /** export */
@@ -143,7 +143,7 @@ export const NUMBER_TYPE = f.createTypeReferenceNode("number");
 
 /** __O */
 // This is referenced so frequently it gets a shorthand!
-export const OBJECT_SIZE = f.createIdentifier("capnp.ObjectSize");
+export const OBJECT_SIZE = f.createIdentifier("$.ObjectSize");
 
 /** readonly */
 
@@ -163,7 +163,7 @@ export const STRING_TYPE = f.createTypeReferenceNode("string");
 
 /** __S */
 // This is referenced so frequently it gets a shorthand!
-export const STRUCT = f.createIdentifier("capnp.Struct");
+export const STRUCT = f.createIdentifier("$.Struct");
 
 /** this */
 

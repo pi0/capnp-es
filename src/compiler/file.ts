@@ -25,7 +25,7 @@ export function getConcreteListType(
   const elementTypeWhich = elementType.which();
 
   if (elementTypeWhich === s.Type.LIST) {
-    return `capnp.PointerList(${getConcreteListType(ctx, elementType)})`;
+    return `$.PointerList(${getConcreteListType(ctx, elementType)})`;
   } else if (elementTypeWhich === s.Type.STRUCT) {
     const structNode = lookupNode(ctx, elementType.getStruct().getTypeId());
 
@@ -36,7 +36,7 @@ export function getConcreteListType(
       throw new Error(E.GEN_FIELD_NON_INLINE_STRUCT_LIST);
     }
 
-    return `capnp.CompositeList(${getJsType(ctx, elementType, false)})`;
+    return `$.CompositeList(${getJsType(ctx, elementType, false)})`;
   }
 
   return ConcreteListType[elementTypeWhich];
@@ -64,7 +64,7 @@ export function getJsType(
 
   switch (whichType) {
     case s.Type.ANY_POINTER: {
-      return "capnp.Pointer";
+      return "$.Pointer";
     }
 
     case s.Type.BOOL: {
@@ -72,7 +72,7 @@ export function getJsType(
     }
 
     case s.Type.DATA: {
-      return "capnp.Data";
+      return "$.Data";
     }
 
     case s.Type.ENUM: {
@@ -96,17 +96,17 @@ export function getJsType(
     }
 
     case s.Type.INTERFACE: {
-      return "capnp.Interface";
+      return "$.Interface";
     }
 
     case s.Type.LIST: {
-      return `capnp.List${constructor ? "Ctor" : ""}<${getJsType(ctx, type.getList().getElementType(), false)}>`;
+      return `$.List${constructor ? "Ctor" : ""}<${getJsType(ctx, type.getList().getElementType(), false)}>`;
     }
 
     case s.Type.STRUCT: {
       const c = getFullClassName(lookupNode(ctx, type.getStruct().getTypeId()));
 
-      return constructor ? `capnp.StructCtor<${c}>` : c;
+      return constructor ? `$.StructCtor<${c}>` : c;
     }
 
     case s.Type.TEXT: {
@@ -114,7 +114,7 @@ export function getJsType(
     }
 
     case s.Type.VOID: {
-      return "capnp.Void";
+      return "$.Void";
     }
 
     default: {
@@ -168,7 +168,7 @@ export function lookupNode(
 
 /**
  * Determine whether the given field needs a concrete list class: this is currently the case for composite lists
- * (`capnp.CompositeList`) and lists of lists (`capnp.PointerList`).
+ * (`$.CompositeList`) and lists of lists (`capnp.PointerList`).
  *
  * @param {s.Field} field The field to check.
  * @returns {boolean} Returns `true` if the field requires a concrete list class initializer.

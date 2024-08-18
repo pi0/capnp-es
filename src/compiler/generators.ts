@@ -344,9 +344,7 @@ export function generateStructFieldMethods(
     [VALUE, getPointer],
   );
   /** capnp.Orphan<Foo> */
-  const orphanType = f.createTypeReferenceNode("capnp.Orphan", [
-    jsTypeReference,
-  ]);
+  const orphanType = f.createTypeReferenceNode("$.Orphan", [jsTypeReference]);
   const discriminantOffsetLiteral = f.createNumericLiteral(
     (discriminantOffset * 2).toString(),
   );
@@ -715,7 +713,7 @@ export function generateStructFieldMethods(
     );
   }
 
-  // initFoo(): FooType { ... } / initFoo(length: number): capnp.List<FooElementType> { ... }
+  // initFoo(): FooType { ... } / initFoo(length: number): $.List<FooElementType> { ... }
   if (init) {
     const parameters =
       whichType === s.Type.DATA || whichType === s.Type.LIST
