@@ -58,9 +58,11 @@ See [tests](./test/integration/rpc.spec.ts) for some examples.
 
 ## Status
 
-This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by Julián Díaz and is under development.
+This project is a rework of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by Julián Díaz and is under development.
 
-**<sup>1</sup> Changes from `capnp-ts`:**
+<details>
+
+<summary>Changes from capnp-ts</summary>
 
 - Internal refactors and simplifications as was playing around.
 - Compiler, runtime, and std lib published via a single and compact ESM-only package with subpath exports.
@@ -74,11 +76,15 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 - Use reflection (getter setters) to access structs.
 - RPC level 1
 
-## Development
+</details>
+
+## Contribution
+
+Feedback and PRs are more than welcome. 🙏
 
 <details>
 
-<summary>local development</summary>
+<summary>Local development</summary>
 
 - Clone this repository
 - Install the latest LTS version of [Node.js](https://nodejs.org/en/)
