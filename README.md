@@ -18,6 +18,8 @@ Cap’n Proto is an insanely fast data interchange format and capability-based R
 
 ## Usage
 
+### Compiling schema
+
 Make sure `capnpc` command is available. You can find install instructions [here](https://capnproto.org/install.html) to install it.
 
 Run the following to compile a schema file into typeScript/javascript source code:
@@ -67,7 +69,7 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 - [x] Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
 - [x] Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
 - [ ] [WIP] Use reflection (getter setters) to access structs.
-- [ ] [TODO] Investigate runtime performance. Some language features make full traverse slow. (especially on Node 20, Bun is fast and all good)
+- [ ] [TODO] Investigate runtime performance. Some language features make full traverse slow, especially on Node.js < 22, Bun is fast and all good.
 - [ ] [PLANNED] Investigate RPC level 1 (some progress [here](https://github.com/jdiaz5513/capnp-ts/pull/169))
 - [ ] [PLANNED] Investigate the possibility of bundling the wasm version of `capnp`
 
