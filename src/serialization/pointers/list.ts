@@ -176,6 +176,19 @@ export class List<T> extends Pointer {
     for (let i = 0; i < length; i++) callbackfn(this.get(i), i);
   }
 
+  [Symbol.iterator](): Iterator<T> {
+    const length = this.getLength();
+    let i = 0;
+    return {
+      next: () => {
+        if (i < length) {
+          return { value: this.get(i++), done: false };
+        }
+        return { value: undefined, done: true };
+      },
+    };
+  }
+
   get(_index: number): T {
     return get(_index, this);
   }

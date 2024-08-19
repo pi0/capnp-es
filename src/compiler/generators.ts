@@ -1089,13 +1089,13 @@ export function generateMethodStructs(
   ctx: CodeGeneratorFileContext,
   node: s.Node,
 ): void {
-  node.interface.methods.forEach((method) => {
+  for (const method of node.interface.methods) {
     const paramNode = lookupNode(ctx, method.paramStructType);
     const resultNode = lookupNode(ctx, method.resultStructType);
     generateNode(ctx, paramNode);
     generateNode(ctx, resultNode);
     generateResultPromise(ctx, resultNode);
-  });
+  }
 }
 
 export function generateServer(
@@ -1171,7 +1171,9 @@ export function generateServer(
   // Generate server constructor
   {
     const serverMethods: ts.Expression[] = [];
-    node.interface.methods.forEach((method, index) => {
+
+    let index = 0;
+    for (const method of node.interface.methods) {
       serverMethods.push(
         f.createObjectLiteralExpression(
           [
@@ -1181,7 +1183,7 @@ export function generateServer(
                   f.createIdentifier(clientName),
                   "methods",
                 ),
-                index,
+                index++,
               ),
             ),
             f.createPropertyAssignment(
@@ -1195,7 +1197,7 @@ export function generateServer(
           true, // multiline
         ),
       );
-    });
+    }
 
     members.push(
       f.createConstructorDeclaration(
@@ -1347,7 +1349,8 @@ export function generateClient(
     ),
   );
 
-  node.interface.methods.forEach((method, index) => {
+  let index = 0;
+  for (const method of node.interface.methods) {
     generateClientMethod(
       ctx,
       node,
@@ -1356,9 +1359,9 @@ export function generateClient(
       methodDefs,
       methodDefTypes,
       method,
-      index,
+      index++,
     );
-  });
+  }
 
   ctx.statements.push(
     f.createClassDeclaration([EXPORT], clientName, undefined, [], members),
@@ -1522,7 +1525,9 @@ export function generateResultPromise(
     }
   };
 
-  fields.forEach((field) => generatePromiseFieldMethod(field));
+  for (const field of fields) {
+    generatePromiseFieldMethod(field);
+  }
 
   {
     members.push(

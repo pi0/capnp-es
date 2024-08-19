@@ -346,7 +346,7 @@ export class Conn {
   populateMessageCapTable(payload: Payload): void {
     const msg = payload.segment.message;
     const ctab = payload.capTable;
-    ctab.forEach((desc) => {
+    for (const desc of ctab) {
       switch (desc.which()) {
         case CapDescriptor.NONE: {
           msg.addCap(null);
@@ -390,7 +390,7 @@ export class Conn {
           throw new Error(format(RPC_UNKNOWN_CAP_DESCRIPTOR, desc.which()));
         }
       }
-    });
+    }
   }
 
   addImport(id: number): Client {

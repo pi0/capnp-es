@@ -5,7 +5,6 @@ export default unjs({
   rules: {
     "unicorn/prefer-code-point": 0,
     "unicorn/no-null": 0,
-    "unicorn/no-array-for-each": 0,
     "unicorn/prefer-spread": 0,
   },
 });

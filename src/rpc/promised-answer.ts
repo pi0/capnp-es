@@ -18,7 +18,7 @@ export function promisedAnswerOpsToTransform(
   list: List<PromisedAnswer_Op>,
 ): PipelineOp[] {
   const transform: PipelineOp[] = [];
-  list.forEach((op) => {
+  for (const op of list) {
     switch (op.which()) {
       case PromisedAnswer_Op.GET_POINTER_FIELD: {
         transform.push(<PipelineOp>{
@@ -33,6 +33,6 @@ export function promisedAnswerOpsToTransform(
       default:
       // nothing
     }
-  });
+  }
   return transform;
 }
