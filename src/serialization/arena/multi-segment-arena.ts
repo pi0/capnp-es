@@ -1,7 +1,7 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import { DEFAULT_BUFFER_SIZE } from "../../constants";
-import { SEG_ID_OUT_OF_BOUNDS } from "../../errors";
+import { SEG_ID_OUT_OF_BOUNDS, SEG_NOT_WORD_ALIGNED } from "../../errors";
 import { padToWord, format } from "../../util";
 import { ArenaAllocationResult } from "./arena-allocation-result";
 import { ArenaKind } from "./arena-kind";
@@ -11,11 +11,15 @@ export class MultiSegmentArena {
   static readonly getBuffer = getBuffer;
   static readonly getNumSegments = getNumSegments;
 
-  readonly buffers: ArrayBuffer[];
   readonly kind = ArenaKind.MULTI_SEGMENT;
 
-  constructor(buffers: ArrayBuffer[] = []) {
-    this.buffers = buffers;
+  constructor(readonly buffers = [new ArrayBuffer(DEFAULT_BUFFER_SIZE)]) {
+    let i = buffers.length;
+    while (--i >= 0) {
+      if ((buffers[i].byteLength & 7) !== 0) {
+        throw new Error(format(SEG_NOT_WORD_ALIGNED, buffers[i].byteLength));
+      }
+    }
   }
 
   toString(): string {

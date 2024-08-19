@@ -50,13 +50,13 @@ const message = capnp.Message.fromArrayBuffer(buffer);
 const struct = message.getRoot(MyStruct);
 ```
 
+### RPC Protocol
+
+Experimental [RPC protocol](https://capnproto.org/rpc.html) is supported ([level 1](https://capnproto.org/rpc.html#protocol-features).)
+
 ## Status
 
 This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by Julián Díaz and is under development.
-
-- [x] Schema Compiler: working, may be missing features
-- [x] Serialization: working, may be missing features
-- [ ] RPC: not yet
 
 **<sup>1</sup> Changes from `capnp-ts`:**
 
@@ -69,9 +69,9 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 - [x] Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
 - [x] Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
 - [x] Built-in schemas are compiled from source (compiler, compiles itself. so cool right?)
-- [ ] [WIP] Use reflection (getter setters) to access structs.
+- [x] Use reflection (getter setters) to access structs.
+- [x] RPC level 1
 - [ ] [TODO] Investigate runtime performance. Some language features make full traverse slow, especially on Node.js < 22, Bun is fast and all good.
-- [ ] [PLANNED] Investigate RPC level 1 (some progress [here](https://github.com/jdiaz5513/capnp-ts/pull/169))
 - [ ] [PLANNED] Investigate the possibility of bundling the wasm version of `capnp`
 
 ## Development

@@ -10,6 +10,7 @@ import { SingleSegmentArena } from "./single-segment-arena";
 
 export abstract class Arena {
   static readonly allocate = allocate;
+  static readonly copy = copy;
   static readonly getBuffer = getBuffer;
   static readonly getNumSegments = getNumSegments;
 }
@@ -26,6 +27,26 @@ export function allocate(
 
     case ArenaKind.SINGLE_SEGMENT: {
       return SingleSegmentArena.allocate(minSize, segments, a);
+    }
+
+    default: {
+      return assertNever(a);
+    }
+  }
+}
+
+export function copy(a: AnyArena): AnyArena {
+  switch (a.kind) {
+    case ArenaKind.MULTI_SEGMENT: {
+      let i = a.buffers.length;
+      const buffers = Array.from({ length: i }) as Array<ArrayBuffer>;
+      while (--i >= 0) {
+        buffers[i] = a.buffers[i].slice(0);
+      }
+      return new MultiSegmentArena(buffers);
+    }
+    case ArenaKind.SINGLE_SEGMENT: {
+      return new SingleSegmentArena(a.buffer.slice(0));
     }
 
     default: {

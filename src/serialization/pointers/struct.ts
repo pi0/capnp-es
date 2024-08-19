@@ -13,6 +13,8 @@ import { Segment } from "../segment";
 import { Data } from "./data";
 import { List, type ListCtor } from "./list";
 import { Orphan } from "./orphan";
+import { type Client } from "../../rpc/client";
+import { clientOrNull } from "../../rpc/error-client";
 import {
   _Pointer,
   _PointerCtor,
@@ -23,6 +25,8 @@ import {
   initPointer,
   erase,
   setStructPointer,
+  setInterfacePointer,
+  getInterfacePointer,
   followFars,
   getTargetListElementSize,
   getTargetPointerType,
@@ -107,6 +111,9 @@ export class Struct extends Pointer<_Struct> {
   static readonly setInt32 = setInt32;
   static readonly setInt64 = setInt64;
   static readonly setText = setText;
+  static readonly setInterfacePointer = setInterfacePointer;
+  static readonly getInterfaceClientOrNull = getInterfaceClientOrNull;
+  static readonly getInterfaceClientOrNullAt = getInterfaceClientOrNullAt;
   static readonly testWhich = testWhich;
 
   /**
@@ -182,6 +189,20 @@ export function initStructAt<T extends Struct>(
   initStruct(StructClass._capnp.size, s);
 
   return s;
+}
+
+export function getInterfaceClientOrNullAt(index: number, s: Struct): Client {
+  return getInterfaceClientOrNull(getPointer(index, s));
+}
+
+export function getInterfaceClientOrNull(p: Pointer): Client {
+  let client: Client | null = null;
+  const capId = getInterfacePointer(p);
+  const capTable = p.segment.message._capnp.capTable;
+  if (capTable && capId >= 0 && capId < capTable.length) {
+    client = capTable[capId];
+  }
+  return clientOrNull(client);
 }
 
 /**

@@ -146,17 +146,7 @@ export function createValueExpression(value: s.Value): ts.Expression {
     }
 
     case s.Value.INT64: {
-      let v = value.int64.toString(16);
-      let neg = "";
-      if (v[0] === "-") {
-        v = v.slice(1);
-        neg = "-";
-      }
-      return f.createCallExpression(
-        f.createIdentifier(`${neg}BigInt`),
-        undefined,
-        [f.createStringLiteral(`0x${v}`)],
-      );
+      return createBigIntExpression(value.int64);
     }
 
     case s.Value.TEXT: {
@@ -172,9 +162,7 @@ export function createValueExpression(value: s.Value): ts.Expression {
     }
 
     case s.Value.UINT64: {
-      return f.createCallExpression(f.createIdentifier("BigInt"), undefined, [
-        f.createStringLiteral(`0x${value.uint64.toString(16)}`),
-      ]);
+      return createBigIntExpression(value.uint64);
     }
     case s.Value.UINT8: {
       return f.createNumericLiteral(value.uint8.toString());
@@ -208,7 +196,17 @@ export function createValueExpression(value: s.Value): ts.Expression {
       break;
     }
 
-    // case s.Value.INTERFACE:
+    case s.Value.INTERFACE: {
+      capnp.Struct.testWhich(
+        "interface",
+        capnp.Struct.getUint16(0, value),
+        17,
+        value,
+      );
+      p = capnp.Struct.getPointer(0, value);
+
+      break;
+    }
     default: {
       throw new Error(
         format(
@@ -243,6 +241,18 @@ export function createValueExpression(value: s.Value): ts.Expression {
       ),
     ],
   );
+}
+
+export function createBigIntExpression(value: bigint): ts.Expression {
+  let v = value.toString(16);
+  let neg = "";
+  if (v[0] === "-") {
+    v = v.slice(1);
+    neg = "-";
+  }
+  return f.createCallExpression(f.createIdentifier(`${neg}BigInt`), undefined, [
+    f.createStringLiteral(`0x${v}`),
+  ]);
 }
 
 function numericExpression(

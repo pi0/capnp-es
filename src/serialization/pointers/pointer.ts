@@ -143,14 +143,7 @@ export function disown<T extends Pointer>(p: T): Orphan<T> {
 }
 
 export function dump(p: Pointer): string {
-  const f = followFars(p);
-  const pHex = bufferToHex(
-    p.segment.buffer.slice(p.byteOffset, p.byteOffset + 8),
-  );
-  if (f.byteOffset === p.byteOffset && f.segment === p.segment) {
-    return pHex;
-  }
-  return `${pHex} > ${bufferToHex(f.segment.buffer.slice(f.byteOffset, f.byteOffset + 8))}`;
+  return bufferToHex(p.segment.buffer.slice(p.byteOffset, p.byteOffset + 8));
 }
 
 /**
@@ -293,6 +286,11 @@ export function copyFrom(src: Pointer, p: Pointer): void {
     case PointerType.LIST: {
       copyFromList(src, p);
 
+      break;
+    }
+
+    case PointerType.OTHER: {
+      copyFromInterface(src, p);
       break;
     }
 
@@ -874,6 +872,16 @@ export function setInterfacePointer(capId: number, p: Pointer): void {
 }
 
 /**
+ * Reads a raw interface pointer
+ *
+ * @param {Pointer} p The pointer to read.
+ * @returns {number} The capability ID.
+ */
+export function getInterfacePointer(p: Pointer): number {
+  return p.segment.getUint32(p.byteOffset + 4);
+}
+
+/**
  * Write a raw list pointer.
  *
  * @param {number} offsetWords The number of words from the end of this pointer to the beginning of the list content.
@@ -972,6 +980,30 @@ export function validate(
       );
     }
   }
+}
+
+export function copyFromInterface(src: Pointer, dst: Pointer): void {
+  const srcCapId = getInterfacePointer(src);
+  if (srcCapId < 0) {
+    // trace("copyFromInterface: src has no capId");
+    return;
+  }
+
+  const srcCapTable = src.segment.message._capnp.capTable;
+  if (!srcCapTable) {
+    // trace("copyFromInterface: src pointer's message has no cap table");
+    return;
+  }
+
+  const client = srcCapTable[srcCapId];
+  if (!client) {
+    // trace("copyFromInterface: src capId is not mapped to a client");
+    return;
+  }
+
+  const dstCapId = dst.segment.message.addCap(client);
+  // trace("copyFromInterface: src capId %d => dst capId %d", srcCapId, dstCapId);
+  setInterfacePointer(dstCapId, dst);
 }
 
 export function copyFromList(src: Pointer, dst: Pointer): void {

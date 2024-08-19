@@ -140,7 +140,7 @@ test("Message.allocateSegment()", () => {
     "should replace existing segments",
   );
 
-  const m2 = new Message(new MultiSegmentArena());
+  const m2 = new Message(new MultiSegmentArena([]));
 
   m2.allocateSegment(length);
   m2.allocateSegment(length);
@@ -153,7 +153,7 @@ test("Message.allocateSegment()", () => {
 });
 
 test("Message.dump()", () => {
-  const m1 = new Message(new MultiSegmentArena());
+  const m1 = new Message(new MultiSegmentArena([]));
 
   t.equal(
     m1.dump(),
@@ -182,7 +182,7 @@ Segment #0
 });
 
 test("Message.getSegment()", () => {
-  const s = new Message(new MultiSegmentArena()).getSegment(0);
+  const s = new Message(new MultiSegmentArena([])).getSegment(0);
 
   t.equal(s.byteLength, 8, "should preallocate segment 0");
 
@@ -191,10 +191,10 @@ test("Message.getSegment()", () => {
     // "should throw when getting out of range segments",
   );
 
-  const m = new Message(new MultiSegmentArena([new ArrayBuffer(2)])); // this is too small to hold the root pointer
-
   t.throws(
-    () => m.getSegment(0),
+    // this is too small to hold the root pointer
+    () =>
+      new Message(new MultiSegmentArena([new ArrayBuffer(2)])).getSegment(0),
     // "should throw when segment 0 is too small",
   );
 });
@@ -236,7 +236,9 @@ test("Message.toPackedArrayBuffer()", () => {
 test("preallocateSegments()", () => {
   t.throws(
     () => {
-      const message = new Message(new MultiSegmentArena());
+      const message = new Message(
+        new MultiSegmentArena([new ArrayBuffer(8), new ArrayBuffer(7)]),
+      );
 
       preallocateSegments(message);
     },
