@@ -2,8 +2,6 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { group, baseline, bench, run } from "mitata";
 import * as capnpES from "capnp-es";
-import * as capnpTS from "capnp-ts";
-import protobuf from "protobufjs";
 
 // JSON
 const decoder = new TextDecoder();
@@ -42,6 +40,7 @@ const capnpESBench = {
 };
 
 // capnp-ts
+const capnpTS = await import("capnp-ts" as any);
 const { AddressBook: capnpTSStruct } = await import(
   "./data/capnp/schema-legacy.cjs" as any
 );
@@ -60,6 +59,7 @@ const capnpTSBench = {
 };
 
 // protobuf
+const protobuf = await import("protobufjs").then((r) => r.default || r);
 const protobufType = await protobuf
   .load(fileURLToPath(new URL("data/protobuf/schema.proto", import.meta.url)))
   .then((pb) => pb.lookupType("pi0.test.AddressBook"));
