@@ -16,7 +16,6 @@
 
 Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. Think JSON, except binary. Or think [Protocol Buffers](https://github.com/protocolbuffers/protobuf), except faster. Cap’n Proto was built by [Kenton Varda](https://github.com/kentonv) to be used in [Sandstorm](https://capnproto.org/faq.html#sandstorm) and is now heavily used in [Cloudflare](https://capnproto.org/faq.html#cloudflare). Start with the [Cap'n Proto Introduction](https://capnproto.org/index.html) for more detailed information on what this is about.
 
-
 ## Usage
 
 Make sure `capnpc` command is available. You can find install instructions [here](https://capnproto.org/install.html) to install it.
@@ -26,7 +25,9 @@ Run the following to compile a schema file into typeScript/javascript source cod
 ```shell
 npx capnp-es --ts --dts --js path/to/myschema.capnp
 ```
+
 or
+
 ```shell
 capnpc -o- path/to/myschema.capnp | npx capnp-es --ts --dts --js
 ```
@@ -66,10 +67,9 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 - [x] Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
 - [x] Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
 - [ ] [WIP] Use reflection (getter setters) to access structs.
-- [ ] [TODO] Investigate runtime performance. Some language features make full traverse slow. (especially on Node 20, Bun is fast and all good) 
+- [ ] [TODO] Investigate runtime performance. Some language features make full traverse slow. (especially on Node 20, Bun is fast and all good)
 - [ ] [PLANNED] Investigate RPC level 1 (some progress [here](https://github.com/jdiaz5513/capnp-ts/pull/169))
 - [ ] [PLANNED] Investigate the possibility of bundling the wasm version of `capnp`
-
 
 ## Development
 
