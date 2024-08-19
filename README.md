@@ -98,4 +98,4 @@ Feedback and PRs are more than welcome. 🙏
 
 🔀 Forked from [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by [Julián Díaz](https://github.com/jdiaz5513).
 
-💛 Published under the [MIT](https://github.com/unjs/capnp-es/blob/main/LICENSE) license.
+💛 Published under the [MIT](https://github.com/pi0/capnp-es/blob/main/LICENSE) license.
