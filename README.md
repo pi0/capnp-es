@@ -25,16 +25,16 @@ Make sure `capnpc` command is available. You can find install instructions [here
 Run the following to compile a schema file into typeScript/javascript source code:
 
 ```shell
-npx capnp-es --ts --dts --js path/to/myschema.capnp
+npx capnp-es path/to/myschema.capnp
 ```
 
-or
+This will generate `path/to/myschema.{ext}`.
 
-```shell
-capnpc -o- path/to/myschema.capnp | npx capnp-es --ts --dts --js
-```
+Arguments:
 
-This will generate `path/to/myschema.{ts,d.ts,js}` (ESM syntax).
+- `--ts`: Generate `.ts` schema (default)
+- `--js`: Generate `.js` transpiled schema (ESM)
+- `--dts`: Generate type declarations
 
 See [playground](./playground/) for examples and learn more about `.capnp` schema in capnp language [docs](https://capnproto.org/language.html).
 
@@ -52,7 +52,9 @@ const struct = message.getRoot(MyStruct);
 
 ### RPC Protocol
 
-Experimental [RPC protocol](https://capnproto.org/rpc.html) is supported ([level 1](https://capnproto.org/rpc.html#protocol-features).)
+Experimental [RPC protocol](https://capnproto.org/rpc.html) is supported ([level 1](https://capnproto.org/rpc.html#protocol-features)).
+
+See [tests](./test/integration/rpc.spec.ts) for some examples.
 
 ## Status
 
@@ -60,19 +62,17 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 
 **<sup>1</sup> Changes from `capnp-ts`:**
 
-- [x] Internal refactors and simplifications as was playing around.
-- [x] Compiler, runtime, and std lib published via a single and compact ESM-only package with subpath exports.
-- [x] Compiler updated to use Typescript v5 API
-- [x] Output files can be `.ts` (new), `.js` (ESM instead of CJS), and `.d.ts` and has no `.capnp` suffix.
-- [x] Compiler API can be used via the `capnp-es/compiler` subpath export programmatically.
-- [x] Use native `TextEncoder` and `TextDecoder` for utf8 encoding
-- [x] Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
-- [x] Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
-- [x] Built-in schemas are compiled from source (compiler, compiles itself. so cool right?)
-- [x] Use reflection (getter setters) to access structs.
-- [x] RPC level 1
-- [ ] [TODO] Investigate runtime performance. Some language features make full traverse slow, especially on Node.js < 22, Bun is fast and all good.
-- [ ] [PLANNED] Investigate the possibility of bundling the wasm version of `capnp`
+- Internal refactors and simplifications as was playing around.
+- Compiler, runtime, and std lib published via a single and compact ESM-only package with subpath exports.
+- Compiler updated to use Typescript v5 API
+- Output files can be `.ts` (new), `.js` (ESM instead of CJS), and `.d.ts` and has no `.capnp` suffix.
+- Compiler API can be used via the `capnp-es/compiler` subpath export programmatically.
+- Use native `TextEncoder` and `TextDecoder` for utf8 encoding
+- Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
+- Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
+- Built-in schemas are compiled from source (compiler, compiles itself. so cool right?)
+- Use reflection (getter setters) to access structs.
+- RPC level 1
 
 ## Development
 
