@@ -28,9 +28,7 @@ export async function compileAll(
   // Load requested files into context
   const req = new Message(buff, false).getRoot(s.CodeGeneratorRequest);
   const ctx = new CodeGeneratorContext();
-  ctx.files = req
-    .getRequestedFiles()
-    .map((file) => loadRequestedFile(req, file));
+  ctx.files = req.requestedFiles.map((file) => loadRequestedFile(req, file));
 
   // Compile files in memory
   const files = new Map<string, string>(
@@ -53,9 +51,9 @@ export function compileFile(ctx: CodeGeneratorFileContext): string {
   generateNestedImports(ctx);
   generateFileId(ctx);
 
-  for (const n of lookupNode(ctx, ctx.file)
-    .getNestedNodes()
-    .map((n) => lookupNode(ctx, n)))
+  for (const n of lookupNode(ctx, ctx.file).nestedNodes.map((n) =>
+    lookupNode(ctx, n),
+  ))
     generateNode(ctx, n);
 
   for (const [fullClassName, field] of ctx.concreteLists)

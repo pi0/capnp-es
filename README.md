@@ -68,6 +68,7 @@ This project is a rework<sup>1</sup> of [jdiaz5513/capnp-ts](https://github.com/
 - [x] Use native `TextEncoder` and `TextDecoder` for utf8 encoding
 - [x] Enums are typed plain JS objects (this way `.ts` files work with strip-only ts loaders without enum support.)
 - [x] Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
+- [x] Built-in schemas are compiled from source (compiler, compiles itself. so cool right?)
 - [ ] [WIP] Use reflection (getter setters) to access structs.
 - [ ] [TODO] Investigate runtime performance. Some language features make full traverse slow, especially on Node.js < 22, Bun is fast and all good.
 - [ ] [PLANNED] Investigate RPC level 1 (some progress [here](https://github.com/jdiaz5513/capnp-ts/pull/169))

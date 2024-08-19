@@ -13,17 +13,11 @@ test("compiler:ast-creators:createValueExpression", () => {
   // Find a node with a default pointer value to play around with.
   const node = m
     .getRoot(Schema.CodeGeneratorRequest)
-    .getNodes()
-    .find((n) => n.getDisplayName().split(":")[1] === "TestDefaults");
+    .nodes.find((n) => n.displayName.split(":")[1] === "TestDefaults");
 
   expect(node).toBeDefined();
 
-  const value = node!
-    .getStruct()
-    .getFields()
-    .get(29)
-    .getSlot()
-    .getDefaultValue();
+  const value = node!.struct.fields.get(29).slot.defaultValue;
   const printer = ts.createPrinter();
   const sourceFile = ts.createSourceFile("", "", ts.ScriptTarget.ES2017);
 

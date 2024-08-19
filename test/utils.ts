@@ -43,18 +43,6 @@ export function compareBuffers(
   wanted: ArrayBuffer,
   _name = "should have the same buffer contents",
 ): void {
-  t.equal(
-    found.byteLength,
-    wanted.byteLength,
-    `should have the same byte length (diff=${diffHex(found, wanted)}).`,
-  );
-
-  // End the comparison prematurely if the buffer lengths differ.
-
-  if (found.byteLength !== wanted.byteLength) {
-    return;
-  }
-
   const a = new Uint8Array(found);
   const b = new Uint8Array(wanted);
 
@@ -63,6 +51,12 @@ export function compareBuffers(
       t.fail(`bytes are not equal (${diffHex(found, wanted)})`);
     }
   }
+
+  t.equal(
+    found.byteLength,
+    wanted.byteLength,
+    `should have the same byte length (diff=${diffHex(found, wanted)}).`,
+  );
 }
 
 // LINT: This is benchmark code, not library code. This does not run as part of the test suite.

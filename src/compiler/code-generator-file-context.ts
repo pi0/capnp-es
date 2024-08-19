@@ -19,15 +19,15 @@ export class CodeGeneratorFileContext {
   ) {
     this.req = req;
     this.file = file;
-    this.nodes = req.getNodes().toArray();
+    this.nodes = req.nodes.toArray();
     this.concreteLists = [];
     this.generatedNodeIds = [];
     this.statements = [];
     this.tsPath = "";
-    this.imports = file.getImports().toArray();
+    this.imports = file.imports.toArray();
   }
 
   toString(): string {
-    return this.file ? this.file.getFilename() : "CodeGeneratorFileContext()";
+    return this.file ? this.file.filename : "CodeGeneratorFileContext()";
   }
 }

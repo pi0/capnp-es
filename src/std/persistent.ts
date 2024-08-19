@@ -1,81 +1,64 @@
-// Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
-
-import * as capnp from "../serialization";
-
-export const _capnpFileId = "b8630836983feed7";
-
-export class Persistent_SaveParams extends capnp.Struct {
+import * as $ from "../serialization";
+export const _capnpFileId = BigInt("0xb8630836983feed7");
+export class Persistent_SaveParams extends $.Struct {
   static readonly _capnp = {
     displayName: "SaveParams",
     id: "f76fba59183073a5",
-    size: new capnp.ObjectSize(0, 1),
+    size: new $.ObjectSize(0, 1),
   };
-  adoptSealFor(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptSealFor(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownSealFor(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getSealFor());
+  disownSealFor(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.sealFor);
   }
-  getSealFor(): capnp.Pointer {
-    return capnp.Struct.getPointer(0, this);
+  get sealFor(): $.Pointer {
+    return $.Struct.getPointer(0, this);
   }
   hasSealFor(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  setSealFor(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set sealFor(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "Persistent_SaveParams_" + super.toString();
   }
 }
-
-export class Persistent_SaveResults extends capnp.Struct {
+export class Persistent_SaveResults extends $.Struct {
   static readonly _capnp = {
     displayName: "SaveResults",
     id: "b76848c18c40efbf",
-    size: new capnp.ObjectSize(0, 1),
+    size: new $.ObjectSize(0, 1),
   };
-  adoptSturdyRef(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptSturdyRef(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownSturdyRef(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getSturdyRef());
+  disownSturdyRef(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.sturdyRef);
   }
-  getSturdyRef(): capnp.Pointer {
-    return capnp.Struct.getPointer(0, this);
+  get sturdyRef(): $.Pointer {
+    return $.Struct.getPointer(0, this);
   }
   hasSturdyRef(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  setSturdyRef(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set sturdyRef(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "Persistent_SaveResults_" + super.toString();
   }
 }
-
-export class Persistent extends capnp.Struct {
+export class Persistent extends $.Struct {
   static readonly SaveParams = Persistent_SaveParams;
   static readonly SaveResults = Persistent_SaveResults;
   static readonly _capnp = {
     displayName: "Persistent",
     id: "c8cb212fcd9f5691",
-    size: new capnp.ObjectSize(0, 0),
+    size: new $.ObjectSize(0, 0),
   };
   toString(): string {
     return "Persistent_" + super.toString();
-  }
-}
-
-export class RealmGateway extends capnp.Struct {
-  static readonly _capnp = {
-    displayName: "RealmGateway",
-    id: "84ff286cd00a3ed4",
-    size: new capnp.ObjectSize(0, 0),
-  };
-  toString(): string {
-    return "RealmGateway_" + super.toString();
   }
 }

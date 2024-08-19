@@ -9,10 +9,10 @@ import * as E from "./errors";
 import * as util from "./util";
 
 export function compareCodeOrder(
-  a: { getCodeOrder(): number },
-  b: { getCodeOrder(): number },
+  a: { readonly codeOrder: number },
+  b: { readonly codeOrder: number },
 ): number {
-  return a.getCodeOrder() - b.getCodeOrder();
+  return a.codeOrder - b.codeOrder;
 }
 
 export function getConcreteListType(
@@ -21,17 +21,16 @@ export function getConcreteListType(
 ): string {
   if (!type.isList()) return getJsType(ctx, type, false);
 
-  const elementType = type.getList().getElementType();
+  const elementType = type.list.elementType;
   const elementTypeWhich = elementType.which();
 
   if (elementTypeWhich === s.Type.LIST) {
     return `$.PointerList(${getConcreteListType(ctx, elementType)})`;
   } else if (elementTypeWhich === s.Type.STRUCT) {
-    const structNode = lookupNode(ctx, elementType.getStruct().getTypeId());
+    const structNode = lookupNode(ctx, elementType.struct.typeId);
 
     if (
-      structNode.getStruct().getPreferredListEncoding() !==
-      s.ElementSize.INLINE_COMPOSITE
+      structNode.struct.preferredListEncoding !== s.ElementSize.INLINE_COMPOSITE
     ) {
       throw new Error(E.GEN_FIELD_NON_INLINE_STRUCT_LIST);
     }
@@ -43,12 +42,11 @@ export function getConcreteListType(
 }
 
 export function getDisplayNamePrefix(node: s.Node): string {
-  return node.getDisplayName().slice(node.getDisplayNamePrefixLength());
+  return node.displayName.slice(node.displayNamePrefixLength);
 }
 
 export function getFullClassName(node: s.Node): string {
-  return node
-    .getDisplayName()
+  return node.displayName
     .split(":")[1]
     .split(".")
     .map((s) => util.c2t(s))
@@ -76,7 +74,7 @@ export function getJsType(
     }
 
     case s.Type.ENUM: {
-      return getFullClassName(lookupNode(ctx, type.getEnum().getTypeId()));
+      return getFullClassName(lookupNode(ctx, type.enum.typeId));
     }
 
     case s.Type.FLOAT32:
@@ -100,11 +98,11 @@ export function getJsType(
     }
 
     case s.Type.LIST: {
-      return `$.List${constructor ? "Ctor" : ""}<${getJsType(ctx, type.getList().getElementType(), false)}>`;
+      return `$.List${constructor ? "Ctor" : ""}<${getJsType(ctx, type.list.elementType, false)}>`;
     }
 
     case s.Type.STRUCT: {
-      const c = getFullClassName(lookupNode(ctx, type.getStruct().getTypeId()));
+      const c = getFullClassName(lookupNode(ctx, type.struct.typeId));
 
       return constructor ? `$.StructCtor<${c}>` : c;
     }
@@ -126,19 +124,18 @@ export function getJsType(
 export function getUnnamedUnionFields(node: s.Node): s.Field[] {
   if (!node.isStruct()) return [];
 
-  return node
-    .getStruct()
-    .getFields()
-    .filter((f) => f.getDiscriminantValue() !== s.Field.NO_DISCRIMINANT);
+  return node.struct.fields.filter(
+    (f) => f.discriminantValue !== s.Field.NO_DISCRIMINANT,
+  );
 }
 
 export function hasNode(
   ctx: CodeGeneratorFileContext,
-  lookup: { getId(): bigint } | bigint,
+  lookup: { readonly id: bigint } | bigint,
 ): boolean {
-  const id = typeof lookup === "bigint" ? lookup : lookup.getId();
+  const id = typeof lookup === "bigint" ? lookup : lookup.id;
 
-  return ctx.nodes.some((n) => n.getId() === id);
+  return ctx.nodes.some((n) => n.id === id);
 }
 
 export function loadRequestedFile(
@@ -147,19 +144,19 @@ export function loadRequestedFile(
 ): CodeGeneratorFileContext {
   const ctx = new CodeGeneratorFileContext(req, file);
 
-  const schema = lookupNode(ctx, file.getId());
+  const schema = lookupNode(ctx, file.id);
 
-  ctx.tsPath = schema.getDisplayName().replace(/\.capnp$/, "") + ".ts";
+  ctx.tsPath = schema.displayName.replace(/\.capnp$/, "") + ".ts";
 
   return ctx;
 }
 
 export function lookupNode(
   ctx: CodeGeneratorFileContext,
-  lookup: { getId(): bigint } | bigint,
+  lookup: { readonly id: bigint } | bigint,
 ): s.Node {
-  const id = typeof lookup === "bigint" ? lookup : lookup.getId();
-  const node = ctx.nodes.find((n) => n.getId() === id);
+  const id = typeof lookup === "bigint" ? lookup : lookup.id;
+  const node = ctx.nodes.find((n) => n.id === id);
 
   if (node === undefined) throw new Error(format(E.GEN_NODE_LOOKUP_FAIL, id));
 
@@ -177,11 +174,11 @@ export function lookupNode(
 export function needsConcreteListClass(field: s.Field): boolean {
   if (!field.isSlot()) return false;
 
-  const slotType = field.getSlot().getType();
+  const slotType = field.slot.type;
 
   if (!slotType.isList()) return false;
 
-  const elementType = slotType.getList().getElementType();
+  const elementType = slotType.list.elementType;
 
   return elementType.isStruct() || elementType.isList();
 }

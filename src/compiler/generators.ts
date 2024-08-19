@@ -54,21 +54,17 @@ export function generateCapnpImport(ctx: CodeGeneratorFileContext): void {
   const fileNode = lookupNode(ctx, ctx.file);
   const tsFileId = util.hexToBigInt(TS_FILE_ID);
   // This may be undefined if ts.capnp is not imported; fine, we'll just use the default.
-  const tsAnnotationFile = ctx.nodes.find((n) => n.getId() === tsFileId);
+  const tsAnnotationFile = ctx.nodes.find((n) => n.id === tsFileId);
   // We might not find the importPath annotation; that's definitely a bug but let's move on.
   const tsImportPathAnnotation =
     tsAnnotationFile &&
-    tsAnnotationFile.getNestedNodes().find((n) => n.getName() === "importPath");
+    tsAnnotationFile.nestedNodes.find((n) => n.name === "importPath");
   // There may not necessarily be an import path annotation on the file node. That's fine.
   const importAnnotation =
     tsImportPathAnnotation &&
-    fileNode
-      .getAnnotations()
-      .find((a) => a.getId() === tsImportPathAnnotation.getId());
+    fileNode.annotations.find((a) => a.id === tsImportPathAnnotation.id);
   const importPath =
-    importAnnotation === undefined
-      ? "capnp-es"
-      : importAnnotation.getValue().getText();
+    importAnnotation === undefined ? "capnp-es" : importAnnotation.value.text;
 
   // import * as capnp from '${importPath}';
   ctx.statements.push(
@@ -90,7 +86,7 @@ export function generateCapnpImport(ctx: CodeGeneratorFileContext): void {
 
 export function generateNestedImports(ctx: CodeGeneratorFileContext): void {
   for (const i of ctx.imports) {
-    const name = i.getName();
+    const name = i.name;
     let importPath: string;
 
     if (name.startsWith("/capnp/")) {
@@ -123,11 +119,9 @@ export function generateConcreteListInitializer(
 ): void {
   const left = f.createPropertyAccessExpression(
     f.createIdentifier(fullClassName),
-    `_${util.c2t(field.getName())}`,
+    `_${util.c2t(field.name)}`,
   );
-  const right = f.createIdentifier(
-    getConcreteListType(ctx, field.getSlot().getType()),
-  );
+  const right = f.createIdentifier(getConcreteListType(ctx, field.slot.type));
 
   ctx.statements.push(
     f.createExpressionStatement(f.createAssignment(left, right)),
@@ -135,9 +129,9 @@ export function generateConcreteListInitializer(
 }
 
 export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
-  const name = field.getName();
-  const slot = field.getSlot();
-  const whichSlotType = slot.getType().which();
+  const name = field.name;
+  const slot = field.slot;
+  const whichSlotType = slot.type.which();
   const p = Primitive[whichSlotType];
   let initializer;
 
@@ -146,13 +140,13 @@ export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
     case s.Type_Which.DATA:
     case s.Type_Which.LIST:
     case s.Type_Which.STRUCT: {
-      initializer = createValueExpression(slot.getDefaultValue());
+      initializer = createValueExpression(slot.defaultValue);
 
       break;
     }
 
     case s.Type_Which.TEXT: {
-      initializer = f.createStringLiteral(slot.getDefaultValue().getText());
+      initializer = f.createStringLiteral(slot.defaultValue.text);
 
       break;
     }
@@ -162,8 +156,8 @@ export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
         f.createPropertyAccessExpression(CAPNP, p.mask),
         undefined,
         [
-          createValueExpression(slot.getDefaultValue()),
-          f.createNumericLiteral((slot.getOffset() % 8).toString()),
+          createValueExpression(slot.defaultValue),
+          f.createNumericLiteral((slot.offset % 8).toString()),
         ],
       );
 
@@ -184,7 +178,7 @@ export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
       initializer = f.createCallExpression(
         f.createPropertyAccessExpression(CAPNP, p.mask),
         undefined,
-        [createValueExpression(slot.getDefaultValue())],
+        [createValueExpression(slot.defaultValue)],
       );
 
       break;
@@ -192,7 +186,10 @@ export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
 
     default: {
       throw new Error(
-        format(E.GEN_UNKNOWN_DEFAULT, s.Type_Which[whichSlotType]),
+        format(
+          E.GEN_UNKNOWN_DEFAULT,
+          whichSlotType /* s.Type_Which[whichSlotType] */,
+        ), // TODO
       );
     }
   }
@@ -203,7 +200,7 @@ export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
 export function generateFileId(ctx: CodeGeneratorFileContext): void {
   // export const _capnpFileId = BigInt('0xabcdef');
   const fileId = f.createCallExpression(BIGINT, undefined, [
-    f.createStringLiteral(`0x${ctx.file.getId().toString(16)}`),
+    f.createStringLiteral(`0x${ctx.file.id.toString(16)}`),
   ]);
   ctx.statements.push(
     f.createVariableStatement(
@@ -228,7 +225,7 @@ export function generateInterfaceClasses(
   node: s.Node,
 ): void {
   console.error(
-    `CAPNP-TS: Warning! Interface generation (${node.getDisplayName()}) is not yet implemented.`,
+    `CAPNP-TS: Warning! Interface generation (${node.displayName}) is not yet implemented.`,
   );
 }
 
@@ -236,7 +233,7 @@ export function generateNode(
   ctx: CodeGeneratorFileContext,
   node: s.Node,
 ): void {
-  const nodeId = node.getId();
+  const nodeId = node.id;
   const nodeIdHex = nodeId.toString(16);
 
   if (ctx.generatedNodeIds.includes(nodeIdHex)) return;
@@ -245,14 +242,13 @@ export function generateNode(
 
   /** An array of group structs formed as children of this struct. They appear before the struct node in the file. */
   const groupNodes = ctx.nodes.filter(
-    (n) =>
-      n.getScopeId() === nodeId && n.isStruct() && n.getStruct().getIsGroup(),
+    (n) => n.scopeId === nodeId && n.isStruct() && n.struct.isGroup,
   );
   /**
    * An array of nodes that are nested within this node; these must appear first since those symbols will be
    * referenced in the node's class definition.
    */
-  const nestedNodes = node.getNestedNodes().map((n) => lookupNode(ctx, n));
+  const nestedNodes = node.nestedNodes.map((n) => lookupNode(ctx, n));
 
   for (const n of nestedNodes) generateNode(ctx, n);
   for (const n of groupNodes) generateNode(ctx, n);
@@ -276,7 +272,7 @@ export function generateNode(
       generateEnumNode(
         ctx,
         getFullClassName(node),
-        node.getEnum().getEnumerants().toArray(),
+        node.enum.enumerants.toArray(),
       );
 
       break;
@@ -294,7 +290,12 @@ export function generateNode(
 
     // case s.Node.FILE:
     default: {
-      throw new Error(format(E.GEN_NODE_UNKNOWN_TYPE, s.Node_Which[whichNode]));
+      throw new Error(
+        format(
+          E.GEN_NODE_UNKNOWN_TYPE,
+          whichNode /* s.Node_Which[whichNode] */,
+        ),
+      ); // TODO
     }
   }
 }
@@ -311,26 +312,25 @@ export function generateStructFieldMethods(
   let whichType: s.Type_Which | string;
 
   if (field.isSlot()) {
-    const slotType = field.getSlot().getType();
+    const slotType = field.slot.type;
     jsType = getJsType(ctx, slotType, false);
     whichType = slotType.which();
   } else if (field.isGroup()) {
-    jsType = getFullClassName(lookupNode(ctx, field.getGroup().getTypeId()));
+    jsType = getFullClassName(lookupNode(ctx, field.group.typeId));
     whichType = "group";
   } else {
     throw new Error(format(E.GEN_UNKNOWN_STRUCT_FIELD, field.which()));
   }
 
   const jsTypeReference = f.createTypeReferenceNode(jsType, undefined);
-  const discriminantOffset = node.getStruct().getDiscriminantOffset();
-  const name = field.getName();
+  const discriminantOffset = node.struct.discriminantOffset;
+  const name = field.name;
   const properName = util.c2t(name);
-  const hadExplicitDefault =
-    field.isSlot() && field.getSlot().getHadExplicitDefault();
-  const discriminantValue = field.getDiscriminantValue();
+  const hadExplicitDefault = field.isSlot() && field.slot.hadExplicitDefault;
+  const discriminantValue = field.discriminantValue;
   const fullClassName = getFullClassName(node);
   const union = discriminantValue !== s.Field.NO_DISCRIMINANT;
-  const offset = (field.isSlot() && field.getSlot().getOffset()) || 0;
+  const offset = (field.isSlot() && field.slot.offset) || 0;
   const offsetLiteral = f.createNumericLiteral(offset.toString());
   /** __S.getPointer(0, this) */
   const getPointer = f.createCallExpression(
@@ -492,12 +492,7 @@ export function generateStructFieldMethods(
     }
 
     case s.Type.LIST: {
-      const whichElementType = field
-        .getSlot()
-        .getType()
-        .getList()
-        .getElementType()
-        .which();
+      const whichElementType = field.slot.type.list.elementType.which();
       let listClass = ConcreteListType[whichElementType];
 
       if (
@@ -550,7 +545,7 @@ export function generateStructFieldMethods(
     }
     case s.Type.STRUCT: {
       const structType = f.createIdentifier(
-        getJsType(ctx, field.getSlot().getType(), false),
+        getJsType(ctx, field.slot.type, false),
       );
 
       getArgs = [offsetLiteral, structType, THIS];
@@ -820,30 +815,25 @@ export function generateStructNode(
 ): void {
   const displayNamePrefix = getDisplayNamePrefix(node);
   const fullClassName = getFullClassName(node);
-  const nestedNodes = node
-    .getNestedNodes()
+  const nestedNodes = node.nestedNodes
     .map((n) => lookupNode(ctx, n))
     .filter((n) => !n.isConst() && !n.isAnnotation());
-  const nodeId = node.getId();
+  const nodeId = node.id;
   const nodeIdHex = nodeId.toString(16);
-  const struct = node.which() === s.Node.STRUCT ? node.getStruct() : undefined;
+  const struct = node.which() === s.Node.STRUCT ? node.struct : undefined;
   const unionFields = getUnnamedUnionFields(node).sort(compareCodeOrder);
 
-  const dataWordCount = struct ? struct.getDataWordCount() : 0;
+  const dataWordCount = struct ? struct.dataWordCount : 0;
   const dataByteLength = struct ? dataWordCount * 8 : 0;
-  const discriminantCount = struct ? struct.getDiscriminantCount() : 0;
-  const discriminantOffset = struct ? struct.getDiscriminantOffset() : 0;
-  const fields = struct
-    ? struct.getFields().toArray().sort(compareCodeOrder)
-    : [];
-  const pointerCount = struct ? struct.getPointerCount() : 0;
+  const discriminantCount = struct ? struct.discriminantCount : 0;
+  const discriminantOffset = struct ? struct.discriminantOffset : 0;
+  const fields = struct ? struct.fields.toArray().sort(compareCodeOrder) : [];
+  const pointerCount = struct ? struct.pointerCount : 0;
 
   const concreteLists = fields
     .filter((f) => needsConcreteListClass(f))
     .sort(compareCodeOrder);
-  const consts = ctx.nodes.filter(
-    (n) => n.getScopeId() === nodeId && n.isConst(),
-  );
+  const consts = ctx.nodes.filter((n) => n.scopeId === nodeId && n.isConst());
   // const groups = ctx.nodes.filter(
   //   (n) => n.getScopeId().equals(nodeId) && n.isStruct() && n.getStruct().getIsGroup());
   const hasUnnamedUnion = discriminantCount !== 0;
@@ -880,8 +870,8 @@ export function generateStructNode(
   const defaultValues = fields.reduce(
     (acc, f) =>
       f.isSlot() &&
-      f.getSlot().getHadExplicitDefault() &&
-      f.getSlot().getType().which() !== s.Type.VOID
+      f.slot.hadExplicitDefault &&
+      f.slot.type.which() !== s.Type.VOID
         ? [...acc, generateDefaultValue(f)]
         : acc,
     [] as ts.PropertyAssignment[],
@@ -982,7 +972,7 @@ export function generateEnumNode(
   fields: s.Enumerant[] | s.Field[],
 ): void {
   const members = fields.sort(compareCodeOrder).map((e, index) => {
-    const key = f.createIdentifier(util.c2s(e.getName()));
+    const key = f.createIdentifier(util.c2s(e.name));
     const val = f.createNumericLiteral(index.toString());
     return f.createPropertyAssignment(key, val);
   });
@@ -1029,8 +1019,7 @@ export function getImportNodes(
 ): s.Node[] {
   return (
     lookupNode(ctx, node)
-      .getNestedNodes()
-      .filter((n) => hasNode(ctx, n))
+      .nestedNodes.filter((n) => hasNode(ctx, n))
       .map((n) => lookupNode(ctx, n))
       // eslint-disable-next-line unicorn/no-array-reduce
       .reduce(

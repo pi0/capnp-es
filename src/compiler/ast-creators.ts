@@ -21,10 +21,8 @@ export function createConcreteListProperty(
   ctx: CodeGeneratorFileContext,
   field: s.Field,
 ): ts.PropertyDeclaration {
-  const name = `_${util.c2t(field.getName())}`;
-  const type = f.createTypeReferenceNode(
-    getJsType(ctx, field.getSlot().getType(), true),
-  );
+  const name = `_${util.c2t(field.name)}`;
+  const type = f.createTypeReferenceNode(getJsType(ctx, field.slot.type, true));
   let u: ts.Expression | undefined;
   return f.createPropertyDeclaration(
     [STATIC],
@@ -37,7 +35,7 @@ export function createConcreteListProperty(
 
 export function createConstProperty(node: s.Node): ts.PropertyDeclaration {
   const name = util.c2s(getDisplayNamePrefix(node));
-  const initializer = createValueExpression(node.getConst().getValue());
+  const initializer = createValueExpression(node.const.value);
 
   return f.createPropertyDeclaration(
     [STATIC, READONLY],
@@ -100,7 +98,7 @@ export function createUnionConstProperty(
   fullClassName: string,
   field: s.Field,
 ): ts.PropertyDeclaration {
-  const name = util.c2s(field.getName());
+  const name = util.c2s(field.name);
   const initializer = f.createPropertyAccessExpression(
     f.createIdentifier(`${fullClassName}_Which`),
     name,
@@ -120,35 +118,35 @@ export function createValueExpression(value: s.Value): ts.Expression {
 
   switch (value.which()) {
     case s.Value.BOOL: {
-      return value.getBool() ? f.createTrue() : f.createFalse();
+      return value.bool ? f.createTrue() : f.createFalse();
     }
 
     case s.Value.ENUM: {
-      return f.createNumericLiteral(value.getEnum().toString());
+      return f.createNumericLiteral(value.enum.toString());
     }
 
     case s.Value.FLOAT32: {
-      return numericExpression(value.getFloat32());
+      return numericExpression(value.float32);
     }
 
     case s.Value.FLOAT64: {
-      return numericExpression(value.getFloat64());
+      return numericExpression(value.float64);
     }
 
     case s.Value.INT8: {
-      return numericExpression(value.getInt8());
+      return numericExpression(value.int8);
     }
 
     case s.Value.INT16: {
-      return numericExpression(value.getInt16());
+      return numericExpression(value.int16);
     }
 
     case s.Value.INT32: {
-      return numericExpression(value.getInt32());
+      return numericExpression(value.int32);
     }
 
     case s.Value.INT64: {
-      let v = value.getInt64().toString(16);
+      let v = value.int64.toString(16);
       let neg = "";
       if (v[0] === "-") {
         v = v.slice(1);
@@ -162,24 +160,24 @@ export function createValueExpression(value: s.Value): ts.Expression {
     }
 
     case s.Value.TEXT: {
-      return f.createStringLiteral(value.getText());
+      return f.createStringLiteral(value.text);
     }
 
     case s.Value.UINT16: {
-      return f.createNumericLiteral(value.getUint16().toString());
+      return f.createNumericLiteral(value.uint16.toString());
     }
 
     case s.Value.UINT32: {
-      return f.createNumericLiteral(value.getUint32().toString());
+      return f.createNumericLiteral(value.uint32.toString());
     }
 
     case s.Value.UINT64: {
       return f.createCallExpression(f.createIdentifier("BigInt"), undefined, [
-        f.createStringLiteral(`0x${value.getUint64().toString(16)}`),
+        f.createStringLiteral(`0x${value.uint64.toString(16)}`),
       ]);
     }
     case s.Value.UINT8: {
-      return f.createNumericLiteral(value.getUint8().toString());
+      return f.createNumericLiteral(value.uint8.toString());
     }
 
     case s.Value.VOID: {
@@ -187,25 +185,25 @@ export function createValueExpression(value: s.Value): ts.Expression {
     }
 
     case s.Value.ANY_POINTER: {
-      p = value.getAnyPointer();
+      p = value.anyPointer;
 
       break;
     }
 
     case s.Value.DATA: {
-      p = value.getData();
+      p = value.data;
 
       break;
     }
 
     case s.Value.LIST: {
-      p = value.getList();
+      p = value.list;
 
       break;
     }
 
     case s.Value.STRUCT: {
-      p = value.getStruct();
+      p = value.struct;
 
       break;
     }
@@ -213,7 +211,10 @@ export function createValueExpression(value: s.Value): ts.Expression {
     // case s.Value.INTERFACE:
     default: {
       throw new Error(
-        format(E.GEN_SERIALIZE_UNKNOWN_VALUE, s.Value_Which[value.which()]),
+        format(
+          E.GEN_SERIALIZE_UNKNOWN_VALUE,
+          value.which() /* s.Value_Which[value.which()] */,
+        ), // TODO
       );
     }
   }

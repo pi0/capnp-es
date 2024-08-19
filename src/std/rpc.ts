@@ -1,27 +1,23 @@
-// Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
-
-import * as capnp from "../serialization";
-
-export const _capnpFileId = "b312981b2552a250";
-
-export enum Message_Which {
-  UNIMPLEMENTED = 0,
-  ABORT = 1,
-  BOOTSTRAP = 8,
-  CALL = 2,
-  RETURN = 3,
-  FINISH = 4,
-  RESOLVE = 5,
-  RELEASE = 6,
-  DISEMBARGO = 13,
-  OBSOLETE_SAVE = 7,
-  OBSOLETE_DELETE = 9,
-  PROVIDE = 10,
-  ACCEPT = 11,
-  JOIN = 12,
-}
-
-export class Message extends capnp.Struct {
+import * as $ from "../serialization";
+export const _capnpFileId = BigInt("0xb312981b2552a250");
+export const Message_Which = {
+  UNIMPLEMENTED: 0,
+  ABORT: 1,
+  BOOTSTRAP: 2,
+  CALL: 3,
+  RETURN: 4,
+  FINISH: 5,
+  RESOLVE: 6,
+  RELEASE: 7,
+  DISEMBARGO: 8,
+  OBSOLETE_SAVE: 9,
+  OBSOLETE_DELETE: 10,
+  PROVIDE: 11,
+  ACCEPT: 12,
+  JOIN: 13,
+} as const;
+export type Message_Which = (typeof Message_Which)[keyof typeof Message_Which];
+export class Message extends $.Struct {
   static readonly UNIMPLEMENTED = Message_Which.UNIMPLEMENTED;
   static readonly ABORT = Message_Which.ABORT;
   static readonly BOOTSTRAP = Message_Which.BOOTSTRAP;
@@ -39,573 +35,554 @@ export class Message extends capnp.Struct {
   static readonly _capnp = {
     displayName: "Message",
     id: "91b79f1f808db032",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  adoptUnimplemented(value: capnp.Orphan<Message>): void {
-    capnp.Struct.setUint16(0, 0, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptUnimplemented(value: $.Orphan<Message>): void {
+    $.Struct.setUint16(0, 0, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownUnimplemented(): capnp.Orphan<Message> {
-    return capnp.Struct.disown(this.getUnimplemented());
+  disownUnimplemented(): $.Orphan<Message> {
+    return $.Struct.disown(this.unimplemented);
   }
-  getUnimplemented(): Message {
-    capnp.Struct.testWhich(
-      "unimplemented",
-      capnp.Struct.getUint16(0, this),
-      0,
-      this,
-    );
-    return capnp.Struct.getStruct(0, Message, this);
+  get unimplemented(): Message {
+    $.Struct.testWhich("unimplemented", $.Struct.getUint16(0, this), 0, this);
+    return $.Struct.getStruct(0, Message, this);
   }
   hasUnimplemented(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initUnimplemented(): Message {
-    capnp.Struct.setUint16(0, 0, this);
-    return capnp.Struct.initStructAt(0, Message, this);
+    $.Struct.setUint16(0, 0, this);
+    return $.Struct.initStructAt(0, Message, this);
   }
   isUnimplemented(): boolean {
-    return capnp.Struct.getUint16(0, this) === 0;
+    return $.Struct.getUint16(0, this) === 0;
   }
-  setUnimplemented(value: Message): void {
-    capnp.Struct.setUint16(0, 0, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set unimplemented(value: Message) {
+    $.Struct.setUint16(0, 0, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptAbort(value: capnp.Orphan<Exception>): void {
-    capnp.Struct.setUint16(0, 1, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptAbort(value: $.Orphan<Exception>): void {
+    $.Struct.setUint16(0, 1, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownAbort(): capnp.Orphan<Exception> {
-    return capnp.Struct.disown(this.getAbort());
+  disownAbort(): $.Orphan<Exception> {
+    return $.Struct.disown(this.abort);
   }
-  getAbort(): Exception {
-    capnp.Struct.testWhich("abort", capnp.Struct.getUint16(0, this), 1, this);
-    return capnp.Struct.getStruct(0, Exception, this);
+  get abort(): Exception {
+    $.Struct.testWhich("abort", $.Struct.getUint16(0, this), 1, this);
+    return $.Struct.getStruct(0, Exception, this);
   }
   hasAbort(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initAbort(): Exception {
-    capnp.Struct.setUint16(0, 1, this);
-    return capnp.Struct.initStructAt(0, Exception, this);
+    $.Struct.setUint16(0, 1, this);
+    return $.Struct.initStructAt(0, Exception, this);
   }
   isAbort(): boolean {
-    return capnp.Struct.getUint16(0, this) === 1;
+    return $.Struct.getUint16(0, this) === 1;
   }
-  setAbort(value: Exception): void {
-    capnp.Struct.setUint16(0, 1, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set abort(value: Exception) {
+    $.Struct.setUint16(0, 1, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptBootstrap(value: capnp.Orphan<Bootstrap>): void {
-    capnp.Struct.setUint16(0, 8, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptBootstrap(value: $.Orphan<Bootstrap>): void {
+    $.Struct.setUint16(0, 8, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownBootstrap(): capnp.Orphan<Bootstrap> {
-    return capnp.Struct.disown(this.getBootstrap());
+  disownBootstrap(): $.Orphan<Bootstrap> {
+    return $.Struct.disown(this.bootstrap);
   }
-  getBootstrap(): Bootstrap {
-    capnp.Struct.testWhich(
-      "bootstrap",
-      capnp.Struct.getUint16(0, this),
-      8,
-      this,
-    );
-    return capnp.Struct.getStruct(0, Bootstrap, this);
+  get bootstrap(): Bootstrap {
+    $.Struct.testWhich("bootstrap", $.Struct.getUint16(0, this), 8, this);
+    return $.Struct.getStruct(0, Bootstrap, this);
   }
   hasBootstrap(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initBootstrap(): Bootstrap {
-    capnp.Struct.setUint16(0, 8, this);
-    return capnp.Struct.initStructAt(0, Bootstrap, this);
+    $.Struct.setUint16(0, 8, this);
+    return $.Struct.initStructAt(0, Bootstrap, this);
   }
   isBootstrap(): boolean {
-    return capnp.Struct.getUint16(0, this) === 8;
+    return $.Struct.getUint16(0, this) === 8;
   }
-  setBootstrap(value: Bootstrap): void {
-    capnp.Struct.setUint16(0, 8, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set bootstrap(value: Bootstrap) {
+    $.Struct.setUint16(0, 8, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptCall(value: capnp.Orphan<Call>): void {
-    capnp.Struct.setUint16(0, 2, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptCall(value: $.Orphan<Call>): void {
+    $.Struct.setUint16(0, 2, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownCall(): capnp.Orphan<Call> {
-    return capnp.Struct.disown(this.getCall());
+  disownCall(): $.Orphan<Call> {
+    return $.Struct.disown(this.call);
   }
-  getCall(): Call {
-    capnp.Struct.testWhich("call", capnp.Struct.getUint16(0, this), 2, this);
-    return capnp.Struct.getStruct(0, Call, this);
+  get call(): Call {
+    $.Struct.testWhich("call", $.Struct.getUint16(0, this), 2, this);
+    return $.Struct.getStruct(0, Call, this);
   }
   hasCall(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initCall(): Call {
-    capnp.Struct.setUint16(0, 2, this);
-    return capnp.Struct.initStructAt(0, Call, this);
+    $.Struct.setUint16(0, 2, this);
+    return $.Struct.initStructAt(0, Call, this);
   }
   isCall(): boolean {
-    return capnp.Struct.getUint16(0, this) === 2;
+    return $.Struct.getUint16(0, this) === 2;
   }
-  setCall(value: Call): void {
-    capnp.Struct.setUint16(0, 2, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set call(value: Call) {
+    $.Struct.setUint16(0, 2, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptReturn(value: capnp.Orphan<Return>): void {
-    capnp.Struct.setUint16(0, 3, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptReturn(value: $.Orphan<Return>): void {
+    $.Struct.setUint16(0, 3, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownReturn(): capnp.Orphan<Return> {
-    return capnp.Struct.disown(this.getReturn());
+  disownReturn(): $.Orphan<Return> {
+    return $.Struct.disown(this.return);
   }
-  getReturn(): Return {
-    capnp.Struct.testWhich("return", capnp.Struct.getUint16(0, this), 3, this);
-    return capnp.Struct.getStruct(0, Return, this);
+  get return(): Return {
+    $.Struct.testWhich("return", $.Struct.getUint16(0, this), 3, this);
+    return $.Struct.getStruct(0, Return, this);
   }
   hasReturn(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initReturn(): Return {
-    capnp.Struct.setUint16(0, 3, this);
-    return capnp.Struct.initStructAt(0, Return, this);
+    $.Struct.setUint16(0, 3, this);
+    return $.Struct.initStructAt(0, Return, this);
   }
   isReturn(): boolean {
-    return capnp.Struct.getUint16(0, this) === 3;
+    return $.Struct.getUint16(0, this) === 3;
   }
-  setReturn(value: Return): void {
-    capnp.Struct.setUint16(0, 3, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set return(value: Return) {
+    $.Struct.setUint16(0, 3, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptFinish(value: capnp.Orphan<Finish>): void {
-    capnp.Struct.setUint16(0, 4, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptFinish(value: $.Orphan<Finish>): void {
+    $.Struct.setUint16(0, 4, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownFinish(): capnp.Orphan<Finish> {
-    return capnp.Struct.disown(this.getFinish());
+  disownFinish(): $.Orphan<Finish> {
+    return $.Struct.disown(this.finish);
   }
-  getFinish(): Finish {
-    capnp.Struct.testWhich("finish", capnp.Struct.getUint16(0, this), 4, this);
-    return capnp.Struct.getStruct(0, Finish, this);
+  get finish(): Finish {
+    $.Struct.testWhich("finish", $.Struct.getUint16(0, this), 4, this);
+    return $.Struct.getStruct(0, Finish, this);
   }
   hasFinish(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initFinish(): Finish {
-    capnp.Struct.setUint16(0, 4, this);
-    return capnp.Struct.initStructAt(0, Finish, this);
+    $.Struct.setUint16(0, 4, this);
+    return $.Struct.initStructAt(0, Finish, this);
   }
   isFinish(): boolean {
-    return capnp.Struct.getUint16(0, this) === 4;
+    return $.Struct.getUint16(0, this) === 4;
   }
-  setFinish(value: Finish): void {
-    capnp.Struct.setUint16(0, 4, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set finish(value: Finish) {
+    $.Struct.setUint16(0, 4, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptResolve(value: capnp.Orphan<Resolve>): void {
-    capnp.Struct.setUint16(0, 5, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptResolve(value: $.Orphan<Resolve>): void {
+    $.Struct.setUint16(0, 5, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownResolve(): capnp.Orphan<Resolve> {
-    return capnp.Struct.disown(this.getResolve());
+  disownResolve(): $.Orphan<Resolve> {
+    return $.Struct.disown(this.resolve);
   }
-  getResolve(): Resolve {
-    capnp.Struct.testWhich("resolve", capnp.Struct.getUint16(0, this), 5, this);
-    return capnp.Struct.getStruct(0, Resolve, this);
+  get resolve(): Resolve {
+    $.Struct.testWhich("resolve", $.Struct.getUint16(0, this), 5, this);
+    return $.Struct.getStruct(0, Resolve, this);
   }
   hasResolve(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initResolve(): Resolve {
-    capnp.Struct.setUint16(0, 5, this);
-    return capnp.Struct.initStructAt(0, Resolve, this);
+    $.Struct.setUint16(0, 5, this);
+    return $.Struct.initStructAt(0, Resolve, this);
   }
   isResolve(): boolean {
-    return capnp.Struct.getUint16(0, this) === 5;
+    return $.Struct.getUint16(0, this) === 5;
   }
-  setResolve(value: Resolve): void {
-    capnp.Struct.setUint16(0, 5, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set resolve(value: Resolve) {
+    $.Struct.setUint16(0, 5, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptRelease(value: capnp.Orphan<Release>): void {
-    capnp.Struct.setUint16(0, 6, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptRelease(value: $.Orphan<Release>): void {
+    $.Struct.setUint16(0, 6, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownRelease(): capnp.Orphan<Release> {
-    return capnp.Struct.disown(this.getRelease());
+  disownRelease(): $.Orphan<Release> {
+    return $.Struct.disown(this.release);
   }
-  getRelease(): Release {
-    capnp.Struct.testWhich("release", capnp.Struct.getUint16(0, this), 6, this);
-    return capnp.Struct.getStruct(0, Release, this);
+  get release(): Release {
+    $.Struct.testWhich("release", $.Struct.getUint16(0, this), 6, this);
+    return $.Struct.getStruct(0, Release, this);
   }
   hasRelease(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initRelease(): Release {
-    capnp.Struct.setUint16(0, 6, this);
-    return capnp.Struct.initStructAt(0, Release, this);
+    $.Struct.setUint16(0, 6, this);
+    return $.Struct.initStructAt(0, Release, this);
   }
   isRelease(): boolean {
-    return capnp.Struct.getUint16(0, this) === 6;
+    return $.Struct.getUint16(0, this) === 6;
   }
-  setRelease(value: Release): void {
-    capnp.Struct.setUint16(0, 6, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set release(value: Release) {
+    $.Struct.setUint16(0, 6, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptDisembargo(value: capnp.Orphan<Disembargo>): void {
-    capnp.Struct.setUint16(0, 13, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptDisembargo(value: $.Orphan<Disembargo>): void {
+    $.Struct.setUint16(0, 13, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownDisembargo(): capnp.Orphan<Disembargo> {
-    return capnp.Struct.disown(this.getDisembargo());
+  disownDisembargo(): $.Orphan<Disembargo> {
+    return $.Struct.disown(this.disembargo);
   }
-  getDisembargo(): Disembargo {
-    capnp.Struct.testWhich(
-      "disembargo",
-      capnp.Struct.getUint16(0, this),
-      13,
-      this,
-    );
-    return capnp.Struct.getStruct(0, Disembargo, this);
+  get disembargo(): Disembargo {
+    $.Struct.testWhich("disembargo", $.Struct.getUint16(0, this), 13, this);
+    return $.Struct.getStruct(0, Disembargo, this);
   }
   hasDisembargo(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initDisembargo(): Disembargo {
-    capnp.Struct.setUint16(0, 13, this);
-    return capnp.Struct.initStructAt(0, Disembargo, this);
+    $.Struct.setUint16(0, 13, this);
+    return $.Struct.initStructAt(0, Disembargo, this);
   }
   isDisembargo(): boolean {
-    return capnp.Struct.getUint16(0, this) === 13;
+    return $.Struct.getUint16(0, this) === 13;
   }
-  setDisembargo(value: Disembargo): void {
-    capnp.Struct.setUint16(0, 13, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set disembargo(value: Disembargo) {
+    $.Struct.setUint16(0, 13, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptObsoleteSave(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.setUint16(0, 7, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptObsoleteSave(value: $.Orphan<$.Pointer>): void {
+    $.Struct.setUint16(0, 7, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownObsoleteSave(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getObsoleteSave());
+  disownObsoleteSave(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.obsoleteSave);
   }
-  getObsoleteSave(): capnp.Pointer {
-    capnp.Struct.testWhich(
-      "obsoleteSave",
-      capnp.Struct.getUint16(0, this),
-      7,
-      this,
-    );
-    return capnp.Struct.getPointer(0, this);
+  get obsoleteSave(): $.Pointer {
+    $.Struct.testWhich("obsoleteSave", $.Struct.getUint16(0, this), 7, this);
+    return $.Struct.getPointer(0, this);
   }
   hasObsoleteSave(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   isObsoleteSave(): boolean {
-    return capnp.Struct.getUint16(0, this) === 7;
+    return $.Struct.getUint16(0, this) === 7;
   }
-  setObsoleteSave(value: capnp.Pointer): void {
-    capnp.Struct.setUint16(0, 7, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set obsoleteSave(value: $.Pointer) {
+    $.Struct.setUint16(0, 7, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptObsoleteDelete(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.setUint16(0, 9, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptObsoleteDelete(value: $.Orphan<$.Pointer>): void {
+    $.Struct.setUint16(0, 9, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownObsoleteDelete(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getObsoleteDelete());
+  disownObsoleteDelete(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.obsoleteDelete);
   }
-  getObsoleteDelete(): capnp.Pointer {
-    capnp.Struct.testWhich(
-      "obsoleteDelete",
-      capnp.Struct.getUint16(0, this),
-      9,
-      this,
-    );
-    return capnp.Struct.getPointer(0, this);
+  get obsoleteDelete(): $.Pointer {
+    $.Struct.testWhich("obsoleteDelete", $.Struct.getUint16(0, this), 9, this);
+    return $.Struct.getPointer(0, this);
   }
   hasObsoleteDelete(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   isObsoleteDelete(): boolean {
-    return capnp.Struct.getUint16(0, this) === 9;
+    return $.Struct.getUint16(0, this) === 9;
   }
-  setObsoleteDelete(value: capnp.Pointer): void {
-    capnp.Struct.setUint16(0, 9, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set obsoleteDelete(value: $.Pointer) {
+    $.Struct.setUint16(0, 9, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptProvide(value: capnp.Orphan<Provide>): void {
-    capnp.Struct.setUint16(0, 10, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptProvide(value: $.Orphan<Provide>): void {
+    $.Struct.setUint16(0, 10, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownProvide(): capnp.Orphan<Provide> {
-    return capnp.Struct.disown(this.getProvide());
+  disownProvide(): $.Orphan<Provide> {
+    return $.Struct.disown(this.provide);
   }
-  getProvide(): Provide {
-    capnp.Struct.testWhich(
-      "provide",
-      capnp.Struct.getUint16(0, this),
-      10,
-      this,
-    );
-    return capnp.Struct.getStruct(0, Provide, this);
+  get provide(): Provide {
+    $.Struct.testWhich("provide", $.Struct.getUint16(0, this), 10, this);
+    return $.Struct.getStruct(0, Provide, this);
   }
   hasProvide(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initProvide(): Provide {
-    capnp.Struct.setUint16(0, 10, this);
-    return capnp.Struct.initStructAt(0, Provide, this);
+    $.Struct.setUint16(0, 10, this);
+    return $.Struct.initStructAt(0, Provide, this);
   }
   isProvide(): boolean {
-    return capnp.Struct.getUint16(0, this) === 10;
+    return $.Struct.getUint16(0, this) === 10;
   }
-  setProvide(value: Provide): void {
-    capnp.Struct.setUint16(0, 10, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set provide(value: Provide) {
+    $.Struct.setUint16(0, 10, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptAccept(value: capnp.Orphan<Accept>): void {
-    capnp.Struct.setUint16(0, 11, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptAccept(value: $.Orphan<Accept>): void {
+    $.Struct.setUint16(0, 11, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownAccept(): capnp.Orphan<Accept> {
-    return capnp.Struct.disown(this.getAccept());
+  disownAccept(): $.Orphan<Accept> {
+    return $.Struct.disown(this.accept);
   }
-  getAccept(): Accept {
-    capnp.Struct.testWhich("accept", capnp.Struct.getUint16(0, this), 11, this);
-    return capnp.Struct.getStruct(0, Accept, this);
+  get accept(): Accept {
+    $.Struct.testWhich("accept", $.Struct.getUint16(0, this), 11, this);
+    return $.Struct.getStruct(0, Accept, this);
   }
   hasAccept(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initAccept(): Accept {
-    capnp.Struct.setUint16(0, 11, this);
-    return capnp.Struct.initStructAt(0, Accept, this);
+    $.Struct.setUint16(0, 11, this);
+    return $.Struct.initStructAt(0, Accept, this);
   }
   isAccept(): boolean {
-    return capnp.Struct.getUint16(0, this) === 11;
+    return $.Struct.getUint16(0, this) === 11;
   }
-  setAccept(value: Accept): void {
-    capnp.Struct.setUint16(0, 11, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set accept(value: Accept) {
+    $.Struct.setUint16(0, 11, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptJoin(value: capnp.Orphan<Join>): void {
-    capnp.Struct.setUint16(0, 12, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptJoin(value: $.Orphan<Join>): void {
+    $.Struct.setUint16(0, 12, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownJoin(): capnp.Orphan<Join> {
-    return capnp.Struct.disown(this.getJoin());
+  disownJoin(): $.Orphan<Join> {
+    return $.Struct.disown(this.join);
   }
-  getJoin(): Join {
-    capnp.Struct.testWhich("join", capnp.Struct.getUint16(0, this), 12, this);
-    return capnp.Struct.getStruct(0, Join, this);
+  get join(): Join {
+    $.Struct.testWhich("join", $.Struct.getUint16(0, this), 12, this);
+    return $.Struct.getStruct(0, Join, this);
   }
   hasJoin(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initJoin(): Join {
-    capnp.Struct.setUint16(0, 12, this);
-    return capnp.Struct.initStructAt(0, Join, this);
+    $.Struct.setUint16(0, 12, this);
+    return $.Struct.initStructAt(0, Join, this);
   }
   isJoin(): boolean {
-    return capnp.Struct.getUint16(0, this) === 12;
+    return $.Struct.getUint16(0, this) === 12;
   }
-  setJoin(value: Join): void {
-    capnp.Struct.setUint16(0, 12, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set join(value: Join) {
+    $.Struct.setUint16(0, 12, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "Message_" + super.toString();
   }
   which(): Message_Which {
-    return capnp.Struct.getUint16(0, this);
+    return $.Struct.getUint16(0, this) as Message_Which;
   }
 }
-
-export class Bootstrap extends capnp.Struct {
+export class Bootstrap extends $.Struct {
   static readonly _capnp = {
     displayName: "Bootstrap",
     id: "e94ccf8031176ec4",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  getQuestionId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get questionId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setQuestionId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set questionId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  adoptDeprecatedObjectId(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptDeprecatedObjectId(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownDeprecatedObjectId(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getDeprecatedObjectId());
+  disownDeprecatedObjectId(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.deprecatedObjectId);
   }
-  getDeprecatedObjectId(): capnp.Pointer {
-    return capnp.Struct.getPointer(0, this);
+  get deprecatedObjectId(): $.Pointer {
+    return $.Struct.getPointer(0, this);
   }
   hasDeprecatedObjectId(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  setDeprecatedObjectId(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set deprecatedObjectId(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "Bootstrap_" + super.toString();
   }
 }
-
-export enum Call_SendResultsTo_Which {
-  CALLER = 0,
-  YOURSELF = 1,
-  THIRD_PARTY = 2,
-}
-
-export class Call_SendResultsTo extends capnp.Struct {
+export const Call_SendResultsTo_Which = {
+  CALLER: 0,
+  YOURSELF: 1,
+  THIRD_PARTY: 2,
+} as const;
+export type Call_SendResultsTo_Which =
+  (typeof Call_SendResultsTo_Which)[keyof typeof Call_SendResultsTo_Which];
+export class Call_SendResultsTo extends $.Struct {
   static readonly CALLER = Call_SendResultsTo_Which.CALLER;
   static readonly YOURSELF = Call_SendResultsTo_Which.YOURSELF;
   static readonly THIRD_PARTY = Call_SendResultsTo_Which.THIRD_PARTY;
   static readonly _capnp = {
     displayName: "sendResultsTo",
     id: "dae8b0f61aab5f99",
-    size: new capnp.ObjectSize(24, 3),
+    size: new $.ObjectSize(24, 3),
   };
   isCaller(): boolean {
-    return capnp.Struct.getUint16(6, this) === 0;
+    return $.Struct.getUint16(6, this) === 0;
   }
-  setCaller(): void {
-    capnp.Struct.setUint16(6, 0, this);
+  set caller(_: true) {
+    $.Struct.setUint16(6, 0, this);
   }
   isYourself(): boolean {
-    return capnp.Struct.getUint16(6, this) === 1;
+    return $.Struct.getUint16(6, this) === 1;
   }
-  setYourself(): void {
-    capnp.Struct.setUint16(6, 1, this);
+  set yourself(_: true) {
+    $.Struct.setUint16(6, 1, this);
   }
-  adoptThirdParty(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.setUint16(6, 2, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(2, this));
+  adoptThirdParty(value: $.Orphan<$.Pointer>): void {
+    $.Struct.setUint16(6, 2, this);
+    $.Struct.adopt(value, $.Struct.getPointer(2, this));
   }
-  disownThirdParty(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getThirdParty());
+  disownThirdParty(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.thirdParty);
   }
-  getThirdParty(): capnp.Pointer {
-    capnp.Struct.testWhich(
-      "thirdParty",
-      capnp.Struct.getUint16(6, this),
-      2,
-      this,
-    );
-    return capnp.Struct.getPointer(2, this);
+  get thirdParty(): $.Pointer {
+    $.Struct.testWhich("thirdParty", $.Struct.getUint16(6, this), 2, this);
+    return $.Struct.getPointer(2, this);
   }
   hasThirdParty(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(2, this));
+    return !$.Struct.isNull($.Struct.getPointer(2, this));
   }
   isThirdParty(): boolean {
-    return capnp.Struct.getUint16(6, this) === 2;
+    return $.Struct.getUint16(6, this) === 2;
   }
-  setThirdParty(value: capnp.Pointer): void {
-    capnp.Struct.setUint16(6, 2, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(2, this));
+  set thirdParty(value: $.Pointer) {
+    $.Struct.setUint16(6, 2, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
   }
   toString(): string {
     return "Call_SendResultsTo_" + super.toString();
   }
   which(): Call_SendResultsTo_Which {
-    return capnp.Struct.getUint16(6, this);
+    return $.Struct.getUint16(6, this) as Call_SendResultsTo_Which;
   }
 }
-
-export class Call extends capnp.Struct {
+export class Call extends $.Struct {
   static readonly _capnp = {
     displayName: "Call",
     id: "836a53ce789d4cd4",
-    size: new capnp.ObjectSize(24, 3),
-    defaultAllowThirdPartyTailCall: capnp.getBitMask(false, 0),
+    size: new $.ObjectSize(24, 3),
+    defaultAllowThirdPartyTailCall: $.getBitMask(false, 0),
+    defaultNoPromisePipelining: $.getBitMask(false, 1),
+    defaultOnlyPromisePipeline: $.getBitMask(false, 2),
   };
-  getQuestionId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get questionId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setQuestionId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set questionId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  adoptTarget(value: capnp.Orphan<MessageTarget>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptTarget(value: $.Orphan<MessageTarget>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownTarget(): capnp.Orphan<MessageTarget> {
-    return capnp.Struct.disown(this.getTarget());
+  disownTarget(): $.Orphan<MessageTarget> {
+    return $.Struct.disown(this.target);
   }
-  getTarget(): MessageTarget {
-    return capnp.Struct.getStruct(0, MessageTarget, this);
+  get target(): MessageTarget {
+    return $.Struct.getStruct(0, MessageTarget, this);
   }
   hasTarget(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initTarget(): MessageTarget {
-    return capnp.Struct.initStructAt(0, MessageTarget, this);
+    return $.Struct.initStructAt(0, MessageTarget, this);
   }
-  setTarget(value: MessageTarget): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set target(value: MessageTarget) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  getInterfaceId(): bigint {
-    return capnp.Struct.getUint64(8, this);
+  get interfaceId(): bigint {
+    return $.Struct.getUint64(8, this);
   }
-  setInterfaceId(value: bigint): void {
-    capnp.Struct.setUint64(8, value, this);
+  set interfaceId(value: bigint) {
+    $.Struct.setUint64(8, value, this);
   }
-  getMethodId(): number {
-    return capnp.Struct.getUint16(4, this);
+  get methodId(): number {
+    return $.Struct.getUint16(4, this);
   }
-  setMethodId(value: number): void {
-    capnp.Struct.setUint16(4, value, this);
+  set methodId(value: number) {
+    $.Struct.setUint16(4, value, this);
   }
-  getAllowThirdPartyTailCall(): boolean {
-    return capnp.Struct.getBit(
+  get allowThirdPartyTailCall(): boolean {
+    return $.Struct.getBit(
       128,
       this,
       Call._capnp.defaultAllowThirdPartyTailCall,
     );
   }
-  setAllowThirdPartyTailCall(value: boolean): void {
-    capnp.Struct.setBit(128, value, this);
+  set allowThirdPartyTailCall(value: boolean) {
+    $.Struct.setBit(
+      128,
+      value,
+      this,
+      Call._capnp.defaultAllowThirdPartyTailCall,
+    );
   }
-  adoptParams(value: capnp.Orphan<Payload>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(1, this));
+  get noPromisePipelining(): boolean {
+    return $.Struct.getBit(129, this, Call._capnp.defaultNoPromisePipelining);
   }
-  disownParams(): capnp.Orphan<Payload> {
-    return capnp.Struct.disown(this.getParams());
+  set noPromisePipelining(value: boolean) {
+    $.Struct.setBit(129, value, this, Call._capnp.defaultNoPromisePipelining);
   }
-  getParams(): Payload {
-    return capnp.Struct.getStruct(1, Payload, this);
+  get onlyPromisePipeline(): boolean {
+    return $.Struct.getBit(130, this, Call._capnp.defaultOnlyPromisePipeline);
+  }
+  set onlyPromisePipeline(value: boolean) {
+    $.Struct.setBit(130, value, this, Call._capnp.defaultOnlyPromisePipeline);
+  }
+  adoptParams(value: $.Orphan<Payload>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+  }
+  disownParams(): $.Orphan<Payload> {
+    return $.Struct.disown(this.params);
+  }
+  get params(): Payload {
+    return $.Struct.getStruct(1, Payload, this);
   }
   hasParams(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(1, this));
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
   }
   initParams(): Payload {
-    return capnp.Struct.initStructAt(1, Payload, this);
+    return $.Struct.initStructAt(1, Payload, this);
   }
-  setParams(value: Payload): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(1, this));
+  set params(value: Payload) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
   }
-  getSendResultsTo(): Call_SendResultsTo {
-    return capnp.Struct.getAs(Call_SendResultsTo, this);
+  get sendResultsTo(): Call_SendResultsTo {
+    return $.Struct.getAs(Call_SendResultsTo, this);
   }
   initSendResultsTo(): Call_SendResultsTo {
-    return capnp.Struct.getAs(Call_SendResultsTo, this);
+    return $.Struct.getAs(Call_SendResultsTo, this);
   }
   toString(): string {
     return "Call_" + super.toString();
   }
 }
-
-export enum Return_Which {
-  RESULTS = 0,
-  EXCEPTION = 1,
-  CANCELED = 2,
-  RESULTS_SENT_ELSEWHERE = 3,
-  TAKE_FROM_OTHER_QUESTION = 4,
-  ACCEPT_FROM_THIRD_PARTY = 5,
-}
-
-export class Return extends capnp.Struct {
+export const Return_Which = {
+  RESULTS: 0,
+  EXCEPTION: 1,
+  CANCELED: 2,
+  RESULTS_SENT_ELSEWHERE: 3,
+  TAKE_FROM_OTHER_QUESTION: 4,
+  ACCEPT_FROM_THIRD_PARTY: 5,
+} as const;
+export type Return_Which = (typeof Return_Which)[keyof typeof Return_Which];
+export class Return extends $.Struct {
   static readonly RESULTS = Return_Which.RESULTS;
   static readonly EXCEPTION = Return_Which.EXCEPTION;
   static readonly CANCELED = Return_Which.CANCELED;
@@ -617,279 +594,285 @@ export class Return extends capnp.Struct {
   static readonly _capnp = {
     displayName: "Return",
     id: "9e19b28d3db3573a",
-    size: new capnp.ObjectSize(16, 1),
-    defaultReleaseParamCaps: capnp.getBitMask(true, 0),
+    size: new $.ObjectSize(16, 1),
+    defaultReleaseParamCaps: $.getBitMask(true, 0),
+    defaultNoFinishNeeded: $.getBitMask(false, 1),
   };
-  getAnswerId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get answerId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setAnswerId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set answerId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  getReleaseParamCaps(): boolean {
-    return capnp.Struct.getBit(32, this, Return._capnp.defaultReleaseParamCaps);
+  get releaseParamCaps(): boolean {
+    return $.Struct.getBit(32, this, Return._capnp.defaultReleaseParamCaps);
   }
-  setReleaseParamCaps(value: boolean): void {
-    capnp.Struct.setBit(32, value, this);
+  set releaseParamCaps(value: boolean) {
+    $.Struct.setBit(32, value, this, Return._capnp.defaultReleaseParamCaps);
   }
-  adoptResults(value: capnp.Orphan<Payload>): void {
-    capnp.Struct.setUint16(6, 0, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  get noFinishNeeded(): boolean {
+    return $.Struct.getBit(33, this, Return._capnp.defaultNoFinishNeeded);
   }
-  disownResults(): capnp.Orphan<Payload> {
-    return capnp.Struct.disown(this.getResults());
+  set noFinishNeeded(value: boolean) {
+    $.Struct.setBit(33, value, this, Return._capnp.defaultNoFinishNeeded);
   }
-  getResults(): Payload {
-    capnp.Struct.testWhich("results", capnp.Struct.getUint16(6, this), 0, this);
-    return capnp.Struct.getStruct(0, Payload, this);
+  adoptResults(value: $.Orphan<Payload>): void {
+    $.Struct.setUint16(6, 0, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownResults(): $.Orphan<Payload> {
+    return $.Struct.disown(this.results);
+  }
+  get results(): Payload {
+    $.Struct.testWhich("results", $.Struct.getUint16(6, this), 0, this);
+    return $.Struct.getStruct(0, Payload, this);
   }
   hasResults(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initResults(): Payload {
-    capnp.Struct.setUint16(6, 0, this);
-    return capnp.Struct.initStructAt(0, Payload, this);
+    $.Struct.setUint16(6, 0, this);
+    return $.Struct.initStructAt(0, Payload, this);
   }
   isResults(): boolean {
-    return capnp.Struct.getUint16(6, this) === 0;
+    return $.Struct.getUint16(6, this) === 0;
   }
-  setResults(value: Payload): void {
-    capnp.Struct.setUint16(6, 0, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set results(value: Payload) {
+    $.Struct.setUint16(6, 0, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptException(value: capnp.Orphan<Exception>): void {
-    capnp.Struct.setUint16(6, 1, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptException(value: $.Orphan<Exception>): void {
+    $.Struct.setUint16(6, 1, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownException(): capnp.Orphan<Exception> {
-    return capnp.Struct.disown(this.getException());
+  disownException(): $.Orphan<Exception> {
+    return $.Struct.disown(this.exception);
   }
-  getException(): Exception {
-    capnp.Struct.testWhich(
-      "exception",
-      capnp.Struct.getUint16(6, this),
-      1,
-      this,
-    );
-    return capnp.Struct.getStruct(0, Exception, this);
+  get exception(): Exception {
+    $.Struct.testWhich("exception", $.Struct.getUint16(6, this), 1, this);
+    return $.Struct.getStruct(0, Exception, this);
   }
   hasException(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initException(): Exception {
-    capnp.Struct.setUint16(6, 1, this);
-    return capnp.Struct.initStructAt(0, Exception, this);
+    $.Struct.setUint16(6, 1, this);
+    return $.Struct.initStructAt(0, Exception, this);
   }
   isException(): boolean {
-    return capnp.Struct.getUint16(6, this) === 1;
+    return $.Struct.getUint16(6, this) === 1;
   }
-  setException(value: Exception): void {
-    capnp.Struct.setUint16(6, 1, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set exception(value: Exception) {
+    $.Struct.setUint16(6, 1, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   isCanceled(): boolean {
-    return capnp.Struct.getUint16(6, this) === 2;
+    return $.Struct.getUint16(6, this) === 2;
   }
-  setCanceled(): void {
-    capnp.Struct.setUint16(6, 2, this);
+  set canceled(_: true) {
+    $.Struct.setUint16(6, 2, this);
   }
   isResultsSentElsewhere(): boolean {
-    return capnp.Struct.getUint16(6, this) === 3;
+    return $.Struct.getUint16(6, this) === 3;
   }
-  setResultsSentElsewhere(): void {
-    capnp.Struct.setUint16(6, 3, this);
+  set resultsSentElsewhere(_: true) {
+    $.Struct.setUint16(6, 3, this);
   }
-  getTakeFromOtherQuestion(): number {
-    capnp.Struct.testWhich(
+  get takeFromOtherQuestion(): number {
+    $.Struct.testWhich(
       "takeFromOtherQuestion",
-      capnp.Struct.getUint16(6, this),
+      $.Struct.getUint16(6, this),
       4,
       this,
     );
-    return capnp.Struct.getUint32(8, this);
+    return $.Struct.getUint32(8, this);
   }
   isTakeFromOtherQuestion(): boolean {
-    return capnp.Struct.getUint16(6, this) === 4;
+    return $.Struct.getUint16(6, this) === 4;
   }
-  setTakeFromOtherQuestion(value: number): void {
-    capnp.Struct.setUint16(6, 4, this);
-    capnp.Struct.setUint32(8, value, this);
+  set takeFromOtherQuestion(value: number) {
+    $.Struct.setUint16(6, 4, this);
+    $.Struct.setUint32(8, value, this);
   }
-  adoptAcceptFromThirdParty(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.setUint16(6, 5, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptAcceptFromThirdParty(value: $.Orphan<$.Pointer>): void {
+    $.Struct.setUint16(6, 5, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownAcceptFromThirdParty(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getAcceptFromThirdParty());
+  disownAcceptFromThirdParty(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.acceptFromThirdParty);
   }
-  getAcceptFromThirdParty(): capnp.Pointer {
-    capnp.Struct.testWhich(
+  get acceptFromThirdParty(): $.Pointer {
+    $.Struct.testWhich(
       "acceptFromThirdParty",
-      capnp.Struct.getUint16(6, this),
+      $.Struct.getUint16(6, this),
       5,
       this,
     );
-    return capnp.Struct.getPointer(0, this);
+    return $.Struct.getPointer(0, this);
   }
   hasAcceptFromThirdParty(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   isAcceptFromThirdParty(): boolean {
-    return capnp.Struct.getUint16(6, this) === 5;
+    return $.Struct.getUint16(6, this) === 5;
   }
-  setAcceptFromThirdParty(value: capnp.Pointer): void {
-    capnp.Struct.setUint16(6, 5, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set acceptFromThirdParty(value: $.Pointer) {
+    $.Struct.setUint16(6, 5, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "Return_" + super.toString();
   }
   which(): Return_Which {
-    return capnp.Struct.getUint16(6, this);
+    return $.Struct.getUint16(6, this) as Return_Which;
   }
 }
-
-export class Finish extends capnp.Struct {
+export class Finish extends $.Struct {
   static readonly _capnp = {
     displayName: "Finish",
     id: "d37d2eb2c2f80e63",
-    size: new capnp.ObjectSize(8, 0),
-    defaultReleaseResultCaps: capnp.getBitMask(true, 0),
+    size: new $.ObjectSize(8, 0),
+    defaultReleaseResultCaps: $.getBitMask(true, 0),
+    defaultRequireEarlyCancellationWorkaround: $.getBitMask(true, 1),
   };
-  getQuestionId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get questionId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setQuestionId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set questionId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  getReleaseResultCaps(): boolean {
-    return capnp.Struct.getBit(
-      32,
+  get releaseResultCaps(): boolean {
+    return $.Struct.getBit(32, this, Finish._capnp.defaultReleaseResultCaps);
+  }
+  set releaseResultCaps(value: boolean) {
+    $.Struct.setBit(32, value, this, Finish._capnp.defaultReleaseResultCaps);
+  }
+  get requireEarlyCancellationWorkaround(): boolean {
+    return $.Struct.getBit(
+      33,
       this,
-      Finish._capnp.defaultReleaseResultCaps,
+      Finish._capnp.defaultRequireEarlyCancellationWorkaround,
     );
   }
-  setReleaseResultCaps(value: boolean): void {
-    capnp.Struct.setBit(32, value, this);
+  set requireEarlyCancellationWorkaround(value: boolean) {
+    $.Struct.setBit(
+      33,
+      value,
+      this,
+      Finish._capnp.defaultRequireEarlyCancellationWorkaround,
+    );
   }
   toString(): string {
     return "Finish_" + super.toString();
   }
 }
-
-export enum Resolve_Which {
-  CAP = 0,
-  EXCEPTION = 1,
-}
-
-export class Resolve extends capnp.Struct {
+export const Resolve_Which = {
+  CAP: 0,
+  EXCEPTION: 1,
+} as const;
+export type Resolve_Which = (typeof Resolve_Which)[keyof typeof Resolve_Which];
+export class Resolve extends $.Struct {
   static readonly CAP = Resolve_Which.CAP;
   static readonly EXCEPTION = Resolve_Which.EXCEPTION;
   static readonly _capnp = {
     displayName: "Resolve",
     id: "bbc29655fa89086e",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  getPromiseId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get promiseId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setPromiseId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set promiseId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  adoptCap(value: capnp.Orphan<CapDescriptor>): void {
-    capnp.Struct.setUint16(4, 0, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptCap(value: $.Orphan<CapDescriptor>): void {
+    $.Struct.setUint16(4, 0, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownCap(): capnp.Orphan<CapDescriptor> {
-    return capnp.Struct.disown(this.getCap());
+  disownCap(): $.Orphan<CapDescriptor> {
+    return $.Struct.disown(this.cap);
   }
-  getCap(): CapDescriptor {
-    capnp.Struct.testWhich("cap", capnp.Struct.getUint16(4, this), 0, this);
-    return capnp.Struct.getStruct(0, CapDescriptor, this);
+  get cap(): CapDescriptor {
+    $.Struct.testWhich("cap", $.Struct.getUint16(4, this), 0, this);
+    return $.Struct.getStruct(0, CapDescriptor, this);
   }
   hasCap(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initCap(): CapDescriptor {
-    capnp.Struct.setUint16(4, 0, this);
-    return capnp.Struct.initStructAt(0, CapDescriptor, this);
+    $.Struct.setUint16(4, 0, this);
+    return $.Struct.initStructAt(0, CapDescriptor, this);
   }
   isCap(): boolean {
-    return capnp.Struct.getUint16(4, this) === 0;
+    return $.Struct.getUint16(4, this) === 0;
   }
-  setCap(value: CapDescriptor): void {
-    capnp.Struct.setUint16(4, 0, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set cap(value: CapDescriptor) {
+    $.Struct.setUint16(4, 0, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptException(value: capnp.Orphan<Exception>): void {
-    capnp.Struct.setUint16(4, 1, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptException(value: $.Orphan<Exception>): void {
+    $.Struct.setUint16(4, 1, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownException(): capnp.Orphan<Exception> {
-    return capnp.Struct.disown(this.getException());
+  disownException(): $.Orphan<Exception> {
+    return $.Struct.disown(this.exception);
   }
-  getException(): Exception {
-    capnp.Struct.testWhich(
-      "exception",
-      capnp.Struct.getUint16(4, this),
-      1,
-      this,
-    );
-    return capnp.Struct.getStruct(0, Exception, this);
+  get exception(): Exception {
+    $.Struct.testWhich("exception", $.Struct.getUint16(4, this), 1, this);
+    return $.Struct.getStruct(0, Exception, this);
   }
   hasException(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initException(): Exception {
-    capnp.Struct.setUint16(4, 1, this);
-    return capnp.Struct.initStructAt(0, Exception, this);
+    $.Struct.setUint16(4, 1, this);
+    return $.Struct.initStructAt(0, Exception, this);
   }
   isException(): boolean {
-    return capnp.Struct.getUint16(4, this) === 1;
+    return $.Struct.getUint16(4, this) === 1;
   }
-  setException(value: Exception): void {
-    capnp.Struct.setUint16(4, 1, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set exception(value: Exception) {
+    $.Struct.setUint16(4, 1, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "Resolve_" + super.toString();
   }
   which(): Resolve_Which {
-    return capnp.Struct.getUint16(4, this);
+    return $.Struct.getUint16(4, this) as Resolve_Which;
   }
 }
-
-export class Release extends capnp.Struct {
+export class Release extends $.Struct {
   static readonly _capnp = {
     displayName: "Release",
     id: "ad1a6c0d7dd07497",
-    size: new capnp.ObjectSize(8, 0),
+    size: new $.ObjectSize(8, 0),
   };
-  getId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get id(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set id(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  getReferenceCount(): number {
-    return capnp.Struct.getUint32(4, this);
+  get referenceCount(): number {
+    return $.Struct.getUint32(4, this);
   }
-  setReferenceCount(value: number): void {
-    capnp.Struct.setUint32(4, value, this);
+  set referenceCount(value: number) {
+    $.Struct.setUint32(4, value, this);
   }
   toString(): string {
     return "Release_" + super.toString();
   }
 }
-
-export enum Disembargo_Context_Which {
-  SENDER_LOOPBACK = 0,
-  RECEIVER_LOOPBACK = 1,
-  ACCEPT = 2,
-  PROVIDE = 3,
-}
-
-export class Disembargo_Context extends capnp.Struct {
+export const Disembargo_Context_Which = {
+  SENDER_LOOPBACK: 0,
+  RECEIVER_LOOPBACK: 1,
+  ACCEPT: 2,
+  PROVIDE: 3,
+} as const;
+export type Disembargo_Context_Which =
+  (typeof Disembargo_Context_Which)[keyof typeof Disembargo_Context_Which];
+export class Disembargo_Context extends $.Struct {
   static readonly SENDER_LOOPBACK = Disembargo_Context_Which.SENDER_LOOPBACK;
   static readonly RECEIVER_LOOPBACK =
     Disembargo_Context_Which.RECEIVER_LOOPBACK;
@@ -898,360 +881,340 @@ export class Disembargo_Context extends capnp.Struct {
   static readonly _capnp = {
     displayName: "context",
     id: "d562b4df655bdd4d",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  getSenderLoopback(): number {
-    capnp.Struct.testWhich(
-      "senderLoopback",
-      capnp.Struct.getUint16(4, this),
-      0,
-      this,
-    );
-    return capnp.Struct.getUint32(0, this);
+  get senderLoopback(): number {
+    $.Struct.testWhich("senderLoopback", $.Struct.getUint16(4, this), 0, this);
+    return $.Struct.getUint32(0, this);
   }
   isSenderLoopback(): boolean {
-    return capnp.Struct.getUint16(4, this) === 0;
+    return $.Struct.getUint16(4, this) === 0;
   }
-  setSenderLoopback(value: number): void {
-    capnp.Struct.setUint16(4, 0, this);
-    capnp.Struct.setUint32(0, value, this);
+  set senderLoopback(value: number) {
+    $.Struct.setUint16(4, 0, this);
+    $.Struct.setUint32(0, value, this);
   }
-  getReceiverLoopback(): number {
-    capnp.Struct.testWhich(
+  get receiverLoopback(): number {
+    $.Struct.testWhich(
       "receiverLoopback",
-      capnp.Struct.getUint16(4, this),
+      $.Struct.getUint16(4, this),
       1,
       this,
     );
-    return capnp.Struct.getUint32(0, this);
+    return $.Struct.getUint32(0, this);
   }
   isReceiverLoopback(): boolean {
-    return capnp.Struct.getUint16(4, this) === 1;
+    return $.Struct.getUint16(4, this) === 1;
   }
-  setReceiverLoopback(value: number): void {
-    capnp.Struct.setUint16(4, 1, this);
-    capnp.Struct.setUint32(0, value, this);
+  set receiverLoopback(value: number) {
+    $.Struct.setUint16(4, 1, this);
+    $.Struct.setUint32(0, value, this);
   }
   isAccept(): boolean {
-    return capnp.Struct.getUint16(4, this) === 2;
+    return $.Struct.getUint16(4, this) === 2;
   }
-  setAccept(): void {
-    capnp.Struct.setUint16(4, 2, this);
+  set accept(_: true) {
+    $.Struct.setUint16(4, 2, this);
   }
-  getProvide(): number {
-    capnp.Struct.testWhich("provide", capnp.Struct.getUint16(4, this), 3, this);
-    return capnp.Struct.getUint32(0, this);
+  get provide(): number {
+    $.Struct.testWhich("provide", $.Struct.getUint16(4, this), 3, this);
+    return $.Struct.getUint32(0, this);
   }
   isProvide(): boolean {
-    return capnp.Struct.getUint16(4, this) === 3;
+    return $.Struct.getUint16(4, this) === 3;
   }
-  setProvide(value: number): void {
-    capnp.Struct.setUint16(4, 3, this);
-    capnp.Struct.setUint32(0, value, this);
+  set provide(value: number) {
+    $.Struct.setUint16(4, 3, this);
+    $.Struct.setUint32(0, value, this);
   }
   toString(): string {
     return "Disembargo_Context_" + super.toString();
   }
   which(): Disembargo_Context_Which {
-    return capnp.Struct.getUint16(4, this);
+    return $.Struct.getUint16(4, this) as Disembargo_Context_Which;
   }
 }
-
-export class Disembargo extends capnp.Struct {
+export class Disembargo extends $.Struct {
   static readonly _capnp = {
     displayName: "Disembargo",
     id: "f964368b0fbd3711",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  adoptTarget(value: capnp.Orphan<MessageTarget>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptTarget(value: $.Orphan<MessageTarget>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownTarget(): capnp.Orphan<MessageTarget> {
-    return capnp.Struct.disown(this.getTarget());
+  disownTarget(): $.Orphan<MessageTarget> {
+    return $.Struct.disown(this.target);
   }
-  getTarget(): MessageTarget {
-    return capnp.Struct.getStruct(0, MessageTarget, this);
+  get target(): MessageTarget {
+    return $.Struct.getStruct(0, MessageTarget, this);
   }
   hasTarget(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initTarget(): MessageTarget {
-    return capnp.Struct.initStructAt(0, MessageTarget, this);
+    return $.Struct.initStructAt(0, MessageTarget, this);
   }
-  setTarget(value: MessageTarget): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set target(value: MessageTarget) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  getContext(): Disembargo_Context {
-    return capnp.Struct.getAs(Disembargo_Context, this);
+  get context(): Disembargo_Context {
+    return $.Struct.getAs(Disembargo_Context, this);
   }
   initContext(): Disembargo_Context {
-    return capnp.Struct.getAs(Disembargo_Context, this);
+    return $.Struct.getAs(Disembargo_Context, this);
   }
   toString(): string {
     return "Disembargo_" + super.toString();
   }
 }
-
-export class Provide extends capnp.Struct {
+export class Provide extends $.Struct {
   static readonly _capnp = {
     displayName: "Provide",
     id: "9c6a046bfbc1ac5a",
-    size: new capnp.ObjectSize(8, 2),
+    size: new $.ObjectSize(8, 2),
   };
-  getQuestionId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get questionId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setQuestionId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set questionId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  adoptTarget(value: capnp.Orphan<MessageTarget>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptTarget(value: $.Orphan<MessageTarget>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownTarget(): capnp.Orphan<MessageTarget> {
-    return capnp.Struct.disown(this.getTarget());
+  disownTarget(): $.Orphan<MessageTarget> {
+    return $.Struct.disown(this.target);
   }
-  getTarget(): MessageTarget {
-    return capnp.Struct.getStruct(0, MessageTarget, this);
+  get target(): MessageTarget {
+    return $.Struct.getStruct(0, MessageTarget, this);
   }
   hasTarget(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initTarget(): MessageTarget {
-    return capnp.Struct.initStructAt(0, MessageTarget, this);
+    return $.Struct.initStructAt(0, MessageTarget, this);
   }
-  setTarget(value: MessageTarget): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set target(value: MessageTarget) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptRecipient(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(1, this));
+  adoptRecipient(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
   }
-  disownRecipient(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getRecipient());
+  disownRecipient(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.recipient);
   }
-  getRecipient(): capnp.Pointer {
-    return capnp.Struct.getPointer(1, this);
+  get recipient(): $.Pointer {
+    return $.Struct.getPointer(1, this);
   }
   hasRecipient(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(1, this));
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
   }
-  setRecipient(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(1, this));
+  set recipient(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
   }
   toString(): string {
     return "Provide_" + super.toString();
   }
 }
-
-export class Accept extends capnp.Struct {
+export class Accept extends $.Struct {
   static readonly _capnp = {
     displayName: "Accept",
     id: "d4c9b56290554016",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  getQuestionId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get questionId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setQuestionId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set questionId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  adoptProvision(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptProvision(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownProvision(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getProvision());
+  disownProvision(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.provision);
   }
-  getProvision(): capnp.Pointer {
-    return capnp.Struct.getPointer(0, this);
+  get provision(): $.Pointer {
+    return $.Struct.getPointer(0, this);
   }
   hasProvision(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  setProvision(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set provision(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  getEmbargo(): boolean {
-    return capnp.Struct.getBit(32, this);
+  get embargo(): boolean {
+    return $.Struct.getBit(32, this);
   }
-  setEmbargo(value: boolean): void {
-    capnp.Struct.setBit(32, value, this);
+  set embargo(value: boolean) {
+    $.Struct.setBit(32, value, this);
   }
   toString(): string {
     return "Accept_" + super.toString();
   }
 }
-
-export class Join extends capnp.Struct {
+export class Join extends $.Struct {
   static readonly _capnp = {
     displayName: "Join",
     id: "fbe1980490e001af",
-    size: new capnp.ObjectSize(8, 2),
+    size: new $.ObjectSize(8, 2),
   };
-  getQuestionId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get questionId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setQuestionId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set questionId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  adoptTarget(value: capnp.Orphan<MessageTarget>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptTarget(value: $.Orphan<MessageTarget>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownTarget(): capnp.Orphan<MessageTarget> {
-    return capnp.Struct.disown(this.getTarget());
+  disownTarget(): $.Orphan<MessageTarget> {
+    return $.Struct.disown(this.target);
   }
-  getTarget(): MessageTarget {
-    return capnp.Struct.getStruct(0, MessageTarget, this);
+  get target(): MessageTarget {
+    return $.Struct.getStruct(0, MessageTarget, this);
   }
   hasTarget(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initTarget(): MessageTarget {
-    return capnp.Struct.initStructAt(0, MessageTarget, this);
+    return $.Struct.initStructAt(0, MessageTarget, this);
   }
-  setTarget(value: MessageTarget): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set target(value: MessageTarget) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptKeyPart(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(1, this));
+  adoptKeyPart(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
   }
-  disownKeyPart(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getKeyPart());
+  disownKeyPart(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.keyPart);
   }
-  getKeyPart(): capnp.Pointer {
-    return capnp.Struct.getPointer(1, this);
+  get keyPart(): $.Pointer {
+    return $.Struct.getPointer(1, this);
   }
   hasKeyPart(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(1, this));
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
   }
-  setKeyPart(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(1, this));
+  set keyPart(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
   }
   toString(): string {
     return "Join_" + super.toString();
   }
 }
-
-export enum MessageTarget_Which {
-  IMPORTED_CAP = 0,
-  PROMISED_ANSWER = 1,
-}
-
-export class MessageTarget extends capnp.Struct {
+export const MessageTarget_Which = {
+  IMPORTED_CAP: 0,
+  PROMISED_ANSWER: 1,
+} as const;
+export type MessageTarget_Which =
+  (typeof MessageTarget_Which)[keyof typeof MessageTarget_Which];
+export class MessageTarget extends $.Struct {
   static readonly IMPORTED_CAP = MessageTarget_Which.IMPORTED_CAP;
   static readonly PROMISED_ANSWER = MessageTarget_Which.PROMISED_ANSWER;
   static readonly _capnp = {
     displayName: "MessageTarget",
     id: "95bc14545813fbc1",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  getImportedCap(): number {
-    capnp.Struct.testWhich(
-      "importedCap",
-      capnp.Struct.getUint16(4, this),
-      0,
-      this,
-    );
-    return capnp.Struct.getUint32(0, this);
+  get importedCap(): number {
+    $.Struct.testWhich("importedCap", $.Struct.getUint16(4, this), 0, this);
+    return $.Struct.getUint32(0, this);
   }
   isImportedCap(): boolean {
-    return capnp.Struct.getUint16(4, this) === 0;
+    return $.Struct.getUint16(4, this) === 0;
   }
-  setImportedCap(value: number): void {
-    capnp.Struct.setUint16(4, 0, this);
-    capnp.Struct.setUint32(0, value, this);
+  set importedCap(value: number) {
+    $.Struct.setUint16(4, 0, this);
+    $.Struct.setUint32(0, value, this);
   }
-  adoptPromisedAnswer(value: capnp.Orphan<PromisedAnswer>): void {
-    capnp.Struct.setUint16(4, 1, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptPromisedAnswer(value: $.Orphan<PromisedAnswer>): void {
+    $.Struct.setUint16(4, 1, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownPromisedAnswer(): capnp.Orphan<PromisedAnswer> {
-    return capnp.Struct.disown(this.getPromisedAnswer());
+  disownPromisedAnswer(): $.Orphan<PromisedAnswer> {
+    return $.Struct.disown(this.promisedAnswer);
   }
-  getPromisedAnswer(): PromisedAnswer {
-    capnp.Struct.testWhich(
-      "promisedAnswer",
-      capnp.Struct.getUint16(4, this),
-      1,
-      this,
-    );
-    return capnp.Struct.getStruct(0, PromisedAnswer, this);
+  get promisedAnswer(): PromisedAnswer {
+    $.Struct.testWhich("promisedAnswer", $.Struct.getUint16(4, this), 1, this);
+    return $.Struct.getStruct(0, PromisedAnswer, this);
   }
   hasPromisedAnswer(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initPromisedAnswer(): PromisedAnswer {
-    capnp.Struct.setUint16(4, 1, this);
-    return capnp.Struct.initStructAt(0, PromisedAnswer, this);
+    $.Struct.setUint16(4, 1, this);
+    return $.Struct.initStructAt(0, PromisedAnswer, this);
   }
   isPromisedAnswer(): boolean {
-    return capnp.Struct.getUint16(4, this) === 1;
+    return $.Struct.getUint16(4, this) === 1;
   }
-  setPromisedAnswer(value: PromisedAnswer): void {
-    capnp.Struct.setUint16(4, 1, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set promisedAnswer(value: PromisedAnswer) {
+    $.Struct.setUint16(4, 1, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "MessageTarget_" + super.toString();
   }
   which(): MessageTarget_Which {
-    return capnp.Struct.getUint16(4, this);
+    return $.Struct.getUint16(4, this) as MessageTarget_Which;
   }
 }
-
-export class Payload extends capnp.Struct {
+export class Payload extends $.Struct {
   static readonly _capnp = {
     displayName: "Payload",
     id: "9a0e61223d96743b",
-    size: new capnp.ObjectSize(0, 2),
+    size: new $.ObjectSize(0, 2),
   };
-  static _CapTable: capnp.ListCtor<CapDescriptor>;
-  adoptContent(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  static _CapTable: $.ListCtor<CapDescriptor>;
+  adoptContent(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownContent(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getContent());
+  disownContent(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.content);
   }
-  getContent(): capnp.Pointer {
-    return capnp.Struct.getPointer(0, this);
+  get content(): $.Pointer {
+    return $.Struct.getPointer(0, this);
   }
   hasContent(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  setContent(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set content(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptCapTable(value: capnp.Orphan<capnp.List<CapDescriptor>>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(1, this));
+  adoptCapTable(value: $.Orphan<$.List<CapDescriptor>>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
   }
-  disownCapTable(): capnp.Orphan<capnp.List<CapDescriptor>> {
-    return capnp.Struct.disown(this.getCapTable());
+  disownCapTable(): $.Orphan<$.List<CapDescriptor>> {
+    return $.Struct.disown(this.capTable);
   }
-  getCapTable(): capnp.List<CapDescriptor> {
-    return capnp.Struct.getList(1, Payload._CapTable, this);
+  get capTable(): $.List<CapDescriptor> {
+    return $.Struct.getList(1, Payload._CapTable, this);
   }
   hasCapTable(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(1, this));
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
   }
-  initCapTable(length: number): capnp.List<CapDescriptor> {
-    return capnp.Struct.initList(1, Payload._CapTable, length, this);
+  initCapTable(length: number): $.List<CapDescriptor> {
+    return $.Struct.initList(1, Payload._CapTable, length, this);
   }
-  setCapTable(value: capnp.List<CapDescriptor>): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(1, this));
+  set capTable(value: $.List<CapDescriptor>) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
   }
   toString(): string {
     return "Payload_" + super.toString();
   }
 }
-
-export enum CapDescriptor_Which {
-  NONE = 0,
-  SENDER_HOSTED = 1,
-  SENDER_PROMISE = 2,
-  RECEIVER_HOSTED = 3,
-  RECEIVER_ANSWER = 4,
-  THIRD_PARTY_HOSTED = 5,
-}
-
-export class CapDescriptor extends capnp.Struct {
+export const CapDescriptor_Which = {
+  NONE: 0,
+  SENDER_HOSTED: 1,
+  SENDER_PROMISE: 2,
+  RECEIVER_HOSTED: 3,
+  RECEIVER_ANSWER: 4,
+  THIRD_PARTY_HOSTED: 5,
+} as const;
+export type CapDescriptor_Which =
+  (typeof CapDescriptor_Which)[keyof typeof CapDescriptor_Which];
+export class CapDescriptor extends $.Struct {
   static readonly NONE = CapDescriptor_Which.NONE;
   static readonly SENDER_HOSTED = CapDescriptor_Which.SENDER_HOSTED;
   static readonly SENDER_PROMISE = CapDescriptor_Which.SENDER_PROMISE;
@@ -1261,284 +1224,269 @@ export class CapDescriptor extends capnp.Struct {
   static readonly _capnp = {
     displayName: "CapDescriptor",
     id: "8523ddc40b86b8b0",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
+    defaultAttachedFd: $.getUint8Mask(255),
   };
   isNone(): boolean {
-    return capnp.Struct.getUint16(0, this) === 0;
+    return $.Struct.getUint16(0, this) === 0;
   }
-  setNone(): void {
-    capnp.Struct.setUint16(0, 0, this);
+  set none(_: true) {
+    $.Struct.setUint16(0, 0, this);
   }
-  getSenderHosted(): number {
-    capnp.Struct.testWhich(
-      "senderHosted",
-      capnp.Struct.getUint16(0, this),
-      1,
-      this,
-    );
-    return capnp.Struct.getUint32(4, this);
+  get senderHosted(): number {
+    $.Struct.testWhich("senderHosted", $.Struct.getUint16(0, this), 1, this);
+    return $.Struct.getUint32(4, this);
   }
   isSenderHosted(): boolean {
-    return capnp.Struct.getUint16(0, this) === 1;
+    return $.Struct.getUint16(0, this) === 1;
   }
-  setSenderHosted(value: number): void {
-    capnp.Struct.setUint16(0, 1, this);
-    capnp.Struct.setUint32(4, value, this);
+  set senderHosted(value: number) {
+    $.Struct.setUint16(0, 1, this);
+    $.Struct.setUint32(4, value, this);
   }
-  getSenderPromise(): number {
-    capnp.Struct.testWhich(
-      "senderPromise",
-      capnp.Struct.getUint16(0, this),
-      2,
-      this,
-    );
-    return capnp.Struct.getUint32(4, this);
+  get senderPromise(): number {
+    $.Struct.testWhich("senderPromise", $.Struct.getUint16(0, this), 2, this);
+    return $.Struct.getUint32(4, this);
   }
   isSenderPromise(): boolean {
-    return capnp.Struct.getUint16(0, this) === 2;
+    return $.Struct.getUint16(0, this) === 2;
   }
-  setSenderPromise(value: number): void {
-    capnp.Struct.setUint16(0, 2, this);
-    capnp.Struct.setUint32(4, value, this);
+  set senderPromise(value: number) {
+    $.Struct.setUint16(0, 2, this);
+    $.Struct.setUint32(4, value, this);
   }
-  getReceiverHosted(): number {
-    capnp.Struct.testWhich(
-      "receiverHosted",
-      capnp.Struct.getUint16(0, this),
-      3,
-      this,
-    );
-    return capnp.Struct.getUint32(4, this);
+  get receiverHosted(): number {
+    $.Struct.testWhich("receiverHosted", $.Struct.getUint16(0, this), 3, this);
+    return $.Struct.getUint32(4, this);
   }
   isReceiverHosted(): boolean {
-    return capnp.Struct.getUint16(0, this) === 3;
+    return $.Struct.getUint16(0, this) === 3;
   }
-  setReceiverHosted(value: number): void {
-    capnp.Struct.setUint16(0, 3, this);
-    capnp.Struct.setUint32(4, value, this);
+  set receiverHosted(value: number) {
+    $.Struct.setUint16(0, 3, this);
+    $.Struct.setUint32(4, value, this);
   }
-  adoptReceiverAnswer(value: capnp.Orphan<PromisedAnswer>): void {
-    capnp.Struct.setUint16(0, 4, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptReceiverAnswer(value: $.Orphan<PromisedAnswer>): void {
+    $.Struct.setUint16(0, 4, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownReceiverAnswer(): capnp.Orphan<PromisedAnswer> {
-    return capnp.Struct.disown(this.getReceiverAnswer());
+  disownReceiverAnswer(): $.Orphan<PromisedAnswer> {
+    return $.Struct.disown(this.receiverAnswer);
   }
-  getReceiverAnswer(): PromisedAnswer {
-    capnp.Struct.testWhich(
-      "receiverAnswer",
-      capnp.Struct.getUint16(0, this),
-      4,
-      this,
-    );
-    return capnp.Struct.getStruct(0, PromisedAnswer, this);
+  get receiverAnswer(): PromisedAnswer {
+    $.Struct.testWhich("receiverAnswer", $.Struct.getUint16(0, this), 4, this);
+    return $.Struct.getStruct(0, PromisedAnswer, this);
   }
   hasReceiverAnswer(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initReceiverAnswer(): PromisedAnswer {
-    capnp.Struct.setUint16(0, 4, this);
-    return capnp.Struct.initStructAt(0, PromisedAnswer, this);
+    $.Struct.setUint16(0, 4, this);
+    return $.Struct.initStructAt(0, PromisedAnswer, this);
   }
   isReceiverAnswer(): boolean {
-    return capnp.Struct.getUint16(0, this) === 4;
+    return $.Struct.getUint16(0, this) === 4;
   }
-  setReceiverAnswer(value: PromisedAnswer): void {
-    capnp.Struct.setUint16(0, 4, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set receiverAnswer(value: PromisedAnswer) {
+    $.Struct.setUint16(0, 4, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  adoptThirdPartyHosted(value: capnp.Orphan<ThirdPartyCapDescriptor>): void {
-    capnp.Struct.setUint16(0, 5, this);
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptThirdPartyHosted(value: $.Orphan<ThirdPartyCapDescriptor>): void {
+    $.Struct.setUint16(0, 5, this);
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownThirdPartyHosted(): capnp.Orphan<ThirdPartyCapDescriptor> {
-    return capnp.Struct.disown(this.getThirdPartyHosted());
+  disownThirdPartyHosted(): $.Orphan<ThirdPartyCapDescriptor> {
+    return $.Struct.disown(this.thirdPartyHosted);
   }
-  getThirdPartyHosted(): ThirdPartyCapDescriptor {
-    capnp.Struct.testWhich(
+  get thirdPartyHosted(): ThirdPartyCapDescriptor {
+    $.Struct.testWhich(
       "thirdPartyHosted",
-      capnp.Struct.getUint16(0, this),
+      $.Struct.getUint16(0, this),
       5,
       this,
     );
-    return capnp.Struct.getStruct(0, ThirdPartyCapDescriptor, this);
+    return $.Struct.getStruct(0, ThirdPartyCapDescriptor, this);
   }
   hasThirdPartyHosted(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
   initThirdPartyHosted(): ThirdPartyCapDescriptor {
-    capnp.Struct.setUint16(0, 5, this);
-    return capnp.Struct.initStructAt(0, ThirdPartyCapDescriptor, this);
+    $.Struct.setUint16(0, 5, this);
+    return $.Struct.initStructAt(0, ThirdPartyCapDescriptor, this);
   }
   isThirdPartyHosted(): boolean {
-    return capnp.Struct.getUint16(0, this) === 5;
+    return $.Struct.getUint16(0, this) === 5;
   }
-  setThirdPartyHosted(value: ThirdPartyCapDescriptor): void {
-    capnp.Struct.setUint16(0, 5, this);
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set thirdPartyHosted(value: ThirdPartyCapDescriptor) {
+    $.Struct.setUint16(0, 5, this);
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  get attachedFd(): number {
+    return $.Struct.getUint8(2, this, CapDescriptor._capnp.defaultAttachedFd);
+  }
+  set attachedFd(value: number) {
+    $.Struct.setUint8(2, value, this, CapDescriptor._capnp.defaultAttachedFd);
   }
   toString(): string {
     return "CapDescriptor_" + super.toString();
   }
   which(): CapDescriptor_Which {
-    return capnp.Struct.getUint16(0, this);
+    return $.Struct.getUint16(0, this) as CapDescriptor_Which;
   }
 }
-
-export enum PromisedAnswer_Op_Which {
-  NOOP = 0,
-  GET_POINTER_FIELD = 1,
-}
-
-export class PromisedAnswer_Op extends capnp.Struct {
+export const PromisedAnswer_Op_Which = {
+  NOOP: 0,
+  GET_POINTER_FIELD: 1,
+} as const;
+export type PromisedAnswer_Op_Which =
+  (typeof PromisedAnswer_Op_Which)[keyof typeof PromisedAnswer_Op_Which];
+export class PromisedAnswer_Op extends $.Struct {
   static readonly NOOP = PromisedAnswer_Op_Which.NOOP;
   static readonly GET_POINTER_FIELD = PromisedAnswer_Op_Which.GET_POINTER_FIELD;
   static readonly _capnp = {
     displayName: "Op",
     id: "f316944415569081",
-    size: new capnp.ObjectSize(8, 0),
+    size: new $.ObjectSize(8, 0),
   };
   isNoop(): boolean {
-    return capnp.Struct.getUint16(0, this) === 0;
+    return $.Struct.getUint16(0, this) === 0;
   }
-  setNoop(): void {
-    capnp.Struct.setUint16(0, 0, this);
+  set noop(_: true) {
+    $.Struct.setUint16(0, 0, this);
   }
-  getGetPointerField(): number {
-    capnp.Struct.testWhich(
-      "getPointerField",
-      capnp.Struct.getUint16(0, this),
-      1,
-      this,
-    );
-    return capnp.Struct.getUint16(2, this);
+  get getPointerField(): number {
+    $.Struct.testWhich("getPointerField", $.Struct.getUint16(0, this), 1, this);
+    return $.Struct.getUint16(2, this);
   }
   isGetPointerField(): boolean {
-    return capnp.Struct.getUint16(0, this) === 1;
+    return $.Struct.getUint16(0, this) === 1;
   }
-  setGetPointerField(value: number): void {
-    capnp.Struct.setUint16(0, 1, this);
-    capnp.Struct.setUint16(2, value, this);
+  set getPointerField(value: number) {
+    $.Struct.setUint16(0, 1, this);
+    $.Struct.setUint16(2, value, this);
   }
   toString(): string {
     return "PromisedAnswer_Op_" + super.toString();
   }
   which(): PromisedAnswer_Op_Which {
-    return capnp.Struct.getUint16(0, this);
+    return $.Struct.getUint16(0, this) as PromisedAnswer_Op_Which;
   }
 }
-
-export class PromisedAnswer extends capnp.Struct {
+export class PromisedAnswer extends $.Struct {
   static readonly Op = PromisedAnswer_Op;
   static readonly _capnp = {
     displayName: "PromisedAnswer",
     id: "d800b1d6cd6f1ca0",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  static _Transform: capnp.ListCtor<PromisedAnswer_Op>;
-  getQuestionId(): number {
-    return capnp.Struct.getUint32(0, this);
+  static _Transform: $.ListCtor<PromisedAnswer_Op>;
+  get questionId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setQuestionId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set questionId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
-  adoptTransform(value: capnp.Orphan<capnp.List<PromisedAnswer_Op>>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptTransform(value: $.Orphan<$.List<PromisedAnswer_Op>>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownTransform(): capnp.Orphan<capnp.List<PromisedAnswer_Op>> {
-    return capnp.Struct.disown(this.getTransform());
+  disownTransform(): $.Orphan<$.List<PromisedAnswer_Op>> {
+    return $.Struct.disown(this.transform);
   }
-  getTransform(): capnp.List<PromisedAnswer_Op> {
-    return capnp.Struct.getList(0, PromisedAnswer._Transform, this);
+  get transform(): $.List<PromisedAnswer_Op> {
+    return $.Struct.getList(0, PromisedAnswer._Transform, this);
   }
   hasTransform(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  initTransform(length: number): capnp.List<PromisedAnswer_Op> {
-    return capnp.Struct.initList(0, PromisedAnswer._Transform, length, this);
+  initTransform(length: number): $.List<PromisedAnswer_Op> {
+    return $.Struct.initList(0, PromisedAnswer._Transform, length, this);
   }
-  setTransform(value: capnp.List<PromisedAnswer_Op>): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set transform(value: $.List<PromisedAnswer_Op>) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "PromisedAnswer_" + super.toString();
   }
 }
-
-export class ThirdPartyCapDescriptor extends capnp.Struct {
+export class ThirdPartyCapDescriptor extends $.Struct {
   static readonly _capnp = {
     displayName: "ThirdPartyCapDescriptor",
     id: "d37007fde1f0027d",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 1),
   };
-  adoptId(value: capnp.Orphan<capnp.Pointer>): void {
-    capnp.Struct.adopt(value, capnp.Struct.getPointer(0, this));
+  adoptId(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
-  disownId(): capnp.Orphan<capnp.Pointer> {
-    return capnp.Struct.disown(this.getId());
+  disownId(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.id);
   }
-  getId(): capnp.Pointer {
-    return capnp.Struct.getPointer(0, this);
+  get id(): $.Pointer {
+    return $.Struct.getPointer(0, this);
   }
   hasId(): boolean {
-    return !capnp.Struct.isNull(capnp.Struct.getPointer(0, this));
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
   }
-  setId(value: capnp.Pointer): void {
-    capnp.Struct.copyFrom(value, capnp.Struct.getPointer(0, this));
+  set id(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
-  getVineId(): number {
-    return capnp.Struct.getUint32(0, this);
+  get vineId(): number {
+    return $.Struct.getUint32(0, this);
   }
-  setVineId(value: number): void {
-    capnp.Struct.setUint32(0, value, this);
+  set vineId(value: number) {
+    $.Struct.setUint32(0, value, this);
   }
   toString(): string {
     return "ThirdPartyCapDescriptor_" + super.toString();
   }
 }
-
-export enum Exception_Type {
-  FAILED,
-  OVERLOADED,
-  DISCONNECTED,
-  UNIMPLEMENTED,
-}
-
-export class Exception extends capnp.Struct {
+export const Exception_Type = {
+  FAILED: 0,
+  OVERLOADED: 1,
+  DISCONNECTED: 2,
+  UNIMPLEMENTED: 3,
+} as const;
+export type Exception_Type =
+  (typeof Exception_Type)[keyof typeof Exception_Type];
+export class Exception extends $.Struct {
   static readonly Type = Exception_Type;
   static readonly _capnp = {
     displayName: "Exception",
     id: "d625b7063acf691a",
-    size: new capnp.ObjectSize(8, 1),
+    size: new $.ObjectSize(8, 2),
   };
-  getReason(): string {
-    return capnp.Struct.getText(0, this);
+  get reason(): string {
+    return $.Struct.getText(0, this);
   }
-  setReason(value: string): void {
-    capnp.Struct.setText(0, value, this);
+  set reason(value: string) {
+    $.Struct.setText(0, value, this);
   }
-  getType(): Exception_Type {
-    return capnp.Struct.getUint16(4, this);
+  get type(): Exception_Type {
+    return $.Struct.getUint16(4, this) as Exception_Type;
   }
-  setType(value: Exception_Type): void {
-    capnp.Struct.setUint16(4, value, this);
+  set type(value: Exception_Type) {
+    $.Struct.setUint16(4, value, this);
   }
-  getObsoleteIsCallersFault(): boolean {
-    return capnp.Struct.getBit(0, this);
+  get obsoleteIsCallersFault(): boolean {
+    return $.Struct.getBit(0, this);
   }
-  setObsoleteIsCallersFault(value: boolean): void {
-    capnp.Struct.setBit(0, value, this);
+  set obsoleteIsCallersFault(value: boolean) {
+    $.Struct.setBit(0, value, this);
   }
-  getObsoleteDurability(): number {
-    return capnp.Struct.getUint16(2, this);
+  get obsoleteDurability(): number {
+    return $.Struct.getUint16(2, this);
   }
-  setObsoleteDurability(value: number): void {
-    capnp.Struct.setUint16(2, value, this);
+  set obsoleteDurability(value: number) {
+    $.Struct.setUint16(2, value, this);
+  }
+  get trace(): string {
+    return $.Struct.getText(1, this);
+  }
+  set trace(value: string) {
+    $.Struct.setText(1, value, this);
   }
   toString(): string {
     return "Exception_" + super.toString();
   }
 }
-
-Payload._CapTable = capnp.CompositeList(CapDescriptor);
-PromisedAnswer._Transform = capnp.CompositeList(PromisedAnswer_Op);
+Payload._CapTable = $.CompositeList(CapDescriptor);
+PromisedAnswer._Transform = $.CompositeList(PromisedAnswer_Op);

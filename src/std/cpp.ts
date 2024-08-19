@@ -1,3 +1,1 @@
-// Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
-
-export const _capnpFileId = BigInt("0x814e30b87b7df8bd");
+export const _capnpFileId = BigInt("0xbdf87d7bb8304e81");
