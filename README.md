@@ -36,7 +36,7 @@ Arguments:
 - `--js`: Generate `.js` transpiled schema (ESM)
 - `--dts`: Generate type declarations
 
-See [playground](./playground/) for examples and learn more about `.capnp` schema in capnp language [docs](https://capnproto.org/language.html).
+See [playground](./playground/) for examples and learn more about `.capnp` schema in [language docs](https://capnproto.org/language.html).
 
 ### Reading Messages
 
@@ -58,7 +58,7 @@ See [tests](./test/integration/rpc.spec.ts) for some examples.
 
 ## Status
 
-This project is a rework of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by Julián Díaz and is under development.
+This project is a rework of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by [Julián Díaz](https://github.com/jdiaz5513) and is under development.
 
 <details>
 
@@ -96,6 +96,6 @@ Feedback and PRs are more than welcome. 🙏
 
 ## License
 
-🔀 Forked from [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by Julián Díaz.
+🔀 Forked from [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/capnp-ts/) by [Julián Díaz](https://github.com/jdiaz5513).
 
 💛 Published under the [MIT](https://github.com/unjs/capnp-es/blob/main/LICENSE) license.
