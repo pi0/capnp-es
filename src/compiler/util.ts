@@ -43,7 +43,7 @@ export function decToHexBytes(d: string): string[] {
 
 export function splitCamel(s: string): string[] {
   let wasLo = false;
-  // eslint-disable-next-line unicorn/prefer-spread, unicorn/no-array-reduce
+  // eslint-disable-next-line unicorn/no-array-reduce
   return s.split("").reduce((a: string[], c: string) => {
     const lo = c.toUpperCase() !== c;
     const up = c.toLowerCase() !== c;

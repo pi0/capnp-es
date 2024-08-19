@@ -94,7 +94,7 @@ export function getJsType(
     }
 
     case s.Type.INTERFACE: {
-      return "$.Interface";
+      return getFullClassName(lookupNode(ctx, type.interface.typeId));
     }
 
     case s.Type.LIST: {

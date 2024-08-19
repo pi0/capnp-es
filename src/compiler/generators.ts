@@ -5,6 +5,7 @@ import * as s from "../std/schema";
 import { format } from "../util";
 
 import {
+  createBigIntExpression,
   createClassExtends,
   createConcreteListProperty,
   createConstProperty,
@@ -16,6 +17,7 @@ import {
 } from "./ast-creators";
 import { CodeGeneratorFileContext } from "./code-generator-file-context";
 import {
+  ASYNC,
   BOOLEAN_TYPE,
   CAPNP,
   ConcreteListType,
@@ -23,6 +25,7 @@ import {
   LENGTH,
   NUMBER_TYPE,
   Primitive,
+  QUESTION_TOKEN,
   READONLY,
   STATIC,
   STRING_TYPE,
@@ -31,6 +34,7 @@ import {
   TS_FILE_ID,
   VALUE,
   VOID_TYPE,
+  ANY_TYPE,
   OBJECT_SIZE,
   BIGINT,
 } from "./constants";
@@ -74,14 +78,6 @@ export function generateCapnpImport(ctx: CodeGeneratorFileContext): void {
       f.createStringLiteral(importPath),
     ),
   );
-
-  // ctx.statements.push(
-  //   f.createExpressionStatement(
-  //     f.createIdentifier(
-  //       `import { ObjectSize as __O, Struct as __S } from '${importPath}'`,
-  //     ),
-  //   ),
-  // );
 }
 
 export function generateNestedImports(ctx: CodeGeneratorFileContext): void {
@@ -139,7 +135,8 @@ export function generateDefaultValue(field: s.Field): ts.PropertyAssignment {
     case s.Type_Which.ANY_POINTER:
     case s.Type_Which.DATA:
     case s.Type_Which.LIST:
-    case s.Type_Which.STRUCT: {
+    case s.Type_Which.STRUCT:
+    case s.Type_Which.INTERFACE: {
       initializer = createValueExpression(slot.defaultValue);
 
       break;
@@ -217,15 +214,6 @@ export function generateFileId(ctx: CodeGeneratorFileContext): void {
         ts.NodeFlags.Const,
       ),
     ),
-  );
-}
-
-export function generateInterfaceClasses(
-  _ctx: CodeGeneratorFileContext,
-  node: s.Node,
-): void {
-  console.error(
-    `CAPNP-TS: Warning! Interface generation (${node.displayName}) is not yet implemented.`,
   );
 }
 
@@ -321,8 +309,14 @@ export function generateStructFieldMethods(
   } else {
     throw new Error(format(E.GEN_UNKNOWN_STRUCT_FIELD, field.which()));
   }
+  let jsTypeReference = f.createTypeReferenceNode(jsType);
 
-  const jsTypeReference = f.createTypeReferenceNode(jsType, undefined);
+  const isInterface = whichType === s.Type.INTERFACE;
+  if (isInterface) {
+    jsType = `${jsType}$Client`;
+    jsTypeReference = f.createTypeReferenceNode(jsType);
+  }
+
   const discriminantOffset = node.struct.discriminantOffset;
   const name = field.name;
   const properName = util.c2t(name);
@@ -332,13 +326,13 @@ export function generateStructFieldMethods(
   const union = discriminantValue !== s.Field.NO_DISCRIMINANT;
   const offset = (field.isSlot() && field.slot.offset) || 0;
   const offsetLiteral = f.createNumericLiteral(offset.toString());
-  /** __S.getPointer(0, this) */
+  /** $.Struct.getPointer(0, this) */
   const getPointer = f.createCallExpression(
     f.createPropertyAccessExpression(STRUCT, "getPointer"),
     undefined,
     [offsetLiteral, THIS],
   );
-  /** __S.copyFrom(value, __S.getPointer(0, this)) */
+  /** $.Struct.copyFrom(value, $.Struct.getPointer(0, this)) */
   const copyFromValue = f.createCallExpression(
     f.createPropertyAccessExpression(STRUCT, "copyFrom"),
     undefined,
@@ -352,13 +346,13 @@ export function generateStructFieldMethods(
   const discriminantValueLiteral = f.createNumericLiteral(
     discriminantValue.toString(),
   );
-  /** __S.getUint16(0, this) */
+  /** $.Struct.getUint16(0, this) */
   const getDiscriminant = f.createCallExpression(
     f.createPropertyAccessExpression(STRUCT, "getUint16"),
     undefined,
     [discriminantOffsetLiteral, THIS],
   );
-  /** __S.setUint16(0, this) */
+  /** $.Struct.setUint16(0, this) */
   const setDiscriminant = f.createCallExpression(
     f.createPropertyAccessExpression(STRUCT, "setUint16"),
     undefined,
@@ -387,14 +381,14 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** __S.getPointer(0, this) */
+      /** $.Struct.getPointer(0, this) */
       get = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "getPointer"),
         undefined,
         getArgs,
       );
       has = true;
-      /** __S.copyFrom(value, __S.getPointer(0, this)) */
+      /** $.Struct.copyFrom(value, $.Struct.getPointer(0, this)) */
       set = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "copyFrom"),
         undefined,
@@ -429,13 +423,13 @@ export function generateStructFieldMethods(
         setArgs.push(defaultValue);
       }
 
-      /** __S.getXYZ(0, this) */
+      /** $.Struct.getXYZ(0, this) */
       get = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, getter),
         undefined,
         getArgs,
       );
-      /** __S.setXYZ(0, value, this) */
+      /** $.Struct.setXYZ(0, value, this) */
       set = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, setter),
         undefined,
@@ -455,14 +449,14 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** __S.getData(0, this) */
+      /** $.Struct.getData(0, this) */
       get = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "getData"),
         undefined,
         getArgs,
       );
       has = true;
-      /** __S.initData(0, length, this) */
+      /** $.Struct.initData(0, length, this) */
       init = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "initData"),
         undefined,
@@ -474,20 +468,51 @@ export function generateStructFieldMethods(
     }
 
     case s.Type.INTERFACE: {
-      if (hadExplicitDefault) {
-        throw new Error(
-          format(E.GEN_EXPLICIT_DEFAULT_NON_PRIMITIVE, "INTERFACE"),
+      // new SomeInterface$Client(undefinedS.getInterfaceClientOrNullAt(0, this));
+      {
+        const client = f.createCallExpression(
+          f.createPropertyAccessExpression(
+            STRUCT,
+            "getInterfaceClientOrNullAt",
+          ),
+          undefined, // typeParams
+          [offsetLiteral, THIS],
         );
+        const newClient = f.createNewExpression(
+          f.createIdentifier(jsType),
+          undefined, // typeParams
+          [client],
+        );
+        get = newClient;
       }
 
-      /** __S.getPointerAs(0, Foo, this) */
-      get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getPointerAs"),
-        undefined,
-        [offsetLiteral, f.createIdentifier(jsType), THIS],
-      );
-      set = copyFromValue;
+      {
+        const message = f.createPropertyAccessExpression(
+          f.createPropertyAccessExpression(THIS, f.createIdentifier("segment")),
+          f.createIdentifier("message"),
+        );
+        const capId = f.createCallExpression(
+          f.createPropertyAccessExpression(message, "addCap"),
+          undefined, // typeParams
+          [
+            f.createPropertyAccessExpression(
+              f.createIdentifier("value"),
+              "client",
+            ),
+          ],
+        );
+        const ptr = f.createCallExpression(
+          f.createPropertyAccessExpression(STRUCT, "getPointer"),
+          undefined, // typeParams
+          [offsetLiteral, THIS],
+        );
 
+        set = f.createCallExpression(
+          f.createPropertyAccessExpression(STRUCT, "setInterfacePointer"),
+          undefined, // typeParams
+          [capId, ptr],
+        );
+      }
       break;
     }
 
@@ -515,7 +540,7 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** __S.getList(0, MyStruct._Foo, this) */
+      /** $.Struct.getList(0, MyStruct._Foo, this) */
       get = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "getList"),
         undefined,
@@ -525,7 +550,7 @@ export function generateStructFieldMethods(
         get = f.createAsExpression(get, jsTypeReference);
       }
       has = true;
-      /** __S.initList(0, MyStruct._Foo, length, this) */
+      /** $.Struct.initList(0, MyStruct._Foo, length, this) */
       init = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "initList"),
         undefined,
@@ -554,14 +579,14 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** __S.getStruct(0, Foo, this) */
+      /** $.Struct.getStruct(0, Foo, this) */
       get = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "getStruct"),
         undefined,
         getArgs,
       );
       has = true;
-      /** __S.initStruct(0, Foo, this) */
+      /** $.Struct.initStruct(0, Foo, this) */
       init = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "initStructAt"),
         undefined,
@@ -576,13 +601,13 @@ export function generateStructFieldMethods(
 
       if (defaultValue) getArgs.push(defaultValue);
 
-      /** __S.getText(0, this) */
+      /** $.Struct.getText(0, this) */
       get = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "getText"),
         undefined,
         getArgs,
       );
-      /** __S.setText(0, value, this) */
+      /** $.Struct.setText(0, value, this) */
       set = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "setText"),
         undefined,
@@ -603,7 +628,7 @@ export function generateStructFieldMethods(
 
       const groupType = f.createIdentifier(jsType);
 
-      /** __S.getAs(Foo, this); */
+      /** $.Struct.getAs(Foo, this); */
       get = f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "getAs"),
         undefined,
@@ -620,7 +645,7 @@ export function generateStructFieldMethods(
     }
   }
 
-  // adoptFoo(value: capnp.Orphan<Foo>): void { __S.adopt(value, this._getPointer(3)); }}
+  // adoptFoo(value: capnp.Orphan<Foo>): void { $.Struct.adopt(value, this._getPointer(3)); }}
   if (adopt) {
     const parameters = [
       f.createParameterDeclaration(
@@ -647,7 +672,7 @@ export function generateStructFieldMethods(
     );
   }
 
-  // disownFoo(): capnp.Orphan<Foo> { return __S.disown(this.getFoo()); }
+  // disownFoo(): capnp.Orphan<Foo> { return $.Struct.disown(this.getFoo()); }
   if (disown) {
     const getter = f.createPropertyAccessExpression(THIS, name);
     const expressions = [
@@ -695,7 +720,7 @@ export function generateStructFieldMethods(
 
   // hasFoo(): boolean { ... }
   if (has) {
-    // !__S.isNull(this._getPointer(8));
+    // !$.Struct.isNull(this._getPointer(8));
     const expressions = [
       f.createLogicalNot(
         f.createCallExpression(
@@ -855,16 +880,28 @@ export function generateStructNode(
   // static readonly NestedStruct = MyStruct_NestedStruct;
   members.push(...nestedNodes.map((n) => createNestedNodeProperty(n)));
 
-  // static readonly Client = MyInterface_Client;
-  // static readonly Server = MyInterface_Server;
-  // if (interfaceNode) {
-
-  //   members.push(
-  //     f.createPropertyDeclaration(undefined, [STATIC, READONLY], 'Client', undefined, undefined, f.createStringLiteral(`${fullClassName}_Client`)));
-  //   members.push(
-  //     f.createPropertyDeclaration(undefined, [STATIC, READONLY], 'Server', undefined, undefined, f.createStringLiteral(`${fullClassName}_Server`)));
-
-  // }
+  // static readonly Client = MyInterface$Client;
+  // static readonly Server = MyInterface$Server;
+  if (interfaceNode) {
+    members.push(
+      f.createPropertyDeclaration(
+        [STATIC, READONLY],
+        "Client",
+        undefined,
+        undefined,
+        f.createIdentifier(`${fullClassName}$Client`),
+      ),
+    );
+    members.push(
+      f.createPropertyDeclaration(
+        [STATIC, READONLY],
+        "Server",
+        undefined,
+        undefined,
+        f.createIdentifier(`${fullClassName}$Server`),
+      ),
+    );
+  }
 
   // eslint-disable-next-line unicorn/no-array-reduce
   const defaultValues = fields.reduce(
@@ -922,7 +959,7 @@ export function generateStructNode(
   members.push(createMethod("toString", [], STRING_TYPE, [toStringExpression]));
 
   if (hasUnnamedUnion) {
-    // which(): MyStruct_Which { return __S.getUint16(12, this); }
+    // which(): MyStruct_Which { return $.Struct.getUint16(12, this); }
     const whichExpression = f.createAsExpression(
       f.createCallExpression(
         f.createPropertyAccessExpression(STRUCT, "getUint16"),
@@ -945,7 +982,7 @@ export function generateStructNode(
     [EXPORT],
     fullClassName,
     undefined,
-    [createClassExtends(STRUCT.escapedText!)],
+    [createClassExtends(interfaceNode ? "$.Interface" : "$.Struct")],
     members,
   );
 
@@ -973,7 +1010,9 @@ export function generateEnumNode(
 ): void {
   const members = fields.sort(compareCodeOrder).map((e, index) => {
     const key = f.createIdentifier(util.c2s(e.name));
-    const val = f.createNumericLiteral(index.toString());
+    const val = f.createNumericLiteral(
+      ((e as s.Field).discriminantValue || index).toString(),
+    );
     return f.createPropertyAssignment(key, val);
   });
 
@@ -1029,5 +1068,674 @@ export function getImportNodes(
       .filter(
         (n) => lookupNode(ctx, n).isStruct() || lookupNode(ctx, n).isEnum(),
       )
+  );
+}
+
+// ---- RPC stuff ----
+
+export function generateInterfaceClasses(
+  ctx: CodeGeneratorFileContext,
+  node: s.Node,
+): void {
+  // Generate the parameter and result structs first
+  generateMethodStructs(ctx, node);
+
+  // Now generate the client & server classes
+  generateClient(ctx, node);
+  generateServer(ctx, node);
+}
+
+export function generateMethodStructs(
+  ctx: CodeGeneratorFileContext,
+  node: s.Node,
+): void {
+  node.interface.methods.forEach((method) => {
+    const paramNode = lookupNode(ctx, method.paramStructType);
+    const resultNode = lookupNode(ctx, method.resultStructType);
+    generateNode(ctx, paramNode);
+    generateNode(ctx, resultNode);
+    generateResultPromise(ctx, resultNode);
+  });
+}
+
+export function generateServer(
+  ctx: CodeGeneratorFileContext,
+  node: s.Node,
+): void {
+  // TODO: handle superclasses
+  const fullClassName = getFullClassName(node);
+  const serverName = `${fullClassName}$Server`;
+  const serverTargetName = `${serverName}$Target`;
+  const clientName = `${fullClassName}$Client`;
+
+  // Generate the `Foobar$Server$Target` interface
+  {
+    const elements = node.interface.methods.map<ts.TypeElement>((method) => {
+      const paramTypeName = getFullClassName(
+        lookupNode(ctx, method.paramStructType),
+      );
+      const resultTypeName = getFullClassName(
+        lookupNode(ctx, method.resultStructType),
+      );
+
+      return f.createMethodSignature(
+        undefined, // modifiers
+        method.name, // name
+        undefined, // questionToken
+        undefined, // typeParams
+        [
+          f.createParameterDeclaration(
+            undefined, // modifiers
+            undefined, // dotDotToken
+            "params", // name
+            undefined, // questionToken
+            f.createTypeReferenceNode(paramTypeName, undefined), // type,
+            undefined, // initializer
+          ),
+          f.createParameterDeclaration(
+            undefined, // modifiers
+            undefined, // dotDotToken
+            "results", // name
+            undefined, // questionToken
+            f.createTypeReferenceNode(resultTypeName, undefined), // type,
+            undefined, // initializer
+          ),
+        ], // params
+        f.createTypeReferenceNode("Promise", [VOID_TYPE]), // type
+      );
+    });
+
+    ctx.statements.push(
+      f.createInterfaceDeclaration(
+        [EXPORT], // modifiers
+        serverTargetName, // name
+        undefined, // typeParams
+        undefined, // heritageClauses
+        elements,
+      ),
+    );
+  }
+
+  const members: ts.ClassElement[] = [];
+
+  members.push(
+    f.createPropertyDeclaration(
+      [READONLY], // modifiers
+      "target", // name
+      undefined, // questionOrExclamationmark
+      f.createTypeReferenceNode(serverTargetName, undefined), // type
+      undefined, // initializer
+    ),
+  );
+
+  // Generate server constructor
+  {
+    const serverMethods: ts.Expression[] = [];
+    node.interface.methods.forEach((method, index) => {
+      serverMethods.push(
+        f.createObjectLiteralExpression(
+          [
+            f.createSpreadAssignment(
+              f.createElementAccessExpression(
+                f.createPropertyAccessExpression(
+                  f.createIdentifier(clientName),
+                  "methods",
+                ),
+                index,
+              ),
+            ),
+            f.createPropertyAssignment(
+              "impl",
+              f.createPropertyAccessExpression(
+                f.createIdentifier("target"),
+                method.name,
+              ),
+            ),
+          ],
+          true, // multiline
+        ),
+      );
+    });
+
+    members.push(
+      f.createConstructorDeclaration(
+        undefined, // modifiers
+        [
+          f.createParameterDeclaration(
+            undefined, // modifiers
+            undefined, // dotDotToken
+            "target", // name
+            undefined, // questionToken
+            f.createTypeReferenceNode(serverTargetName, undefined), // type
+            undefined, // initializer
+          ),
+        ], // parameters
+        f.createBlock(
+          [
+            f.createExpressionStatement(
+              f.createCallExpression(
+                f.createIdentifier("super"),
+                undefined, // typeArguments
+                [
+                  f.createIdentifier("target"),
+                  f.createArrayLiteralExpression(
+                    serverMethods,
+                    true /* multiline */,
+                  ),
+                ], // arguments
+              ),
+            ),
+            f.createExpressionStatement(
+              f.createAssignment(
+                f.createPropertyAccessExpression(THIS, "target"),
+                f.createIdentifier("target"),
+              ),
+            ),
+          ],
+          true, // multiline
+        ), // body
+      ),
+    );
+  }
+
+  members.push(
+    f.createMethodDeclaration(
+      undefined, // modifiers
+      undefined, // asteriskToken
+      "client", // name
+      undefined, // questionToken
+      undefined, // typeParams
+      [], // params
+      f.createTypeReferenceNode(clientName, undefined), // type
+      f.createBlock(
+        [
+          f.createReturnStatement(
+            f.createNewExpression(
+              f.createIdentifier(clientName),
+              undefined, // typeArgs
+              [THIS], // args
+            ),
+          ),
+        ],
+        false, // multiline
+      ),
+    ),
+  );
+
+  ctx.statements.push(
+    f.createClassDeclaration(
+      [EXPORT], // modifiers
+      serverName, // name
+      undefined, // typeParams
+      [createClassExtends("$.Server")], // heritageClauses
+      members, // members
+    ),
+  );
+}
+
+export function generateClient(
+  ctx: CodeGeneratorFileContext,
+  node: s.Node,
+): void {
+  const fullClassName = getFullClassName(node);
+  const clientName = `${fullClassName}$Client`;
+
+  // TODO: handle superclasses
+  const members: ts.ClassElement[] = [];
+
+  const ClientType = f.createTypeReferenceNode("$.Client", undefined);
+
+  members.push(
+    f.createPropertyDeclaration(
+      undefined,
+      "client",
+      undefined,
+      ClientType,
+      undefined,
+    ),
+  );
+
+  members.push(
+    f.createPropertyDeclaration(
+      [STATIC, READONLY],
+      "interfaceId",
+      undefined,
+      f.createTypeReferenceNode("bigint", undefined),
+      createBigIntExpression(node.id),
+    ),
+  );
+
+  members.push(
+    f.createConstructorDeclaration(
+      undefined, // modifiers
+      [
+        f.createParameterDeclaration(
+          undefined,
+          undefined,
+          "client",
+          undefined,
+          ClientType,
+        ),
+      ], // parameters
+      f.createBlock(
+        [
+          f.createExpressionStatement(
+            f.createAssignment(
+              f.createPropertyAccessExpression(THIS, "client"),
+              f.createIdentifier("client"),
+            ),
+          ),
+        ],
+        true, // multiline
+      ), // body
+    ),
+  );
+
+  const methodDefs: ts.Expression[] = [];
+  const methodDefTypes: ts.TypeNode[] = [];
+
+  members.push(
+    f.createPropertyDeclaration(
+      [STATIC, READONLY], // modifiers
+      "methods", // name
+      undefined, // questionOrExclamationToken
+      f.createTupleTypeNode(methodDefTypes), // type
+      f.createArrayLiteralExpression(
+        methodDefs,
+        true, // multiline
+      ), // initializer
+    ),
+  );
+
+  node.interface.methods.forEach((method, index) => {
+    generateClientMethod(
+      ctx,
+      node,
+      clientName,
+      members,
+      methodDefs,
+      methodDefTypes,
+      method,
+      index,
+    );
+  });
+
+  ctx.statements.push(
+    f.createClassDeclaration([EXPORT], clientName, undefined, [], members),
+  );
+
+  ctx.statements.push(
+    f.createExpressionStatement(
+      f.createCallExpression(
+        f.createPropertyAccessExpression(
+          f.createIdentifier("$.Registry"),
+          "register",
+        ),
+        undefined, // typeArgs
+        [
+          f.createPropertyAccessExpression(
+            f.createIdentifier(clientName),
+            "interfaceId",
+          ),
+          f.createIdentifier(clientName),
+        ],
+      ),
+    ),
+  );
+}
+
+export function generateResultPromise(
+  ctx: CodeGeneratorFileContext,
+  node: s.Node,
+): void {
+  const nodeId = node.id;
+
+  if (ctx.generatedResultsPromiseIds.has(nodeId)) return;
+
+  ctx.generatedResultsPromiseIds.add(nodeId);
+
+  const resultsClassName = getFullClassName(node);
+  const fullClassName = `${resultsClassName}$Promise`;
+
+  const PipelineType = f.createTypeReferenceNode("$.Pipeline", [
+    ANY_TYPE,
+    ANY_TYPE,
+    f.createTypeReferenceNode(resultsClassName, undefined),
+  ]);
+
+  const members: ts.ClassElement[] = [];
+  members.push(
+    f.createPropertyDeclaration(
+      undefined,
+      "pipeline",
+      undefined,
+      PipelineType,
+      undefined,
+    ),
+  );
+
+  members.push(
+    f.createConstructorDeclaration(
+      undefined, // modifiers
+      [
+        f.createParameterDeclaration(
+          undefined,
+          undefined,
+          "pipeline",
+          undefined,
+          PipelineType,
+        ),
+      ], // parameters
+      f.createBlock(
+        [
+          f.createExpressionStatement(
+            f.createAssignment(
+              f.createPropertyAccessExpression(THIS, "pipeline"),
+              f.createIdentifier("pipeline"),
+            ),
+          ),
+        ],
+        true, // multiline
+      ), // body
+    ),
+  );
+
+  const struct = node.struct;
+  const fields = struct.fields.toArray().sort(compareCodeOrder);
+
+  const generatePromiseFieldMethod = (field: s.Field) => {
+    let jsType: string;
+    let isInterface = false;
+    let slot: s.Field_Slot;
+
+    if (field.isSlot()) {
+      slot = field.slot;
+      const slotType = slot.type;
+      if (slotType.which() !== s.Type.INTERFACE) {
+        // TODO: return a Promise<jsType> for non-interface slots
+        return;
+      }
+      isInterface = true;
+      jsType = getJsType(ctx, slotType, false);
+    } else if (field.isGroup()) {
+      // TODO: how should groups be handled?
+      return;
+    } else {
+      throw new Error(format(E.GEN_UNKNOWN_STRUCT_FIELD, field.which()));
+    }
+
+    const promisedJsType = jsType;
+    if (isInterface) {
+      jsType = `${jsType}$Client`;
+    }
+
+    const name = field.name;
+    const properName = util.c2t(name);
+    const jsTypeReference = f.createTypeReferenceNode(jsType, undefined);
+
+    {
+      // const pipeline = this.pipeline.getPipeline(SlotType, offset)
+      const pipeline = f.createCallExpression(
+        f.createPropertyAccessExpression(
+          f.createPropertyAccessExpression(THIS, "pipeline"),
+          "getPipeline",
+        ),
+        undefined, // typeArguments
+        [
+          f.createIdentifier(promisedJsType),
+          f.createNumericLiteral(slot.offset.toString()),
+        ], // arguments
+      ); // call
+
+      // const client = pipeline.client()
+      const client = f.createCallExpression(
+        f.createPropertyAccessExpression(
+          pipeline,
+          f.createIdentifier("client"),
+        ),
+        undefined, // typeArguments
+        undefined, // arguments
+      );
+
+      // new RemoteInterface(client)
+      const remoteInterface = f.createNewExpression(
+        f.createIdentifier(jsType), // expression
+        undefined, // typeArguments
+        [client], // argumentsArray
+      );
+
+      members.push(
+        f.createMethodDeclaration(
+          undefined, // modifiers
+          undefined, // asteriskToken
+          `get${properName}`,
+          undefined,
+          undefined,
+          [], // parameters
+          jsTypeReference,
+          f.createBlock(
+            [f.createReturnStatement(remoteInterface)],
+            true, // multiLine
+          ),
+        ),
+      );
+    }
+  };
+
+  fields.forEach((field) => generatePromiseFieldMethod(field));
+
+  {
+    members.push(
+      f.createMethodDeclaration(
+        [ASYNC], // modifiers
+        undefined, // asteriskToken
+        `promise`,
+        undefined,
+        undefined,
+        [], // parameters
+        f.createTypeReferenceNode(
+          "Promise",
+          [f.createTypeReferenceNode(resultsClassName, undefined)], // typeArguments
+        ),
+        createExpressionBlock(
+          [
+            f.createAwaitExpression(
+              f.createCallExpression(
+                f.createPropertyAccessExpression(
+                  f.createPropertyAccessExpression(THIS, "pipeline"),
+                  "struct",
+                ),
+                undefined, // typeArguments
+                undefined, // parameters
+              ), // call
+            ), // await
+          ],
+          true, // returns
+          false, // allowSingleLine
+        ),
+      ),
+    );
+  }
+
+  const c = f.createClassDeclaration(
+    [EXPORT],
+    fullClassName,
+    undefined,
+    [], // TODO: inheritance
+    members,
+  );
+
+  ctx.statements.push(c);
+}
+
+export function generateClientMethod(
+  ctx: CodeGeneratorFileContext,
+  node: s.Node,
+  clientName: string,
+  members: ts.ClassElement[],
+  methodDefs: ts.Expression[],
+  methodDefTypes: ts.TypeNode[],
+  method: s.Method,
+  index: number,
+): void {
+  const name = method.name;
+
+  const paramTypeName = getFullClassName(
+    lookupNode(ctx, method.paramStructType),
+  );
+  const resultTypeName = getFullClassName(
+    lookupNode(ctx, method.resultStructType),
+  );
+
+  methodDefTypes.push(
+    f.createTypeReferenceNode(
+      "$.Method",
+      [
+        f.createTypeReferenceNode(paramTypeName, undefined),
+        f.createTypeReferenceNode(resultTypeName, undefined),
+      ], // typeArgs
+    ),
+  );
+  methodDefs.push(
+    f.createObjectLiteralExpression(
+      [
+        f.createPropertyAssignment(
+          "ParamsClass",
+          f.createIdentifier(paramTypeName),
+        ),
+        f.createPropertyAssignment(
+          "ResultsClass",
+          f.createIdentifier(resultTypeName),
+        ),
+        f.createPropertyAssignment(
+          "interfaceId",
+          f.createPropertyAccessExpression(
+            f.createIdentifier(clientName),
+            "interfaceId",
+          ),
+        ),
+        f.createPropertyAssignment(
+          "methodId",
+          f.createNumericLiteral(index.toString()),
+        ),
+        f.createPropertyAssignment(
+          "interfaceName",
+          f.createStringLiteral(node.displayName),
+        ),
+        f.createPropertyAssignment(
+          "methodName",
+          f.createStringLiteral(method.name),
+        ),
+      ],
+      true /* multiline */,
+    ),
+  );
+
+  members.push(
+    f.createMethodDeclaration(
+      undefined, // modifiers
+      undefined, // asteriskToken
+      name,
+      undefined, // typeParameters
+      undefined, // questionToken
+      [
+        f.createParameterDeclaration(
+          undefined, // modifiers
+          undefined, // dotDotToken
+          "paramsFunc",
+          QUESTION_TOKEN, // questionToken
+          f.createFunctionTypeNode(
+            undefined, // typeParameters
+            [
+              f.createParameterDeclaration(
+                undefined, // modifiers
+                undefined, // dotDotToken
+                "params", // name
+                undefined, // questionToken
+                f.createTypeReferenceNode(paramTypeName, undefined), // type
+              ),
+            ],
+            VOID_TYPE, // type
+          ),
+        ),
+      ], // parameters
+      f.createTypeReferenceNode(`${resultTypeName}$Promise`, undefined),
+      f.createBlock(
+        [
+          f.createVariableStatement(
+            undefined, // modifiers
+            f.createVariableDeclarationList(
+              [
+                f.createVariableDeclaration(
+                  "answer",
+                  undefined,
+                  undefined,
+                  f.createCallExpression(
+                    f.createPropertyAccessExpression(
+                      f.createPropertyAccessExpression(THIS, "client"),
+                      "call",
+                    ),
+                    undefined, // typeArgs
+                    [
+                      f.createObjectLiteralExpression(
+                        [
+                          f.createPropertyAssignment(
+                            "method",
+                            f.createElementAccessExpression(
+                              f.createPropertyAccessExpression(
+                                f.createIdentifier(clientName),
+                                "methods",
+                              ),
+                              index,
+                            ),
+                          ),
+                          f.createPropertyAssignment(
+                            "paramsFunc",
+                            f.createIdentifier("paramsFunc"),
+                          ),
+                        ],
+                        true, // multiline
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+              ts.NodeFlags.Const,
+            ),
+          ), // const answer = ...
+
+          f.createVariableStatement(
+            undefined, // modifiers
+            f.createVariableDeclarationList(
+              [
+                f.createVariableDeclaration(
+                  "pipeline",
+                  undefined,
+                  undefined,
+                  f.createNewExpression(
+                    f.createIdentifier("$.Pipeline"),
+                    undefined, // typeArgs
+                    [
+                      f.createIdentifier(resultTypeName),
+                      f.createIdentifier("answer"),
+                    ],
+                  ),
+                ),
+              ],
+              ts.NodeFlags.Const,
+            ),
+          ), // const pipeline = ...
+
+          f.createReturnStatement(
+            f.createNewExpression(
+              f.createIdentifier(`${resultTypeName}$Promise`),
+              undefined, // typeArguments
+              [f.createIdentifier("pipeline")],
+            ),
+          ),
+        ],
+        true, // multiline
+      ),
+    ),
   );
 }

@@ -1504,10 +1504,10 @@ export class TestUnion_Union1 extends $.Struct {
   }
 }
 export const TestUnion_Union2_Which = {
-  U2F0S64: 0,
-  U2F0S32: 1,
+  U2F0S64: 4,
+  U2F0S32: 3,
   U2F0S16: 2,
-  U2F0S8: 3,
+  U2F0S8: 1,
   U2F0S1: 4
 } as const;
 export type TestUnion_Union2_Which = (typeof TestUnion_Union2_Which)[keyof typeof TestUnion_Union2_Which];
@@ -1585,10 +1585,10 @@ export class TestUnion_Union2 extends $.Struct {
   }
 }
 export const TestUnion_Union3_Which = {
-  U3F0S64: 0,
-  U3F0S32: 1,
+  U3F0S64: 4,
+  U3F0S32: 3,
   U3F0S16: 2,
-  U3F0S8: 3,
+  U3F0S8: 1,
   U3F0S1: 4
 } as const;
 export type TestUnion_Union3_Which = (typeof TestUnion_Union3_Which)[keyof typeof TestUnion_Union3_Which];
@@ -1996,8 +1996,8 @@ export class TestGroups_Groups_Bar extends $.Struct {
 }
 export const TestGroups_Groups_Which = {
   FOO: 0,
-  BAR: 1,
-  BAZ: 2
+  BAR: 2,
+  BAZ: 1
 } as const;
 export type TestGroups_Groups_Which = (typeof TestGroups_Groups_Which)[keyof typeof TestGroups_Groups_Which];
 export class TestGroups_Groups extends $.Struct {
@@ -3657,7 +3657,82 @@ export class TestGenerics_Inner extends $.Struct {
     return "TestGenerics_Inner_" + super.toString();
   }
 }
-export class TestGenerics_Inner2_DeepNest_DeepNestInterface extends $.Struct {
+export class TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "call$Params",
+    id: "b84eecc799437049",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Params_" + super.toString();
+  }
+}
+export class TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "call$Results",
+    id: "e080f0fc54614f6f",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results_" + super.toString();
+  }
+}
+export class TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestGenerics_Inner2_DeepNest_DeepNestInterface$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x8839ed86c9794287");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Params, TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results>
+  ] = [
+    {
+      ParamsClass: TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Params,
+      ResultsClass: TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results,
+      interfaceId: TestGenerics_Inner2_DeepNest_DeepNestInterface$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestGenerics.Inner2.DeepNest.DeepNestInterface",
+      methodName: "call"
+    }
+  ];
+  call(paramsFunc?: (params: TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Params) => void): TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results$Promise {
+    const answer = this.client.call({
+      method: TestGenerics_Inner2_DeepNest_DeepNestInterface$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results, answer);
+    return new TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestGenerics_Inner2_DeepNest_DeepNestInterface$Client.interfaceId, TestGenerics_Inner2_DeepNest_DeepNestInterface$Client);
+export interface TestGenerics_Inner2_DeepNest_DeepNestInterface$Server$Target {
+  call(params: TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Params, results: TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Results): Promise<void>;
+}
+export class TestGenerics_Inner2_DeepNest_DeepNestInterface$Server extends $.Server {
+  readonly target: TestGenerics_Inner2_DeepNest_DeepNestInterface$Server$Target;
+  constructor(target: TestGenerics_Inner2_DeepNest_DeepNestInterface$Server$Target) {
+    super(target, [
+      {
+        ...TestGenerics_Inner2_DeepNest_DeepNestInterface$Client.methods[0],
+        impl: target.call
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestGenerics_Inner2_DeepNest_DeepNestInterface$Client { return new TestGenerics_Inner2_DeepNest_DeepNestInterface$Client(this); }
+}
+export class TestGenerics_Inner2_DeepNest_DeepNestInterface extends $.Interface {
+  static readonly Client = TestGenerics_Inner2_DeepNest_DeepNestInterface$Client;
+  static readonly Server = TestGenerics_Inner2_DeepNest_DeepNestInterface$Server;
   static readonly _capnp = {
     displayName: "DeepNestInterface",
     id: "8839ed86c9794287",
@@ -3815,7 +3890,105 @@ export class TestGenerics_Inner2 extends $.Struct {
     return "TestGenerics_Inner2_" + super.toString();
   }
 }
-export class TestGenerics_Interface extends $.Struct {
+export class TestGenerics_Interface_Call$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "call$Results",
+    id: "a5b46224e33581ad",
+    size: new $.ObjectSize(0, 2)
+  };
+  adoptQux(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownQux(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.qux);
+  }
+  get qux(): $.Pointer {
+    return $.Struct.getPointer(0, this);
+  }
+  hasQux(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
+  }
+  set qux(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  adoptGen(value: $.Orphan<TestGenerics>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+  }
+  disownGen(): $.Orphan<TestGenerics> {
+    return $.Struct.disown(this.gen);
+  }
+  get gen(): TestGenerics {
+    return $.Struct.getStruct(1, TestGenerics, this);
+  }
+  hasGen(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
+  }
+  initGen(): TestGenerics {
+    return $.Struct.initStructAt(1, TestGenerics, this);
+  }
+  set gen(value: TestGenerics) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  }
+  toString(): string {
+    return "TestGenerics_Interface_Call$Results_" + super.toString();
+  }
+}
+export class TestGenerics_Interface_Call$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestGenerics_Interface_Call$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestGenerics_Interface_Call$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestGenerics_Interface_Call$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestGenerics_Interface$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xc9e749e8dd54da5c");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestGenerics_Inner2, TestGenerics_Interface_Call$Results>
+  ] = [
+    {
+      ParamsClass: TestGenerics_Inner2,
+      ResultsClass: TestGenerics_Interface_Call$Results,
+      interfaceId: TestGenerics_Interface$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestGenerics.Interface",
+      methodName: "call"
+    }
+  ];
+  call(paramsFunc?: (params: TestGenerics_Inner2) => void): TestGenerics_Interface_Call$Results$Promise {
+    const answer = this.client.call({
+      method: TestGenerics_Interface$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestGenerics_Interface_Call$Results, answer);
+    return new TestGenerics_Interface_Call$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestGenerics_Interface$Client.interfaceId, TestGenerics_Interface$Client);
+export interface TestGenerics_Interface$Server$Target {
+  call(params: TestGenerics_Inner2, results: TestGenerics_Interface_Call$Results): Promise<void>;
+}
+export class TestGenerics_Interface$Server extends $.Server {
+  readonly target: TestGenerics_Interface$Server$Target;
+  constructor(target: TestGenerics_Interface$Server$Target) {
+    super(target, [
+      {
+        ...TestGenerics_Interface$Client.methods[0],
+        impl: target.call
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestGenerics_Interface$Client { return new TestGenerics_Interface$Client(this); }
+}
+export class TestGenerics_Interface extends $.Interface {
+  static readonly Client = TestGenerics_Interface$Client;
+  static readonly Server = TestGenerics_Interface$Server;
   static readonly _capnp = {
     displayName: "Interface",
     id: "c9e749e8dd54da5c",
@@ -4086,7 +4259,102 @@ export class TestGenericsWrapper2 extends $.Struct {
     return "TestGenericsWrapper2_" + super.toString();
   }
 }
-export class TestImplicitMethodParams extends $.Struct {
+export class TestImplicitMethodParams_Call$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "call$Params",
+    id: "f83f8caf54bdc486",
+    size: new $.ObjectSize(0, 2)
+  };
+  adoptFoo(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownFoo(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.foo);
+  }
+  get foo(): $.Pointer {
+    return $.Struct.getPointer(0, this);
+  }
+  hasFoo(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
+  }
+  set foo(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  adoptBar(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+  }
+  disownBar(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.bar);
+  }
+  get bar(): $.Pointer {
+    return $.Struct.getPointer(1, this);
+  }
+  hasBar(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
+  }
+  set bar(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  }
+  toString(): string {
+    return "TestImplicitMethodParams_Call$Params_" + super.toString();
+  }
+}
+export class TestGenerics$Promise {
+  pipeline: $.Pipeline<any, any, TestGenerics>;
+  constructor(pipeline: $.Pipeline<any, any, TestGenerics>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestGenerics> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestImplicitMethodParams$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x8b9717a3f8d85a9a");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestImplicitMethodParams_Call$Params, TestGenerics>
+  ] = [
+    {
+      ParamsClass: TestImplicitMethodParams_Call$Params,
+      ResultsClass: TestGenerics,
+      interfaceId: TestImplicitMethodParams$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestImplicitMethodParams",
+      methodName: "call"
+    }
+  ];
+  call(paramsFunc?: (params: TestImplicitMethodParams_Call$Params) => void): TestGenerics$Promise {
+    const answer = this.client.call({
+      method: TestImplicitMethodParams$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestGenerics, answer);
+    return new TestGenerics$Promise(pipeline);
+  }
+}
+$.Registry.register(TestImplicitMethodParams$Client.interfaceId, TestImplicitMethodParams$Client);
+export interface TestImplicitMethodParams$Server$Target {
+  call(params: TestImplicitMethodParams_Call$Params, results: TestGenerics): Promise<void>;
+}
+export class TestImplicitMethodParams$Server extends $.Server {
+  readonly target: TestImplicitMethodParams$Server$Target;
+  constructor(target: TestImplicitMethodParams$Server$Target) {
+    super(target, [
+      {
+        ...TestImplicitMethodParams$Client.methods[0],
+        impl: target.call
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestImplicitMethodParams$Client { return new TestImplicitMethodParams$Client(this); }
+}
+export class TestImplicitMethodParams extends $.Interface {
+  static readonly Client = TestImplicitMethodParams$Client;
+  static readonly Server = TestImplicitMethodParams$Server;
   static readonly _capnp = {
     displayName: "TestImplicitMethodParams",
     id: "8b9717a3f8d85a9a",
@@ -4096,7 +4364,93 @@ export class TestImplicitMethodParams extends $.Struct {
     return "TestImplicitMethodParams_" + super.toString();
   }
 }
-export class TestImplicitMethodParamsInGeneric extends $.Struct {
+export class TestImplicitMethodParamsInGeneric_Call$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "call$Params",
+    id: "9aab8e25c808d71e",
+    size: new $.ObjectSize(0, 2)
+  };
+  adoptFoo(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownFoo(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.foo);
+  }
+  get foo(): $.Pointer {
+    return $.Struct.getPointer(0, this);
+  }
+  hasFoo(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
+  }
+  set foo(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  adoptBar(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+  }
+  disownBar(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.bar);
+  }
+  get bar(): $.Pointer {
+    return $.Struct.getPointer(1, this);
+  }
+  hasBar(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
+  }
+  set bar(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  }
+  toString(): string {
+    return "TestImplicitMethodParamsInGeneric_Call$Params_" + super.toString();
+  }
+}
+export class TestImplicitMethodParamsInGeneric$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xdf9ccdeb81a704c9");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestImplicitMethodParamsInGeneric_Call$Params, TestGenerics>
+  ] = [
+    {
+      ParamsClass: TestImplicitMethodParamsInGeneric_Call$Params,
+      ResultsClass: TestGenerics,
+      interfaceId: TestImplicitMethodParamsInGeneric$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestImplicitMethodParamsInGeneric",
+      methodName: "call"
+    }
+  ];
+  call(paramsFunc?: (params: TestImplicitMethodParamsInGeneric_Call$Params) => void): TestGenerics$Promise {
+    const answer = this.client.call({
+      method: TestImplicitMethodParamsInGeneric$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestGenerics, answer);
+    return new TestGenerics$Promise(pipeline);
+  }
+}
+$.Registry.register(TestImplicitMethodParamsInGeneric$Client.interfaceId, TestImplicitMethodParamsInGeneric$Client);
+export interface TestImplicitMethodParamsInGeneric$Server$Target {
+  call(params: TestImplicitMethodParamsInGeneric_Call$Params, results: TestGenerics): Promise<void>;
+}
+export class TestImplicitMethodParamsInGeneric$Server extends $.Server {
+  readonly target: TestImplicitMethodParamsInGeneric$Server$Target;
+  constructor(target: TestImplicitMethodParamsInGeneric$Server$Target) {
+    super(target, [
+      {
+        ...TestImplicitMethodParamsInGeneric$Client.methods[0],
+        impl: target.call
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestImplicitMethodParamsInGeneric$Client { return new TestImplicitMethodParamsInGeneric$Client(this); }
+}
+export class TestImplicitMethodParamsInGeneric extends $.Interface {
+  static readonly Client = TestImplicitMethodParamsInGeneric$Client;
+  static readonly Server = TestImplicitMethodParamsInGeneric$Server;
   static readonly _capnp = {
     displayName: "TestImplicitMethodParamsInGeneric",
     id: "df9ccdeb81a704c9",
@@ -4312,11 +4666,11 @@ export class TestUseGenerics extends $.Struct {
   set cap(value: TestGenerics) {
     $.Struct.copyFrom(value, $.Struct.getPointer(18, this));
   }
-  get genericCap(): $.Interface {
-    return $.Struct.getPointerAs(19, $.Interface, this);
+  get genericCap(): TestGenerics_Interface$Client {
+    return new TestGenerics_Interface$Client($.Struct.getInterfaceClientOrNullAt(19, this));
   }
-  set genericCap(value: $.Interface) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(19, this));
+  set genericCap(value: TestGenerics_Interface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(19, this));
   }
   adoptDefault(value: $.Orphan<TestGenerics>): void {
     $.Struct.adopt(value, $.Struct.getPointer(5, this));
@@ -4648,7 +5002,220 @@ export class TestAnyPointerConstants extends $.Struct {
     return "TestAnyPointerConstants_" + super.toString();
   }
 }
-export class TestInterface extends $.Struct {
+export class TestInterface_Foo$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "foo$Params",
+    id: "b874edc0d559b391",
+    size: new $.ObjectSize(8, 0)
+  };
+  get i(): number {
+    return $.Struct.getUint32(0, this);
+  }
+  set i(value: number) {
+    $.Struct.setUint32(0, value, this);
+  }
+  get j(): boolean {
+    return $.Struct.getBit(32, this);
+  }
+  set j(value: boolean) {
+    $.Struct.setBit(32, value, this);
+  }
+  toString(): string {
+    return "TestInterface_Foo$Params_" + super.toString();
+  }
+}
+export class TestInterface_Foo$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "foo$Results",
+    id: "b04fcaddab714ba4",
+    size: new $.ObjectSize(0, 1)
+  };
+  get x(): string {
+    return $.Struct.getText(0, this);
+  }
+  set x(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  toString(): string {
+    return "TestInterface_Foo$Results_" + super.toString();
+  }
+}
+export class TestInterface_Foo$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestInterface_Foo$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestInterface_Foo$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestInterface_Foo$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestInterface_Bar$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "bar$Params",
+    id: "d044893357b42568",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestInterface_Bar$Params_" + super.toString();
+  }
+}
+export class TestInterface_Bar$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "bar$Results",
+    id: "9bf141df4247d52f",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestInterface_Bar$Results_" + super.toString();
+  }
+}
+export class TestInterface_Bar$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestInterface_Bar$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestInterface_Bar$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestInterface_Bar$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestInterface_Baz$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "baz$Params",
+    id: "d9ac8abb2a91cfbc",
+    size: new $.ObjectSize(0, 1)
+  };
+  adoptS(value: $.Orphan<TestAllTypes>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownS(): $.Orphan<TestAllTypes> {
+    return $.Struct.disown(this.s);
+  }
+  get s(): TestAllTypes {
+    return $.Struct.getStruct(0, TestAllTypes, this);
+  }
+  hasS(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
+  }
+  initS(): TestAllTypes {
+    return $.Struct.initStructAt(0, TestAllTypes, this);
+  }
+  set s(value: TestAllTypes) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestInterface_Baz$Params_" + super.toString();
+  }
+}
+export class TestInterface_Baz$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "baz$Results",
+    id: "9b99d14f2f375b2d",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestInterface_Baz$Results_" + super.toString();
+  }
+}
+export class TestInterface_Baz$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestInterface_Baz$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestInterface_Baz$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestInterface_Baz$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestInterface$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x88eb12a0e0af92b2");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestInterface_Foo$Params, TestInterface_Foo$Results>,
+    $.Method<TestInterface_Bar$Params, TestInterface_Bar$Results>,
+    $.Method<TestInterface_Baz$Params, TestInterface_Baz$Results>
+  ] = [
+    {
+      ParamsClass: TestInterface_Foo$Params,
+      ResultsClass: TestInterface_Foo$Results,
+      interfaceId: TestInterface$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestInterface",
+      methodName: "foo"
+    },
+    {
+      ParamsClass: TestInterface_Bar$Params,
+      ResultsClass: TestInterface_Bar$Results,
+      interfaceId: TestInterface$Client.interfaceId,
+      methodId: 1,
+      interfaceName: "test/fixtures/test.capnp:TestInterface",
+      methodName: "bar"
+    },
+    {
+      ParamsClass: TestInterface_Baz$Params,
+      ResultsClass: TestInterface_Baz$Results,
+      interfaceId: TestInterface$Client.interfaceId,
+      methodId: 2,
+      interfaceName: "test/fixtures/test.capnp:TestInterface",
+      methodName: "baz"
+    }
+  ];
+  foo(paramsFunc?: (params: TestInterface_Foo$Params) => void): TestInterface_Foo$Results$Promise {
+    const answer = this.client.call({
+      method: TestInterface$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestInterface_Foo$Results, answer);
+    return new TestInterface_Foo$Results$Promise(pipeline);
+  }
+  bar(paramsFunc?: (params: TestInterface_Bar$Params) => void): TestInterface_Bar$Results$Promise {
+    const answer = this.client.call({
+      method: TestInterface$Client.methods[1],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestInterface_Bar$Results, answer);
+    return new TestInterface_Bar$Results$Promise(pipeline);
+  }
+  baz(paramsFunc?: (params: TestInterface_Baz$Params) => void): TestInterface_Baz$Results$Promise {
+    const answer = this.client.call({
+      method: TestInterface$Client.methods[2],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestInterface_Baz$Results, answer);
+    return new TestInterface_Baz$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestInterface$Client.interfaceId, TestInterface$Client);
+export interface TestInterface$Server$Target {
+  foo(params: TestInterface_Foo$Params, results: TestInterface_Foo$Results): Promise<void>;
+  bar(params: TestInterface_Bar$Params, results: TestInterface_Bar$Results): Promise<void>;
+  baz(params: TestInterface_Baz$Params, results: TestInterface_Baz$Results): Promise<void>;
+}
+export class TestInterface$Server extends $.Server {
+  readonly target: TestInterface$Server$Target;
+  constructor(target: TestInterface$Server$Target) {
+    super(target, [
+      {
+        ...TestInterface$Client.methods[0],
+        impl: target.foo
+      },
+      {
+        ...TestInterface$Client.methods[1],
+        impl: target.bar
+      },
+      {
+        ...TestInterface$Client.methods[2],
+        impl: target.baz
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestInterface$Client { return new TestInterface$Client(this); }
+}
+export class TestInterface extends $.Interface {
+  static readonly Client = TestInterface$Client;
+  static readonly Server = TestInterface$Server;
   static readonly _capnp = {
     displayName: "TestInterface",
     id: "88eb12a0e0af92b2",
@@ -4658,7 +5225,164 @@ export class TestInterface extends $.Struct {
     return "TestInterface_" + super.toString();
   }
 }
-export class TestExtends extends $.Struct {
+export class TestExtends_Qux$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "qux$Params",
+    id: "83a4bc5471363f17",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestExtends_Qux$Params_" + super.toString();
+  }
+}
+export class TestExtends_Qux$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "qux$Results",
+    id: "8e4b3d1a3e2753dd",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestExtends_Qux$Results_" + super.toString();
+  }
+}
+export class TestExtends_Qux$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestExtends_Qux$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestExtends_Qux$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestExtends_Qux$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestExtends_Corge$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "corge$Results",
+    id: "acf67532a7e7bad9",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestExtends_Corge$Results_" + super.toString();
+  }
+}
+export class TestExtends_Corge$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestExtends_Corge$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestExtends_Corge$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestExtends_Corge$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestExtends_Grault$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "grault$Params",
+    id: "f3b834e851ea8af6",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestExtends_Grault$Params_" + super.toString();
+  }
+}
+export class TestAllTypes$Promise {
+  pipeline: $.Pipeline<any, any, TestAllTypes>;
+  constructor(pipeline: $.Pipeline<any, any, TestAllTypes>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestAllTypes> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestExtends$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xe4e9bac98670b748");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestExtends_Qux$Params, TestExtends_Qux$Results>,
+    $.Method<TestAllTypes, TestExtends_Corge$Results>,
+    $.Method<TestExtends_Grault$Params, TestAllTypes>
+  ] = [
+    {
+      ParamsClass: TestExtends_Qux$Params,
+      ResultsClass: TestExtends_Qux$Results,
+      interfaceId: TestExtends$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestExtends",
+      methodName: "qux"
+    },
+    {
+      ParamsClass: TestAllTypes,
+      ResultsClass: TestExtends_Corge$Results,
+      interfaceId: TestExtends$Client.interfaceId,
+      methodId: 1,
+      interfaceName: "test/fixtures/test.capnp:TestExtends",
+      methodName: "corge"
+    },
+    {
+      ParamsClass: TestExtends_Grault$Params,
+      ResultsClass: TestAllTypes,
+      interfaceId: TestExtends$Client.interfaceId,
+      methodId: 2,
+      interfaceName: "test/fixtures/test.capnp:TestExtends",
+      methodName: "grault"
+    }
+  ];
+  qux(paramsFunc?: (params: TestExtends_Qux$Params) => void): TestExtends_Qux$Results$Promise {
+    const answer = this.client.call({
+      method: TestExtends$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestExtends_Qux$Results, answer);
+    return new TestExtends_Qux$Results$Promise(pipeline);
+  }
+  corge(paramsFunc?: (params: TestAllTypes) => void): TestExtends_Corge$Results$Promise {
+    const answer = this.client.call({
+      method: TestExtends$Client.methods[1],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestExtends_Corge$Results, answer);
+    return new TestExtends_Corge$Results$Promise(pipeline);
+  }
+  grault(paramsFunc?: (params: TestExtends_Grault$Params) => void): TestAllTypes$Promise {
+    const answer = this.client.call({
+      method: TestExtends$Client.methods[2],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestAllTypes, answer);
+    return new TestAllTypes$Promise(pipeline);
+  }
+}
+$.Registry.register(TestExtends$Client.interfaceId, TestExtends$Client);
+export interface TestExtends$Server$Target {
+  qux(params: TestExtends_Qux$Params, results: TestExtends_Qux$Results): Promise<void>;
+  corge(params: TestAllTypes, results: TestExtends_Corge$Results): Promise<void>;
+  grault(params: TestExtends_Grault$Params, results: TestAllTypes): Promise<void>;
+}
+export class TestExtends$Server extends $.Server {
+  readonly target: TestExtends$Server$Target;
+  constructor(target: TestExtends$Server$Target) {
+    super(target, [
+      {
+        ...TestExtends$Client.methods[0],
+        impl: target.qux
+      },
+      {
+        ...TestExtends$Client.methods[1],
+        impl: target.corge
+      },
+      {
+        ...TestExtends$Client.methods[2],
+        impl: target.grault
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestExtends$Client { return new TestExtends$Client(this); }
+}
+export class TestExtends extends $.Interface {
+  static readonly Client = TestExtends$Client;
+  static readonly Server = TestExtends$Server;
   static readonly _capnp = {
     displayName: "TestExtends",
     id: "e4e9bac98670b748",
@@ -4668,7 +5392,29 @@ export class TestExtends extends $.Struct {
     return "TestExtends_" + super.toString();
   }
 }
-export class TestExtends2 extends $.Struct {
+export class TestExtends2$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x98d7e0ef61488783");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+  ] = [];
+}
+$.Registry.register(TestExtends2$Client.interfaceId, TestExtends2$Client);
+export interface TestExtends2$Server$Target {
+}
+export class TestExtends2$Server extends $.Server {
+  readonly target: TestExtends2$Server$Target;
+  constructor(target: TestExtends2$Server$Target) {
+    super(target, []);
+    this.target = target;
+  }
+  client(): TestExtends2$Client { return new TestExtends2$Client(this); }
+}
+export class TestExtends2 extends $.Interface {
+  static readonly Client = TestExtends2$Client;
+  static readonly Server = TestExtends2$Server;
   static readonly _capnp = {
     displayName: "TestExtends2",
     id: "98d7e0ef61488783",
@@ -4684,11 +5430,11 @@ export class TestPipeline_Box extends $.Struct {
     id: "b0b29e51db0e26b1",
     size: new $.ObjectSize(0, 1)
   };
-  get cap(): $.Interface {
-    return $.Struct.getPointerAs(0, $.Interface, this);
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
   }
-  set cap(value: $.Interface) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
   }
   toString(): string {
     return "TestPipeline_Box_" + super.toString();
@@ -4719,9 +5465,306 @@ export class TestPipeline_AnyBox extends $.Struct {
     return "TestPipeline_AnyBox_" + super.toString();
   }
 }
-export class TestPipeline extends $.Struct {
+export class TestPipeline_GetCap$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getCap$Params",
+    id: "c7e8df5096257034",
+    size: new $.ObjectSize(8, 1)
+  };
+  get n(): number {
+    return $.Struct.getUint32(0, this);
+  }
+  set n(value: number) {
+    $.Struct.setUint32(0, value, this);
+  }
+  get inCap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set inCap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestPipeline_GetCap$Params_" + super.toString();
+  }
+}
+export class TestPipeline_GetCap$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getCap$Results",
+    id: "b2442a9e0ba28fdf",
+    size: new $.ObjectSize(0, 2)
+  };
+  get s(): string {
+    return $.Struct.getText(0, this);
+  }
+  set s(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  adoptOutBox(value: $.Orphan<TestPipeline_Box>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+  }
+  disownOutBox(): $.Orphan<TestPipeline_Box> {
+    return $.Struct.disown(this.outBox);
+  }
+  get outBox(): TestPipeline_Box {
+    return $.Struct.getStruct(1, TestPipeline_Box, this);
+  }
+  hasOutBox(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
+  }
+  initOutBox(): TestPipeline_Box {
+    return $.Struct.initStructAt(1, TestPipeline_Box, this);
+  }
+  set outBox(value: TestPipeline_Box) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  }
+  toString(): string {
+    return "TestPipeline_GetCap$Results_" + super.toString();
+  }
+}
+export class TestPipeline_GetCap$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestPipeline_GetCap$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestPipeline_GetCap$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestPipeline_GetCap$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestPipeline_TestPointers$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "testPointers$Params",
+    id: "a604ee63cf37819f",
+    size: new $.ObjectSize(0, 3)
+  };
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  adoptObj(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+  }
+  disownObj(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.obj);
+  }
+  get obj(): $.Pointer {
+    return $.Struct.getPointer(1, this);
+  }
+  hasObj(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
+  }
+  set obj(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  }
+  adoptList(value: $.Orphan<$.List<TestInterface>>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+  }
+  disownList(): $.Orphan<$.List<TestInterface>> {
+    return $.Struct.disown(this.list);
+  }
+  get list(): $.List<TestInterface> {
+    return $.Struct.getList(2, $.InterfaceList, this);
+  }
+  hasList(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(2, this));
+  }
+  initList(length: number): $.List<TestInterface> {
+    return $.Struct.initList(2, $.InterfaceList, length, this);
+  }
+  set list(value: $.List<TestInterface>) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+  }
+  toString(): string {
+    return "TestPipeline_TestPointers$Params_" + super.toString();
+  }
+}
+export class TestPipeline_TestPointers$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "testPointers$Results",
+    id: "8eda54756c6070d6",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestPipeline_TestPointers$Results_" + super.toString();
+  }
+}
+export class TestPipeline_TestPointers$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestPipeline_TestPointers$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestPipeline_TestPointers$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestPipeline_TestPointers$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestPipeline_GetAnyCap$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getAnyCap$Params",
+    id: "f8e36b53ab093d4e",
+    size: new $.ObjectSize(8, 1)
+  };
+  get n(): number {
+    return $.Struct.getUint32(0, this);
+  }
+  set n(value: number) {
+    $.Struct.setUint32(0, value, this);
+  }
+  adoptInCap(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownInCap(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.inCap);
+  }
+  get inCap(): $.Pointer {
+    return $.Struct.getPointer(0, this);
+  }
+  hasInCap(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
+  }
+  set inCap(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestPipeline_GetAnyCap$Params_" + super.toString();
+  }
+}
+export class TestPipeline_GetAnyCap$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getAnyCap$Results",
+    id: "bf44b4c94c26ef79",
+    size: new $.ObjectSize(0, 2)
+  };
+  get s(): string {
+    return $.Struct.getText(0, this);
+  }
+  set s(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  adoptOutBox(value: $.Orphan<TestPipeline_AnyBox>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+  }
+  disownOutBox(): $.Orphan<TestPipeline_AnyBox> {
+    return $.Struct.disown(this.outBox);
+  }
+  get outBox(): TestPipeline_AnyBox {
+    return $.Struct.getStruct(1, TestPipeline_AnyBox, this);
+  }
+  hasOutBox(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(1, this));
+  }
+  initOutBox(): TestPipeline_AnyBox {
+    return $.Struct.initStructAt(1, TestPipeline_AnyBox, this);
+  }
+  set outBox(value: TestPipeline_AnyBox) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  }
+  toString(): string {
+    return "TestPipeline_GetAnyCap$Results_" + super.toString();
+  }
+}
+export class TestPipeline_GetAnyCap$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestPipeline_GetAnyCap$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestPipeline_GetAnyCap$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestPipeline_GetAnyCap$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestPipeline$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xa5a404caa61d4cd0");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestPipeline_GetCap$Params, TestPipeline_GetCap$Results>,
+    $.Method<TestPipeline_TestPointers$Params, TestPipeline_TestPointers$Results>,
+    $.Method<TestPipeline_GetAnyCap$Params, TestPipeline_GetAnyCap$Results>
+  ] = [
+    {
+      ParamsClass: TestPipeline_GetCap$Params,
+      ResultsClass: TestPipeline_GetCap$Results,
+      interfaceId: TestPipeline$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestPipeline",
+      methodName: "getCap"
+    },
+    {
+      ParamsClass: TestPipeline_TestPointers$Params,
+      ResultsClass: TestPipeline_TestPointers$Results,
+      interfaceId: TestPipeline$Client.interfaceId,
+      methodId: 1,
+      interfaceName: "test/fixtures/test.capnp:TestPipeline",
+      methodName: "testPointers"
+    },
+    {
+      ParamsClass: TestPipeline_GetAnyCap$Params,
+      ResultsClass: TestPipeline_GetAnyCap$Results,
+      interfaceId: TestPipeline$Client.interfaceId,
+      methodId: 2,
+      interfaceName: "test/fixtures/test.capnp:TestPipeline",
+      methodName: "getAnyCap"
+    }
+  ];
+  getCap(paramsFunc?: (params: TestPipeline_GetCap$Params) => void): TestPipeline_GetCap$Results$Promise {
+    const answer = this.client.call({
+      method: TestPipeline$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestPipeline_GetCap$Results, answer);
+    return new TestPipeline_GetCap$Results$Promise(pipeline);
+  }
+  testPointers(paramsFunc?: (params: TestPipeline_TestPointers$Params) => void): TestPipeline_TestPointers$Results$Promise {
+    const answer = this.client.call({
+      method: TestPipeline$Client.methods[1],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestPipeline_TestPointers$Results, answer);
+    return new TestPipeline_TestPointers$Results$Promise(pipeline);
+  }
+  getAnyCap(paramsFunc?: (params: TestPipeline_GetAnyCap$Params) => void): TestPipeline_GetAnyCap$Results$Promise {
+    const answer = this.client.call({
+      method: TestPipeline$Client.methods[2],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestPipeline_GetAnyCap$Results, answer);
+    return new TestPipeline_GetAnyCap$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestPipeline$Client.interfaceId, TestPipeline$Client);
+export interface TestPipeline$Server$Target {
+  getCap(params: TestPipeline_GetCap$Params, results: TestPipeline_GetCap$Results): Promise<void>;
+  testPointers(params: TestPipeline_TestPointers$Params, results: TestPipeline_TestPointers$Results): Promise<void>;
+  getAnyCap(params: TestPipeline_GetAnyCap$Params, results: TestPipeline_GetAnyCap$Results): Promise<void>;
+}
+export class TestPipeline$Server extends $.Server {
+  readonly target: TestPipeline$Server$Target;
+  constructor(target: TestPipeline$Server$Target) {
+    super(target, [
+      {
+        ...TestPipeline$Client.methods[0],
+        impl: target.getCap
+      },
+      {
+        ...TestPipeline$Client.methods[1],
+        impl: target.testPointers
+      },
+      {
+        ...TestPipeline$Client.methods[2],
+        impl: target.getAnyCap
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestPipeline$Client { return new TestPipeline$Client(this); }
+}
+export class TestPipeline extends $.Interface {
   static readonly Box = TestPipeline_Box;
   static readonly AnyBox = TestPipeline_AnyBox;
+  static readonly Client = TestPipeline$Client;
+  static readonly Server = TestPipeline$Server;
   static readonly _capnp = {
     displayName: "TestPipeline",
     id: "a5a404caa61d4cd0",
@@ -4731,7 +5774,94 @@ export class TestPipeline extends $.Struct {
     return "TestPipeline_" + super.toString();
   }
 }
-export class TestCallOrder extends $.Struct {
+export class TestCallOrder_GetCallSequence$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getCallSequence$Params",
+    id: "8f1e8cd56ceb74dc",
+    size: new $.ObjectSize(8, 0)
+  };
+  get expected(): number {
+    return $.Struct.getUint32(0, this);
+  }
+  set expected(value: number) {
+    $.Struct.setUint32(0, value, this);
+  }
+  toString(): string {
+    return "TestCallOrder_GetCallSequence$Params_" + super.toString();
+  }
+}
+export class TestCallOrder_GetCallSequence$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getCallSequence$Results",
+    id: "dedbb6bf3810eab7",
+    size: new $.ObjectSize(8, 0)
+  };
+  get n(): number {
+    return $.Struct.getUint32(0, this);
+  }
+  set n(value: number) {
+    $.Struct.setUint32(0, value, this);
+  }
+  toString(): string {
+    return "TestCallOrder_GetCallSequence$Results_" + super.toString();
+  }
+}
+export class TestCallOrder_GetCallSequence$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestCallOrder_GetCallSequence$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestCallOrder_GetCallSequence$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestCallOrder_GetCallSequence$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestCallOrder$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xa0e77035bdff0051");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestCallOrder_GetCallSequence$Params, TestCallOrder_GetCallSequence$Results>
+  ] = [
+    {
+      ParamsClass: TestCallOrder_GetCallSequence$Params,
+      ResultsClass: TestCallOrder_GetCallSequence$Results,
+      interfaceId: TestCallOrder$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestCallOrder",
+      methodName: "getCallSequence"
+    }
+  ];
+  getCallSequence(paramsFunc?: (params: TestCallOrder_GetCallSequence$Params) => void): TestCallOrder_GetCallSequence$Results$Promise {
+    const answer = this.client.call({
+      method: TestCallOrder$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestCallOrder_GetCallSequence$Results, answer);
+    return new TestCallOrder_GetCallSequence$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestCallOrder$Client.interfaceId, TestCallOrder$Client);
+export interface TestCallOrder$Server$Target {
+  getCallSequence(params: TestCallOrder_GetCallSequence$Params, results: TestCallOrder_GetCallSequence$Results): Promise<void>;
+}
+export class TestCallOrder$Server extends $.Server {
+  readonly target: TestCallOrder$Server$Target;
+  constructor(target: TestCallOrder$Server$Target) {
+    super(target, [
+      {
+        ...TestCallOrder$Client.methods[0],
+        impl: target.getCallSequence
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestCallOrder$Client { return new TestCallOrder$Client(this); }
+}
+export class TestCallOrder extends $.Interface {
+  static readonly Client = TestCallOrder$Client;
+  static readonly Server = TestCallOrder$Server;
   static readonly _capnp = {
     displayName: "TestCallOrder",
     id: "a0e77035bdff0051",
@@ -4759,18 +5889,98 @@ export class TestTailCallee_TailResult extends $.Struct {
   set t(value: string) {
     $.Struct.setText(0, value, this);
   }
-  get c(): $.Interface {
-    return $.Struct.getPointerAs(1, $.Interface, this);
+  get c(): TestCallOrder$Client {
+    return new TestCallOrder$Client($.Struct.getInterfaceClientOrNullAt(1, this));
   }
-  set c(value: $.Interface) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  set c(value: TestCallOrder$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(1, this));
   }
   toString(): string {
     return "TestTailCallee_TailResult_" + super.toString();
   }
 }
-export class TestTailCallee extends $.Struct {
+export class TestTailCallee_Foo$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "foo$Params",
+    id: "c5e1efc325614957",
+    size: new $.ObjectSize(8, 1)
+  };
+  get i(): number {
+    return $.Struct.getInt32(0, this);
+  }
+  set i(value: number) {
+    $.Struct.setInt32(0, value, this);
+  }
+  get t(): string {
+    return $.Struct.getText(0, this);
+  }
+  set t(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  toString(): string {
+    return "TestTailCallee_Foo$Params_" + super.toString();
+  }
+}
+export class TestTailCallee_TailResult$Promise {
+  pipeline: $.Pipeline<any, any, TestTailCallee_TailResult>;
+  constructor(pipeline: $.Pipeline<any, any, TestTailCallee_TailResult>) {
+    this.pipeline = pipeline;
+  }
+  getC(): TestCallOrder$Client {
+    return new TestCallOrder$Client(this.pipeline.getPipeline(TestCallOrder, 1).client());
+  }
+  async promise(): Promise<TestTailCallee_TailResult> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestTailCallee$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xddd699207eb8e23b");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestTailCallee_Foo$Params, TestTailCallee_TailResult>
+  ] = [
+    {
+      ParamsClass: TestTailCallee_Foo$Params,
+      ResultsClass: TestTailCallee_TailResult,
+      interfaceId: TestTailCallee$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestTailCallee",
+      methodName: "foo"
+    }
+  ];
+  foo(paramsFunc?: (params: TestTailCallee_Foo$Params) => void): TestTailCallee_TailResult$Promise {
+    const answer = this.client.call({
+      method: TestTailCallee$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestTailCallee_TailResult, answer);
+    return new TestTailCallee_TailResult$Promise(pipeline);
+  }
+}
+$.Registry.register(TestTailCallee$Client.interfaceId, TestTailCallee$Client);
+export interface TestTailCallee$Server$Target {
+  foo(params: TestTailCallee_Foo$Params, results: TestTailCallee_TailResult): Promise<void>;
+}
+export class TestTailCallee$Server extends $.Server {
+  readonly target: TestTailCallee$Server$Target;
+  constructor(target: TestTailCallee$Server$Target) {
+    super(target, [
+      {
+        ...TestTailCallee$Client.methods[0],
+        impl: target.foo
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestTailCallee$Client { return new TestTailCallee$Client(this); }
+}
+export class TestTailCallee extends $.Interface {
   static readonly TailResult = TestTailCallee_TailResult;
+  static readonly Client = TestTailCallee$Client;
+  static readonly Server = TestTailCallee$Server;
   static readonly _capnp = {
     displayName: "TestTailCallee",
     id: "ddd699207eb8e23b",
@@ -4780,7 +5990,75 @@ export class TestTailCallee extends $.Struct {
     return "TestTailCallee_" + super.toString();
   }
 }
-export class TestTailCaller extends $.Struct {
+export class TestTailCaller_Foo$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "foo$Params",
+    id: "b07a279515dc8ac5",
+    size: new $.ObjectSize(8, 1)
+  };
+  get i(): number {
+    return $.Struct.getInt32(0, this);
+  }
+  set i(value: number) {
+    $.Struct.setInt32(0, value, this);
+  }
+  get callee(): TestTailCallee$Client {
+    return new TestTailCallee$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set callee(value: TestTailCallee$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestTailCaller_Foo$Params_" + super.toString();
+  }
+}
+export class TestTailCaller$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x870bf40110ce3035");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestTailCaller_Foo$Params, TestTailCallee_TailResult>
+  ] = [
+    {
+      ParamsClass: TestTailCaller_Foo$Params,
+      ResultsClass: TestTailCallee_TailResult,
+      interfaceId: TestTailCaller$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestTailCaller",
+      methodName: "foo"
+    }
+  ];
+  foo(paramsFunc?: (params: TestTailCaller_Foo$Params) => void): TestTailCallee_TailResult$Promise {
+    const answer = this.client.call({
+      method: TestTailCaller$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestTailCallee_TailResult, answer);
+    return new TestTailCallee_TailResult$Promise(pipeline);
+  }
+}
+$.Registry.register(TestTailCaller$Client.interfaceId, TestTailCaller$Client);
+export interface TestTailCaller$Server$Target {
+  foo(params: TestTailCaller_Foo$Params, results: TestTailCallee_TailResult): Promise<void>;
+}
+export class TestTailCaller$Server extends $.Server {
+  readonly target: TestTailCaller$Server$Target;
+  constructor(target: TestTailCaller$Server$Target) {
+    super(target, [
+      {
+        ...TestTailCaller$Client.methods[0],
+        impl: target.foo
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestTailCaller$Client { return new TestTailCaller$Client(this); }
+}
+export class TestTailCaller extends $.Interface {
+  static readonly Client = TestTailCaller$Client;
+  static readonly Server = TestTailCaller$Server;
   static readonly _capnp = {
     displayName: "TestTailCaller",
     id: "870bf40110ce3035",
@@ -4790,7 +6068,29 @@ export class TestTailCaller extends $.Struct {
     return "TestTailCaller_" + super.toString();
   }
 }
-export class TestHandle extends $.Struct {
+export class TestHandle$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xa38e5efe41e53a15");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+  ] = [];
+}
+$.Registry.register(TestHandle$Client.interfaceId, TestHandle$Client);
+export interface TestHandle$Server$Target {
+}
+export class TestHandle$Server extends $.Server {
+  readonly target: TestHandle$Server$Target;
+  constructor(target: TestHandle$Server$Target) {
+    super(target, []);
+    this.target = target;
+  }
+  client(): TestHandle$Client { return new TestHandle$Client(this); }
+}
+export class TestHandle extends $.Interface {
+  static readonly Client = TestHandle$Client;
+  static readonly Server = TestHandle$Server;
   static readonly _capnp = {
     displayName: "TestHandle",
     id: "a38e5efe41e53a15",
@@ -4800,7 +6100,845 @@ export class TestHandle extends $.Struct {
     return "TestHandle_" + super.toString();
   }
 }
-export class TestMoreStuff extends $.Struct {
+export class TestMoreStuff_CallFoo$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callFoo$Params",
+    id: "931ba418da60f6e4",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_CallFoo$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_CallFoo$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callFoo$Results",
+    id: "9a28970beccecdd0",
+    size: new $.ObjectSize(0, 1)
+  };
+  get s(): string {
+    return $.Struct.getText(0, this);
+  }
+  set s(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  toString(): string {
+    return "TestMoreStuff_CallFoo$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_CallFoo$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_CallFoo$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_CallFoo$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_CallFoo$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_CallFooWhenResolved$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callFooWhenResolved$Params",
+    id: "fabc700c2ebe6378",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_CallFooWhenResolved$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_CallFooWhenResolved$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callFooWhenResolved$Results",
+    id: "a54ce1e9aa822f90",
+    size: new $.ObjectSize(0, 1)
+  };
+  get s(): string {
+    return $.Struct.getText(0, this);
+  }
+  set s(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  toString(): string {
+    return "TestMoreStuff_CallFooWhenResolved$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_CallFooWhenResolved$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_CallFooWhenResolved$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_CallFooWhenResolved$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_CallFooWhenResolved$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_NeverReturn$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "neverReturn$Params",
+    id: "94fe60465c95182b",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_NeverReturn$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_NeverReturn$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "neverReturn$Results",
+    id: "def4e5fa6999c5dc",
+    size: new $.ObjectSize(0, 1)
+  };
+  get capCopy(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set capCopy(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_NeverReturn$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_NeverReturn$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_NeverReturn$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_NeverReturn$Results>) {
+    this.pipeline = pipeline;
+  }
+  getCapCopy(): TestInterface$Client {
+    return new TestInterface$Client(this.pipeline.getPipeline(TestInterface, 0).client());
+  }
+  async promise(): Promise<TestMoreStuff_NeverReturn$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_Hold$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "hold$Params",
+    id: "fe7c8fbb769d8e58",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_Hold$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_Hold$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "hold$Results",
+    id: "f839fb1374d003c9",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_Hold$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_Hold$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_Hold$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_Hold$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_Hold$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_CallHeld$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callHeld$Params",
+    id: "f8c5e5ef1edf83be",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_CallHeld$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_CallHeld$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callHeld$Results",
+    id: "e59935f160ac7578",
+    size: new $.ObjectSize(0, 1)
+  };
+  get s(): string {
+    return $.Struct.getText(0, this);
+  }
+  set s(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  toString(): string {
+    return "TestMoreStuff_CallHeld$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_CallHeld$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_CallHeld$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_CallHeld$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_CallHeld$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_GetHeld$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getHeld$Params",
+    id: "feffc025fce317e3",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_GetHeld$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetHeld$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getHeld$Results",
+    id: "ef4e146185af67ce",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_GetHeld$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetHeld$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_GetHeld$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_GetHeld$Results>) {
+    this.pipeline = pipeline;
+  }
+  getCap(): TestInterface$Client {
+    return new TestInterface$Client(this.pipeline.getPipeline(TestInterface, 0).client());
+  }
+  async promise(): Promise<TestMoreStuff_GetHeld$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_Echo$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "echo$Params",
+    id: "c07526f7e2e533b9",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestCallOrder$Client {
+    return new TestCallOrder$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestCallOrder$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_Echo$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_Echo$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "echo$Results",
+    id: "a6224536593d5b92",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestCallOrder$Client {
+    return new TestCallOrder$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestCallOrder$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_Echo$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_Echo$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_Echo$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_Echo$Results>) {
+    this.pipeline = pipeline;
+  }
+  getCap(): TestCallOrder$Client {
+    return new TestCallOrder$Client(this.pipeline.getPipeline(TestCallOrder, 0).client());
+  }
+  async promise(): Promise<TestMoreStuff_Echo$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_ExpectCancel$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "expectCancel$Params",
+    id: "a1cc32d87f3edeb1",
+    size: new $.ObjectSize(0, 1)
+  };
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_ExpectCancel$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_ExpectCancel$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "expectCancel$Results",
+    id: "8a3eba1758c0916e",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_ExpectCancel$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_ExpectCancel$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_ExpectCancel$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_ExpectCancel$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_ExpectCancel$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_MethodWithDefaults$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "methodWithDefaults$Params",
+    id: "99160a25fa50fbf1",
+    size: new $.ObjectSize(8, 2),
+    defaultB: $.getUint32Mask(123),
+    defaultC: "foo"
+  };
+  get a(): string {
+    return $.Struct.getText(0, this);
+  }
+  set a(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  get b(): number {
+    return $.Struct.getUint32(0, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultB);
+  }
+  set b(value: number) {
+    $.Struct.setUint32(0, value, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultB);
+  }
+  get c(): string {
+    return $.Struct.getText(1, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultC);
+  }
+  set c(value: string) {
+    $.Struct.setText(1, value, this);
+  }
+  toString(): string {
+    return "TestMoreStuff_MethodWithDefaults$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_MethodWithDefaults$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "methodWithDefaults$Results",
+    id: "9c7e066f845a6c56",
+    size: new $.ObjectSize(0, 2),
+    defaultE: "bar"
+  };
+  get d(): string {
+    return $.Struct.getText(0, this);
+  }
+  set d(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  get e(): string {
+    return $.Struct.getText(1, this, TestMoreStuff_MethodWithDefaults$Results._capnp.defaultE);
+  }
+  set e(value: string) {
+    $.Struct.setText(1, value, this);
+  }
+  toString(): string {
+    return "TestMoreStuff_MethodWithDefaults$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_MethodWithDefaults$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_MethodWithDefaults$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_MethodWithDefaults$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_MethodWithDefaults$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_GetHandle$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getHandle$Params",
+    id: "ead024a301a092a1",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_GetHandle$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetHandle$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getHandle$Results",
+    id: "c3490d75420a1fe8",
+    size: new $.ObjectSize(0, 1)
+  };
+  get handle(): TestHandle$Client {
+    return new TestHandle$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set handle(value: TestHandle$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_GetHandle$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetHandle$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_GetHandle$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_GetHandle$Results>) {
+    this.pipeline = pipeline;
+  }
+  getHandle(): TestHandle$Client {
+    return new TestHandle$Client(this.pipeline.getPipeline(TestHandle, 0).client());
+  }
+  async promise(): Promise<TestMoreStuff_GetHandle$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_GetNull$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getNull$Params",
+    id: "d8493f0e175d61f2",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_GetNull$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetNull$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getNull$Results",
+    id: "e6955d8ef1023671",
+    size: new $.ObjectSize(0, 1)
+  };
+  get nullCap(): TestMoreStuff$Client {
+    return new TestMoreStuff$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set nullCap(value: TestMoreStuff$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_GetNull$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetNull$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_GetNull$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_GetNull$Results>) {
+    this.pipeline = pipeline;
+  }
+  getNullCap(): TestMoreStuff$Client {
+    return new TestMoreStuff$Client(this.pipeline.getPipeline(TestMoreStuff, 0).client());
+  }
+  async promise(): Promise<TestMoreStuff_GetNull$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_GetEnormousString$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getEnormousString$Params",
+    id: "805df436f55dd07a",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_GetEnormousString$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetEnormousString$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getEnormousString$Results",
+    id: "860e7512dc3925b0",
+    size: new $.ObjectSize(0, 1)
+  };
+  get str(): string {
+    return $.Struct.getText(0, this);
+  }
+  set str(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  toString(): string {
+    return "TestMoreStuff_GetEnormousString$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_GetEnormousString$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_GetEnormousString$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_GetEnormousString$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_GetEnormousString$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff_MethodWithNullDefault$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "methodWithNullDefault$Params",
+    id: "fb92899aeb0ee74f",
+    size: new $.ObjectSize(0, 2),
+    defaultB: $.readRawPointer(new Uint8Array([0x10, 0x01, 0x00, 0x00]).buffer)
+  };
+  get a(): string {
+    return $.Struct.getText(0, this);
+  }
+  set a(value: string) {
+    $.Struct.setText(0, value, this);
+  }
+  get b(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(1, this));
+  }
+  set b(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(1, this));
+  }
+  toString(): string {
+    return "TestMoreStuff_MethodWithNullDefault$Params_" + super.toString();
+  }
+}
+export class TestMoreStuff_MethodWithNullDefault$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "methodWithNullDefault$Results",
+    id: "8467348247305cf7",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMoreStuff_MethodWithNullDefault$Results_" + super.toString();
+  }
+}
+export class TestMoreStuff_MethodWithNullDefault$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMoreStuff_MethodWithNullDefault$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMoreStuff_MethodWithNullDefault$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMoreStuff_MethodWithNullDefault$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMoreStuff$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xddc70bf9784133cf");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestMoreStuff_CallFoo$Params, TestMoreStuff_CallFoo$Results>,
+    $.Method<TestMoreStuff_CallFooWhenResolved$Params, TestMoreStuff_CallFooWhenResolved$Results>,
+    $.Method<TestMoreStuff_NeverReturn$Params, TestMoreStuff_NeverReturn$Results>,
+    $.Method<TestMoreStuff_Hold$Params, TestMoreStuff_Hold$Results>,
+    $.Method<TestMoreStuff_CallHeld$Params, TestMoreStuff_CallHeld$Results>,
+    $.Method<TestMoreStuff_GetHeld$Params, TestMoreStuff_GetHeld$Results>,
+    $.Method<TestMoreStuff_Echo$Params, TestMoreStuff_Echo$Results>,
+    $.Method<TestMoreStuff_ExpectCancel$Params, TestMoreStuff_ExpectCancel$Results>,
+    $.Method<TestMoreStuff_MethodWithDefaults$Params, TestMoreStuff_MethodWithDefaults$Results>,
+    $.Method<TestMoreStuff_GetHandle$Params, TestMoreStuff_GetHandle$Results>,
+    $.Method<TestMoreStuff_GetNull$Params, TestMoreStuff_GetNull$Results>,
+    $.Method<TestMoreStuff_GetEnormousString$Params, TestMoreStuff_GetEnormousString$Results>,
+    $.Method<TestMoreStuff_MethodWithNullDefault$Params, TestMoreStuff_MethodWithNullDefault$Results>
+  ] = [
+    {
+      ParamsClass: TestMoreStuff_CallFoo$Params,
+      ResultsClass: TestMoreStuff_CallFoo$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "callFoo"
+    },
+    {
+      ParamsClass: TestMoreStuff_CallFooWhenResolved$Params,
+      ResultsClass: TestMoreStuff_CallFooWhenResolved$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 1,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "callFooWhenResolved"
+    },
+    {
+      ParamsClass: TestMoreStuff_NeverReturn$Params,
+      ResultsClass: TestMoreStuff_NeverReturn$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 2,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "neverReturn"
+    },
+    {
+      ParamsClass: TestMoreStuff_Hold$Params,
+      ResultsClass: TestMoreStuff_Hold$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 3,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "hold"
+    },
+    {
+      ParamsClass: TestMoreStuff_CallHeld$Params,
+      ResultsClass: TestMoreStuff_CallHeld$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 4,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "callHeld"
+    },
+    {
+      ParamsClass: TestMoreStuff_GetHeld$Params,
+      ResultsClass: TestMoreStuff_GetHeld$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 5,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "getHeld"
+    },
+    {
+      ParamsClass: TestMoreStuff_Echo$Params,
+      ResultsClass: TestMoreStuff_Echo$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 6,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "echo"
+    },
+    {
+      ParamsClass: TestMoreStuff_ExpectCancel$Params,
+      ResultsClass: TestMoreStuff_ExpectCancel$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 7,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "expectCancel"
+    },
+    {
+      ParamsClass: TestMoreStuff_MethodWithDefaults$Params,
+      ResultsClass: TestMoreStuff_MethodWithDefaults$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 8,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "methodWithDefaults"
+    },
+    {
+      ParamsClass: TestMoreStuff_GetHandle$Params,
+      ResultsClass: TestMoreStuff_GetHandle$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 9,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "getHandle"
+    },
+    {
+      ParamsClass: TestMoreStuff_GetNull$Params,
+      ResultsClass: TestMoreStuff_GetNull$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 10,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "getNull"
+    },
+    {
+      ParamsClass: TestMoreStuff_GetEnormousString$Params,
+      ResultsClass: TestMoreStuff_GetEnormousString$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 11,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "getEnormousString"
+    },
+    {
+      ParamsClass: TestMoreStuff_MethodWithNullDefault$Params,
+      ResultsClass: TestMoreStuff_MethodWithNullDefault$Results,
+      interfaceId: TestMoreStuff$Client.interfaceId,
+      methodId: 12,
+      interfaceName: "test/fixtures/test.capnp:TestMoreStuff",
+      methodName: "methodWithNullDefault"
+    }
+  ];
+  callFoo(paramsFunc?: (params: TestMoreStuff_CallFoo$Params) => void): TestMoreStuff_CallFoo$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_CallFoo$Results, answer);
+    return new TestMoreStuff_CallFoo$Results$Promise(pipeline);
+  }
+  callFooWhenResolved(paramsFunc?: (params: TestMoreStuff_CallFooWhenResolved$Params) => void): TestMoreStuff_CallFooWhenResolved$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[1],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_CallFooWhenResolved$Results, answer);
+    return new TestMoreStuff_CallFooWhenResolved$Results$Promise(pipeline);
+  }
+  neverReturn(paramsFunc?: (params: TestMoreStuff_NeverReturn$Params) => void): TestMoreStuff_NeverReturn$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[2],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_NeverReturn$Results, answer);
+    return new TestMoreStuff_NeverReturn$Results$Promise(pipeline);
+  }
+  hold(paramsFunc?: (params: TestMoreStuff_Hold$Params) => void): TestMoreStuff_Hold$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[3],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_Hold$Results, answer);
+    return new TestMoreStuff_Hold$Results$Promise(pipeline);
+  }
+  callHeld(paramsFunc?: (params: TestMoreStuff_CallHeld$Params) => void): TestMoreStuff_CallHeld$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[4],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_CallHeld$Results, answer);
+    return new TestMoreStuff_CallHeld$Results$Promise(pipeline);
+  }
+  getHeld(paramsFunc?: (params: TestMoreStuff_GetHeld$Params) => void): TestMoreStuff_GetHeld$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[5],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_GetHeld$Results, answer);
+    return new TestMoreStuff_GetHeld$Results$Promise(pipeline);
+  }
+  echo(paramsFunc?: (params: TestMoreStuff_Echo$Params) => void): TestMoreStuff_Echo$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[6],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_Echo$Results, answer);
+    return new TestMoreStuff_Echo$Results$Promise(pipeline);
+  }
+  expectCancel(paramsFunc?: (params: TestMoreStuff_ExpectCancel$Params) => void): TestMoreStuff_ExpectCancel$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[7],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_ExpectCancel$Results, answer);
+    return new TestMoreStuff_ExpectCancel$Results$Promise(pipeline);
+  }
+  methodWithDefaults(paramsFunc?: (params: TestMoreStuff_MethodWithDefaults$Params) => void): TestMoreStuff_MethodWithDefaults$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[8],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_MethodWithDefaults$Results, answer);
+    return new TestMoreStuff_MethodWithDefaults$Results$Promise(pipeline);
+  }
+  getHandle(paramsFunc?: (params: TestMoreStuff_GetHandle$Params) => void): TestMoreStuff_GetHandle$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[9],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_GetHandle$Results, answer);
+    return new TestMoreStuff_GetHandle$Results$Promise(pipeline);
+  }
+  getNull(paramsFunc?: (params: TestMoreStuff_GetNull$Params) => void): TestMoreStuff_GetNull$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[10],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_GetNull$Results, answer);
+    return new TestMoreStuff_GetNull$Results$Promise(pipeline);
+  }
+  getEnormousString(paramsFunc?: (params: TestMoreStuff_GetEnormousString$Params) => void): TestMoreStuff_GetEnormousString$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[11],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_GetEnormousString$Results, answer);
+    return new TestMoreStuff_GetEnormousString$Results$Promise(pipeline);
+  }
+  methodWithNullDefault(paramsFunc?: (params: TestMoreStuff_MethodWithNullDefault$Params) => void): TestMoreStuff_MethodWithNullDefault$Results$Promise {
+    const answer = this.client.call({
+      method: TestMoreStuff$Client.methods[12],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMoreStuff_MethodWithNullDefault$Results, answer);
+    return new TestMoreStuff_MethodWithNullDefault$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestMoreStuff$Client.interfaceId, TestMoreStuff$Client);
+export interface TestMoreStuff$Server$Target {
+  callFoo(params: TestMoreStuff_CallFoo$Params, results: TestMoreStuff_CallFoo$Results): Promise<void>;
+  callFooWhenResolved(params: TestMoreStuff_CallFooWhenResolved$Params, results: TestMoreStuff_CallFooWhenResolved$Results): Promise<void>;
+  neverReturn(params: TestMoreStuff_NeverReturn$Params, results: TestMoreStuff_NeverReturn$Results): Promise<void>;
+  hold(params: TestMoreStuff_Hold$Params, results: TestMoreStuff_Hold$Results): Promise<void>;
+  callHeld(params: TestMoreStuff_CallHeld$Params, results: TestMoreStuff_CallHeld$Results): Promise<void>;
+  getHeld(params: TestMoreStuff_GetHeld$Params, results: TestMoreStuff_GetHeld$Results): Promise<void>;
+  echo(params: TestMoreStuff_Echo$Params, results: TestMoreStuff_Echo$Results): Promise<void>;
+  expectCancel(params: TestMoreStuff_ExpectCancel$Params, results: TestMoreStuff_ExpectCancel$Results): Promise<void>;
+  methodWithDefaults(params: TestMoreStuff_MethodWithDefaults$Params, results: TestMoreStuff_MethodWithDefaults$Results): Promise<void>;
+  getHandle(params: TestMoreStuff_GetHandle$Params, results: TestMoreStuff_GetHandle$Results): Promise<void>;
+  getNull(params: TestMoreStuff_GetNull$Params, results: TestMoreStuff_GetNull$Results): Promise<void>;
+  getEnormousString(params: TestMoreStuff_GetEnormousString$Params, results: TestMoreStuff_GetEnormousString$Results): Promise<void>;
+  methodWithNullDefault(params: TestMoreStuff_MethodWithNullDefault$Params, results: TestMoreStuff_MethodWithNullDefault$Results): Promise<void>;
+}
+export class TestMoreStuff$Server extends $.Server {
+  readonly target: TestMoreStuff$Server$Target;
+  constructor(target: TestMoreStuff$Server$Target) {
+    super(target, [
+      {
+        ...TestMoreStuff$Client.methods[0],
+        impl: target.callFoo
+      },
+      {
+        ...TestMoreStuff$Client.methods[1],
+        impl: target.callFooWhenResolved
+      },
+      {
+        ...TestMoreStuff$Client.methods[2],
+        impl: target.neverReturn
+      },
+      {
+        ...TestMoreStuff$Client.methods[3],
+        impl: target.hold
+      },
+      {
+        ...TestMoreStuff$Client.methods[4],
+        impl: target.callHeld
+      },
+      {
+        ...TestMoreStuff$Client.methods[5],
+        impl: target.getHeld
+      },
+      {
+        ...TestMoreStuff$Client.methods[6],
+        impl: target.echo
+      },
+      {
+        ...TestMoreStuff$Client.methods[7],
+        impl: target.expectCancel
+      },
+      {
+        ...TestMoreStuff$Client.methods[8],
+        impl: target.methodWithDefaults
+      },
+      {
+        ...TestMoreStuff$Client.methods[9],
+        impl: target.getHandle
+      },
+      {
+        ...TestMoreStuff$Client.methods[10],
+        impl: target.getNull
+      },
+      {
+        ...TestMoreStuff$Client.methods[11],
+        impl: target.getEnormousString
+      },
+      {
+        ...TestMoreStuff$Client.methods[12],
+        impl: target.methodWithNullDefault
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestMoreStuff$Client { return new TestMoreStuff$Client(this); }
+}
+export class TestMoreStuff extends $.Interface {
+  static readonly Client = TestMoreStuff$Client;
+  static readonly Server = TestMoreStuff$Server;
   static readonly _capnp = {
     displayName: "TestMoreStuff",
     id: "ddc70bf9784133cf",
@@ -4810,14 +6948,14 @@ export class TestMoreStuff extends $.Struct {
     return "TestMoreStuff_" + super.toString();
   }
 }
-export class TestMembrane_Thing extends $.Struct {
+export class TestMembrane_Thing_PassThrough$Params extends $.Struct {
   static readonly _capnp = {
-    displayName: "Thing",
-    id: "9352e4e41f173917",
+    displayName: "passThrough$Params",
+    id: "ff9bdcd05085d786",
     size: new $.ObjectSize(0, 0)
   };
   toString(): string {
-    return "TestMembrane_Thing_" + super.toString();
+    return "TestMembrane_Thing_PassThrough$Params_" + super.toString();
   }
 }
 export class TestMembrane_Result extends $.Struct {
@@ -4836,9 +6974,344 @@ export class TestMembrane_Result extends $.Struct {
     return "TestMembrane_Result_" + super.toString();
   }
 }
-export class TestMembrane extends $.Struct {
+export class TestMembrane_Result$Promise {
+  pipeline: $.Pipeline<any, any, TestMembrane_Result>;
+  constructor(pipeline: $.Pipeline<any, any, TestMembrane_Result>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestMembrane_Result> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMembrane_Thing_Intercept$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "intercept$Params",
+    id: "ee94bed3615ee745",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMembrane_Thing_Intercept$Params_" + super.toString();
+  }
+}
+export class TestMembrane_Thing$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x9352e4e41f173917");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestMembrane_Thing_PassThrough$Params, TestMembrane_Result>,
+    $.Method<TestMembrane_Thing_Intercept$Params, TestMembrane_Result>
+  ] = [
+    {
+      ParamsClass: TestMembrane_Thing_PassThrough$Params,
+      ResultsClass: TestMembrane_Result,
+      interfaceId: TestMembrane_Thing$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestMembrane.Thing",
+      methodName: "passThrough"
+    },
+    {
+      ParamsClass: TestMembrane_Thing_Intercept$Params,
+      ResultsClass: TestMembrane_Result,
+      interfaceId: TestMembrane_Thing$Client.interfaceId,
+      methodId: 1,
+      interfaceName: "test/fixtures/test.capnp:TestMembrane.Thing",
+      methodName: "intercept"
+    }
+  ];
+  passThrough(paramsFunc?: (params: TestMembrane_Thing_PassThrough$Params) => void): TestMembrane_Result$Promise {
+    const answer = this.client.call({
+      method: TestMembrane_Thing$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMembrane_Result, answer);
+    return new TestMembrane_Result$Promise(pipeline);
+  }
+  intercept(paramsFunc?: (params: TestMembrane_Thing_Intercept$Params) => void): TestMembrane_Result$Promise {
+    const answer = this.client.call({
+      method: TestMembrane_Thing$Client.methods[1],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMembrane_Result, answer);
+    return new TestMembrane_Result$Promise(pipeline);
+  }
+}
+$.Registry.register(TestMembrane_Thing$Client.interfaceId, TestMembrane_Thing$Client);
+export interface TestMembrane_Thing$Server$Target {
+  passThrough(params: TestMembrane_Thing_PassThrough$Params, results: TestMembrane_Result): Promise<void>;
+  intercept(params: TestMembrane_Thing_Intercept$Params, results: TestMembrane_Result): Promise<void>;
+}
+export class TestMembrane_Thing$Server extends $.Server {
+  readonly target: TestMembrane_Thing$Server$Target;
+  constructor(target: TestMembrane_Thing$Server$Target) {
+    super(target, [
+      {
+        ...TestMembrane_Thing$Client.methods[0],
+        impl: target.passThrough
+      },
+      {
+        ...TestMembrane_Thing$Client.methods[1],
+        impl: target.intercept
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestMembrane_Thing$Client { return new TestMembrane_Thing$Client(this); }
+}
+export class TestMembrane_Thing extends $.Interface {
+  static readonly Client = TestMembrane_Thing$Client;
+  static readonly Server = TestMembrane_Thing$Server;
+  static readonly _capnp = {
+    displayName: "Thing",
+    id: "9352e4e41f173917",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMembrane_Thing_" + super.toString();
+  }
+}
+export class TestMembrane_MakeThing$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "makeThing$Params",
+    id: "d8ac2acc3ece6556",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestMembrane_MakeThing$Params_" + super.toString();
+  }
+}
+export class TestMembrane_MakeThing$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "makeThing$Results",
+    id: "e5d4904814ccbf29",
+    size: new $.ObjectSize(0, 1)
+  };
+  get thing(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set thing(value: TestMembrane_Thing$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMembrane_MakeThing$Results_" + super.toString();
+  }
+}
+export class TestMembrane_MakeThing$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMembrane_MakeThing$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMembrane_MakeThing$Results>) {
+    this.pipeline = pipeline;
+  }
+  getThing(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client(this.pipeline.getPipeline(TestMembrane_Thing, 0).client());
+  }
+  async promise(): Promise<TestMembrane_MakeThing$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMembrane_CallPassThrough$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callPassThrough$Params",
+    id: "945d9f634a6a29da",
+    size: new $.ObjectSize(8, 1)
+  };
+  get thing(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set thing(value: TestMembrane_Thing$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  get tailCall(): boolean {
+    return $.Struct.getBit(0, this);
+  }
+  set tailCall(value: boolean) {
+    $.Struct.setBit(0, value, this);
+  }
+  toString(): string {
+    return "TestMembrane_CallPassThrough$Params_" + super.toString();
+  }
+}
+export class TestMembrane_CallIntercept$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "callIntercept$Params",
+    id: "8749aac3375c5c71",
+    size: new $.ObjectSize(8, 1)
+  };
+  get thing(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set thing(value: TestMembrane_Thing$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  get tailCall(): boolean {
+    return $.Struct.getBit(0, this);
+  }
+  set tailCall(value: boolean) {
+    $.Struct.setBit(0, value, this);
+  }
+  toString(): string {
+    return "TestMembrane_CallIntercept$Params_" + super.toString();
+  }
+}
+export class TestMembrane_Loopback$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "loopback$Params",
+    id: "869a1b7ab34b42c9",
+    size: new $.ObjectSize(0, 1)
+  };
+  get thing(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set thing(value: TestMembrane_Thing$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMembrane_Loopback$Params_" + super.toString();
+  }
+}
+export class TestMembrane_Loopback$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "loopback$Results",
+    id: "ecd19398fd88ab5c",
+    size: new $.ObjectSize(0, 1)
+  };
+  get thing(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+  }
+  set thing(value: TestMembrane_Thing$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestMembrane_Loopback$Results_" + super.toString();
+  }
+}
+export class TestMembrane_Loopback$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestMembrane_Loopback$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestMembrane_Loopback$Results>) {
+    this.pipeline = pipeline;
+  }
+  getThing(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client(this.pipeline.getPipeline(TestMembrane_Thing, 0).client());
+  }
+  async promise(): Promise<TestMembrane_Loopback$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestMembrane$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xc07d8dcd80a69c0c");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestMembrane_MakeThing$Params, TestMembrane_MakeThing$Results>,
+    $.Method<TestMembrane_CallPassThrough$Params, TestMembrane_Result>,
+    $.Method<TestMembrane_CallIntercept$Params, TestMembrane_Result>,
+    $.Method<TestMembrane_Loopback$Params, TestMembrane_Loopback$Results>
+  ] = [
+    {
+      ParamsClass: TestMembrane_MakeThing$Params,
+      ResultsClass: TestMembrane_MakeThing$Results,
+      interfaceId: TestMembrane$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestMembrane",
+      methodName: "makeThing"
+    },
+    {
+      ParamsClass: TestMembrane_CallPassThrough$Params,
+      ResultsClass: TestMembrane_Result,
+      interfaceId: TestMembrane$Client.interfaceId,
+      methodId: 1,
+      interfaceName: "test/fixtures/test.capnp:TestMembrane",
+      methodName: "callPassThrough"
+    },
+    {
+      ParamsClass: TestMembrane_CallIntercept$Params,
+      ResultsClass: TestMembrane_Result,
+      interfaceId: TestMembrane$Client.interfaceId,
+      methodId: 2,
+      interfaceName: "test/fixtures/test.capnp:TestMembrane",
+      methodName: "callIntercept"
+    },
+    {
+      ParamsClass: TestMembrane_Loopback$Params,
+      ResultsClass: TestMembrane_Loopback$Results,
+      interfaceId: TestMembrane$Client.interfaceId,
+      methodId: 3,
+      interfaceName: "test/fixtures/test.capnp:TestMembrane",
+      methodName: "loopback"
+    }
+  ];
+  makeThing(paramsFunc?: (params: TestMembrane_MakeThing$Params) => void): TestMembrane_MakeThing$Results$Promise {
+    const answer = this.client.call({
+      method: TestMembrane$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMembrane_MakeThing$Results, answer);
+    return new TestMembrane_MakeThing$Results$Promise(pipeline);
+  }
+  callPassThrough(paramsFunc?: (params: TestMembrane_CallPassThrough$Params) => void): TestMembrane_Result$Promise {
+    const answer = this.client.call({
+      method: TestMembrane$Client.methods[1],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMembrane_Result, answer);
+    return new TestMembrane_Result$Promise(pipeline);
+  }
+  callIntercept(paramsFunc?: (params: TestMembrane_CallIntercept$Params) => void): TestMembrane_Result$Promise {
+    const answer = this.client.call({
+      method: TestMembrane$Client.methods[2],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMembrane_Result, answer);
+    return new TestMembrane_Result$Promise(pipeline);
+  }
+  loopback(paramsFunc?: (params: TestMembrane_Loopback$Params) => void): TestMembrane_Loopback$Results$Promise {
+    const answer = this.client.call({
+      method: TestMembrane$Client.methods[3],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestMembrane_Loopback$Results, answer);
+    return new TestMembrane_Loopback$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestMembrane$Client.interfaceId, TestMembrane$Client);
+export interface TestMembrane$Server$Target {
+  makeThing(params: TestMembrane_MakeThing$Params, results: TestMembrane_MakeThing$Results): Promise<void>;
+  callPassThrough(params: TestMembrane_CallPassThrough$Params, results: TestMembrane_Result): Promise<void>;
+  callIntercept(params: TestMembrane_CallIntercept$Params, results: TestMembrane_Result): Promise<void>;
+  loopback(params: TestMembrane_Loopback$Params, results: TestMembrane_Loopback$Results): Promise<void>;
+}
+export class TestMembrane$Server extends $.Server {
+  readonly target: TestMembrane$Server$Target;
+  constructor(target: TestMembrane$Server$Target) {
+    super(target, [
+      {
+        ...TestMembrane$Client.methods[0],
+        impl: target.makeThing
+      },
+      {
+        ...TestMembrane$Client.methods[1],
+        impl: target.callPassThrough
+      },
+      {
+        ...TestMembrane$Client.methods[2],
+        impl: target.callIntercept
+      },
+      {
+        ...TestMembrane$Client.methods[3],
+        impl: target.loopback
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestMembrane$Client { return new TestMembrane$Client(this); }
+}
+export class TestMembrane extends $.Interface {
   static readonly Thing = TestMembrane_Thing;
   static readonly Result = TestMembrane_Result;
+  static readonly Client = TestMembrane$Client;
+  static readonly Server = TestMembrane$Server;
   static readonly _capnp = {
     displayName: "TestMembrane",
     id: "c07d8dcd80a69c0c",
@@ -4854,28 +7327,28 @@ export class TestContainMembrane extends $.Struct {
     id: "949449ad7c11fa5c",
     size: new $.ObjectSize(0, 2)
   };
-  get cap(): $.Interface {
-    return $.Struct.getPointerAs(0, $.Interface, this);
+  get cap(): TestMembrane_Thing$Client {
+    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
   }
-  set cap(value: $.Interface) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  set cap(value: TestMembrane_Thing$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
   }
-  adoptList(value: $.Orphan<$.List<$.Interface>>): void {
+  adoptList(value: $.Orphan<$.List<TestMembrane_Thing>>): void {
     $.Struct.adopt(value, $.Struct.getPointer(1, this));
   }
-  disownList(): $.Orphan<$.List<$.Interface>> {
+  disownList(): $.Orphan<$.List<TestMembrane_Thing>> {
     return $.Struct.disown(this.list);
   }
-  get list(): $.List<$.Interface> {
+  get list(): $.List<TestMembrane_Thing> {
     return $.Struct.getList(1, $.InterfaceList, this);
   }
   hasList(): boolean {
     return !$.Struct.isNull($.Struct.getPointer(1, this));
   }
-  initList(length: number): $.List<$.Interface> {
+  initList(length: number): $.List<TestMembrane_Thing> {
     return $.Struct.initList(1, $.InterfaceList, length, this);
   }
-  set list(value: $.List<$.Interface>) {
+  set list(value: $.List<TestMembrane_Thing>) {
     $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
   }
   toString(): string {
@@ -4894,11 +7367,11 @@ export class TestTransferCap_Element extends $.Struct {
   set text(value: string) {
     $.Struct.setText(0, value, this);
   }
-  get cap(): $.Interface {
-    return $.Struct.getPointerAs(1, $.Interface, this);
+  get cap(): TestInterface$Client {
+    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(1, this));
   }
-  set cap(value: $.Interface) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+  set cap(value: TestInterface$Client) {
+    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(1, this));
   }
   toString(): string {
     return "TestTransferCap_Element_" + super.toString();
@@ -4934,7 +7407,235 @@ export class TestTransferCap extends $.Struct {
     return "TestTransferCap_" + super.toString();
   }
 }
-export class TestKeywordMethods extends $.Struct {
+export class TestKeywordMethods_Delete$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "delete$Params",
+    id: "ca3a89cdeb6bd6b7",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Delete$Params_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Delete$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "delete$Results",
+    id: "eeb5843598307592",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Delete$Results_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Delete$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestKeywordMethods_Delete$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestKeywordMethods_Delete$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestKeywordMethods_Delete$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestKeywordMethods_Class$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "class$Params",
+    id: "9cf5a8313c5db036",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Class$Params_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Class$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "class$Results",
+    id: "c0253868ac12e7d8",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Class$Results_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Class$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestKeywordMethods_Class$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestKeywordMethods_Class$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestKeywordMethods_Class$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestKeywordMethods_Void$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "void$Params",
+    id: "a4a08763833c7757",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Void$Params_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Void$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "void$Results",
+    id: "de82773089c0aeab",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Void$Results_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Void$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestKeywordMethods_Void$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestKeywordMethods_Void$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestKeywordMethods_Void$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestKeywordMethods_Return$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "return$Params",
+    id: "99817360625e8ca3",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Return$Params_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Return$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "return$Results",
+    id: "b70872e07eaa992f",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestKeywordMethods_Return$Results_" + super.toString();
+  }
+}
+export class TestKeywordMethods_Return$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestKeywordMethods_Return$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestKeywordMethods_Return$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestKeywordMethods_Return$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestKeywordMethods$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x9ae342d394247cfc");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestKeywordMethods_Delete$Params, TestKeywordMethods_Delete$Results>,
+    $.Method<TestKeywordMethods_Class$Params, TestKeywordMethods_Class$Results>,
+    $.Method<TestKeywordMethods_Void$Params, TestKeywordMethods_Void$Results>,
+    $.Method<TestKeywordMethods_Return$Params, TestKeywordMethods_Return$Results>
+  ] = [
+    {
+      ParamsClass: TestKeywordMethods_Delete$Params,
+      ResultsClass: TestKeywordMethods_Delete$Results,
+      interfaceId: TestKeywordMethods$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestKeywordMethods",
+      methodName: "delete"
+    },
+    {
+      ParamsClass: TestKeywordMethods_Class$Params,
+      ResultsClass: TestKeywordMethods_Class$Results,
+      interfaceId: TestKeywordMethods$Client.interfaceId,
+      methodId: 1,
+      interfaceName: "test/fixtures/test.capnp:TestKeywordMethods",
+      methodName: "class"
+    },
+    {
+      ParamsClass: TestKeywordMethods_Void$Params,
+      ResultsClass: TestKeywordMethods_Void$Results,
+      interfaceId: TestKeywordMethods$Client.interfaceId,
+      methodId: 2,
+      interfaceName: "test/fixtures/test.capnp:TestKeywordMethods",
+      methodName: "void"
+    },
+    {
+      ParamsClass: TestKeywordMethods_Return$Params,
+      ResultsClass: TestKeywordMethods_Return$Results,
+      interfaceId: TestKeywordMethods$Client.interfaceId,
+      methodId: 3,
+      interfaceName: "test/fixtures/test.capnp:TestKeywordMethods",
+      methodName: "return"
+    }
+  ];
+  delete(paramsFunc?: (params: TestKeywordMethods_Delete$Params) => void): TestKeywordMethods_Delete$Results$Promise {
+    const answer = this.client.call({
+      method: TestKeywordMethods$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestKeywordMethods_Delete$Results, answer);
+    return new TestKeywordMethods_Delete$Results$Promise(pipeline);
+  }
+  class(paramsFunc?: (params: TestKeywordMethods_Class$Params) => void): TestKeywordMethods_Class$Results$Promise {
+    const answer = this.client.call({
+      method: TestKeywordMethods$Client.methods[1],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestKeywordMethods_Class$Results, answer);
+    return new TestKeywordMethods_Class$Results$Promise(pipeline);
+  }
+  void(paramsFunc?: (params: TestKeywordMethods_Void$Params) => void): TestKeywordMethods_Void$Results$Promise {
+    const answer = this.client.call({
+      method: TestKeywordMethods$Client.methods[2],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestKeywordMethods_Void$Results, answer);
+    return new TestKeywordMethods_Void$Results$Promise(pipeline);
+  }
+  return(paramsFunc?: (params: TestKeywordMethods_Return$Params) => void): TestKeywordMethods_Return$Results$Promise {
+    const answer = this.client.call({
+      method: TestKeywordMethods$Client.methods[3],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestKeywordMethods_Return$Results, answer);
+    return new TestKeywordMethods_Return$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestKeywordMethods$Client.interfaceId, TestKeywordMethods$Client);
+export interface TestKeywordMethods$Server$Target {
+  delete(params: TestKeywordMethods_Delete$Params, results: TestKeywordMethods_Delete$Results): Promise<void>;
+  class(params: TestKeywordMethods_Class$Params, results: TestKeywordMethods_Class$Results): Promise<void>;
+  void(params: TestKeywordMethods_Void$Params, results: TestKeywordMethods_Void$Results): Promise<void>;
+  return(params: TestKeywordMethods_Return$Params, results: TestKeywordMethods_Return$Results): Promise<void>;
+}
+export class TestKeywordMethods$Server extends $.Server {
+  readonly target: TestKeywordMethods$Server$Target;
+  constructor(target: TestKeywordMethods$Server$Target) {
+    super(target, [
+      {
+        ...TestKeywordMethods$Client.methods[0],
+        impl: target.delete
+      },
+      {
+        ...TestKeywordMethods$Client.methods[1],
+        impl: target.class
+      },
+      {
+        ...TestKeywordMethods$Client.methods[2],
+        impl: target.void
+      },
+      {
+        ...TestKeywordMethods$Client.methods[3],
+        impl: target.return
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestKeywordMethods$Client { return new TestKeywordMethods$Client(this); }
+}
+export class TestKeywordMethods extends $.Interface {
+  static readonly Client = TestKeywordMethods$Client;
+  static readonly Server = TestKeywordMethods$Server;
   static readonly _capnp = {
     displayName: "TestKeywordMethods",
     id: "9ae342d394247cfc",
@@ -4944,7 +7645,97 @@ export class TestKeywordMethods extends $.Struct {
     return "TestKeywordMethods_" + super.toString();
   }
 }
-export class TestAuthenticatedBootstrap extends $.Struct {
+export class TestAuthenticatedBootstrap_GetCallerId$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getCallerId$Params",
+    id: "8ec30e2451f1cffe",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestAuthenticatedBootstrap_GetCallerId$Params_" + super.toString();
+  }
+}
+export class TestAuthenticatedBootstrap_GetCallerId$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getCallerId$Results",
+    id: "c71cf776034a3e67",
+    size: new $.ObjectSize(0, 1)
+  };
+  adoptCaller(value: $.Orphan<$.Pointer>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownCaller(): $.Orphan<$.Pointer> {
+    return $.Struct.disown(this.caller);
+  }
+  get caller(): $.Pointer {
+    return $.Struct.getPointer(0, this);
+  }
+  hasCaller(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
+  }
+  set caller(value: $.Pointer) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "TestAuthenticatedBootstrap_GetCallerId$Results_" + super.toString();
+  }
+}
+export class TestAuthenticatedBootstrap_GetCallerId$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestAuthenticatedBootstrap_GetCallerId$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestAuthenticatedBootstrap_GetCallerId$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestAuthenticatedBootstrap_GetCallerId$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestAuthenticatedBootstrap$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xea72cc77253798cd");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestAuthenticatedBootstrap_GetCallerId$Params, TestAuthenticatedBootstrap_GetCallerId$Results>
+  ] = [
+    {
+      ParamsClass: TestAuthenticatedBootstrap_GetCallerId$Params,
+      ResultsClass: TestAuthenticatedBootstrap_GetCallerId$Results,
+      interfaceId: TestAuthenticatedBootstrap$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestAuthenticatedBootstrap",
+      methodName: "getCallerId"
+    }
+  ];
+  getCallerId(paramsFunc?: (params: TestAuthenticatedBootstrap_GetCallerId$Params) => void): TestAuthenticatedBootstrap_GetCallerId$Results$Promise {
+    const answer = this.client.call({
+      method: TestAuthenticatedBootstrap$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestAuthenticatedBootstrap_GetCallerId$Results, answer);
+    return new TestAuthenticatedBootstrap_GetCallerId$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestAuthenticatedBootstrap$Client.interfaceId, TestAuthenticatedBootstrap$Client);
+export interface TestAuthenticatedBootstrap$Server$Target {
+  getCallerId(params: TestAuthenticatedBootstrap_GetCallerId$Params, results: TestAuthenticatedBootstrap_GetCallerId$Results): Promise<void>;
+}
+export class TestAuthenticatedBootstrap$Server extends $.Server {
+  readonly target: TestAuthenticatedBootstrap$Server$Target;
+  constructor(target: TestAuthenticatedBootstrap$Server$Target) {
+    super(target, [
+      {
+        ...TestAuthenticatedBootstrap$Client.methods[0],
+        impl: target.getCallerId
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestAuthenticatedBootstrap$Client { return new TestAuthenticatedBootstrap$Client(this); }
+}
+export class TestAuthenticatedBootstrap extends $.Interface {
+  static readonly Client = TestAuthenticatedBootstrap$Client;
+  static readonly Server = TestAuthenticatedBootstrap$Server;
   static readonly _capnp = {
     displayName: "TestAuthenticatedBootstrap",
     id: "ea72cc77253798cd",
@@ -5251,7 +8042,88 @@ export class TestNameAnnotation extends $.Struct {
     return $.Struct.getUint16(2, this) as TestNameAnnotation_Which;
   }
 }
-export class TestNameAnnotationInterface extends $.Struct {
+export class TestNameAnnotationInterface_BadlyNamedMethod$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "badlyNamedMethod$Params",
+    id: "c12efc3b075adfe9",
+    size: new $.ObjectSize(8, 0)
+  };
+  get badlyNamedParam(): number {
+    return $.Struct.getUint8(0, this);
+  }
+  set badlyNamedParam(value: number) {
+    $.Struct.setUint8(0, value, this);
+  }
+  toString(): string {
+    return "TestNameAnnotationInterface_BadlyNamedMethod$Params_" + super.toString();
+  }
+}
+export class TestNameAnnotationInterface_BadlyNamedMethod$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "badlyNamedMethod$Results",
+    id: "dcc3cdb4b28f6c86",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "TestNameAnnotationInterface_BadlyNamedMethod$Results_" + super.toString();
+  }
+}
+export class TestNameAnnotationInterface_BadlyNamedMethod$Results$Promise {
+  pipeline: $.Pipeline<any, any, TestNameAnnotationInterface_BadlyNamedMethod$Results>;
+  constructor(pipeline: $.Pipeline<any, any, TestNameAnnotationInterface_BadlyNamedMethod$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<TestNameAnnotationInterface_BadlyNamedMethod$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class TestNameAnnotationInterface$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0xd112a69d31ed918b");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<TestNameAnnotationInterface_BadlyNamedMethod$Params, TestNameAnnotationInterface_BadlyNamedMethod$Results>
+  ] = [
+    {
+      ParamsClass: TestNameAnnotationInterface_BadlyNamedMethod$Params,
+      ResultsClass: TestNameAnnotationInterface_BadlyNamedMethod$Results,
+      interfaceId: TestNameAnnotationInterface$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/test.capnp:TestNameAnnotationInterface",
+      methodName: "badlyNamedMethod"
+    }
+  ];
+  badlyNamedMethod(paramsFunc?: (params: TestNameAnnotationInterface_BadlyNamedMethod$Params) => void): TestNameAnnotationInterface_BadlyNamedMethod$Results$Promise {
+    const answer = this.client.call({
+      method: TestNameAnnotationInterface$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(TestNameAnnotationInterface_BadlyNamedMethod$Results, answer);
+    return new TestNameAnnotationInterface_BadlyNamedMethod$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(TestNameAnnotationInterface$Client.interfaceId, TestNameAnnotationInterface$Client);
+export interface TestNameAnnotationInterface$Server$Target {
+  badlyNamedMethod(params: TestNameAnnotationInterface_BadlyNamedMethod$Params, results: TestNameAnnotationInterface_BadlyNamedMethod$Results): Promise<void>;
+}
+export class TestNameAnnotationInterface$Server extends $.Server {
+  readonly target: TestNameAnnotationInterface$Server$Target;
+  constructor(target: TestNameAnnotationInterface$Server$Target) {
+    super(target, [
+      {
+        ...TestNameAnnotationInterface$Client.methods[0],
+        impl: target.badlyNamedMethod
+      }
+    ]);
+    this.target = target;
+  }
+  client(): TestNameAnnotationInterface$Client { return new TestNameAnnotationInterface$Client(this); }
+}
+export class TestNameAnnotationInterface extends $.Interface {
+  static readonly Client = TestNameAnnotationInterface$Client;
+  static readonly Server = TestNameAnnotationInterface$Server;
   static readonly _capnp = {
     displayName: "TestNameAnnotationInterface",
     id: "d112a69d31ed918b",

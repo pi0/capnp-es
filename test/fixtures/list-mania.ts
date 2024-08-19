@@ -170,22 +170,22 @@ export class ListMania extends $.Struct {
   set int64List(value: $.List<bigint>) {
     $.Struct.copyFrom(value, $.Struct.getPointer(8, this));
   }
-  adoptInterfaceList(value: $.Orphan<$.List<$.Interface>>): void {
+  adoptInterfaceList(value: $.Orphan<$.List<ListManiaInterface>>): void {
     $.Struct.adopt(value, $.Struct.getPointer(9, this));
   }
-  disownInterfaceList(): $.Orphan<$.List<$.Interface>> {
+  disownInterfaceList(): $.Orphan<$.List<ListManiaInterface>> {
     return $.Struct.disown(this.interfaceList);
   }
-  get interfaceList(): $.List<$.Interface> {
+  get interfaceList(): $.List<ListManiaInterface> {
     return $.Struct.getList(9, $.InterfaceList, this);
   }
   hasInterfaceList(): boolean {
     return !$.Struct.isNull($.Struct.getPointer(9, this));
   }
-  initInterfaceList(length: number): $.List<$.Interface> {
+  initInterfaceList(length: number): $.List<ListManiaInterface> {
     return $.Struct.initList(9, $.InterfaceList, length, this);
   }
-  set interfaceList(value: $.List<$.Interface>) {
+  set interfaceList(value: $.List<ListManiaInterface>) {
     $.Struct.copyFrom(value, $.Struct.getPointer(9, this));
   }
   adoptTextList(value: $.Orphan<$.List<string>>): void {
@@ -300,7 +300,100 @@ export class ListMania extends $.Struct {
     return "ListMania_" + super.toString();
   }
 }
-export class ListManiaInterface extends $.Struct {
+export class ListManiaInterface_GetListMania$Params extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getListMania$Params",
+    id: "f7bf50e8ad110566",
+    size: new $.ObjectSize(0, 0)
+  };
+  toString(): string {
+    return "ListManiaInterface_GetListMania$Params_" + super.toString();
+  }
+}
+export class ListManiaInterface_GetListMania$Results extends $.Struct {
+  static readonly _capnp = {
+    displayName: "getListMania$Results",
+    id: "e89af40dc5417fee",
+    size: new $.ObjectSize(0, 1)
+  };
+  adoptResult(value: $.Orphan<$.List<ListManiaInterface>>): void {
+    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+  }
+  disownResult(): $.Orphan<$.List<ListManiaInterface>> {
+    return $.Struct.disown(this.result);
+  }
+  get result(): $.List<ListManiaInterface> {
+    return $.Struct.getList(0, $.InterfaceList, this);
+  }
+  hasResult(): boolean {
+    return !$.Struct.isNull($.Struct.getPointer(0, this));
+  }
+  initResult(length: number): $.List<ListManiaInterface> {
+    return $.Struct.initList(0, $.InterfaceList, length, this);
+  }
+  set result(value: $.List<ListManiaInterface>) {
+    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+  }
+  toString(): string {
+    return "ListManiaInterface_GetListMania$Results_" + super.toString();
+  }
+}
+export class ListManiaInterface_GetListMania$Results$Promise {
+  pipeline: $.Pipeline<any, any, ListManiaInterface_GetListMania$Results>;
+  constructor(pipeline: $.Pipeline<any, any, ListManiaInterface_GetListMania$Results>) {
+    this.pipeline = pipeline;
+  }
+  async promise(): Promise<ListManiaInterface_GetListMania$Results> {
+    return await this.pipeline.struct();
+  }
+}
+export class ListManiaInterface$Client {
+  client: $.Client;
+  static readonly interfaceId: bigint = BigInt("0x8a94079c3c57204f");
+  constructor(client: $.Client) {
+    this.client = client;
+  }
+  static readonly methods: [
+    $.Method<ListManiaInterface_GetListMania$Params, ListManiaInterface_GetListMania$Results>
+  ] = [
+    {
+      ParamsClass: ListManiaInterface_GetListMania$Params,
+      ResultsClass: ListManiaInterface_GetListMania$Results,
+      interfaceId: ListManiaInterface$Client.interfaceId,
+      methodId: 0,
+      interfaceName: "test/fixtures/list-mania.capnp:ListManiaInterface",
+      methodName: "getListMania"
+    }
+  ];
+  getListMania(paramsFunc?: (params: ListManiaInterface_GetListMania$Params) => void): ListManiaInterface_GetListMania$Results$Promise {
+    const answer = this.client.call({
+      method: ListManiaInterface$Client.methods[0],
+      paramsFunc: paramsFunc
+    });
+    const pipeline = new $.Pipeline(ListManiaInterface_GetListMania$Results, answer);
+    return new ListManiaInterface_GetListMania$Results$Promise(pipeline);
+  }
+}
+$.Registry.register(ListManiaInterface$Client.interfaceId, ListManiaInterface$Client);
+export interface ListManiaInterface$Server$Target {
+  getListMania(params: ListManiaInterface_GetListMania$Params, results: ListManiaInterface_GetListMania$Results): Promise<void>;
+}
+export class ListManiaInterface$Server extends $.Server {
+  readonly target: ListManiaInterface$Server$Target;
+  constructor(target: ListManiaInterface$Server$Target) {
+    super(target, [
+      {
+        ...ListManiaInterface$Client.methods[0],
+        impl: target.getListMania
+      }
+    ]);
+    this.target = target;
+  }
+  client(): ListManiaInterface$Client { return new ListManiaInterface$Client(this); }
+}
+export class ListManiaInterface extends $.Interface {
+  static readonly Client = ListManiaInterface$Client;
+  static readonly Server = ListManiaInterface$Server;
   static readonly _capnp = {
     displayName: "ListManiaInterface",
     id: "8a94079c3c57204f",
