@@ -1,4 +1,4 @@
-# capnp-es
+# 🔥 capnp-es
 
 <!-- automd:badges bundlephobia codecov -->
 
@@ -9,12 +9,12 @@
 
 <!-- /automd -->
 
-> TypeScript implementation of the [Cap'n Proto](https://capnproto.org) serialization protocol.
-
 > [!WARNING]
 > This is an alpha-quality software. please use at your own risk ([project status](#status)).
 
-Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. Think JSON, except binary. Or think [Protocol Buffers](https://github.com/protocolbuffers/protobuf), except faster. Cap’n Proto was built by [Kenton Varda](https://github.com/kentonv) to be used in [Sandstorm](https://capnproto.org/faq.html#sandstorm) and is now heavily used in [Cloudflare](https://capnproto.org/faq.html#cloudflare). Start with the [Cap'n Proto Introduction](https://capnproto.org/index.html) for more detailed information on what this is about.
+TypeScript implementation of the [Cap'n Proto](https://capnproto.org) serialization protocol.
+
+[Cap’n Proto](https://capnproto.org/) is an insanely fast data interchange format and capability-based RPC system. Think JSON, except binary. Or think [Protocol Buffers](https://github.com/protocolbuffers/protobuf), except faster. Cap’n Proto was built by [Kenton Varda](https://github.com/kentonv) to be used in [Sandstorm](https://capnproto.org/faq.html#sandstorm) and is now heavily used in [Cloudflare](https://capnproto.org/faq.html#cloudflare).
 
 ## Usage
 
@@ -74,7 +74,7 @@ This project is a rework of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/ca
 - Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
 - Built-in schemas are compiled from source (compiler, compiles itself. so cool right?)
 - Use reflection (getter setters) to access structs.
-- RPC level 1
+- RPC level 1 merged from [jdiaz5513/capnp-ts#169](https://github.com/jdiaz5513/capnp-ts/pull/169).
 
 </details>
 
