@@ -9,16 +9,16 @@ const jsonUrl = new URL("data/json/data.json", import.meta.url);
 const jsonData = await readFile(jsonUrl);
 const jsonObj = JSON.parse(decoder.decode(jsonData));
 const jsonString = JSON.stringify(jsonObj);
-const jsonSerialized = serializeData(jsonObj);
+const jsonSerialized = traverseData(jsonObj);
 const jsonStrBench = {
   parse: () => JSON.parse(jsonString),
   length: () => JSON.parse(jsonString).people.length,
-  traverse: () => serializeData(JSON.parse(jsonString)),
+  traverse: () => traverseData(JSON.parse(jsonString)),
 };
 const jsonBuffBench = {
   parse: () => JSON.parse(decoder.decode(jsonData)),
   length: () => JSON.parse(decoder.decode(jsonData)).people.length,
-  traverse: () => serializeData(JSON.parse(decoder.decode(jsonData))),
+  traverse: () => traverseData(JSON.parse(decoder.decode(jsonData))),
 };
 
 // capnp-es
@@ -33,7 +33,7 @@ const capnpESBench = {
     new capnpES.Message(capnpData, false, true).getRoot(capnpESStruct).people
       .length,
   traverse: () =>
-    serializeData(
+    traverseData(
       new capnpES.Message(capnpData, false, true).getRoot(capnpESStruct),
     ),
 };
@@ -51,7 +51,7 @@ const capnpTSBench = {
       .getPeople()
       .getLength(),
   traverse: () =>
-    serializeData(
+    traverseData(
       new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct),
       true,
     ),
@@ -68,29 +68,30 @@ const protobufData = new Uint8Array(
 const protobufBench = {
   parse: () => protobufType.decode(protobufData),
   length: () => (protobufType.decode(protobufData) as any).people.length,
-  traverse: () => serializeData(protobufType.decode(protobufData)),
+  traverse: () => traverseData(protobufType.decode(protobufData)),
 };
 
 // This util traverses all fields of the object
-function serializeData(obj: any, capnpTSCompat = false) {
+function traverseData(obj: any, capnpTSCompat = false) {
+  const res: string[] = [];
   if (capnpTSCompat) {
-    return obj
-      .getPeople()
-      .map(
-        (person: any) =>
-          `id: ${person.getId()}, name: ${person.getName()}, email: ${person.getEmail()}, phones: ${person
-            .getPhones()
-            .map((phone: any) => `${phone.getNumber()}`)
-            .join("|")}`,
-      )
-      .join("\n");
+    // eslint-disable-next-line unicorn/no-array-for-each
+    obj.getPeople().forEach((person: any) => {
+      res.push(person.getId(), person.getName(), person.getEmail());
+      // eslint-disable-next-line unicorn/no-array-for-each
+      person.getPhones().forEach((phone: any) => {
+        res.push(phone.getNumber());
+      });
+    });
+  } else {
+    for (const person of obj.people) {
+      res.push(person.id, person.name, person.email);
+      for (const phone of person.phones) {
+        res.push(phone.number);
+      }
+    }
   }
-  return obj.people
-    .map(
-      (person: any) =>
-        `id: ${person.id}, name: ${person.name}, email: ${person.email}, phones: ${person.phones.map((phone: any) => `${phone.number}`).join("|")}`,
-    )
-    .join("\n");
+  return res.join(":");
 }
 
 // All benchmarks
