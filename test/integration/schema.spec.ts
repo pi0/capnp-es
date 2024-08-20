@@ -23,7 +23,7 @@ test("schema roundtrip", () => {
 
   const requestedFiles = req.requestedFiles;
 
-  t.equal(requestedFiles.getLength(), 1);
+  t.equal(requestedFiles.length, 1);
 
   const requestedFile = requestedFiles.get(0);
   const filename = requestedFile.filename;

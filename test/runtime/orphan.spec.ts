@@ -140,7 +140,7 @@ test("Orphan._moveTo()", () => {
     300,
     "should overwrite target list pointer and keep old data",
   );
-  t.equal(newList.getLength(), 2, "should set the correct list length");
+  t.equal(newList.length, 2, "should set the correct list length");
 
   t.throws(
     () => {

@@ -74,7 +74,8 @@ This project is a rework of [jdiaz5513/capnp-ts](https://github.com/jdiaz5513/ca
 - Compiler CLI can directly accept a path to `.capnp` files and internally use `capnpc`
 - Built-in schemas are compiled from source (compiler, compiles itself. so cool right?)
 - Use reflection (getter setters) to access structs.
-- RPC level 1 merged from [jdiaz5513/capnp-ts#169](https://github.com/jdiaz5513/capnp-ts/pull/169).
+- RPC level-1 merged from [jdiaz5513/capnp-ts#169](https://github.com/jdiaz5513/capnp-ts/pull/169).
+- List interface implements [`Array` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) (custom methods removed).
 
 </details>
 

@@ -3,8 +3,10 @@
 import {
   PTR_COMPOSITE_SIZE_UNDEFINED,
   PTR_INVALID_LIST_SIZE,
+  LIST_NO_MUTABLE,
+  LIST_NO_SEARCH,
 } from "../../errors";
-import { format, identity } from "../../util";
+import { format } from "../../util";
 import { ListElementSize } from "../list-element-size";
 import { ObjectSize, padToWord, getByteLength } from "../object-size";
 import { Segment } from "../segment";
@@ -29,12 +31,12 @@ export interface ListCtor<T> {
   new (segment: Segment, byteOffset: number, depthLimit?: number): List<T>;
 }
 
-export type FilterCallback<T> = (
-  this: void,
+export type ArrayCb<T, RT = boolean> = (
+  this: any,
   value: T,
   index: number,
-) => boolean;
-export type IndexedCallback<T, U> = (this: void, value: T, index: number) => U;
+  array: T[],
+) => RT;
 
 export interface Group<T> {
   [k: string]: T;
@@ -44,279 +46,335 @@ export interface Group<T> {
  * A generic list class. Implements Filterable,
  */
 
-export class List<T> extends Pointer {
+export class List<T> extends Pointer implements Array<T> {
   static readonly _capnp: _ListCtor = {
     displayName: "List<Generic>" as string,
     size: ListElementSize.VOID,
   };
-  static readonly get = get;
   static readonly initList = initList;
-  static readonly set = set;
 
-  static toString(): string {
-    return this._capnp.displayName;
+  [n: number]: T;
+
+  constructor(segment: Segment, byteOffset: number, depthLimit?: number) {
+    super(segment, byteOffset, depthLimit);
+    return new Proxy(this, List.#proxyHandler);
   }
 
-  all(callbackfn: FilterCallback<T>): boolean {
-    const length = this.getLength();
+  static #proxyHandler: ProxyHandler<List<any>> = {
+    get(target, prop, receiver) {
+      const val = Reflect.get(target, prop, receiver);
+      if (val !== undefined) return val;
+      if (typeof prop === "string") {
+        return target.get(+prop);
+      }
+    },
+  };
 
-    for (let i = 0; i < length; i++) {
-      if (!callbackfn(this.get(i), i)) return false;
-    }
-
-    return true;
+  get length(): number {
+    return getTargetListLength(this);
   }
 
-  any(callbackfn: FilterCallback<T>): boolean {
-    const length = this.getLength();
-
+  toArray(): T[] {
+    const length = this.length;
+    const res = Array.from({ length }) as T[];
     for (let i = 0; i < length; i++) {
-      if (callbackfn(this.get(i), i)) return true;
+      res[i] = this.at(i);
     }
+    return res;
+  }
 
+  get(_index: number): T {
+    throw new TypeError("Cannot get from a generic list.");
+  }
+
+  set(_index: number, _value: T): void {
+    throw new TypeError("Cannot set on a generic list.");
+  }
+
+  at(index: number): T {
+    if (index < 0) {
+      const length = this.length;
+      index += length;
+    }
+    return this.get(index);
+  }
+
+  concat(other: T[]): T[] {
+    const length = this.length;
+    const otherLength = other.length;
+    const res = Array.from({ length: length + otherLength }) as T[];
+    for (let i = 0; i < length; i++) res[i] = this.at(i);
+    for (let i = 0; i < otherLength; i++) res[i + length] = other.at(i)!;
+    return res;
+  }
+
+  some(cb: ArrayCb<T>, _this?: any): boolean {
+    const length = this.length;
+    for (let i = 0; i < length; i++) {
+      if (cb.call(_this, this.at(i), i, this as unknown as T[])) {
+        return true;
+      }
+    }
     return false;
   }
 
-  ap<U>(callbackfns: Array<IndexedCallback<T, U>>): U[] {
-    const length = this.getLength();
-    const res: U[] = [];
-
-    for (let i = 0; i < length; i++) {
-      res.push(...callbackfns.map((f) => f(this.get(i), i)));
-    }
-
-    return res;
-  }
-
-  concat(other: List<T>): T[] {
-    const length = this.getLength();
-    const otherLength = other.getLength();
-    const res = Array.from({ length: length + otherLength }) as Array<T>;
-
-    for (let i = 0; i < length; i++) res[i] = this.get(i);
-
-    for (let i = 0; i < otherLength; i++) res[i + length] = other.get(i);
-
-    return res;
-  }
-
-  drop(n: number): T[] {
-    const length = this.getLength();
-    const res = Array.from({ length }) as T[];
-
-    for (let i = n; i < length; i++) res[i] = this.get(i);
-
-    return res;
-  }
-
-  dropWhile(callbackfn: FilterCallback<T>): T[] {
-    const length = this.getLength();
+  filter(cb: ArrayCb<T>, _this?: any): T[] {
+    const length = this.length;
     const res: T[] = [];
-    let drop = true;
-
     for (let i = 0; i < length; i++) {
-      const v = this.get(i);
-
-      if (drop) drop = callbackfn(v, i);
-
-      if (!drop) res.push(v);
+      const value = this.at(i);
+      if (cb.call(_this, value, i, this as unknown as T[])) {
+        res.push(value);
+      }
     }
-
     return res;
   }
 
-  empty(): T[] {
-    return [] as T[];
-  }
-
-  every(callbackfn: FilterCallback<T>): boolean {
-    return this.all(callbackfn);
-  }
-
-  filter(callbackfn: FilterCallback<T>): T[] {
-    const length = this.getLength();
-    const res: T[] = [];
-
+  find(cb: ArrayCb<T>, _this?: any): T | undefined {
+    const length = this.length;
     for (let i = 0; i < length; i++) {
-      const value = this.get(i);
-
-      if (callbackfn(value, i)) res.push(value);
+      const value = this.at(i);
+      if (cb.call(_this, value, i, this as unknown as T[])) {
+        return value;
+      }
     }
-
-    return res;
-  }
-
-  find(callbackfn: FilterCallback<T>): T | undefined {
-    const length = this.getLength();
-
-    for (let i = 0; i < length; i++) {
-      const value = this.get(i);
-
-      if (callbackfn(value, i)) return value;
-    }
-
     return undefined;
   }
 
-  findIndex(callbackfn: FilterCallback<T>): number {
-    const length = this.getLength();
-
+  findIndex(cb: (v: T, i: number, arr: T[]) => boolean, _this?: any): number {
+    const length = this.length;
     for (let i = 0; i < length; i++) {
-      const value = this.get(i);
-
-      if (callbackfn(value, i)) return i;
+      const value = this.at(i);
+      if (cb.call(_this, value, i, this as unknown as T[])) {
+        return i;
+      }
     }
-
     return -1;
   }
 
-  forEach(callbackfn: (this: void, value: T, index: number) => void): void {
-    const length = this.getLength();
-
-    for (let i = 0; i < length; i++) callbackfn(this.get(i), i);
+  forEach(cb: ArrayCb<T, void>, _this?: any): void {
+    const length = this.length;
+    for (let i = 0; i < length; i++) {
+      cb.call(_this, this.at(i), i, this as unknown as T[]);
+    }
   }
 
-  [Symbol.iterator](): Iterator<T> {
-    const length = this.getLength();
+  map<U>(cb: ArrayCb<T, U>, _this?: any): U[] {
+    const length = this.length;
+    const res = Array.from({ length }) as U[];
+    for (let i = 0; i < length; i++) {
+      res[i] = cb.call(_this, this.at(i), i, this as unknown as T[]);
+    }
+    return res;
+  }
+
+  flatMap<U>(cb: ArrayCb<T, U | U[]>, _this?: any): U[] {
+    const length = this.length;
+    const res: U[] = [];
+    for (let i = 0; i < length; i++) {
+      const r = cb.call(_this, this.at(i), i, this as unknown as T[]);
+      res.push(...(Array.isArray(r) ? r : [r]));
+    }
+    return res;
+  }
+
+  every<S extends T>(cb: (v: T, i: number) => v is S, t?: any): this is S[];
+  every(cb: ArrayCb<T, unknown>, _this?: any): boolean {
+    const length = this.length;
+    for (let i = 0; i < length; i++) {
+      if (!cb.call(_this, this.at(i), i, this as unknown as T[])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  reduce(cb: (p: T, c: T, i: number, a: T[]) => T, initialValue?: T): T {
+    let i = 0;
+    let res: T;
+    if (initialValue === undefined) {
+      res = this.at(0);
+      i++;
+    } else {
+      res = initialValue;
+    }
+    for (; i < this.length; i++) {
+      res = cb(res, this.at(i), i, this as unknown as T[]);
+    }
+    return res;
+  }
+
+  reduceRight(cb: (p: T, c: T, i: number, a: T[]) => T, initialValue?: T): T {
+    let i = this.length - 1;
+    let res: T;
+    if (initialValue === undefined) {
+      res = this.at(i);
+      i--;
+    } else {
+      res = initialValue;
+    }
+    for (; i >= 0; i--) {
+      res = cb(res, this.at(i), i, this as unknown as T[]);
+    }
+    return res;
+  }
+
+  slice(start = 0, end?: number): T[] {
+    const length = end ? Math.min(this.length, end) : this.length;
+    const res = Array.from({ length: length - start }) as T[];
+    for (let i = start; i < length; i++) res[i] = this.at(i);
+    return res;
+  }
+
+  join(separator?: string): string {
+    return this.toArray().join(separator);
+  }
+
+  toReversed(): T[] {
+    return this.toArray().reverse();
+  }
+
+  toSorted(compareFn?: ((a: T, b: T) => number) | undefined): T[] {
+    return this.toArray().sort(compareFn);
+  }
+
+  toSpliced(start: number, deleteCount: number, ...items: T[]): T[] {
+    return this.toArray().splice(start, deleteCount, ...items);
+  }
+
+  fill(value: T, start?: number, end?: number): this {
+    const length = this.length;
+    const s = Math.max(start ?? 0, 0);
+    const e = Math.min(end ?? length, length);
+    for (let i = s; i < e; i++) {
+      this.set(i, value);
+    }
+    return this;
+  }
+
+  copyWithin(target: number, start: number, end?: number): this {
+    const length = this.length;
+    const e = end ?? length;
+    const s = start < 0 ? Math.max(length + start, 0) : start;
+    const t = target < 0 ? Math.max(length + target, 0) : target;
+    const len = Math.min(e - s, length - t);
+    for (let i = 0; i < len; i++) {
+      this.set(t + i, this.at(s + i));
+    }
+    return this;
+  }
+
+  keys(): IterableIterator<number> {
+    const length = this.length;
+    return Array.from({ length }, (_, i) => i)[Symbol.iterator]();
+  }
+
+  values(): IterableIterator<T> {
+    const length = this.length;
     let i = 0;
     return {
+      [Symbol.iterator]: () => this.values(),
       next: () => {
         if (i < length) {
-          return { value: this.get(i++), done: false };
+          return { value: this.at(i++), done: false };
         }
         return { value: undefined, done: true };
       },
     };
   }
 
-  get(_index: number): T {
-    return get(_index, this);
-  }
-
-  /**
-   * Get the length of this list.
-   *
-   * @returns {number} The number of elements in this list.
-   */
-
-  getLength(): number {
-    return getTargetListLength(this);
-  }
-
-  groupBy(callbackfn: IndexedCallback<T, string>): Group<T> {
-    const length = this.getLength();
-    const res: Group<T> = {};
-
-    for (let i = 0; i < length; i++) {
-      const v = this.get(i);
-      res[callbackfn(v, i)] = v;
-    }
-
-    return res;
-  }
-
-  intersperse(sep: T): T[] {
-    const length = this.getLength();
-    const res = Array.from({ length }) as T[];
-
-    for (let i = 0; i < length; i++) {
-      if (i > 0) res.push(sep);
-
-      res.push(this.get(i));
-    }
-
-    return res;
-  }
-
-  map<U>(callbackfn: IndexedCallback<T, U>): U[] {
-    const length = this.getLength();
-    const res = Array.from({ length }) as U[];
-
-    for (let i = 0; i < length; i++) res[i] = callbackfn(this.get(i), i);
-
-    return res;
-  }
-
-  reduce(
-    callbackfn: (previousValue: T, currentValue: T, currentIndex: number) => T,
-  ): T;
-  reduce<U>(
-    callbackfn: (previousValue: U, currentValue: T, currentIndex: number) => U,
-    initialValue: U,
-  ): U;
-  reduce<U>(
-    callbackfn: (
-      previousValue: T | U,
-      currentValue: T,
-      currentIndex: number,
-    ) => T | U,
-    initialValue?: U,
-  ): T | U {
+  entries(): IterableIterator<[number, T]> {
+    const length = this.length;
     let i = 0;
-    let res: T | U;
-
-    if (initialValue === undefined) {
-      res = this.get(0);
-      i++;
-    } else {
-      res = initialValue;
-    }
-
-    for (; i < this.getLength(); i++) res = callbackfn(res, this.get(i), i);
-
-    return res;
+    return {
+      [Symbol.iterator]: () => this.entries(),
+      next: () => {
+        if (i < length) {
+          return { value: [i, this.at(i++)], done: false };
+        }
+        return { value: undefined, done: true };
+      },
+    };
   }
 
-  set(_index: number, _value: T): void {
-    set(_index, _value, this);
+  flat<A, D extends number = 1>(this: A, depth?: D): FlatArray<A, D>[] {
+    return (this as List<T>).toArray().flat(depth) as FlatArray<A, D>[];
   }
 
-  slice(start = 0, end?: number): T[] {
-    const length = end ? Math.min(this.getLength(), end) : this.getLength();
-    const res = Array.from({ length: length - start }) as T[];
-
-    for (let i = start; i < length; i++) res[i] = this.get(i);
-
-    return res;
+  with(index: number, value: T): T[] {
+    return this.toArray().with(index, value);
   }
 
-  some(callbackfn: FilterCallback<T>): boolean {
-    return this.any(callbackfn);
+  includes(_searchElement: T, _fromIndex?: number): boolean {
+    throw new Error(LIST_NO_SEARCH);
   }
 
-  take(n: number): T[] {
-    const length = Math.min(this.getLength(), n);
-    const res = Array.from({ length }) as T[];
-
-    for (let i = 0; i < length; i++) res[i] = this.get(i);
-
-    return res;
+  findLast(_cb: unknown, _thisArg?: unknown): T | undefined {
+    throw new Error(LIST_NO_SEARCH);
   }
 
-  takeWhile(callbackfn: FilterCallback<T>): T[] {
-    const length = this.getLength();
-    const res: T[] = [];
-    let take;
-
-    for (let i = 0; i < length; i++) {
-      const v = this.get(i);
-
-      take = callbackfn(v, i);
-
-      if (!take) return res;
-
-      res.push(v);
-    }
-
-    return res;
+  findLastIndex(_cb: (v: T, i: number, a: T[]) => unknown, _t?: any): number {
+    throw new Error(LIST_NO_SEARCH);
   }
 
-  toArray(): T[] {
-    return this.map(identity);
+  indexOf(_searchElement: T, _fromIndex?: number): number {
+    throw new Error(LIST_NO_SEARCH);
+  }
+
+  lastIndexOf(_searchElement: T, _fromIndex?: number): number {
+    throw new Error(LIST_NO_SEARCH);
+  }
+
+  pop(): T | undefined {
+    throw new Error(LIST_NO_MUTABLE);
+  }
+
+  push(..._items: T[]): number {
+    throw new Error(LIST_NO_MUTABLE);
+  }
+
+  reverse(): T[] {
+    throw new Error(LIST_NO_MUTABLE);
+  }
+
+  shift(): T | undefined {
+    throw new Error(LIST_NO_MUTABLE);
+  }
+
+  unshift(..._items: T[]): number {
+    throw new Error(LIST_NO_MUTABLE);
+  }
+
+  splice(_start: unknown, _deleteCount?: unknown, ..._rest: unknown[]): T[] {
+    throw new Error(LIST_NO_MUTABLE);
+  }
+
+  sort(_fn?: ((a: T, b: T) => number) | undefined): this {
+    throw new Error(LIST_NO_MUTABLE);
+  }
+
+  get [Symbol.unscopables]() {
+    return Array.prototype[Symbol.unscopables];
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this.values();
+  }
+
+  [Symbol.toStringTag]() {
+    return "[object Array]";
   }
 
   toString(): string {
-    return `List_${super.toString()}`;
+    return this.join(",");
+  }
+
+  toLocaleString(_locales?: unknown, _options?: unknown): string {
+    return this.toString();
+  }
+
+  static toString(): string {
+    return this._capnp.displayName;
   }
 }
 
@@ -398,12 +456,4 @@ export function initList<T>(
     res.pointer,
     compositeSize,
   );
-}
-
-export function get<T>(_index: number, _l: List<T>): T {
-  throw new TypeError("Cannot get from a generic list.");
-}
-
-export function set<T>(_index: number, _value: T, _l: List<T>): void {
-  throw new TypeError("Cannot set on a generic list.");
 }

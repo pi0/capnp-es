@@ -43,7 +43,7 @@ export class Data extends List<number> {
   copyBuffer(src: ArrayBuffer | ArrayBufferView): void {
     const c = getContent(this);
 
-    const dstLength = this.getLength();
+    const dstLength = this.length;
     const srcLength = src.byteLength;
 
     const i =
@@ -55,7 +55,7 @@ export class Data extends List<number> {
             Math.min(dstLength, srcLength),
           );
 
-    const o = new Uint8Array(c.segment.buffer, c.byteOffset, this.getLength());
+    const o = new Uint8Array(c.segment.buffer, c.byteOffset, this.length);
 
     o.set(i);
 
@@ -99,10 +99,7 @@ export class Data extends List<number> {
 
   toArrayBuffer(): ArrayBuffer {
     const c = getContent(this);
-    return c.segment.buffer.slice(
-      c.byteOffset,
-      c.byteOffset + this.getLength(),
-    );
+    return c.segment.buffer.slice(c.byteOffset, c.byteOffset + this.length);
   }
 
   /**
@@ -116,7 +113,7 @@ export class Data extends List<number> {
 
   toDataView(): DataView {
     const c = getContent(this);
-    return new DataView(c.segment.buffer, c.byteOffset, this.getLength());
+    return new DataView(c.segment.buffer, c.byteOffset, this.length);
   }
 
   toString(): string {
@@ -134,6 +131,6 @@ export class Data extends List<number> {
 
   toUint8Array(): Uint8Array {
     const c = getContent(this);
-    return new Uint8Array(c.segment.buffer, c.byteOffset, this.getLength());
+    return new Uint8Array(c.segment.buffer, c.byteOffset, this.length);
   }
 }

@@ -30,9 +30,8 @@ const capnpESBench = {
   parse: () =>
     new capnpES.Message(capnpData, false, true).getRoot(capnpESStruct),
   length: () =>
-    new capnpES.Message(capnpData, false, true)
-      .getRoot(capnpESStruct)
-      .people.getLength(),
+    new capnpES.Message(capnpData, false, true).getRoot(capnpESStruct).people
+      .length,
   traverse: () =>
     serializeData(
       new capnpES.Message(capnpData, false, true).getRoot(capnpESStruct),
@@ -48,9 +47,9 @@ const capnpTSBench = {
   parse: () =>
     new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct),
   length: () =>
-    (new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct) as any)
-      .getPeople()
-      .getLength(),
+    (
+      new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct) as any
+    ).getPeople().length,
   traverse: () =>
     serializeData(
       new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct),

@@ -201,13 +201,12 @@ test("Message.getSegment()", () => {
 
 test("Message.onCreatePointer()", () => {
   // This is why you should cache the result of `getList()` calls and use `List.toArray()` liberally...
-
   const m = new Message();
+  m._capnp.traversalLimit = 100;
   const p = m.initRoot(Person);
-
   t.throws(
     () => {
-      for (let i = 0; i < C.DEFAULT_TRAVERSE_LIMIT + 1; i++) {
+      for (let i = 0; i < 101 + 1; i++) {
         p.phones;
       }
     },

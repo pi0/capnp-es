@@ -167,6 +167,11 @@ export const PTR_WRITE_CONST_LIST =
 export const PTR_WRITE_CONST_STRUCT =
   "CAPNP-TS044 Attempted to write to a const struct.";
 
+export const LIST_NO_MUTABLE =
+  "CAPNP-TS045: Cannot call mutative methods on an immutable list.";
+
+export const LIST_NO_SEARCH = "CAPNP-TS046: Search is not supported for list.";
+
 // RPC errors
 //
 // RPC is hard too.

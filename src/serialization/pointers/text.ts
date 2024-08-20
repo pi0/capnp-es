@@ -33,7 +33,7 @@ export class Text extends List<string> {
       new Uint8Array(
         c.segment.buffer,
         c.byteOffset + index,
-        this.getLength() - index,
+        this.length - index,
       ),
     );
   }
@@ -45,7 +45,7 @@ export class Text extends List<string> {
    */
 
   getLength(): number {
-    return super.getLength() - 1;
+    return super.length - 1;
   }
 
   /**
@@ -70,7 +70,7 @@ export class Text extends List<string> {
 
       // Only copy bytes that will remain after copying. Everything after `index` should end up truncated.
 
-      let originalLength = this.getLength();
+      let originalLength = this.length;
 
       if (originalLength >= index) {
         originalLength = index;

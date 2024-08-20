@@ -64,7 +64,7 @@ test("TestAllTypes", () => {
   t.equal(allTypes.enumField, T.TestEnum.CORGE);
 
   allTypes.initVoidList(10);
-  t.equal(allTypes.voidList.getLength(), 10);
+  t.equal(allTypes.voidList.length, 10);
 
   allTypes.initBoolList(2).set(1, true);
   t.equal(allTypes.boolList.get(1), true);

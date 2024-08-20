@@ -85,7 +85,7 @@ test("read address book", () => {
 
   const people = addressBook.people;
 
-  t.equal(people.getLength(), 2);
+  t.equal(people.length, 2);
 
   const alice = people.get(0);
 
@@ -95,7 +95,7 @@ test("read address book", () => {
 
   const alicePhones = alice.phones;
 
-  t.equal(alicePhones.getLength(), 1);
+  t.equal(alicePhones.length, 1);
 
   t.equal(alicePhones.get(0).number, "555-1212");
   t.equal(alicePhones.get(0).type, Person.PhoneNumber.Type.MOBILE);
@@ -114,7 +114,7 @@ test("read address book", () => {
 
   const bobPhones = bob.phones;
 
-  t.equal(bobPhones.getLength(), 2);
+  t.equal(bobPhones.length, 2);
 
   t.equal(bobPhones.get(0).number, "555-4567");
   t.equal(bobPhones.get(0).type, Person.PhoneNumber.Type.HOME);
@@ -145,7 +145,7 @@ test("copy pointers from other message", () => {
   const people2 = addressBook2.people;
   const alice2 = people2.get(1);
 
-  t.equal(people2.getLength(), 2);
+  t.equal(people2.length, 2);
   t.equal(alice2.name, "Alice");
   t.equal(alice2.email, "alice@example.com");
   t.equal(alice2.id, 456);
