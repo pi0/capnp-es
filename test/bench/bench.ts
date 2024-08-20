@@ -47,9 +47,9 @@ const capnpTSBench = {
   parse: () =>
     new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct),
   length: () =>
-    (
-      new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct) as any
-    ).getPeople().length,
+    (new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct) as any)
+      .getPeople()
+      .getLength(),
   traverse: () =>
     serializeData(
       new capnpTS.Message(capnpData, false, true).getRoot(capnpTSStruct),
