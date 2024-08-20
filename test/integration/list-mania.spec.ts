@@ -85,22 +85,22 @@ test("1 of each list", () => {
     uint32List.set(0, 1);
     uint64List.set(0, BigInt(1));
 
-    capnp.Pointer.disown(boolList).dispose();
-    capnp.Pointer.disown(compositeList).dispose();
-    capnp.Pointer.disown(dataList).dispose();
-    capnp.Pointer.disown(float32List).dispose();
-    capnp.Pointer.disown(float64List).dispose();
-    capnp.Pointer.disown(int8List).dispose();
-    capnp.Pointer.disown(int16List).dispose();
-    capnp.Pointer.disown(int32List).dispose();
-    capnp.Pointer.disown(int64List).dispose();
-    capnp.Pointer.disown(interfaceList).dispose();
-    capnp.Pointer.disown(textList).dispose();
-    capnp.Pointer.disown(uint8List).dispose();
-    capnp.Pointer.disown(uint16List).dispose();
-    capnp.Pointer.disown(uint32List).dispose();
-    capnp.Pointer.disown(uint64List).dispose();
-    capnp.Pointer.disown(voidList).dispose();
+    capnp.utils.disown(boolList).dispose();
+    capnp.utils.disown(compositeList).dispose();
+    capnp.utils.disown(dataList).dispose();
+    capnp.utils.disown(float32List).dispose();
+    capnp.utils.disown(float64List).dispose();
+    capnp.utils.disown(int8List).dispose();
+    capnp.utils.disown(int16List).dispose();
+    capnp.utils.disown(int32List).dispose();
+    capnp.utils.disown(int64List).dispose();
+    capnp.utils.disown(interfaceList).dispose();
+    capnp.utils.disown(textList).dispose();
+    capnp.utils.disown(uint8List).dispose();
+    capnp.utils.disown(uint16List).dispose();
+    capnp.utils.disown(uint32List).dispose();
+    capnp.utils.disown(uint64List).dispose();
+    capnp.utils.disown(voidList).dispose();
 
     // Everything after the root pointer should be zero now.
 

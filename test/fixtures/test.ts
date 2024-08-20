@@ -20,424 +20,424 @@ export class TestAllTypes extends $.Struct {
   };
   static _StructList: $.ListCtor<TestAllTypes>;
   get boolField(): boolean {
-    return $.Struct.getBit(0, this);
+    return $.utils.getBit(0, this);
   }
   set boolField(value: boolean) {
-    $.Struct.setBit(0, value, this);
+    $.utils.setBit(0, value, this);
   }
   get int8Field(): number {
-    return $.Struct.getInt8(1, this);
+    return $.utils.getInt8(1, this);
   }
   set int8Field(value: number) {
-    $.Struct.setInt8(1, value, this);
+    $.utils.setInt8(1, value, this);
   }
   get int16Field(): number {
-    return $.Struct.getInt16(2, this);
+    return $.utils.getInt16(2, this);
   }
   set int16Field(value: number) {
-    $.Struct.setInt16(2, value, this);
+    $.utils.setInt16(2, value, this);
   }
   get int32Field(): number {
-    return $.Struct.getInt32(4, this);
+    return $.utils.getInt32(4, this);
   }
   set int32Field(value: number) {
-    $.Struct.setInt32(4, value, this);
+    $.utils.setInt32(4, value, this);
   }
   get int64Field(): bigint {
-    return $.Struct.getInt64(8, this);
+    return $.utils.getInt64(8, this);
   }
   set int64Field(value: bigint) {
-    $.Struct.setInt64(8, value, this);
+    $.utils.setInt64(8, value, this);
   }
   get uInt8Field(): number {
-    return $.Struct.getUint8(16, this);
+    return $.utils.getUint8(16, this);
   }
   set uInt8Field(value: number) {
-    $.Struct.setUint8(16, value, this);
+    $.utils.setUint8(16, value, this);
   }
   get uInt16Field(): number {
-    return $.Struct.getUint16(18, this);
+    return $.utils.getUint16(18, this);
   }
   set uInt16Field(value: number) {
-    $.Struct.setUint16(18, value, this);
+    $.utils.setUint16(18, value, this);
   }
   get uInt32Field(): number {
-    return $.Struct.getUint32(20, this);
+    return $.utils.getUint32(20, this);
   }
   set uInt32Field(value: number) {
-    $.Struct.setUint32(20, value, this);
+    $.utils.setUint32(20, value, this);
   }
   get uInt64Field(): bigint {
-    return $.Struct.getUint64(24, this);
+    return $.utils.getUint64(24, this);
   }
   set uInt64Field(value: bigint) {
-    $.Struct.setUint64(24, value, this);
+    $.utils.setUint64(24, value, this);
   }
   get float32Field(): number {
-    return $.Struct.getFloat32(32, this);
+    return $.utils.getFloat32(32, this);
   }
   set float32Field(value: number) {
-    $.Struct.setFloat32(32, value, this);
+    $.utils.setFloat32(32, value, this);
   }
   get float64Field(): number {
-    return $.Struct.getFloat64(40, this);
+    return $.utils.getFloat64(40, this);
   }
   set float64Field(value: number) {
-    $.Struct.setFloat64(40, value, this);
+    $.utils.setFloat64(40, value, this);
   }
   get textField(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set textField(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   adoptDataField(value: $.Orphan<$.Data>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownDataField(): $.Orphan<$.Data> {
-    return $.Struct.disown(this.dataField);
+    return $.utils.disown(this.dataField);
   }
   get dataField(): $.Data {
-    return $.Struct.getData(1, this);
+    return $.utils.getData(1, this);
   }
   hasDataField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initDataField(length: number): $.Data {
-    return $.Struct.initData(1, length, this);
+    return $.utils.initData(1, length, this);
   }
   set dataField(value: $.Data) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptStructField(value: $.Orphan<TestAllTypes>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownStructField(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.structField);
+    return $.utils.disown(this.structField);
   }
   get structField(): TestAllTypes {
-    return $.Struct.getStruct(2, TestAllTypes, this);
+    return $.utils.getStruct(2, TestAllTypes, this);
   }
   hasStructField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initStructField(): TestAllTypes {
-    return $.Struct.initStructAt(2, TestAllTypes, this);
+    return $.utils.initStructAt(2, TestAllTypes, this);
   }
   set structField(value: TestAllTypes) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   get enumField(): TestEnum {
-    return $.Struct.getUint16(36, this) as TestEnum;
+    return $.utils.getUint16(36, this) as TestEnum;
   }
   set enumField(value: TestEnum) {
-    $.Struct.setUint16(36, value, this);
+    $.utils.setUint16(36, value, this);
   }
   adoptVoidList(value: $.Orphan<$.List<$.Void>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownVoidList(): $.Orphan<$.List<$.Void>> {
-    return $.Struct.disown(this.voidList);
+    return $.utils.disown(this.voidList);
   }
   get voidList(): $.List<$.Void> {
-    return $.Struct.getList(3, $.VoidList, this);
+    return $.utils.getList(3, $.VoidList, this);
   }
   hasVoidList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initVoidList(length: number): $.List<$.Void> {
-    return $.Struct.initList(3, $.VoidList, length, this);
+    return $.utils.initList(3, $.VoidList, length, this);
   }
   set voidList(value: $.List<$.Void>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   adoptBoolList(value: $.Orphan<$.List<boolean>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(4, this));
+    $.utils.adopt(value, $.utils.getPointer(4, this));
   }
   disownBoolList(): $.Orphan<$.List<boolean>> {
-    return $.Struct.disown(this.boolList);
+    return $.utils.disown(this.boolList);
   }
   get boolList(): $.List<boolean> {
-    return $.Struct.getList(4, $.BoolList, this);
+    return $.utils.getList(4, $.BoolList, this);
   }
   hasBoolList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(4, this));
+    return !$.utils.isNull($.utils.getPointer(4, this));
   }
   initBoolList(length: number): $.List<boolean> {
-    return $.Struct.initList(4, $.BoolList, length, this);
+    return $.utils.initList(4, $.BoolList, length, this);
   }
   set boolList(value: $.List<boolean>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(4, this));
+    $.utils.copyFrom(value, $.utils.getPointer(4, this));
   }
   adoptInt8List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(5, this));
+    $.utils.adopt(value, $.utils.getPointer(5, this));
   }
   disownInt8List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.int8List);
+    return $.utils.disown(this.int8List);
   }
   get int8List(): $.List<number> {
-    return $.Struct.getList(5, $.Int8List, this);
+    return $.utils.getList(5, $.Int8List, this);
   }
   hasInt8List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(5, this));
+    return !$.utils.isNull($.utils.getPointer(5, this));
   }
   initInt8List(length: number): $.List<number> {
-    return $.Struct.initList(5, $.Int8List, length, this);
+    return $.utils.initList(5, $.Int8List, length, this);
   }
   set int8List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(5, this));
+    $.utils.copyFrom(value, $.utils.getPointer(5, this));
   }
   adoptInt16List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(6, this));
+    $.utils.adopt(value, $.utils.getPointer(6, this));
   }
   disownInt16List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.int16List);
+    return $.utils.disown(this.int16List);
   }
   get int16List(): $.List<number> {
-    return $.Struct.getList(6, $.Int16List, this);
+    return $.utils.getList(6, $.Int16List, this);
   }
   hasInt16List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(6, this));
+    return !$.utils.isNull($.utils.getPointer(6, this));
   }
   initInt16List(length: number): $.List<number> {
-    return $.Struct.initList(6, $.Int16List, length, this);
+    return $.utils.initList(6, $.Int16List, length, this);
   }
   set int16List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(6, this));
+    $.utils.copyFrom(value, $.utils.getPointer(6, this));
   }
   adoptInt32List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(7, this));
+    $.utils.adopt(value, $.utils.getPointer(7, this));
   }
   disownInt32List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.int32List);
+    return $.utils.disown(this.int32List);
   }
   get int32List(): $.List<number> {
-    return $.Struct.getList(7, $.Int32List, this);
+    return $.utils.getList(7, $.Int32List, this);
   }
   hasInt32List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(7, this));
+    return !$.utils.isNull($.utils.getPointer(7, this));
   }
   initInt32List(length: number): $.List<number> {
-    return $.Struct.initList(7, $.Int32List, length, this);
+    return $.utils.initList(7, $.Int32List, length, this);
   }
   set int32List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(7, this));
+    $.utils.copyFrom(value, $.utils.getPointer(7, this));
   }
   adoptInt64List(value: $.Orphan<$.List<bigint>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(8, this));
+    $.utils.adopt(value, $.utils.getPointer(8, this));
   }
   disownInt64List(): $.Orphan<$.List<bigint>> {
-    return $.Struct.disown(this.int64List);
+    return $.utils.disown(this.int64List);
   }
   get int64List(): $.List<bigint> {
-    return $.Struct.getList(8, $.Int64List, this);
+    return $.utils.getList(8, $.Int64List, this);
   }
   hasInt64List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(8, this));
+    return !$.utils.isNull($.utils.getPointer(8, this));
   }
   initInt64List(length: number): $.List<bigint> {
-    return $.Struct.initList(8, $.Int64List, length, this);
+    return $.utils.initList(8, $.Int64List, length, this);
   }
   set int64List(value: $.List<bigint>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(8, this));
+    $.utils.copyFrom(value, $.utils.getPointer(8, this));
   }
   adoptUInt8List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(9, this));
+    $.utils.adopt(value, $.utils.getPointer(9, this));
   }
   disownUInt8List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.uInt8List);
+    return $.utils.disown(this.uInt8List);
   }
   get uInt8List(): $.List<number> {
-    return $.Struct.getList(9, $.Uint8List, this);
+    return $.utils.getList(9, $.Uint8List, this);
   }
   hasUInt8List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(9, this));
+    return !$.utils.isNull($.utils.getPointer(9, this));
   }
   initUInt8List(length: number): $.List<number> {
-    return $.Struct.initList(9, $.Uint8List, length, this);
+    return $.utils.initList(9, $.Uint8List, length, this);
   }
   set uInt8List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(9, this));
+    $.utils.copyFrom(value, $.utils.getPointer(9, this));
   }
   adoptUInt16List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(10, this));
+    $.utils.adopt(value, $.utils.getPointer(10, this));
   }
   disownUInt16List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.uInt16List);
+    return $.utils.disown(this.uInt16List);
   }
   get uInt16List(): $.List<number> {
-    return $.Struct.getList(10, $.Uint16List, this);
+    return $.utils.getList(10, $.Uint16List, this);
   }
   hasUInt16List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(10, this));
+    return !$.utils.isNull($.utils.getPointer(10, this));
   }
   initUInt16List(length: number): $.List<number> {
-    return $.Struct.initList(10, $.Uint16List, length, this);
+    return $.utils.initList(10, $.Uint16List, length, this);
   }
   set uInt16List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(10, this));
+    $.utils.copyFrom(value, $.utils.getPointer(10, this));
   }
   adoptUInt32List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(11, this));
+    $.utils.adopt(value, $.utils.getPointer(11, this));
   }
   disownUInt32List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.uInt32List);
+    return $.utils.disown(this.uInt32List);
   }
   get uInt32List(): $.List<number> {
-    return $.Struct.getList(11, $.Uint32List, this);
+    return $.utils.getList(11, $.Uint32List, this);
   }
   hasUInt32List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(11, this));
+    return !$.utils.isNull($.utils.getPointer(11, this));
   }
   initUInt32List(length: number): $.List<number> {
-    return $.Struct.initList(11, $.Uint32List, length, this);
+    return $.utils.initList(11, $.Uint32List, length, this);
   }
   set uInt32List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(11, this));
+    $.utils.copyFrom(value, $.utils.getPointer(11, this));
   }
   adoptUInt64List(value: $.Orphan<$.List<bigint>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(12, this));
+    $.utils.adopt(value, $.utils.getPointer(12, this));
   }
   disownUInt64List(): $.Orphan<$.List<bigint>> {
-    return $.Struct.disown(this.uInt64List);
+    return $.utils.disown(this.uInt64List);
   }
   get uInt64List(): $.List<bigint> {
-    return $.Struct.getList(12, $.Uint64List, this);
+    return $.utils.getList(12, $.Uint64List, this);
   }
   hasUInt64List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(12, this));
+    return !$.utils.isNull($.utils.getPointer(12, this));
   }
   initUInt64List(length: number): $.List<bigint> {
-    return $.Struct.initList(12, $.Uint64List, length, this);
+    return $.utils.initList(12, $.Uint64List, length, this);
   }
   set uInt64List(value: $.List<bigint>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(12, this));
+    $.utils.copyFrom(value, $.utils.getPointer(12, this));
   }
   adoptFloat32List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(13, this));
+    $.utils.adopt(value, $.utils.getPointer(13, this));
   }
   disownFloat32List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.float32List);
+    return $.utils.disown(this.float32List);
   }
   get float32List(): $.List<number> {
-    return $.Struct.getList(13, $.Float32List, this);
+    return $.utils.getList(13, $.Float32List, this);
   }
   hasFloat32List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(13, this));
+    return !$.utils.isNull($.utils.getPointer(13, this));
   }
   initFloat32List(length: number): $.List<number> {
-    return $.Struct.initList(13, $.Float32List, length, this);
+    return $.utils.initList(13, $.Float32List, length, this);
   }
   set float32List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(13, this));
+    $.utils.copyFrom(value, $.utils.getPointer(13, this));
   }
   adoptFloat64List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(14, this));
+    $.utils.adopt(value, $.utils.getPointer(14, this));
   }
   disownFloat64List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.float64List);
+    return $.utils.disown(this.float64List);
   }
   get float64List(): $.List<number> {
-    return $.Struct.getList(14, $.Float64List, this);
+    return $.utils.getList(14, $.Float64List, this);
   }
   hasFloat64List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(14, this));
+    return !$.utils.isNull($.utils.getPointer(14, this));
   }
   initFloat64List(length: number): $.List<number> {
-    return $.Struct.initList(14, $.Float64List, length, this);
+    return $.utils.initList(14, $.Float64List, length, this);
   }
   set float64List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(14, this));
+    $.utils.copyFrom(value, $.utils.getPointer(14, this));
   }
   adoptTextList(value: $.Orphan<$.List<string>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(15, this));
+    $.utils.adopt(value, $.utils.getPointer(15, this));
   }
   disownTextList(): $.Orphan<$.List<string>> {
-    return $.Struct.disown(this.textList);
+    return $.utils.disown(this.textList);
   }
   get textList(): $.List<string> {
-    return $.Struct.getList(15, $.TextList, this);
+    return $.utils.getList(15, $.TextList, this);
   }
   hasTextList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(15, this));
+    return !$.utils.isNull($.utils.getPointer(15, this));
   }
   initTextList(length: number): $.List<string> {
-    return $.Struct.initList(15, $.TextList, length, this);
+    return $.utils.initList(15, $.TextList, length, this);
   }
   set textList(value: $.List<string>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(15, this));
+    $.utils.copyFrom(value, $.utils.getPointer(15, this));
   }
   adoptDataList(value: $.Orphan<$.List<$.Data>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(16, this));
+    $.utils.adopt(value, $.utils.getPointer(16, this));
   }
   disownDataList(): $.Orphan<$.List<$.Data>> {
-    return $.Struct.disown(this.dataList);
+    return $.utils.disown(this.dataList);
   }
   get dataList(): $.List<$.Data> {
-    return $.Struct.getList(16, $.DataList, this);
+    return $.utils.getList(16, $.DataList, this);
   }
   hasDataList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(16, this));
+    return !$.utils.isNull($.utils.getPointer(16, this));
   }
   initDataList(length: number): $.List<$.Data> {
-    return $.Struct.initList(16, $.DataList, length, this);
+    return $.utils.initList(16, $.DataList, length, this);
   }
   set dataList(value: $.List<$.Data>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(16, this));
+    $.utils.copyFrom(value, $.utils.getPointer(16, this));
   }
   adoptStructList(value: $.Orphan<$.List<TestAllTypes>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(17, this));
+    $.utils.adopt(value, $.utils.getPointer(17, this));
   }
   disownStructList(): $.Orphan<$.List<TestAllTypes>> {
-    return $.Struct.disown(this.structList);
+    return $.utils.disown(this.structList);
   }
   get structList(): $.List<TestAllTypes> {
-    return $.Struct.getList(17, TestAllTypes._StructList, this);
+    return $.utils.getList(17, TestAllTypes._StructList, this);
   }
   hasStructList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(17, this));
+    return !$.utils.isNull($.utils.getPointer(17, this));
   }
   initStructList(length: number): $.List<TestAllTypes> {
-    return $.Struct.initList(17, TestAllTypes._StructList, length, this);
+    return $.utils.initList(17, TestAllTypes._StructList, length, this);
   }
   set structList(value: $.List<TestAllTypes>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(17, this));
+    $.utils.copyFrom(value, $.utils.getPointer(17, this));
   }
   adoptEnumList(value: $.Orphan<$.List<TestEnum>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(18, this));
+    $.utils.adopt(value, $.utils.getPointer(18, this));
   }
   disownEnumList(): $.Orphan<$.List<TestEnum>> {
-    return $.Struct.disown(this.enumList);
+    return $.utils.disown(this.enumList);
   }
   get enumList(): $.List<TestEnum> {
-    return $.Struct.getList(18, $.Uint16List, this) as $.List<TestEnum>;
+    return $.utils.getList(18, $.Uint16List, this) as $.List<TestEnum>;
   }
   hasEnumList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(18, this));
+    return !$.utils.isNull($.utils.getPointer(18, this));
   }
   initEnumList(length: number): $.List<TestEnum> {
-    return $.Struct.initList(18, $.Uint16List, length, this) as $.List<TestEnum>;
+    return $.utils.initList(18, $.Uint16List, length, this) as $.List<TestEnum>;
   }
   set enumList(value: $.List<TestEnum>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(18, this));
+    $.utils.copyFrom(value, $.utils.getPointer(18, this));
   }
   adoptInterfaceList(value: $.Orphan<$.List<$.Void>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(19, this));
+    $.utils.adopt(value, $.utils.getPointer(19, this));
   }
   disownInterfaceList(): $.Orphan<$.List<$.Void>> {
-    return $.Struct.disown(this.interfaceList);
+    return $.utils.disown(this.interfaceList);
   }
   get interfaceList(): $.List<$.Void> {
-    return $.Struct.getList(19, $.VoidList, this);
+    return $.utils.getList(19, $.VoidList, this);
   }
   hasInterfaceList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(19, this));
+    return !$.utils.isNull($.utils.getPointer(19, this));
   }
   initInterfaceList(length: number): $.List<$.Void> {
-    return $.Struct.initList(19, $.VoidList, length, this);
+    return $.utils.initList(19, $.VoidList, length, this);
   }
   set interfaceList(value: $.List<$.Void>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(19, this));
+    $.utils.copyFrom(value, $.utils.getPointer(19, this));
   }
   toString(): string {
     return "TestAllTypes_" + super.toString();
@@ -482,424 +482,424 @@ export class TestDefaults extends $.Struct {
   };
   static _StructList: $.ListCtor<TestAllTypes>;
   get boolField(): boolean {
-    return $.Struct.getBit(0, this, TestDefaults._capnp.defaultBoolField);
+    return $.utils.getBit(0, this, TestDefaults._capnp.defaultBoolField);
   }
   set boolField(value: boolean) {
-    $.Struct.setBit(0, value, this, TestDefaults._capnp.defaultBoolField);
+    $.utils.setBit(0, value, this, TestDefaults._capnp.defaultBoolField);
   }
   get int8Field(): number {
-    return $.Struct.getInt8(1, this, TestDefaults._capnp.defaultInt8Field);
+    return $.utils.getInt8(1, this, TestDefaults._capnp.defaultInt8Field);
   }
   set int8Field(value: number) {
-    $.Struct.setInt8(1, value, this, TestDefaults._capnp.defaultInt8Field);
+    $.utils.setInt8(1, value, this, TestDefaults._capnp.defaultInt8Field);
   }
   get int16Field(): number {
-    return $.Struct.getInt16(2, this, TestDefaults._capnp.defaultInt16Field);
+    return $.utils.getInt16(2, this, TestDefaults._capnp.defaultInt16Field);
   }
   set int16Field(value: number) {
-    $.Struct.setInt16(2, value, this, TestDefaults._capnp.defaultInt16Field);
+    $.utils.setInt16(2, value, this, TestDefaults._capnp.defaultInt16Field);
   }
   get int32Field(): number {
-    return $.Struct.getInt32(4, this, TestDefaults._capnp.defaultInt32Field);
+    return $.utils.getInt32(4, this, TestDefaults._capnp.defaultInt32Field);
   }
   set int32Field(value: number) {
-    $.Struct.setInt32(4, value, this, TestDefaults._capnp.defaultInt32Field);
+    $.utils.setInt32(4, value, this, TestDefaults._capnp.defaultInt32Field);
   }
   get int64Field(): bigint {
-    return $.Struct.getInt64(8, this, TestDefaults._capnp.defaultInt64Field);
+    return $.utils.getInt64(8, this, TestDefaults._capnp.defaultInt64Field);
   }
   set int64Field(value: bigint) {
-    $.Struct.setInt64(8, value, this, TestDefaults._capnp.defaultInt64Field);
+    $.utils.setInt64(8, value, this, TestDefaults._capnp.defaultInt64Field);
   }
   get uInt8Field(): number {
-    return $.Struct.getUint8(16, this, TestDefaults._capnp.defaultUInt8Field);
+    return $.utils.getUint8(16, this, TestDefaults._capnp.defaultUInt8Field);
   }
   set uInt8Field(value: number) {
-    $.Struct.setUint8(16, value, this, TestDefaults._capnp.defaultUInt8Field);
+    $.utils.setUint8(16, value, this, TestDefaults._capnp.defaultUInt8Field);
   }
   get uInt16Field(): number {
-    return $.Struct.getUint16(18, this, TestDefaults._capnp.defaultUInt16Field);
+    return $.utils.getUint16(18, this, TestDefaults._capnp.defaultUInt16Field);
   }
   set uInt16Field(value: number) {
-    $.Struct.setUint16(18, value, this, TestDefaults._capnp.defaultUInt16Field);
+    $.utils.setUint16(18, value, this, TestDefaults._capnp.defaultUInt16Field);
   }
   get uInt32Field(): number {
-    return $.Struct.getUint32(20, this, TestDefaults._capnp.defaultUInt32Field);
+    return $.utils.getUint32(20, this, TestDefaults._capnp.defaultUInt32Field);
   }
   set uInt32Field(value: number) {
-    $.Struct.setUint32(20, value, this, TestDefaults._capnp.defaultUInt32Field);
+    $.utils.setUint32(20, value, this, TestDefaults._capnp.defaultUInt32Field);
   }
   get uInt64Field(): bigint {
-    return $.Struct.getUint64(24, this, TestDefaults._capnp.defaultUInt64Field);
+    return $.utils.getUint64(24, this, TestDefaults._capnp.defaultUInt64Field);
   }
   set uInt64Field(value: bigint) {
-    $.Struct.setUint64(24, value, this, TestDefaults._capnp.defaultUInt64Field);
+    $.utils.setUint64(24, value, this, TestDefaults._capnp.defaultUInt64Field);
   }
   get float32Field(): number {
-    return $.Struct.getFloat32(32, this, TestDefaults._capnp.defaultFloat32Field);
+    return $.utils.getFloat32(32, this, TestDefaults._capnp.defaultFloat32Field);
   }
   set float32Field(value: number) {
-    $.Struct.setFloat32(32, value, this, TestDefaults._capnp.defaultFloat32Field);
+    $.utils.setFloat32(32, value, this, TestDefaults._capnp.defaultFloat32Field);
   }
   get float64Field(): number {
-    return $.Struct.getFloat64(40, this, TestDefaults._capnp.defaultFloat64Field);
+    return $.utils.getFloat64(40, this, TestDefaults._capnp.defaultFloat64Field);
   }
   set float64Field(value: number) {
-    $.Struct.setFloat64(40, value, this, TestDefaults._capnp.defaultFloat64Field);
+    $.utils.setFloat64(40, value, this, TestDefaults._capnp.defaultFloat64Field);
   }
   get textField(): string {
-    return $.Struct.getText(0, this, TestDefaults._capnp.defaultTextField);
+    return $.utils.getText(0, this, TestDefaults._capnp.defaultTextField);
   }
   set textField(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   adoptDataField(value: $.Orphan<$.Data>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownDataField(): $.Orphan<$.Data> {
-    return $.Struct.disown(this.dataField);
+    return $.utils.disown(this.dataField);
   }
   get dataField(): $.Data {
-    return $.Struct.getData(1, this, TestDefaults._capnp.defaultDataField);
+    return $.utils.getData(1, this, TestDefaults._capnp.defaultDataField);
   }
   hasDataField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initDataField(length: number): $.Data {
-    return $.Struct.initData(1, length, this);
+    return $.utils.initData(1, length, this);
   }
   set dataField(value: $.Data) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptStructField(value: $.Orphan<TestAllTypes>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownStructField(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.structField);
+    return $.utils.disown(this.structField);
   }
   get structField(): TestAllTypes {
-    return $.Struct.getStruct(2, TestAllTypes, this, TestDefaults._capnp.defaultStructField);
+    return $.utils.getStruct(2, TestAllTypes, this, TestDefaults._capnp.defaultStructField);
   }
   hasStructField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initStructField(): TestAllTypes {
-    return $.Struct.initStructAt(2, TestAllTypes, this);
+    return $.utils.initStructAt(2, TestAllTypes, this);
   }
   set structField(value: TestAllTypes) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   get enumField(): TestEnum {
-    return $.Struct.getUint16(36, this, TestDefaults._capnp.defaultEnumField) as TestEnum;
+    return $.utils.getUint16(36, this, TestDefaults._capnp.defaultEnumField) as TestEnum;
   }
   set enumField(value: TestEnum) {
-    $.Struct.setUint16(36, value, this, TestDefaults._capnp.defaultEnumField);
+    $.utils.setUint16(36, value, this, TestDefaults._capnp.defaultEnumField);
   }
   adoptVoidList(value: $.Orphan<$.List<$.Void>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownVoidList(): $.Orphan<$.List<$.Void>> {
-    return $.Struct.disown(this.voidList);
+    return $.utils.disown(this.voidList);
   }
   get voidList(): $.List<$.Void> {
-    return $.Struct.getList(3, $.VoidList, this, TestDefaults._capnp.defaultVoidList);
+    return $.utils.getList(3, $.VoidList, this, TestDefaults._capnp.defaultVoidList);
   }
   hasVoidList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initVoidList(length: number): $.List<$.Void> {
-    return $.Struct.initList(3, $.VoidList, length, this);
+    return $.utils.initList(3, $.VoidList, length, this);
   }
   set voidList(value: $.List<$.Void>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   adoptBoolList(value: $.Orphan<$.List<boolean>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(4, this));
+    $.utils.adopt(value, $.utils.getPointer(4, this));
   }
   disownBoolList(): $.Orphan<$.List<boolean>> {
-    return $.Struct.disown(this.boolList);
+    return $.utils.disown(this.boolList);
   }
   get boolList(): $.List<boolean> {
-    return $.Struct.getList(4, $.BoolList, this, TestDefaults._capnp.defaultBoolList);
+    return $.utils.getList(4, $.BoolList, this, TestDefaults._capnp.defaultBoolList);
   }
   hasBoolList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(4, this));
+    return !$.utils.isNull($.utils.getPointer(4, this));
   }
   initBoolList(length: number): $.List<boolean> {
-    return $.Struct.initList(4, $.BoolList, length, this);
+    return $.utils.initList(4, $.BoolList, length, this);
   }
   set boolList(value: $.List<boolean>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(4, this));
+    $.utils.copyFrom(value, $.utils.getPointer(4, this));
   }
   adoptInt8List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(5, this));
+    $.utils.adopt(value, $.utils.getPointer(5, this));
   }
   disownInt8List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.int8List);
+    return $.utils.disown(this.int8List);
   }
   get int8List(): $.List<number> {
-    return $.Struct.getList(5, $.Int8List, this, TestDefaults._capnp.defaultInt8List);
+    return $.utils.getList(5, $.Int8List, this, TestDefaults._capnp.defaultInt8List);
   }
   hasInt8List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(5, this));
+    return !$.utils.isNull($.utils.getPointer(5, this));
   }
   initInt8List(length: number): $.List<number> {
-    return $.Struct.initList(5, $.Int8List, length, this);
+    return $.utils.initList(5, $.Int8List, length, this);
   }
   set int8List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(5, this));
+    $.utils.copyFrom(value, $.utils.getPointer(5, this));
   }
   adoptInt16List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(6, this));
+    $.utils.adopt(value, $.utils.getPointer(6, this));
   }
   disownInt16List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.int16List);
+    return $.utils.disown(this.int16List);
   }
   get int16List(): $.List<number> {
-    return $.Struct.getList(6, $.Int16List, this, TestDefaults._capnp.defaultInt16List);
+    return $.utils.getList(6, $.Int16List, this, TestDefaults._capnp.defaultInt16List);
   }
   hasInt16List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(6, this));
+    return !$.utils.isNull($.utils.getPointer(6, this));
   }
   initInt16List(length: number): $.List<number> {
-    return $.Struct.initList(6, $.Int16List, length, this);
+    return $.utils.initList(6, $.Int16List, length, this);
   }
   set int16List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(6, this));
+    $.utils.copyFrom(value, $.utils.getPointer(6, this));
   }
   adoptInt32List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(7, this));
+    $.utils.adopt(value, $.utils.getPointer(7, this));
   }
   disownInt32List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.int32List);
+    return $.utils.disown(this.int32List);
   }
   get int32List(): $.List<number> {
-    return $.Struct.getList(7, $.Int32List, this, TestDefaults._capnp.defaultInt32List);
+    return $.utils.getList(7, $.Int32List, this, TestDefaults._capnp.defaultInt32List);
   }
   hasInt32List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(7, this));
+    return !$.utils.isNull($.utils.getPointer(7, this));
   }
   initInt32List(length: number): $.List<number> {
-    return $.Struct.initList(7, $.Int32List, length, this);
+    return $.utils.initList(7, $.Int32List, length, this);
   }
   set int32List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(7, this));
+    $.utils.copyFrom(value, $.utils.getPointer(7, this));
   }
   adoptInt64List(value: $.Orphan<$.List<bigint>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(8, this));
+    $.utils.adopt(value, $.utils.getPointer(8, this));
   }
   disownInt64List(): $.Orphan<$.List<bigint>> {
-    return $.Struct.disown(this.int64List);
+    return $.utils.disown(this.int64List);
   }
   get int64List(): $.List<bigint> {
-    return $.Struct.getList(8, $.Int64List, this, TestDefaults._capnp.defaultInt64List);
+    return $.utils.getList(8, $.Int64List, this, TestDefaults._capnp.defaultInt64List);
   }
   hasInt64List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(8, this));
+    return !$.utils.isNull($.utils.getPointer(8, this));
   }
   initInt64List(length: number): $.List<bigint> {
-    return $.Struct.initList(8, $.Int64List, length, this);
+    return $.utils.initList(8, $.Int64List, length, this);
   }
   set int64List(value: $.List<bigint>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(8, this));
+    $.utils.copyFrom(value, $.utils.getPointer(8, this));
   }
   adoptUInt8List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(9, this));
+    $.utils.adopt(value, $.utils.getPointer(9, this));
   }
   disownUInt8List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.uInt8List);
+    return $.utils.disown(this.uInt8List);
   }
   get uInt8List(): $.List<number> {
-    return $.Struct.getList(9, $.Uint8List, this, TestDefaults._capnp.defaultUInt8List);
+    return $.utils.getList(9, $.Uint8List, this, TestDefaults._capnp.defaultUInt8List);
   }
   hasUInt8List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(9, this));
+    return !$.utils.isNull($.utils.getPointer(9, this));
   }
   initUInt8List(length: number): $.List<number> {
-    return $.Struct.initList(9, $.Uint8List, length, this);
+    return $.utils.initList(9, $.Uint8List, length, this);
   }
   set uInt8List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(9, this));
+    $.utils.copyFrom(value, $.utils.getPointer(9, this));
   }
   adoptUInt16List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(10, this));
+    $.utils.adopt(value, $.utils.getPointer(10, this));
   }
   disownUInt16List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.uInt16List);
+    return $.utils.disown(this.uInt16List);
   }
   get uInt16List(): $.List<number> {
-    return $.Struct.getList(10, $.Uint16List, this, TestDefaults._capnp.defaultUInt16List);
+    return $.utils.getList(10, $.Uint16List, this, TestDefaults._capnp.defaultUInt16List);
   }
   hasUInt16List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(10, this));
+    return !$.utils.isNull($.utils.getPointer(10, this));
   }
   initUInt16List(length: number): $.List<number> {
-    return $.Struct.initList(10, $.Uint16List, length, this);
+    return $.utils.initList(10, $.Uint16List, length, this);
   }
   set uInt16List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(10, this));
+    $.utils.copyFrom(value, $.utils.getPointer(10, this));
   }
   adoptUInt32List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(11, this));
+    $.utils.adopt(value, $.utils.getPointer(11, this));
   }
   disownUInt32List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.uInt32List);
+    return $.utils.disown(this.uInt32List);
   }
   get uInt32List(): $.List<number> {
-    return $.Struct.getList(11, $.Uint32List, this, TestDefaults._capnp.defaultUInt32List);
+    return $.utils.getList(11, $.Uint32List, this, TestDefaults._capnp.defaultUInt32List);
   }
   hasUInt32List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(11, this));
+    return !$.utils.isNull($.utils.getPointer(11, this));
   }
   initUInt32List(length: number): $.List<number> {
-    return $.Struct.initList(11, $.Uint32List, length, this);
+    return $.utils.initList(11, $.Uint32List, length, this);
   }
   set uInt32List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(11, this));
+    $.utils.copyFrom(value, $.utils.getPointer(11, this));
   }
   adoptUInt64List(value: $.Orphan<$.List<bigint>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(12, this));
+    $.utils.adopt(value, $.utils.getPointer(12, this));
   }
   disownUInt64List(): $.Orphan<$.List<bigint>> {
-    return $.Struct.disown(this.uInt64List);
+    return $.utils.disown(this.uInt64List);
   }
   get uInt64List(): $.List<bigint> {
-    return $.Struct.getList(12, $.Uint64List, this, TestDefaults._capnp.defaultUInt64List);
+    return $.utils.getList(12, $.Uint64List, this, TestDefaults._capnp.defaultUInt64List);
   }
   hasUInt64List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(12, this));
+    return !$.utils.isNull($.utils.getPointer(12, this));
   }
   initUInt64List(length: number): $.List<bigint> {
-    return $.Struct.initList(12, $.Uint64List, length, this);
+    return $.utils.initList(12, $.Uint64List, length, this);
   }
   set uInt64List(value: $.List<bigint>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(12, this));
+    $.utils.copyFrom(value, $.utils.getPointer(12, this));
   }
   adoptFloat32List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(13, this));
+    $.utils.adopt(value, $.utils.getPointer(13, this));
   }
   disownFloat32List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.float32List);
+    return $.utils.disown(this.float32List);
   }
   get float32List(): $.List<number> {
-    return $.Struct.getList(13, $.Float32List, this, TestDefaults._capnp.defaultFloat32List);
+    return $.utils.getList(13, $.Float32List, this, TestDefaults._capnp.defaultFloat32List);
   }
   hasFloat32List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(13, this));
+    return !$.utils.isNull($.utils.getPointer(13, this));
   }
   initFloat32List(length: number): $.List<number> {
-    return $.Struct.initList(13, $.Float32List, length, this);
+    return $.utils.initList(13, $.Float32List, length, this);
   }
   set float32List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(13, this));
+    $.utils.copyFrom(value, $.utils.getPointer(13, this));
   }
   adoptFloat64List(value: $.Orphan<$.List<number>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(14, this));
+    $.utils.adopt(value, $.utils.getPointer(14, this));
   }
   disownFloat64List(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.float64List);
+    return $.utils.disown(this.float64List);
   }
   get float64List(): $.List<number> {
-    return $.Struct.getList(14, $.Float64List, this, TestDefaults._capnp.defaultFloat64List);
+    return $.utils.getList(14, $.Float64List, this, TestDefaults._capnp.defaultFloat64List);
   }
   hasFloat64List(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(14, this));
+    return !$.utils.isNull($.utils.getPointer(14, this));
   }
   initFloat64List(length: number): $.List<number> {
-    return $.Struct.initList(14, $.Float64List, length, this);
+    return $.utils.initList(14, $.Float64List, length, this);
   }
   set float64List(value: $.List<number>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(14, this));
+    $.utils.copyFrom(value, $.utils.getPointer(14, this));
   }
   adoptTextList(value: $.Orphan<$.List<string>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(15, this));
+    $.utils.adopt(value, $.utils.getPointer(15, this));
   }
   disownTextList(): $.Orphan<$.List<string>> {
-    return $.Struct.disown(this.textList);
+    return $.utils.disown(this.textList);
   }
   get textList(): $.List<string> {
-    return $.Struct.getList(15, $.TextList, this, TestDefaults._capnp.defaultTextList);
+    return $.utils.getList(15, $.TextList, this, TestDefaults._capnp.defaultTextList);
   }
   hasTextList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(15, this));
+    return !$.utils.isNull($.utils.getPointer(15, this));
   }
   initTextList(length: number): $.List<string> {
-    return $.Struct.initList(15, $.TextList, length, this);
+    return $.utils.initList(15, $.TextList, length, this);
   }
   set textList(value: $.List<string>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(15, this));
+    $.utils.copyFrom(value, $.utils.getPointer(15, this));
   }
   adoptDataList(value: $.Orphan<$.List<$.Data>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(16, this));
+    $.utils.adopt(value, $.utils.getPointer(16, this));
   }
   disownDataList(): $.Orphan<$.List<$.Data>> {
-    return $.Struct.disown(this.dataList);
+    return $.utils.disown(this.dataList);
   }
   get dataList(): $.List<$.Data> {
-    return $.Struct.getList(16, $.DataList, this, TestDefaults._capnp.defaultDataList);
+    return $.utils.getList(16, $.DataList, this, TestDefaults._capnp.defaultDataList);
   }
   hasDataList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(16, this));
+    return !$.utils.isNull($.utils.getPointer(16, this));
   }
   initDataList(length: number): $.List<$.Data> {
-    return $.Struct.initList(16, $.DataList, length, this);
+    return $.utils.initList(16, $.DataList, length, this);
   }
   set dataList(value: $.List<$.Data>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(16, this));
+    $.utils.copyFrom(value, $.utils.getPointer(16, this));
   }
   adoptStructList(value: $.Orphan<$.List<TestAllTypes>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(17, this));
+    $.utils.adopt(value, $.utils.getPointer(17, this));
   }
   disownStructList(): $.Orphan<$.List<TestAllTypes>> {
-    return $.Struct.disown(this.structList);
+    return $.utils.disown(this.structList);
   }
   get structList(): $.List<TestAllTypes> {
-    return $.Struct.getList(17, TestDefaults._StructList, this, TestDefaults._capnp.defaultStructList);
+    return $.utils.getList(17, TestDefaults._StructList, this, TestDefaults._capnp.defaultStructList);
   }
   hasStructList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(17, this));
+    return !$.utils.isNull($.utils.getPointer(17, this));
   }
   initStructList(length: number): $.List<TestAllTypes> {
-    return $.Struct.initList(17, TestDefaults._StructList, length, this);
+    return $.utils.initList(17, TestDefaults._StructList, length, this);
   }
   set structList(value: $.List<TestAllTypes>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(17, this));
+    $.utils.copyFrom(value, $.utils.getPointer(17, this));
   }
   adoptEnumList(value: $.Orphan<$.List<TestEnum>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(18, this));
+    $.utils.adopt(value, $.utils.getPointer(18, this));
   }
   disownEnumList(): $.Orphan<$.List<TestEnum>> {
-    return $.Struct.disown(this.enumList);
+    return $.utils.disown(this.enumList);
   }
   get enumList(): $.List<TestEnum> {
-    return $.Struct.getList(18, $.Uint16List, this, TestDefaults._capnp.defaultEnumList) as $.List<TestEnum>;
+    return $.utils.getList(18, $.Uint16List, this, TestDefaults._capnp.defaultEnumList) as $.List<TestEnum>;
   }
   hasEnumList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(18, this));
+    return !$.utils.isNull($.utils.getPointer(18, this));
   }
   initEnumList(length: number): $.List<TestEnum> {
-    return $.Struct.initList(18, $.Uint16List, length, this) as $.List<TestEnum>;
+    return $.utils.initList(18, $.Uint16List, length, this) as $.List<TestEnum>;
   }
   set enumList(value: $.List<TestEnum>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(18, this));
+    $.utils.copyFrom(value, $.utils.getPointer(18, this));
   }
   adoptInterfaceList(value: $.Orphan<$.List<$.Void>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(19, this));
+    $.utils.adopt(value, $.utils.getPointer(19, this));
   }
   disownInterfaceList(): $.Orphan<$.List<$.Void>> {
-    return $.Struct.disown(this.interfaceList);
+    return $.utils.disown(this.interfaceList);
   }
   get interfaceList(): $.List<$.Void> {
-    return $.Struct.getList(19, $.VoidList, this);
+    return $.utils.getList(19, $.VoidList, this);
   }
   hasInterfaceList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(19, this));
+    return !$.utils.isNull($.utils.getPointer(19, this));
   }
   initInterfaceList(length: number): $.List<$.Void> {
-    return $.Struct.initList(19, $.VoidList, length, this);
+    return $.utils.initList(19, $.VoidList, length, this);
   }
   set interfaceList(value: $.List<$.Void>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(19, this));
+    $.utils.copyFrom(value, $.utils.getPointer(19, this));
   }
   toString(): string {
     return "TestDefaults_" + super.toString();
@@ -912,19 +912,19 @@ export class TestAnyPointer extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptAnyPointerField(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownAnyPointerField(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.anyPointerField);
+    return $.utils.disown(this.anyPointerField);
   }
   get anyPointerField(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasAnyPointerField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set anyPointerField(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestAnyPointer_" + super.toString();
@@ -937,49 +937,49 @@ export class TestAnyOthers extends $.Struct {
     size: new $.ObjectSize(0, 3)
   };
   adoptAnyStructField(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownAnyStructField(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.anyStructField);
+    return $.utils.disown(this.anyStructField);
   }
   get anyStructField(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasAnyStructField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set anyStructField(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptAnyListField(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownAnyListField(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.anyListField);
+    return $.utils.disown(this.anyListField);
   }
   get anyListField(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasAnyListField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set anyListField(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptCapabilityField(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownCapabilityField(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.capabilityField);
+    return $.utils.disown(this.capabilityField);
   }
   get capabilityField(): $.Pointer {
-    return $.Struct.getPointer(2, this);
+    return $.utils.getPointer(2, this);
   }
   hasCapabilityField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   set capabilityField(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   toString(): string {
     return "TestAnyOthers_" + super.toString();
@@ -992,58 +992,58 @@ export class TestOutOfOrder extends $.Struct {
     size: new $.ObjectSize(0, 9)
   };
   get foo(): string {
-    return $.Struct.getText(3, this);
+    return $.utils.getText(3, this);
   }
   set foo(value: string) {
-    $.Struct.setText(3, value, this);
+    $.utils.setText(3, value, this);
   }
   get bar(): string {
-    return $.Struct.getText(2, this);
+    return $.utils.getText(2, this);
   }
   set bar(value: string) {
-    $.Struct.setText(2, value, this);
+    $.utils.setText(2, value, this);
   }
   get baz(): string {
-    return $.Struct.getText(8, this);
+    return $.utils.getText(8, this);
   }
   set baz(value: string) {
-    $.Struct.setText(8, value, this);
+    $.utils.setText(8, value, this);
   }
   get qux(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set qux(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get quux(): string {
-    return $.Struct.getText(6, this);
+    return $.utils.getText(6, this);
   }
   set quux(value: string) {
-    $.Struct.setText(6, value, this);
+    $.utils.setText(6, value, this);
   }
   get corge(): string {
-    return $.Struct.getText(4, this);
+    return $.utils.getText(4, this);
   }
   set corge(value: string) {
-    $.Struct.setText(4, value, this);
+    $.utils.setText(4, value, this);
   }
   get grault(): string {
-    return $.Struct.getText(1, this);
+    return $.utils.getText(1, this);
   }
   set grault(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   get garply(): string {
-    return $.Struct.getText(7, this);
+    return $.utils.getText(7, this);
   }
   set garply(value: string) {
-    $.Struct.setText(7, value, this);
+    $.utils.setText(7, value, this);
   }
   get waldo(): string {
-    return $.Struct.getText(5, this);
+    return $.utils.getText(5, this);
   }
   set waldo(value: string) {
-    $.Struct.setText(5, value, this);
+    $.utils.setText(5, value, this);
   }
   toString(): string {
     return "TestOutOfOrder_" + super.toString();
@@ -1087,154 +1087,154 @@ export class TestUnion_Union0 extends $.Struct {
     size: new $.ObjectSize(64, 2)
   };
   isU0f0s0(): boolean {
-    return $.Struct.getUint16(0, this) === 0;
+    return $.utils.getUint16(0, this) === 0;
   }
   set u0f0s0(_: true) {
-    $.Struct.setUint16(0, 0, this);
+    $.utils.setUint16(0, 0, this);
   }
   get u0f0s1(): boolean {
-    $.Struct.testWhich("u0f0s1", $.Struct.getUint16(0, this), 1, this);
-    return $.Struct.getBit(64, this);
+    $.utils.testWhich("u0f0s1", $.utils.getUint16(0, this), 1, this);
+    return $.utils.getBit(64, this);
   }
   isU0f0s1(): boolean {
-    return $.Struct.getUint16(0, this) === 1;
+    return $.utils.getUint16(0, this) === 1;
   }
   set u0f0s1(value: boolean) {
-    $.Struct.setUint16(0, 1, this);
-    $.Struct.setBit(64, value, this);
+    $.utils.setUint16(0, 1, this);
+    $.utils.setBit(64, value, this);
   }
   get u0f0s8(): number {
-    $.Struct.testWhich("u0f0s8", $.Struct.getUint16(0, this), 2, this);
-    return $.Struct.getInt8(8, this);
+    $.utils.testWhich("u0f0s8", $.utils.getUint16(0, this), 2, this);
+    return $.utils.getInt8(8, this);
   }
   isU0f0s8(): boolean {
-    return $.Struct.getUint16(0, this) === 2;
+    return $.utils.getUint16(0, this) === 2;
   }
   set u0f0s8(value: number) {
-    $.Struct.setUint16(0, 2, this);
-    $.Struct.setInt8(8, value, this);
+    $.utils.setUint16(0, 2, this);
+    $.utils.setInt8(8, value, this);
   }
   get u0f0s16(): number {
-    $.Struct.testWhich("u0f0s16", $.Struct.getUint16(0, this), 3, this);
-    return $.Struct.getInt16(8, this);
+    $.utils.testWhich("u0f0s16", $.utils.getUint16(0, this), 3, this);
+    return $.utils.getInt16(8, this);
   }
   isU0f0s16(): boolean {
-    return $.Struct.getUint16(0, this) === 3;
+    return $.utils.getUint16(0, this) === 3;
   }
   set u0f0s16(value: number) {
-    $.Struct.setUint16(0, 3, this);
-    $.Struct.setInt16(8, value, this);
+    $.utils.setUint16(0, 3, this);
+    $.utils.setInt16(8, value, this);
   }
   get u0f0s32(): number {
-    $.Struct.testWhich("u0f0s32", $.Struct.getUint16(0, this), 4, this);
-    return $.Struct.getInt32(8, this);
+    $.utils.testWhich("u0f0s32", $.utils.getUint16(0, this), 4, this);
+    return $.utils.getInt32(8, this);
   }
   isU0f0s32(): boolean {
-    return $.Struct.getUint16(0, this) === 4;
+    return $.utils.getUint16(0, this) === 4;
   }
   set u0f0s32(value: number) {
-    $.Struct.setUint16(0, 4, this);
-    $.Struct.setInt32(8, value, this);
+    $.utils.setUint16(0, 4, this);
+    $.utils.setInt32(8, value, this);
   }
   get u0f0s64(): bigint {
-    $.Struct.testWhich("u0f0s64", $.Struct.getUint16(0, this), 5, this);
-    return $.Struct.getInt64(8, this);
+    $.utils.testWhich("u0f0s64", $.utils.getUint16(0, this), 5, this);
+    return $.utils.getInt64(8, this);
   }
   isU0f0s64(): boolean {
-    return $.Struct.getUint16(0, this) === 5;
+    return $.utils.getUint16(0, this) === 5;
   }
   set u0f0s64(value: bigint) {
-    $.Struct.setUint16(0, 5, this);
-    $.Struct.setInt64(8, value, this);
+    $.utils.setUint16(0, 5, this);
+    $.utils.setInt64(8, value, this);
   }
   get u0f0sp(): string {
-    $.Struct.testWhich("u0f0sp", $.Struct.getUint16(0, this), 6, this);
-    return $.Struct.getText(0, this);
+    $.utils.testWhich("u0f0sp", $.utils.getUint16(0, this), 6, this);
+    return $.utils.getText(0, this);
   }
   isU0f0sp(): boolean {
-    return $.Struct.getUint16(0, this) === 6;
+    return $.utils.getUint16(0, this) === 6;
   }
   set u0f0sp(value: string) {
-    $.Struct.setUint16(0, 6, this);
-    $.Struct.setText(0, value, this);
+    $.utils.setUint16(0, 6, this);
+    $.utils.setText(0, value, this);
   }
   isU0f1s0(): boolean {
-    return $.Struct.getUint16(0, this) === 7;
+    return $.utils.getUint16(0, this) === 7;
   }
   set u0f1s0(_: true) {
-    $.Struct.setUint16(0, 7, this);
+    $.utils.setUint16(0, 7, this);
   }
   get u0f1s1(): boolean {
-    $.Struct.testWhich("u0f1s1", $.Struct.getUint16(0, this), 8, this);
-    return $.Struct.getBit(64, this);
+    $.utils.testWhich("u0f1s1", $.utils.getUint16(0, this), 8, this);
+    return $.utils.getBit(64, this);
   }
   isU0f1s1(): boolean {
-    return $.Struct.getUint16(0, this) === 8;
+    return $.utils.getUint16(0, this) === 8;
   }
   set u0f1s1(value: boolean) {
-    $.Struct.setUint16(0, 8, this);
-    $.Struct.setBit(64, value, this);
+    $.utils.setUint16(0, 8, this);
+    $.utils.setBit(64, value, this);
   }
   get u0f1s8(): number {
-    $.Struct.testWhich("u0f1s8", $.Struct.getUint16(0, this), 9, this);
-    return $.Struct.getInt8(8, this);
+    $.utils.testWhich("u0f1s8", $.utils.getUint16(0, this), 9, this);
+    return $.utils.getInt8(8, this);
   }
   isU0f1s8(): boolean {
-    return $.Struct.getUint16(0, this) === 9;
+    return $.utils.getUint16(0, this) === 9;
   }
   set u0f1s8(value: number) {
-    $.Struct.setUint16(0, 9, this);
-    $.Struct.setInt8(8, value, this);
+    $.utils.setUint16(0, 9, this);
+    $.utils.setInt8(8, value, this);
   }
   get u0f1s16(): number {
-    $.Struct.testWhich("u0f1s16", $.Struct.getUint16(0, this), 10, this);
-    return $.Struct.getInt16(8, this);
+    $.utils.testWhich("u0f1s16", $.utils.getUint16(0, this), 10, this);
+    return $.utils.getInt16(8, this);
   }
   isU0f1s16(): boolean {
-    return $.Struct.getUint16(0, this) === 10;
+    return $.utils.getUint16(0, this) === 10;
   }
   set u0f1s16(value: number) {
-    $.Struct.setUint16(0, 10, this);
-    $.Struct.setInt16(8, value, this);
+    $.utils.setUint16(0, 10, this);
+    $.utils.setInt16(8, value, this);
   }
   get u0f1s32(): number {
-    $.Struct.testWhich("u0f1s32", $.Struct.getUint16(0, this), 11, this);
-    return $.Struct.getInt32(8, this);
+    $.utils.testWhich("u0f1s32", $.utils.getUint16(0, this), 11, this);
+    return $.utils.getInt32(8, this);
   }
   isU0f1s32(): boolean {
-    return $.Struct.getUint16(0, this) === 11;
+    return $.utils.getUint16(0, this) === 11;
   }
   set u0f1s32(value: number) {
-    $.Struct.setUint16(0, 11, this);
-    $.Struct.setInt32(8, value, this);
+    $.utils.setUint16(0, 11, this);
+    $.utils.setInt32(8, value, this);
   }
   get u0f1s64(): bigint {
-    $.Struct.testWhich("u0f1s64", $.Struct.getUint16(0, this), 12, this);
-    return $.Struct.getInt64(8, this);
+    $.utils.testWhich("u0f1s64", $.utils.getUint16(0, this), 12, this);
+    return $.utils.getInt64(8, this);
   }
   isU0f1s64(): boolean {
-    return $.Struct.getUint16(0, this) === 12;
+    return $.utils.getUint16(0, this) === 12;
   }
   set u0f1s64(value: bigint) {
-    $.Struct.setUint16(0, 12, this);
-    $.Struct.setInt64(8, value, this);
+    $.utils.setUint16(0, 12, this);
+    $.utils.setInt64(8, value, this);
   }
   get u0f1sp(): string {
-    $.Struct.testWhich("u0f1sp", $.Struct.getUint16(0, this), 13, this);
-    return $.Struct.getText(0, this);
+    $.utils.testWhich("u0f1sp", $.utils.getUint16(0, this), 13, this);
+    return $.utils.getText(0, this);
   }
   isU0f1sp(): boolean {
-    return $.Struct.getUint16(0, this) === 13;
+    return $.utils.getUint16(0, this) === 13;
   }
   set u0f1sp(value: string) {
-    $.Struct.setUint16(0, 13, this);
-    $.Struct.setText(0, value, this);
+    $.utils.setUint16(0, 13, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestUnion_Union0_" + super.toString();
   }
   which(): TestUnion_Union0_Which {
-    return $.Struct.getUint16(0, this) as TestUnion_Union0_Which;
+    return $.utils.getUint16(0, this) as TestUnion_Union0_Which;
   }
 }
 export const TestUnion_Union1_Which = {
@@ -1287,220 +1287,220 @@ export class TestUnion_Union1 extends $.Struct {
     size: new $.ObjectSize(64, 2)
   };
   isU1f0s0(): boolean {
-    return $.Struct.getUint16(2, this) === 0;
+    return $.utils.getUint16(2, this) === 0;
   }
   set u1f0s0(_: true) {
-    $.Struct.setUint16(2, 0, this);
+    $.utils.setUint16(2, 0, this);
   }
   get u1f0s1(): boolean {
-    $.Struct.testWhich("u1f0s1", $.Struct.getUint16(2, this), 1, this);
-    return $.Struct.getBit(129, this);
+    $.utils.testWhich("u1f0s1", $.utils.getUint16(2, this), 1, this);
+    return $.utils.getBit(129, this);
   }
   isU1f0s1(): boolean {
-    return $.Struct.getUint16(2, this) === 1;
+    return $.utils.getUint16(2, this) === 1;
   }
   set u1f0s1(value: boolean) {
-    $.Struct.setUint16(2, 1, this);
-    $.Struct.setBit(129, value, this);
+    $.utils.setUint16(2, 1, this);
+    $.utils.setBit(129, value, this);
   }
   get u1f1s1(): boolean {
-    $.Struct.testWhich("u1f1s1", $.Struct.getUint16(2, this), 2, this);
-    return $.Struct.getBit(129, this);
+    $.utils.testWhich("u1f1s1", $.utils.getUint16(2, this), 2, this);
+    return $.utils.getBit(129, this);
   }
   isU1f1s1(): boolean {
-    return $.Struct.getUint16(2, this) === 2;
+    return $.utils.getUint16(2, this) === 2;
   }
   set u1f1s1(value: boolean) {
-    $.Struct.setUint16(2, 2, this);
-    $.Struct.setBit(129, value, this);
+    $.utils.setUint16(2, 2, this);
+    $.utils.setBit(129, value, this);
   }
   get u1f0s8(): number {
-    $.Struct.testWhich("u1f0s8", $.Struct.getUint16(2, this), 3, this);
-    return $.Struct.getInt8(17, this);
+    $.utils.testWhich("u1f0s8", $.utils.getUint16(2, this), 3, this);
+    return $.utils.getInt8(17, this);
   }
   isU1f0s8(): boolean {
-    return $.Struct.getUint16(2, this) === 3;
+    return $.utils.getUint16(2, this) === 3;
   }
   set u1f0s8(value: number) {
-    $.Struct.setUint16(2, 3, this);
-    $.Struct.setInt8(17, value, this);
+    $.utils.setUint16(2, 3, this);
+    $.utils.setInt8(17, value, this);
   }
   get u1f1s8(): number {
-    $.Struct.testWhich("u1f1s8", $.Struct.getUint16(2, this), 4, this);
-    return $.Struct.getInt8(17, this);
+    $.utils.testWhich("u1f1s8", $.utils.getUint16(2, this), 4, this);
+    return $.utils.getInt8(17, this);
   }
   isU1f1s8(): boolean {
-    return $.Struct.getUint16(2, this) === 4;
+    return $.utils.getUint16(2, this) === 4;
   }
   set u1f1s8(value: number) {
-    $.Struct.setUint16(2, 4, this);
-    $.Struct.setInt8(17, value, this);
+    $.utils.setUint16(2, 4, this);
+    $.utils.setInt8(17, value, this);
   }
   get u1f0s16(): number {
-    $.Struct.testWhich("u1f0s16", $.Struct.getUint16(2, this), 5, this);
-    return $.Struct.getInt16(18, this);
+    $.utils.testWhich("u1f0s16", $.utils.getUint16(2, this), 5, this);
+    return $.utils.getInt16(18, this);
   }
   isU1f0s16(): boolean {
-    return $.Struct.getUint16(2, this) === 5;
+    return $.utils.getUint16(2, this) === 5;
   }
   set u1f0s16(value: number) {
-    $.Struct.setUint16(2, 5, this);
-    $.Struct.setInt16(18, value, this);
+    $.utils.setUint16(2, 5, this);
+    $.utils.setInt16(18, value, this);
   }
   get u1f1s16(): number {
-    $.Struct.testWhich("u1f1s16", $.Struct.getUint16(2, this), 6, this);
-    return $.Struct.getInt16(18, this);
+    $.utils.testWhich("u1f1s16", $.utils.getUint16(2, this), 6, this);
+    return $.utils.getInt16(18, this);
   }
   isU1f1s16(): boolean {
-    return $.Struct.getUint16(2, this) === 6;
+    return $.utils.getUint16(2, this) === 6;
   }
   set u1f1s16(value: number) {
-    $.Struct.setUint16(2, 6, this);
-    $.Struct.setInt16(18, value, this);
+    $.utils.setUint16(2, 6, this);
+    $.utils.setInt16(18, value, this);
   }
   get u1f0s32(): number {
-    $.Struct.testWhich("u1f0s32", $.Struct.getUint16(2, this), 7, this);
-    return $.Struct.getInt32(20, this);
+    $.utils.testWhich("u1f0s32", $.utils.getUint16(2, this), 7, this);
+    return $.utils.getInt32(20, this);
   }
   isU1f0s32(): boolean {
-    return $.Struct.getUint16(2, this) === 7;
+    return $.utils.getUint16(2, this) === 7;
   }
   set u1f0s32(value: number) {
-    $.Struct.setUint16(2, 7, this);
-    $.Struct.setInt32(20, value, this);
+    $.utils.setUint16(2, 7, this);
+    $.utils.setInt32(20, value, this);
   }
   get u1f1s32(): number {
-    $.Struct.testWhich("u1f1s32", $.Struct.getUint16(2, this), 8, this);
-    return $.Struct.getInt32(20, this);
+    $.utils.testWhich("u1f1s32", $.utils.getUint16(2, this), 8, this);
+    return $.utils.getInt32(20, this);
   }
   isU1f1s32(): boolean {
-    return $.Struct.getUint16(2, this) === 8;
+    return $.utils.getUint16(2, this) === 8;
   }
   set u1f1s32(value: number) {
-    $.Struct.setUint16(2, 8, this);
-    $.Struct.setInt32(20, value, this);
+    $.utils.setUint16(2, 8, this);
+    $.utils.setInt32(20, value, this);
   }
   get u1f0s64(): bigint {
-    $.Struct.testWhich("u1f0s64", $.Struct.getUint16(2, this), 9, this);
-    return $.Struct.getInt64(24, this);
+    $.utils.testWhich("u1f0s64", $.utils.getUint16(2, this), 9, this);
+    return $.utils.getInt64(24, this);
   }
   isU1f0s64(): boolean {
-    return $.Struct.getUint16(2, this) === 9;
+    return $.utils.getUint16(2, this) === 9;
   }
   set u1f0s64(value: bigint) {
-    $.Struct.setUint16(2, 9, this);
-    $.Struct.setInt64(24, value, this);
+    $.utils.setUint16(2, 9, this);
+    $.utils.setInt64(24, value, this);
   }
   get u1f1s64(): bigint {
-    $.Struct.testWhich("u1f1s64", $.Struct.getUint16(2, this), 10, this);
-    return $.Struct.getInt64(24, this);
+    $.utils.testWhich("u1f1s64", $.utils.getUint16(2, this), 10, this);
+    return $.utils.getInt64(24, this);
   }
   isU1f1s64(): boolean {
-    return $.Struct.getUint16(2, this) === 10;
+    return $.utils.getUint16(2, this) === 10;
   }
   set u1f1s64(value: bigint) {
-    $.Struct.setUint16(2, 10, this);
-    $.Struct.setInt64(24, value, this);
+    $.utils.setUint16(2, 10, this);
+    $.utils.setInt64(24, value, this);
   }
   get u1f0sp(): string {
-    $.Struct.testWhich("u1f0sp", $.Struct.getUint16(2, this), 11, this);
-    return $.Struct.getText(1, this);
+    $.utils.testWhich("u1f0sp", $.utils.getUint16(2, this), 11, this);
+    return $.utils.getText(1, this);
   }
   isU1f0sp(): boolean {
-    return $.Struct.getUint16(2, this) === 11;
+    return $.utils.getUint16(2, this) === 11;
   }
   set u1f0sp(value: string) {
-    $.Struct.setUint16(2, 11, this);
-    $.Struct.setText(1, value, this);
+    $.utils.setUint16(2, 11, this);
+    $.utils.setText(1, value, this);
   }
   get u1f1sp(): string {
-    $.Struct.testWhich("u1f1sp", $.Struct.getUint16(2, this), 12, this);
-    return $.Struct.getText(1, this);
+    $.utils.testWhich("u1f1sp", $.utils.getUint16(2, this), 12, this);
+    return $.utils.getText(1, this);
   }
   isU1f1sp(): boolean {
-    return $.Struct.getUint16(2, this) === 12;
+    return $.utils.getUint16(2, this) === 12;
   }
   set u1f1sp(value: string) {
-    $.Struct.setUint16(2, 12, this);
-    $.Struct.setText(1, value, this);
+    $.utils.setUint16(2, 12, this);
+    $.utils.setText(1, value, this);
   }
   isU1f2s0(): boolean {
-    return $.Struct.getUint16(2, this) === 13;
+    return $.utils.getUint16(2, this) === 13;
   }
   set u1f2s0(_: true) {
-    $.Struct.setUint16(2, 13, this);
+    $.utils.setUint16(2, 13, this);
   }
   get u1f2s1(): boolean {
-    $.Struct.testWhich("u1f2s1", $.Struct.getUint16(2, this), 14, this);
-    return $.Struct.getBit(129, this);
+    $.utils.testWhich("u1f2s1", $.utils.getUint16(2, this), 14, this);
+    return $.utils.getBit(129, this);
   }
   isU1f2s1(): boolean {
-    return $.Struct.getUint16(2, this) === 14;
+    return $.utils.getUint16(2, this) === 14;
   }
   set u1f2s1(value: boolean) {
-    $.Struct.setUint16(2, 14, this);
-    $.Struct.setBit(129, value, this);
+    $.utils.setUint16(2, 14, this);
+    $.utils.setBit(129, value, this);
   }
   get u1f2s8(): number {
-    $.Struct.testWhich("u1f2s8", $.Struct.getUint16(2, this), 15, this);
-    return $.Struct.getInt8(17, this);
+    $.utils.testWhich("u1f2s8", $.utils.getUint16(2, this), 15, this);
+    return $.utils.getInt8(17, this);
   }
   isU1f2s8(): boolean {
-    return $.Struct.getUint16(2, this) === 15;
+    return $.utils.getUint16(2, this) === 15;
   }
   set u1f2s8(value: number) {
-    $.Struct.setUint16(2, 15, this);
-    $.Struct.setInt8(17, value, this);
+    $.utils.setUint16(2, 15, this);
+    $.utils.setInt8(17, value, this);
   }
   get u1f2s16(): number {
-    $.Struct.testWhich("u1f2s16", $.Struct.getUint16(2, this), 16, this);
-    return $.Struct.getInt16(18, this);
+    $.utils.testWhich("u1f2s16", $.utils.getUint16(2, this), 16, this);
+    return $.utils.getInt16(18, this);
   }
   isU1f2s16(): boolean {
-    return $.Struct.getUint16(2, this) === 16;
+    return $.utils.getUint16(2, this) === 16;
   }
   set u1f2s16(value: number) {
-    $.Struct.setUint16(2, 16, this);
-    $.Struct.setInt16(18, value, this);
+    $.utils.setUint16(2, 16, this);
+    $.utils.setInt16(18, value, this);
   }
   get u1f2s32(): number {
-    $.Struct.testWhich("u1f2s32", $.Struct.getUint16(2, this), 17, this);
-    return $.Struct.getInt32(20, this);
+    $.utils.testWhich("u1f2s32", $.utils.getUint16(2, this), 17, this);
+    return $.utils.getInt32(20, this);
   }
   isU1f2s32(): boolean {
-    return $.Struct.getUint16(2, this) === 17;
+    return $.utils.getUint16(2, this) === 17;
   }
   set u1f2s32(value: number) {
-    $.Struct.setUint16(2, 17, this);
-    $.Struct.setInt32(20, value, this);
+    $.utils.setUint16(2, 17, this);
+    $.utils.setInt32(20, value, this);
   }
   get u1f2s64(): bigint {
-    $.Struct.testWhich("u1f2s64", $.Struct.getUint16(2, this), 18, this);
-    return $.Struct.getInt64(24, this);
+    $.utils.testWhich("u1f2s64", $.utils.getUint16(2, this), 18, this);
+    return $.utils.getInt64(24, this);
   }
   isU1f2s64(): boolean {
-    return $.Struct.getUint16(2, this) === 18;
+    return $.utils.getUint16(2, this) === 18;
   }
   set u1f2s64(value: bigint) {
-    $.Struct.setUint16(2, 18, this);
-    $.Struct.setInt64(24, value, this);
+    $.utils.setUint16(2, 18, this);
+    $.utils.setInt64(24, value, this);
   }
   get u1f2sp(): string {
-    $.Struct.testWhich("u1f2sp", $.Struct.getUint16(2, this), 19, this);
-    return $.Struct.getText(1, this);
+    $.utils.testWhich("u1f2sp", $.utils.getUint16(2, this), 19, this);
+    return $.utils.getText(1, this);
   }
   isU1f2sp(): boolean {
-    return $.Struct.getUint16(2, this) === 19;
+    return $.utils.getUint16(2, this) === 19;
   }
   set u1f2sp(value: string) {
-    $.Struct.setUint16(2, 19, this);
-    $.Struct.setText(1, value, this);
+    $.utils.setUint16(2, 19, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "TestUnion_Union1_" + super.toString();
   }
   which(): TestUnion_Union1_Which {
-    return $.Struct.getUint16(2, this) as TestUnion_Union1_Which;
+    return $.utils.getUint16(2, this) as TestUnion_Union1_Which;
   }
 }
 export const TestUnion_Union2_Which = {
@@ -1523,65 +1523,65 @@ export class TestUnion_Union2 extends $.Struct {
     size: new $.ObjectSize(64, 2)
   };
   get u2f0s64(): bigint {
-    $.Struct.testWhich("u2f0s64", $.Struct.getUint16(4, this), 4, this);
-    return $.Struct.getInt64(48, this);
+    $.utils.testWhich("u2f0s64", $.utils.getUint16(4, this), 4, this);
+    return $.utils.getInt64(48, this);
   }
   isU2f0s64(): boolean {
-    return $.Struct.getUint16(4, this) === 4;
+    return $.utils.getUint16(4, this) === 4;
   }
   set u2f0s64(value: bigint) {
-    $.Struct.setUint16(4, 4, this);
-    $.Struct.setInt64(48, value, this);
+    $.utils.setUint16(4, 4, this);
+    $.utils.setInt64(48, value, this);
   }
   get u2f0s32(): number {
-    $.Struct.testWhich("u2f0s32", $.Struct.getUint16(4, this), 3, this);
-    return $.Struct.getInt32(40, this);
+    $.utils.testWhich("u2f0s32", $.utils.getUint16(4, this), 3, this);
+    return $.utils.getInt32(40, this);
   }
   isU2f0s32(): boolean {
-    return $.Struct.getUint16(4, this) === 3;
+    return $.utils.getUint16(4, this) === 3;
   }
   set u2f0s32(value: number) {
-    $.Struct.setUint16(4, 3, this);
-    $.Struct.setInt32(40, value, this);
+    $.utils.setUint16(4, 3, this);
+    $.utils.setInt32(40, value, this);
   }
   get u2f0s16(): number {
-    $.Struct.testWhich("u2f0s16", $.Struct.getUint16(4, this), 2, this);
-    return $.Struct.getInt16(36, this);
+    $.utils.testWhich("u2f0s16", $.utils.getUint16(4, this), 2, this);
+    return $.utils.getInt16(36, this);
   }
   isU2f0s16(): boolean {
-    return $.Struct.getUint16(4, this) === 2;
+    return $.utils.getUint16(4, this) === 2;
   }
   set u2f0s16(value: number) {
-    $.Struct.setUint16(4, 2, this);
-    $.Struct.setInt16(36, value, this);
+    $.utils.setUint16(4, 2, this);
+    $.utils.setInt16(36, value, this);
   }
   get u2f0s8(): number {
-    $.Struct.testWhich("u2f0s8", $.Struct.getUint16(4, this), 1, this);
-    return $.Struct.getInt8(33, this);
+    $.utils.testWhich("u2f0s8", $.utils.getUint16(4, this), 1, this);
+    return $.utils.getInt8(33, this);
   }
   isU2f0s8(): boolean {
-    return $.Struct.getUint16(4, this) === 1;
+    return $.utils.getUint16(4, this) === 1;
   }
   set u2f0s8(value: number) {
-    $.Struct.setUint16(4, 1, this);
-    $.Struct.setInt8(33, value, this);
+    $.utils.setUint16(4, 1, this);
+    $.utils.setInt8(33, value, this);
   }
   get u2f0s1(): boolean {
-    $.Struct.testWhich("u2f0s1", $.Struct.getUint16(4, this), 0, this);
-    return $.Struct.getBit(256, this);
+    $.utils.testWhich("u2f0s1", $.utils.getUint16(4, this), 0, this);
+    return $.utils.getBit(256, this);
   }
   isU2f0s1(): boolean {
-    return $.Struct.getUint16(4, this) === 0;
+    return $.utils.getUint16(4, this) === 0;
   }
   set u2f0s1(value: boolean) {
-    $.Struct.setUint16(4, 0, this);
-    $.Struct.setBit(256, value, this);
+    $.utils.setUint16(4, 0, this);
+    $.utils.setBit(256, value, this);
   }
   toString(): string {
     return "TestUnion_Union2_" + super.toString();
   }
   which(): TestUnion_Union2_Which {
-    return $.Struct.getUint16(4, this) as TestUnion_Union2_Which;
+    return $.utils.getUint16(4, this) as TestUnion_Union2_Which;
   }
 }
 export const TestUnion_Union3_Which = {
@@ -1604,65 +1604,65 @@ export class TestUnion_Union3 extends $.Struct {
     size: new $.ObjectSize(64, 2)
   };
   get u3f0s64(): bigint {
-    $.Struct.testWhich("u3f0s64", $.Struct.getUint16(6, this), 4, this);
-    return $.Struct.getInt64(56, this);
+    $.utils.testWhich("u3f0s64", $.utils.getUint16(6, this), 4, this);
+    return $.utils.getInt64(56, this);
   }
   isU3f0s64(): boolean {
-    return $.Struct.getUint16(6, this) === 4;
+    return $.utils.getUint16(6, this) === 4;
   }
   set u3f0s64(value: bigint) {
-    $.Struct.setUint16(6, 4, this);
-    $.Struct.setInt64(56, value, this);
+    $.utils.setUint16(6, 4, this);
+    $.utils.setInt64(56, value, this);
   }
   get u3f0s32(): number {
-    $.Struct.testWhich("u3f0s32", $.Struct.getUint16(6, this), 3, this);
-    return $.Struct.getInt32(44, this);
+    $.utils.testWhich("u3f0s32", $.utils.getUint16(6, this), 3, this);
+    return $.utils.getInt32(44, this);
   }
   isU3f0s32(): boolean {
-    return $.Struct.getUint16(6, this) === 3;
+    return $.utils.getUint16(6, this) === 3;
   }
   set u3f0s32(value: number) {
-    $.Struct.setUint16(6, 3, this);
-    $.Struct.setInt32(44, value, this);
+    $.utils.setUint16(6, 3, this);
+    $.utils.setInt32(44, value, this);
   }
   get u3f0s16(): number {
-    $.Struct.testWhich("u3f0s16", $.Struct.getUint16(6, this), 2, this);
-    return $.Struct.getInt16(38, this);
+    $.utils.testWhich("u3f0s16", $.utils.getUint16(6, this), 2, this);
+    return $.utils.getInt16(38, this);
   }
   isU3f0s16(): boolean {
-    return $.Struct.getUint16(6, this) === 2;
+    return $.utils.getUint16(6, this) === 2;
   }
   set u3f0s16(value: number) {
-    $.Struct.setUint16(6, 2, this);
-    $.Struct.setInt16(38, value, this);
+    $.utils.setUint16(6, 2, this);
+    $.utils.setInt16(38, value, this);
   }
   get u3f0s8(): number {
-    $.Struct.testWhich("u3f0s8", $.Struct.getUint16(6, this), 1, this);
-    return $.Struct.getInt8(34, this);
+    $.utils.testWhich("u3f0s8", $.utils.getUint16(6, this), 1, this);
+    return $.utils.getInt8(34, this);
   }
   isU3f0s8(): boolean {
-    return $.Struct.getUint16(6, this) === 1;
+    return $.utils.getUint16(6, this) === 1;
   }
   set u3f0s8(value: number) {
-    $.Struct.setUint16(6, 1, this);
-    $.Struct.setInt8(34, value, this);
+    $.utils.setUint16(6, 1, this);
+    $.utils.setInt8(34, value, this);
   }
   get u3f0s1(): boolean {
-    $.Struct.testWhich("u3f0s1", $.Struct.getUint16(6, this), 0, this);
-    return $.Struct.getBit(257, this);
+    $.utils.testWhich("u3f0s1", $.utils.getUint16(6, this), 0, this);
+    return $.utils.getBit(257, this);
   }
   isU3f0s1(): boolean {
-    return $.Struct.getUint16(6, this) === 0;
+    return $.utils.getUint16(6, this) === 0;
   }
   set u3f0s1(value: boolean) {
-    $.Struct.setUint16(6, 0, this);
-    $.Struct.setBit(257, value, this);
+    $.utils.setUint16(6, 0, this);
+    $.utils.setBit(257, value, this);
   }
   toString(): string {
     return "TestUnion_Union3_" + super.toString();
   }
   which(): TestUnion_Union3_Which {
-    return $.Struct.getUint16(6, this) as TestUnion_Union3_Which;
+    return $.utils.getUint16(6, this) as TestUnion_Union3_Which;
   }
 }
 export class TestUnion extends $.Struct {
@@ -1672,76 +1672,76 @@ export class TestUnion extends $.Struct {
     size: new $.ObjectSize(64, 2)
   };
   get union0(): TestUnion_Union0 {
-    return $.Struct.getAs(TestUnion_Union0, this);
+    return $.utils.getAs(TestUnion_Union0, this);
   }
   initUnion0(): TestUnion_Union0 {
-    return $.Struct.getAs(TestUnion_Union0, this);
+    return $.utils.getAs(TestUnion_Union0, this);
   }
   get bit0(): boolean {
-    return $.Struct.getBit(128, this);
+    return $.utils.getBit(128, this);
   }
   set bit0(value: boolean) {
-    $.Struct.setBit(128, value, this);
+    $.utils.setBit(128, value, this);
   }
   get union1(): TestUnion_Union1 {
-    return $.Struct.getAs(TestUnion_Union1, this);
+    return $.utils.getAs(TestUnion_Union1, this);
   }
   initUnion1(): TestUnion_Union1 {
-    return $.Struct.getAs(TestUnion_Union1, this);
+    return $.utils.getAs(TestUnion_Union1, this);
   }
   get bit2(): boolean {
-    return $.Struct.getBit(130, this);
+    return $.utils.getBit(130, this);
   }
   set bit2(value: boolean) {
-    $.Struct.setBit(130, value, this);
+    $.utils.setBit(130, value, this);
   }
   get bit3(): boolean {
-    return $.Struct.getBit(131, this);
+    return $.utils.getBit(131, this);
   }
   set bit3(value: boolean) {
-    $.Struct.setBit(131, value, this);
+    $.utils.setBit(131, value, this);
   }
   get bit4(): boolean {
-    return $.Struct.getBit(132, this);
+    return $.utils.getBit(132, this);
   }
   set bit4(value: boolean) {
-    $.Struct.setBit(132, value, this);
+    $.utils.setBit(132, value, this);
   }
   get bit5(): boolean {
-    return $.Struct.getBit(133, this);
+    return $.utils.getBit(133, this);
   }
   set bit5(value: boolean) {
-    $.Struct.setBit(133, value, this);
+    $.utils.setBit(133, value, this);
   }
   get bit6(): boolean {
-    return $.Struct.getBit(134, this);
+    return $.utils.getBit(134, this);
   }
   set bit6(value: boolean) {
-    $.Struct.setBit(134, value, this);
+    $.utils.setBit(134, value, this);
   }
   get bit7(): boolean {
-    return $.Struct.getBit(135, this);
+    return $.utils.getBit(135, this);
   }
   set bit7(value: boolean) {
-    $.Struct.setBit(135, value, this);
+    $.utils.setBit(135, value, this);
   }
   get union2(): TestUnion_Union2 {
-    return $.Struct.getAs(TestUnion_Union2, this);
+    return $.utils.getAs(TestUnion_Union2, this);
   }
   initUnion2(): TestUnion_Union2 {
-    return $.Struct.getAs(TestUnion_Union2, this);
+    return $.utils.getAs(TestUnion_Union2, this);
   }
   get union3(): TestUnion_Union3 {
-    return $.Struct.getAs(TestUnion_Union3, this);
+    return $.utils.getAs(TestUnion_Union3, this);
   }
   initUnion3(): TestUnion_Union3 {
-    return $.Struct.getAs(TestUnion_Union3, this);
+    return $.utils.getAs(TestUnion_Union3, this);
   }
   get byte0(): number {
-    return $.Struct.getUint8(35, this);
+    return $.utils.getUint8(35, this);
   }
   set byte0(value: number) {
-    $.Struct.setUint8(35, value, this);
+    $.utils.setUint8(35, value, this);
   }
   toString(): string {
     return "TestUnion_" + super.toString();
@@ -1761,50 +1761,50 @@ export class TestUnnamedUnion extends $.Struct {
     size: new $.ObjectSize(16, 2)
   };
   get before(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set before(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get foo(): number {
-    $.Struct.testWhich("foo", $.Struct.getUint16(4, this), 0, this);
-    return $.Struct.getUint16(0, this);
+    $.utils.testWhich("foo", $.utils.getUint16(4, this), 0, this);
+    return $.utils.getUint16(0, this);
   }
   isFoo(): boolean {
-    return $.Struct.getUint16(4, this) === 0;
+    return $.utils.getUint16(4, this) === 0;
   }
   set foo(value: number) {
-    $.Struct.setUint16(4, 0, this);
-    $.Struct.setUint16(0, value, this);
+    $.utils.setUint16(4, 0, this);
+    $.utils.setUint16(0, value, this);
   }
   get bar(): number {
-    $.Struct.testWhich("bar", $.Struct.getUint16(4, this), 1, this);
-    return $.Struct.getUint32(8, this);
+    $.utils.testWhich("bar", $.utils.getUint16(4, this), 1, this);
+    return $.utils.getUint32(8, this);
   }
   isBar(): boolean {
-    return $.Struct.getUint16(4, this) === 1;
+    return $.utils.getUint16(4, this) === 1;
   }
   set bar(value: number) {
-    $.Struct.setUint16(4, 1, this);
-    $.Struct.setUint32(8, value, this);
+    $.utils.setUint16(4, 1, this);
+    $.utils.setUint32(8, value, this);
   }
   get middle(): number {
-    return $.Struct.getUint16(2, this);
+    return $.utils.getUint16(2, this);
   }
   set middle(value: number) {
-    $.Struct.setUint16(2, value, this);
+    $.utils.setUint16(2, value, this);
   }
   get after(): string {
-    return $.Struct.getText(1, this);
+    return $.utils.getText(1, this);
   }
   set after(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "TestUnnamedUnion_" + super.toString();
   }
   which(): TestUnnamedUnion_Which {
-    return $.Struct.getUint16(4, this) as TestUnnamedUnion_Which;
+    return $.utils.getUint16(4, this) as TestUnnamedUnion_Which;
   }
 }
 export const TestUnionInUnion_Outer_Inner_Which = {
@@ -1821,32 +1821,32 @@ export class TestUnionInUnion_Outer_Inner extends $.Struct {
     size: new $.ObjectSize(16, 0)
   };
   get foo(): number {
-    $.Struct.testWhich("foo", $.Struct.getUint16(4, this), 0, this);
-    return $.Struct.getInt32(0, this);
+    $.utils.testWhich("foo", $.utils.getUint16(4, this), 0, this);
+    return $.utils.getInt32(0, this);
   }
   isFoo(): boolean {
-    return $.Struct.getUint16(4, this) === 0;
+    return $.utils.getUint16(4, this) === 0;
   }
   set foo(value: number) {
-    $.Struct.setUint16(4, 0, this);
-    $.Struct.setInt32(0, value, this);
+    $.utils.setUint16(4, 0, this);
+    $.utils.setInt32(0, value, this);
   }
   get bar(): number {
-    $.Struct.testWhich("bar", $.Struct.getUint16(4, this), 1, this);
-    return $.Struct.getInt32(0, this);
+    $.utils.testWhich("bar", $.utils.getUint16(4, this), 1, this);
+    return $.utils.getInt32(0, this);
   }
   isBar(): boolean {
-    return $.Struct.getUint16(4, this) === 1;
+    return $.utils.getUint16(4, this) === 1;
   }
   set bar(value: number) {
-    $.Struct.setUint16(4, 1, this);
-    $.Struct.setInt32(0, value, this);
+    $.utils.setUint16(4, 1, this);
+    $.utils.setInt32(0, value, this);
   }
   toString(): string {
     return "TestUnionInUnion_Outer_Inner_" + super.toString();
   }
   which(): TestUnionInUnion_Outer_Inner_Which {
-    return $.Struct.getUint16(4, this) as TestUnionInUnion_Outer_Inner_Which;
+    return $.utils.getUint16(4, this) as TestUnionInUnion_Outer_Inner_Which;
   }
 }
 export const TestUnionInUnion_Outer_Which = {
@@ -1863,35 +1863,35 @@ export class TestUnionInUnion_Outer extends $.Struct {
     size: new $.ObjectSize(16, 0)
   };
   get inner(): TestUnionInUnion_Outer_Inner {
-    $.Struct.testWhich("inner", $.Struct.getUint16(8, this), 0, this);
-    return $.Struct.getAs(TestUnionInUnion_Outer_Inner, this);
+    $.utils.testWhich("inner", $.utils.getUint16(8, this), 0, this);
+    return $.utils.getAs(TestUnionInUnion_Outer_Inner, this);
   }
   initInner(): TestUnionInUnion_Outer_Inner {
-    $.Struct.setUint16(8, 0, this);
-    return $.Struct.getAs(TestUnionInUnion_Outer_Inner, this);
+    $.utils.setUint16(8, 0, this);
+    return $.utils.getAs(TestUnionInUnion_Outer_Inner, this);
   }
   isInner(): boolean {
-    return $.Struct.getUint16(8, this) === 0;
+    return $.utils.getUint16(8, this) === 0;
   }
   set inner(_: true) {
-    $.Struct.setUint16(8, 0, this);
+    $.utils.setUint16(8, 0, this);
   }
   get baz(): number {
-    $.Struct.testWhich("baz", $.Struct.getUint16(8, this), 1, this);
-    return $.Struct.getInt32(0, this);
+    $.utils.testWhich("baz", $.utils.getUint16(8, this), 1, this);
+    return $.utils.getInt32(0, this);
   }
   isBaz(): boolean {
-    return $.Struct.getUint16(8, this) === 1;
+    return $.utils.getUint16(8, this) === 1;
   }
   set baz(value: number) {
-    $.Struct.setUint16(8, 1, this);
-    $.Struct.setInt32(0, value, this);
+    $.utils.setUint16(8, 1, this);
+    $.utils.setInt32(0, value, this);
   }
   toString(): string {
     return "TestUnionInUnion_Outer_" + super.toString();
   }
   which(): TestUnionInUnion_Outer_Which {
-    return $.Struct.getUint16(8, this) as TestUnionInUnion_Outer_Which;
+    return $.utils.getUint16(8, this) as TestUnionInUnion_Outer_Which;
   }
 }
 export class TestUnionInUnion extends $.Struct {
@@ -1901,10 +1901,10 @@ export class TestUnionInUnion extends $.Struct {
     size: new $.ObjectSize(16, 0)
   };
   get outer(): TestUnionInUnion_Outer {
-    return $.Struct.getAs(TestUnionInUnion_Outer, this);
+    return $.utils.getAs(TestUnionInUnion_Outer, this);
   }
   initOuter(): TestUnionInUnion_Outer {
-    return $.Struct.getAs(TestUnionInUnion_Outer, this);
+    return $.utils.getAs(TestUnionInUnion_Outer, this);
   }
   toString(): string {
     return "TestUnionInUnion_" + super.toString();
@@ -1917,22 +1917,22 @@ export class TestGroups_Groups_Foo extends $.Struct {
     size: new $.ObjectSize(16, 2)
   };
   get corge(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set corge(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get grault(): bigint {
-    return $.Struct.getInt64(8, this);
+    return $.utils.getInt64(8, this);
   }
   set grault(value: bigint) {
-    $.Struct.setInt64(8, value, this);
+    $.utils.setInt64(8, value, this);
   }
   get garply(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set garply(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestGroups_Groups_Foo_" + super.toString();
@@ -1945,22 +1945,22 @@ export class TestGroups_Groups_Baz extends $.Struct {
     size: new $.ObjectSize(16, 2)
   };
   get corge(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set corge(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get grault(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set grault(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get garply(): string {
-    return $.Struct.getText(1, this);
+    return $.utils.getText(1, this);
   }
   set garply(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "TestGroups_Groups_Baz_" + super.toString();
@@ -1973,22 +1973,22 @@ export class TestGroups_Groups_Bar extends $.Struct {
     size: new $.ObjectSize(16, 2)
   };
   get corge(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set corge(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get grault(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set grault(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get garply(): bigint {
-    return $.Struct.getInt64(8, this);
+    return $.utils.getInt64(8, this);
   }
   set garply(value: bigint) {
-    $.Struct.setInt64(8, value, this);
+    $.utils.setInt64(8, value, this);
   }
   toString(): string {
     return "TestGroups_Groups_Bar_" + super.toString();
@@ -2010,52 +2010,52 @@ export class TestGroups_Groups extends $.Struct {
     size: new $.ObjectSize(16, 2)
   };
   get foo(): TestGroups_Groups_Foo {
-    $.Struct.testWhich("foo", $.Struct.getUint16(4, this), 0, this);
-    return $.Struct.getAs(TestGroups_Groups_Foo, this);
+    $.utils.testWhich("foo", $.utils.getUint16(4, this), 0, this);
+    return $.utils.getAs(TestGroups_Groups_Foo, this);
   }
   initFoo(): TestGroups_Groups_Foo {
-    $.Struct.setUint16(4, 0, this);
-    return $.Struct.getAs(TestGroups_Groups_Foo, this);
+    $.utils.setUint16(4, 0, this);
+    return $.utils.getAs(TestGroups_Groups_Foo, this);
   }
   isFoo(): boolean {
-    return $.Struct.getUint16(4, this) === 0;
+    return $.utils.getUint16(4, this) === 0;
   }
   set foo(_: true) {
-    $.Struct.setUint16(4, 0, this);
+    $.utils.setUint16(4, 0, this);
   }
   get bar(): TestGroups_Groups_Bar {
-    $.Struct.testWhich("bar", $.Struct.getUint16(4, this), 2, this);
-    return $.Struct.getAs(TestGroups_Groups_Bar, this);
+    $.utils.testWhich("bar", $.utils.getUint16(4, this), 2, this);
+    return $.utils.getAs(TestGroups_Groups_Bar, this);
   }
   initBar(): TestGroups_Groups_Bar {
-    $.Struct.setUint16(4, 2, this);
-    return $.Struct.getAs(TestGroups_Groups_Bar, this);
+    $.utils.setUint16(4, 2, this);
+    return $.utils.getAs(TestGroups_Groups_Bar, this);
   }
   isBar(): boolean {
-    return $.Struct.getUint16(4, this) === 2;
+    return $.utils.getUint16(4, this) === 2;
   }
   set bar(_: true) {
-    $.Struct.setUint16(4, 2, this);
+    $.utils.setUint16(4, 2, this);
   }
   get baz(): TestGroups_Groups_Baz {
-    $.Struct.testWhich("baz", $.Struct.getUint16(4, this), 1, this);
-    return $.Struct.getAs(TestGroups_Groups_Baz, this);
+    $.utils.testWhich("baz", $.utils.getUint16(4, this), 1, this);
+    return $.utils.getAs(TestGroups_Groups_Baz, this);
   }
   initBaz(): TestGroups_Groups_Baz {
-    $.Struct.setUint16(4, 1, this);
-    return $.Struct.getAs(TestGroups_Groups_Baz, this);
+    $.utils.setUint16(4, 1, this);
+    return $.utils.getAs(TestGroups_Groups_Baz, this);
   }
   isBaz(): boolean {
-    return $.Struct.getUint16(4, this) === 1;
+    return $.utils.getUint16(4, this) === 1;
   }
   set baz(_: true) {
-    $.Struct.setUint16(4, 1, this);
+    $.utils.setUint16(4, 1, this);
   }
   toString(): string {
     return "TestGroups_Groups_" + super.toString();
   }
   which(): TestGroups_Groups_Which {
-    return $.Struct.getUint16(4, this) as TestGroups_Groups_Which;
+    return $.utils.getUint16(4, this) as TestGroups_Groups_Which;
   }
 }
 export class TestGroups extends $.Struct {
@@ -2065,10 +2065,10 @@ export class TestGroups extends $.Struct {
     size: new $.ObjectSize(16, 2)
   };
   get groups(): TestGroups_Groups {
-    return $.Struct.getAs(TestGroups_Groups, this);
+    return $.utils.getAs(TestGroups_Groups, this);
   }
   initGroups(): TestGroups_Groups {
-    return $.Struct.getAs(TestGroups_Groups, this);
+    return $.utils.getAs(TestGroups_Groups, this);
   }
   toString(): string {
     return "TestGroups_" + super.toString();
@@ -2081,28 +2081,28 @@ export class TestInterleavedGroups_Group1_Corge extends $.Struct {
     size: new $.ObjectSize(48, 6)
   };
   get grault(): bigint {
-    return $.Struct.getUint64(32, this);
+    return $.utils.getUint64(32, this);
   }
   set grault(value: bigint) {
-    $.Struct.setUint64(32, value, this);
+    $.utils.setUint64(32, value, this);
   }
   get garply(): number {
-    return $.Struct.getUint16(24, this);
+    return $.utils.getUint16(24, this);
   }
   set garply(value: number) {
-    $.Struct.setUint16(24, value, this);
+    $.utils.setUint16(24, value, this);
   }
   get plugh(): string {
-    return $.Struct.getText(2, this);
+    return $.utils.getText(2, this);
   }
   set plugh(value: string) {
-    $.Struct.setText(2, value, this);
+    $.utils.setText(2, value, this);
   }
   get xyzzy(): string {
-    return $.Struct.getText(4, this);
+    return $.utils.getText(4, this);
   }
   set xyzzy(value: string) {
-    $.Struct.setText(4, value, this);
+    $.utils.setText(4, value, this);
   }
   toString(): string {
     return "TestInterleavedGroups_Group1_Corge_" + super.toString();
@@ -2124,64 +2124,64 @@ export class TestInterleavedGroups_Group1 extends $.Struct {
     size: new $.ObjectSize(48, 6)
   };
   get foo(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set foo(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   get bar(): bigint {
-    return $.Struct.getUint64(8, this);
+    return $.utils.getUint64(8, this);
   }
   set bar(value: bigint) {
-    $.Struct.setUint64(8, value, this);
+    $.utils.setUint64(8, value, this);
   }
   get qux(): number {
-    $.Struct.testWhich("qux", $.Struct.getUint16(28, this), 0, this);
-    return $.Struct.getUint16(24, this);
+    $.utils.testWhich("qux", $.utils.getUint16(28, this), 0, this);
+    return $.utils.getUint16(24, this);
   }
   isQux(): boolean {
-    return $.Struct.getUint16(28, this) === 0;
+    return $.utils.getUint16(28, this) === 0;
   }
   set qux(value: number) {
-    $.Struct.setUint16(28, 0, this);
-    $.Struct.setUint16(24, value, this);
+    $.utils.setUint16(28, 0, this);
+    $.utils.setUint16(24, value, this);
   }
   get corge(): TestInterleavedGroups_Group1_Corge {
-    $.Struct.testWhich("corge", $.Struct.getUint16(28, this), 1, this);
-    return $.Struct.getAs(TestInterleavedGroups_Group1_Corge, this);
+    $.utils.testWhich("corge", $.utils.getUint16(28, this), 1, this);
+    return $.utils.getAs(TestInterleavedGroups_Group1_Corge, this);
   }
   initCorge(): TestInterleavedGroups_Group1_Corge {
-    $.Struct.setUint16(28, 1, this);
-    return $.Struct.getAs(TestInterleavedGroups_Group1_Corge, this);
+    $.utils.setUint16(28, 1, this);
+    return $.utils.getAs(TestInterleavedGroups_Group1_Corge, this);
   }
   isCorge(): boolean {
-    return $.Struct.getUint16(28, this) === 1;
+    return $.utils.getUint16(28, this) === 1;
   }
   set corge(_: true) {
-    $.Struct.setUint16(28, 1, this);
+    $.utils.setUint16(28, 1, this);
   }
   get fred(): string {
-    $.Struct.testWhich("fred", $.Struct.getUint16(28, this), 2, this);
-    return $.Struct.getText(2, this);
+    $.utils.testWhich("fred", $.utils.getUint16(28, this), 2, this);
+    return $.utils.getText(2, this);
   }
   isFred(): boolean {
-    return $.Struct.getUint16(28, this) === 2;
+    return $.utils.getUint16(28, this) === 2;
   }
   set fred(value: string) {
-    $.Struct.setUint16(28, 2, this);
-    $.Struct.setText(2, value, this);
+    $.utils.setUint16(28, 2, this);
+    $.utils.setText(2, value, this);
   }
   get waldo(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set waldo(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestInterleavedGroups_Group1_" + super.toString();
   }
   which(): TestInterleavedGroups_Group1_Which {
-    return $.Struct.getUint16(28, this) as TestInterleavedGroups_Group1_Which;
+    return $.utils.getUint16(28, this) as TestInterleavedGroups_Group1_Which;
   }
 }
 export class TestInterleavedGroups_Group2_Corge extends $.Struct {
@@ -2191,28 +2191,28 @@ export class TestInterleavedGroups_Group2_Corge extends $.Struct {
     size: new $.ObjectSize(48, 6)
   };
   get grault(): bigint {
-    return $.Struct.getUint64(40, this);
+    return $.utils.getUint64(40, this);
   }
   set grault(value: bigint) {
-    $.Struct.setUint64(40, value, this);
+    $.utils.setUint64(40, value, this);
   }
   get garply(): number {
-    return $.Struct.getUint16(26, this);
+    return $.utils.getUint16(26, this);
   }
   set garply(value: number) {
-    $.Struct.setUint16(26, value, this);
+    $.utils.setUint16(26, value, this);
   }
   get plugh(): string {
-    return $.Struct.getText(3, this);
+    return $.utils.getText(3, this);
   }
   set plugh(value: string) {
-    $.Struct.setText(3, value, this);
+    $.utils.setText(3, value, this);
   }
   get xyzzy(): string {
-    return $.Struct.getText(5, this);
+    return $.utils.getText(5, this);
   }
   set xyzzy(value: string) {
-    $.Struct.setText(5, value, this);
+    $.utils.setText(5, value, this);
   }
   toString(): string {
     return "TestInterleavedGroups_Group2_Corge_" + super.toString();
@@ -2234,64 +2234,64 @@ export class TestInterleavedGroups_Group2 extends $.Struct {
     size: new $.ObjectSize(48, 6)
   };
   get foo(): number {
-    return $.Struct.getUint32(4, this);
+    return $.utils.getUint32(4, this);
   }
   set foo(value: number) {
-    $.Struct.setUint32(4, value, this);
+    $.utils.setUint32(4, value, this);
   }
   get bar(): bigint {
-    return $.Struct.getUint64(16, this);
+    return $.utils.getUint64(16, this);
   }
   set bar(value: bigint) {
-    $.Struct.setUint64(16, value, this);
+    $.utils.setUint64(16, value, this);
   }
   get qux(): number {
-    $.Struct.testWhich("qux", $.Struct.getUint16(30, this), 0, this);
-    return $.Struct.getUint16(26, this);
+    $.utils.testWhich("qux", $.utils.getUint16(30, this), 0, this);
+    return $.utils.getUint16(26, this);
   }
   isQux(): boolean {
-    return $.Struct.getUint16(30, this) === 0;
+    return $.utils.getUint16(30, this) === 0;
   }
   set qux(value: number) {
-    $.Struct.setUint16(30, 0, this);
-    $.Struct.setUint16(26, value, this);
+    $.utils.setUint16(30, 0, this);
+    $.utils.setUint16(26, value, this);
   }
   get corge(): TestInterleavedGroups_Group2_Corge {
-    $.Struct.testWhich("corge", $.Struct.getUint16(30, this), 1, this);
-    return $.Struct.getAs(TestInterleavedGroups_Group2_Corge, this);
+    $.utils.testWhich("corge", $.utils.getUint16(30, this), 1, this);
+    return $.utils.getAs(TestInterleavedGroups_Group2_Corge, this);
   }
   initCorge(): TestInterleavedGroups_Group2_Corge {
-    $.Struct.setUint16(30, 1, this);
-    return $.Struct.getAs(TestInterleavedGroups_Group2_Corge, this);
+    $.utils.setUint16(30, 1, this);
+    return $.utils.getAs(TestInterleavedGroups_Group2_Corge, this);
   }
   isCorge(): boolean {
-    return $.Struct.getUint16(30, this) === 1;
+    return $.utils.getUint16(30, this) === 1;
   }
   set corge(_: true) {
-    $.Struct.setUint16(30, 1, this);
+    $.utils.setUint16(30, 1, this);
   }
   get fred(): string {
-    $.Struct.testWhich("fred", $.Struct.getUint16(30, this), 2, this);
-    return $.Struct.getText(3, this);
+    $.utils.testWhich("fred", $.utils.getUint16(30, this), 2, this);
+    return $.utils.getText(3, this);
   }
   isFred(): boolean {
-    return $.Struct.getUint16(30, this) === 2;
+    return $.utils.getUint16(30, this) === 2;
   }
   set fred(value: string) {
-    $.Struct.setUint16(30, 2, this);
-    $.Struct.setText(3, value, this);
+    $.utils.setUint16(30, 2, this);
+    $.utils.setText(3, value, this);
   }
   get waldo(): string {
-    return $.Struct.getText(1, this);
+    return $.utils.getText(1, this);
   }
   set waldo(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "TestInterleavedGroups_Group2_" + super.toString();
   }
   which(): TestInterleavedGroups_Group2_Which {
-    return $.Struct.getUint16(30, this) as TestInterleavedGroups_Group2_Which;
+    return $.utils.getUint16(30, this) as TestInterleavedGroups_Group2_Which;
   }
 }
 export class TestInterleavedGroups extends $.Struct {
@@ -2301,16 +2301,16 @@ export class TestInterleavedGroups extends $.Struct {
     size: new $.ObjectSize(48, 6)
   };
   get group1(): TestInterleavedGroups_Group1 {
-    return $.Struct.getAs(TestInterleavedGroups_Group1, this);
+    return $.utils.getAs(TestInterleavedGroups_Group1, this);
   }
   initGroup1(): TestInterleavedGroups_Group1 {
-    return $.Struct.getAs(TestInterleavedGroups_Group1, this);
+    return $.utils.getAs(TestInterleavedGroups_Group1, this);
   }
   get group2(): TestInterleavedGroups_Group2 {
-    return $.Struct.getAs(TestInterleavedGroups_Group2, this);
+    return $.utils.getAs(TestInterleavedGroups_Group2, this);
   }
   initGroup2(): TestInterleavedGroups_Group2 {
-    return $.Struct.getAs(TestInterleavedGroups_Group2, this);
+    return $.utils.getAs(TestInterleavedGroups_Group2, this);
   }
   toString(): string {
     return "TestInterleavedGroups_" + super.toString();
@@ -2327,76 +2327,76 @@ export class TestUnionDefaults extends $.Struct {
     defaultUnnamed2: $.readRawPointer(new Uint8Array([0x10, 0x07, 0x50, 0x02, 0x02, 0x10, 0x01, 0x03, 0x41, 0x01, 0x11, 0x05, 0x22, 0x11, 0x05, 0x22, 0x07, 0x66, 0x6f, 0x6f, 0x07, 0x62, 0x61, 0x72]).buffer)
   };
   adoptS16s8s64s8Set(value: $.Orphan<TestUnion>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownS16s8s64s8Set(): $.Orphan<TestUnion> {
-    return $.Struct.disown(this.s16s8s64s8Set);
+    return $.utils.disown(this.s16s8s64s8Set);
   }
   get s16s8s64s8Set(): TestUnion {
-    return $.Struct.getStruct(0, TestUnion, this, TestUnionDefaults._capnp.defaultS16s8s64s8Set);
+    return $.utils.getStruct(0, TestUnion, this, TestUnionDefaults._capnp.defaultS16s8s64s8Set);
   }
   hasS16s8s64s8Set(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initS16s8s64s8Set(): TestUnion {
-    return $.Struct.initStructAt(0, TestUnion, this);
+    return $.utils.initStructAt(0, TestUnion, this);
   }
   set s16s8s64s8Set(value: TestUnion) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptS0sps1s32Set(value: $.Orphan<TestUnion>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownS0sps1s32Set(): $.Orphan<TestUnion> {
-    return $.Struct.disown(this.s0sps1s32Set);
+    return $.utils.disown(this.s0sps1s32Set);
   }
   get s0sps1s32Set(): TestUnion {
-    return $.Struct.getStruct(1, TestUnion, this, TestUnionDefaults._capnp.defaultS0sps1s32Set);
+    return $.utils.getStruct(1, TestUnion, this, TestUnionDefaults._capnp.defaultS0sps1s32Set);
   }
   hasS0sps1s32Set(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initS0sps1s32Set(): TestUnion {
-    return $.Struct.initStructAt(1, TestUnion, this);
+    return $.utils.initStructAt(1, TestUnion, this);
   }
   set s0sps1s32Set(value: TestUnion) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptUnnamed1(value: $.Orphan<TestUnnamedUnion>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownUnnamed1(): $.Orphan<TestUnnamedUnion> {
-    return $.Struct.disown(this.unnamed1);
+    return $.utils.disown(this.unnamed1);
   }
   get unnamed1(): TestUnnamedUnion {
-    return $.Struct.getStruct(2, TestUnnamedUnion, this, TestUnionDefaults._capnp.defaultUnnamed1);
+    return $.utils.getStruct(2, TestUnnamedUnion, this, TestUnionDefaults._capnp.defaultUnnamed1);
   }
   hasUnnamed1(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initUnnamed1(): TestUnnamedUnion {
-    return $.Struct.initStructAt(2, TestUnnamedUnion, this);
+    return $.utils.initStructAt(2, TestUnnamedUnion, this);
   }
   set unnamed1(value: TestUnnamedUnion) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptUnnamed2(value: $.Orphan<TestUnnamedUnion>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownUnnamed2(): $.Orphan<TestUnnamedUnion> {
-    return $.Struct.disown(this.unnamed2);
+    return $.utils.disown(this.unnamed2);
   }
   get unnamed2(): TestUnnamedUnion {
-    return $.Struct.getStruct(3, TestUnnamedUnion, this, TestUnionDefaults._capnp.defaultUnnamed2);
+    return $.utils.getStruct(3, TestUnnamedUnion, this, TestUnionDefaults._capnp.defaultUnnamed2);
   }
   hasUnnamed2(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initUnnamed2(): TestUnnamedUnion {
-    return $.Struct.initStructAt(3, TestUnnamedUnion, this);
+    return $.utils.initStructAt(3, TestUnnamedUnion, this);
   }
   set unnamed2(value: TestUnnamedUnion) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   toString(): string {
     return "TestUnionDefaults_" + super.toString();
@@ -2423,16 +2423,16 @@ export class TestNestedTypes_NestedStruct extends $.Struct {
     defaultInnerNestedEnum: $.getUint16Mask(2)
   };
   get outerNestedEnum(): TestNestedTypes_NestedEnum {
-    return $.Struct.getUint16(0, this, TestNestedTypes_NestedStruct._capnp.defaultOuterNestedEnum) as TestNestedTypes_NestedEnum;
+    return $.utils.getUint16(0, this, TestNestedTypes_NestedStruct._capnp.defaultOuterNestedEnum) as TestNestedTypes_NestedEnum;
   }
   set outerNestedEnum(value: TestNestedTypes_NestedEnum) {
-    $.Struct.setUint16(0, value, this, TestNestedTypes_NestedStruct._capnp.defaultOuterNestedEnum);
+    $.utils.setUint16(0, value, this, TestNestedTypes_NestedStruct._capnp.defaultOuterNestedEnum);
   }
   get innerNestedEnum(): TestNestedTypes_NestedStruct_NestedEnum {
-    return $.Struct.getUint16(2, this, TestNestedTypes_NestedStruct._capnp.defaultInnerNestedEnum) as TestNestedTypes_NestedStruct_NestedEnum;
+    return $.utils.getUint16(2, this, TestNestedTypes_NestedStruct._capnp.defaultInnerNestedEnum) as TestNestedTypes_NestedStruct_NestedEnum;
   }
   set innerNestedEnum(value: TestNestedTypes_NestedStruct_NestedEnum) {
-    $.Struct.setUint16(2, value, this, TestNestedTypes_NestedStruct._capnp.defaultInnerNestedEnum);
+    $.utils.setUint16(2, value, this, TestNestedTypes_NestedStruct._capnp.defaultInnerNestedEnum);
   }
   toString(): string {
     return "TestNestedTypes_NestedStruct_" + super.toString();
@@ -2449,34 +2449,34 @@ export class TestNestedTypes extends $.Struct {
     defaultInnerNestedEnum: $.getUint16Mask(2)
   };
   adoptNestedStruct(value: $.Orphan<TestNestedTypes_NestedStruct>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownNestedStruct(): $.Orphan<TestNestedTypes_NestedStruct> {
-    return $.Struct.disown(this.nestedStruct);
+    return $.utils.disown(this.nestedStruct);
   }
   get nestedStruct(): TestNestedTypes_NestedStruct {
-    return $.Struct.getStruct(0, TestNestedTypes_NestedStruct, this);
+    return $.utils.getStruct(0, TestNestedTypes_NestedStruct, this);
   }
   hasNestedStruct(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initNestedStruct(): TestNestedTypes_NestedStruct {
-    return $.Struct.initStructAt(0, TestNestedTypes_NestedStruct, this);
+    return $.utils.initStructAt(0, TestNestedTypes_NestedStruct, this);
   }
   set nestedStruct(value: TestNestedTypes_NestedStruct) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   get outerNestedEnum(): TestNestedTypes_NestedEnum {
-    return $.Struct.getUint16(0, this, TestNestedTypes._capnp.defaultOuterNestedEnum) as TestNestedTypes_NestedEnum;
+    return $.utils.getUint16(0, this, TestNestedTypes._capnp.defaultOuterNestedEnum) as TestNestedTypes_NestedEnum;
   }
   set outerNestedEnum(value: TestNestedTypes_NestedEnum) {
-    $.Struct.setUint16(0, value, this, TestNestedTypes._capnp.defaultOuterNestedEnum);
+    $.utils.setUint16(0, value, this, TestNestedTypes._capnp.defaultOuterNestedEnum);
   }
   get innerNestedEnum(): TestNestedTypes_NestedStruct_NestedEnum {
-    return $.Struct.getUint16(2, this, TestNestedTypes._capnp.defaultInnerNestedEnum) as TestNestedTypes_NestedStruct_NestedEnum;
+    return $.utils.getUint16(2, this, TestNestedTypes._capnp.defaultInnerNestedEnum) as TestNestedTypes_NestedStruct_NestedEnum;
   }
   set innerNestedEnum(value: TestNestedTypes_NestedStruct_NestedEnum) {
-    $.Struct.setUint16(2, value, this, TestNestedTypes._capnp.defaultInnerNestedEnum);
+    $.utils.setUint16(2, value, this, TestNestedTypes._capnp.defaultInnerNestedEnum);
   }
   toString(): string {
     return "TestNestedTypes_" + super.toString();
@@ -2491,16 +2491,16 @@ export class TestUsing extends $.Struct {
     defaultInnerNestedEnum: $.getUint16Mask(2)
   };
   get outerNestedEnum(): TestNestedTypes_NestedEnum {
-    return $.Struct.getUint16(2, this, TestUsing._capnp.defaultOuterNestedEnum) as TestNestedTypes_NestedEnum;
+    return $.utils.getUint16(2, this, TestUsing._capnp.defaultOuterNestedEnum) as TestNestedTypes_NestedEnum;
   }
   set outerNestedEnum(value: TestNestedTypes_NestedEnum) {
-    $.Struct.setUint16(2, value, this, TestUsing._capnp.defaultOuterNestedEnum);
+    $.utils.setUint16(2, value, this, TestUsing._capnp.defaultOuterNestedEnum);
   }
   get innerNestedEnum(): TestNestedTypes_NestedStruct_NestedEnum {
-    return $.Struct.getUint16(0, this, TestUsing._capnp.defaultInnerNestedEnum) as TestNestedTypes_NestedStruct_NestedEnum;
+    return $.utils.getUint16(0, this, TestUsing._capnp.defaultInnerNestedEnum) as TestNestedTypes_NestedStruct_NestedEnum;
   }
   set innerNestedEnum(value: TestNestedTypes_NestedStruct_NestedEnum) {
-    $.Struct.setUint16(0, value, this, TestUsing._capnp.defaultInnerNestedEnum);
+    $.utils.setUint16(0, value, this, TestUsing._capnp.defaultInnerNestedEnum);
   }
   toString(): string {
     return "TestUsing_" + super.toString();
@@ -2523,10 +2523,10 @@ export class TestLists_Struct1 extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get f(): boolean {
-    return $.Struct.getBit(0, this);
+    return $.utils.getBit(0, this);
   }
   set f(value: boolean) {
-    $.Struct.setBit(0, value, this);
+    $.utils.setBit(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct1_" + super.toString();
@@ -2539,10 +2539,10 @@ export class TestLists_Struct8 extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get f(): number {
-    return $.Struct.getUint8(0, this);
+    return $.utils.getUint8(0, this);
   }
   set f(value: number) {
-    $.Struct.setUint8(0, value, this);
+    $.utils.setUint8(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct8_" + super.toString();
@@ -2555,10 +2555,10 @@ export class TestLists_Struct16 extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get f(): number {
-    return $.Struct.getUint16(0, this);
+    return $.utils.getUint16(0, this);
   }
   set f(value: number) {
-    $.Struct.setUint16(0, value, this);
+    $.utils.setUint16(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct16_" + super.toString();
@@ -2571,10 +2571,10 @@ export class TestLists_Struct32 extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get f(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set f(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct32_" + super.toString();
@@ -2587,10 +2587,10 @@ export class TestLists_Struct64 extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get f(): bigint {
-    return $.Struct.getUint64(0, this);
+    return $.utils.getUint64(0, this);
   }
   set f(value: bigint) {
-    $.Struct.setUint64(0, value, this);
+    $.utils.setUint64(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct64_" + super.toString();
@@ -2603,10 +2603,10 @@ export class TestLists_StructP extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get f(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set f(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestLists_StructP_" + super.toString();
@@ -2619,10 +2619,10 @@ export class TestLists_Struct0c extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get pad(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set pad(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct0c_" + super.toString();
@@ -2635,16 +2635,16 @@ export class TestLists_Struct1c extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get f(): boolean {
-    return $.Struct.getBit(0, this);
+    return $.utils.getBit(0, this);
   }
   set f(value: boolean) {
-    $.Struct.setBit(0, value, this);
+    $.utils.setBit(0, value, this);
   }
   get pad(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set pad(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct1c_" + super.toString();
@@ -2657,16 +2657,16 @@ export class TestLists_Struct8c extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get f(): number {
-    return $.Struct.getUint8(0, this);
+    return $.utils.getUint8(0, this);
   }
   set f(value: number) {
-    $.Struct.setUint8(0, value, this);
+    $.utils.setUint8(0, value, this);
   }
   get pad(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set pad(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct8c_" + super.toString();
@@ -2679,16 +2679,16 @@ export class TestLists_Struct16c extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get f(): number {
-    return $.Struct.getUint16(0, this);
+    return $.utils.getUint16(0, this);
   }
   set f(value: number) {
-    $.Struct.setUint16(0, value, this);
+    $.utils.setUint16(0, value, this);
   }
   get pad(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set pad(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct16c_" + super.toString();
@@ -2701,16 +2701,16 @@ export class TestLists_Struct32c extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get f(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set f(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   get pad(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set pad(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct32c_" + super.toString();
@@ -2723,16 +2723,16 @@ export class TestLists_Struct64c extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get f(): bigint {
-    return $.Struct.getUint64(0, this);
+    return $.utils.getUint64(0, this);
   }
   set f(value: bigint) {
-    $.Struct.setUint64(0, value, this);
+    $.utils.setUint64(0, value, this);
   }
   get pad(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set pad(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestLists_Struct64c_" + super.toString();
@@ -2745,16 +2745,16 @@ export class TestLists_StructPc extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get f(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set f(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get pad(): bigint {
-    return $.Struct.getUint64(0, this);
+    return $.utils.getUint64(0, this);
   }
   set pad(value: bigint) {
-    $.Struct.setUint64(0, value, this);
+    $.utils.setUint64(0, value, this);
   }
   toString(): string {
     return "TestLists_StructPc_" + super.toString();
@@ -2791,184 +2791,184 @@ export class TestLists extends $.Struct {
   static _TextListList: $.ListCtor<$.List<string>>;
   static _StructListList: $.ListCtor<$.List<TestAllTypes>>;
   adoptList0(value: $.Orphan<$.List<TestLists_Struct0>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownList0(): $.Orphan<$.List<TestLists_Struct0>> {
-    return $.Struct.disown(this.list0);
+    return $.utils.disown(this.list0);
   }
   get list0(): $.List<TestLists_Struct0> {
-    return $.Struct.getList(0, TestLists._List0, this);
+    return $.utils.getList(0, TestLists._List0, this);
   }
   hasList0(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initList0(length: number): $.List<TestLists_Struct0> {
-    return $.Struct.initList(0, TestLists._List0, length, this);
+    return $.utils.initList(0, TestLists._List0, length, this);
   }
   set list0(value: $.List<TestLists_Struct0>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptList1(value: $.Orphan<$.List<TestLists_Struct1>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownList1(): $.Orphan<$.List<TestLists_Struct1>> {
-    return $.Struct.disown(this.list1);
+    return $.utils.disown(this.list1);
   }
   get list1(): $.List<TestLists_Struct1> {
-    return $.Struct.getList(1, TestLists._List1, this);
+    return $.utils.getList(1, TestLists._List1, this);
   }
   hasList1(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initList1(length: number): $.List<TestLists_Struct1> {
-    return $.Struct.initList(1, TestLists._List1, length, this);
+    return $.utils.initList(1, TestLists._List1, length, this);
   }
   set list1(value: $.List<TestLists_Struct1>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptList8(value: $.Orphan<$.List<TestLists_Struct8>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownList8(): $.Orphan<$.List<TestLists_Struct8>> {
-    return $.Struct.disown(this.list8);
+    return $.utils.disown(this.list8);
   }
   get list8(): $.List<TestLists_Struct8> {
-    return $.Struct.getList(2, TestLists._List8, this);
+    return $.utils.getList(2, TestLists._List8, this);
   }
   hasList8(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initList8(length: number): $.List<TestLists_Struct8> {
-    return $.Struct.initList(2, TestLists._List8, length, this);
+    return $.utils.initList(2, TestLists._List8, length, this);
   }
   set list8(value: $.List<TestLists_Struct8>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptList16(value: $.Orphan<$.List<TestLists_Struct16>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownList16(): $.Orphan<$.List<TestLists_Struct16>> {
-    return $.Struct.disown(this.list16);
+    return $.utils.disown(this.list16);
   }
   get list16(): $.List<TestLists_Struct16> {
-    return $.Struct.getList(3, TestLists._List16, this);
+    return $.utils.getList(3, TestLists._List16, this);
   }
   hasList16(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initList16(length: number): $.List<TestLists_Struct16> {
-    return $.Struct.initList(3, TestLists._List16, length, this);
+    return $.utils.initList(3, TestLists._List16, length, this);
   }
   set list16(value: $.List<TestLists_Struct16>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   adoptList32(value: $.Orphan<$.List<TestLists_Struct32>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(4, this));
+    $.utils.adopt(value, $.utils.getPointer(4, this));
   }
   disownList32(): $.Orphan<$.List<TestLists_Struct32>> {
-    return $.Struct.disown(this.list32);
+    return $.utils.disown(this.list32);
   }
   get list32(): $.List<TestLists_Struct32> {
-    return $.Struct.getList(4, TestLists._List32, this);
+    return $.utils.getList(4, TestLists._List32, this);
   }
   hasList32(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(4, this));
+    return !$.utils.isNull($.utils.getPointer(4, this));
   }
   initList32(length: number): $.List<TestLists_Struct32> {
-    return $.Struct.initList(4, TestLists._List32, length, this);
+    return $.utils.initList(4, TestLists._List32, length, this);
   }
   set list32(value: $.List<TestLists_Struct32>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(4, this));
+    $.utils.copyFrom(value, $.utils.getPointer(4, this));
   }
   adoptList64(value: $.Orphan<$.List<TestLists_Struct64>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(5, this));
+    $.utils.adopt(value, $.utils.getPointer(5, this));
   }
   disownList64(): $.Orphan<$.List<TestLists_Struct64>> {
-    return $.Struct.disown(this.list64);
+    return $.utils.disown(this.list64);
   }
   get list64(): $.List<TestLists_Struct64> {
-    return $.Struct.getList(5, TestLists._List64, this);
+    return $.utils.getList(5, TestLists._List64, this);
   }
   hasList64(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(5, this));
+    return !$.utils.isNull($.utils.getPointer(5, this));
   }
   initList64(length: number): $.List<TestLists_Struct64> {
-    return $.Struct.initList(5, TestLists._List64, length, this);
+    return $.utils.initList(5, TestLists._List64, length, this);
   }
   set list64(value: $.List<TestLists_Struct64>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(5, this));
+    $.utils.copyFrom(value, $.utils.getPointer(5, this));
   }
   adoptListP(value: $.Orphan<$.List<TestLists_StructP>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(6, this));
+    $.utils.adopt(value, $.utils.getPointer(6, this));
   }
   disownListP(): $.Orphan<$.List<TestLists_StructP>> {
-    return $.Struct.disown(this.listP);
+    return $.utils.disown(this.listP);
   }
   get listP(): $.List<TestLists_StructP> {
-    return $.Struct.getList(6, TestLists._ListP, this);
+    return $.utils.getList(6, TestLists._ListP, this);
   }
   hasListP(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(6, this));
+    return !$.utils.isNull($.utils.getPointer(6, this));
   }
   initListP(length: number): $.List<TestLists_StructP> {
-    return $.Struct.initList(6, TestLists._ListP, length, this);
+    return $.utils.initList(6, TestLists._ListP, length, this);
   }
   set listP(value: $.List<TestLists_StructP>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(6, this));
+    $.utils.copyFrom(value, $.utils.getPointer(6, this));
   }
   adoptInt32ListList(value: $.Orphan<$.List<$.List<number>>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(7, this));
+    $.utils.adopt(value, $.utils.getPointer(7, this));
   }
   disownInt32ListList(): $.Orphan<$.List<$.List<number>>> {
-    return $.Struct.disown(this.int32ListList);
+    return $.utils.disown(this.int32ListList);
   }
   get int32ListList(): $.List<$.List<number>> {
-    return $.Struct.getList(7, TestLists._Int32ListList, this);
+    return $.utils.getList(7, TestLists._Int32ListList, this);
   }
   hasInt32ListList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(7, this));
+    return !$.utils.isNull($.utils.getPointer(7, this));
   }
   initInt32ListList(length: number): $.List<$.List<number>> {
-    return $.Struct.initList(7, TestLists._Int32ListList, length, this);
+    return $.utils.initList(7, TestLists._Int32ListList, length, this);
   }
   set int32ListList(value: $.List<$.List<number>>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(7, this));
+    $.utils.copyFrom(value, $.utils.getPointer(7, this));
   }
   adoptTextListList(value: $.Orphan<$.List<$.List<string>>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(8, this));
+    $.utils.adopt(value, $.utils.getPointer(8, this));
   }
   disownTextListList(): $.Orphan<$.List<$.List<string>>> {
-    return $.Struct.disown(this.textListList);
+    return $.utils.disown(this.textListList);
   }
   get textListList(): $.List<$.List<string>> {
-    return $.Struct.getList(8, TestLists._TextListList, this);
+    return $.utils.getList(8, TestLists._TextListList, this);
   }
   hasTextListList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(8, this));
+    return !$.utils.isNull($.utils.getPointer(8, this));
   }
   initTextListList(length: number): $.List<$.List<string>> {
-    return $.Struct.initList(8, TestLists._TextListList, length, this);
+    return $.utils.initList(8, TestLists._TextListList, length, this);
   }
   set textListList(value: $.List<$.List<string>>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(8, this));
+    $.utils.copyFrom(value, $.utils.getPointer(8, this));
   }
   adoptStructListList(value: $.Orphan<$.List<$.List<TestAllTypes>>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(9, this));
+    $.utils.adopt(value, $.utils.getPointer(9, this));
   }
   disownStructListList(): $.Orphan<$.List<$.List<TestAllTypes>>> {
-    return $.Struct.disown(this.structListList);
+    return $.utils.disown(this.structListList);
   }
   get structListList(): $.List<$.List<TestAllTypes>> {
-    return $.Struct.getList(9, TestLists._StructListList, this);
+    return $.utils.getList(9, TestLists._StructListList, this);
   }
   hasStructListList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(9, this));
+    return !$.utils.isNull($.utils.getPointer(9, this));
   }
   initStructListList(length: number): $.List<$.List<TestAllTypes>> {
-    return $.Struct.initList(9, TestLists._StructListList, length, this);
+    return $.utils.initList(9, TestLists._StructListList, length, this);
   }
   set structListList(value: $.List<$.List<TestAllTypes>>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(9, this));
+    $.utils.copyFrom(value, $.utils.getPointer(9, this));
   }
   toString(): string {
     return "TestLists_" + super.toString();
@@ -2983,22 +2983,22 @@ export class TestFieldZeroIsBit extends $.Struct {
     defaultThirdField: $.getUint8Mask(123)
   };
   get bit(): boolean {
-    return $.Struct.getBit(0, this);
+    return $.utils.getBit(0, this);
   }
   set bit(value: boolean) {
-    $.Struct.setBit(0, value, this);
+    $.utils.setBit(0, value, this);
   }
   get secondBit(): boolean {
-    return $.Struct.getBit(1, this, TestFieldZeroIsBit._capnp.defaultSecondBit);
+    return $.utils.getBit(1, this, TestFieldZeroIsBit._capnp.defaultSecondBit);
   }
   set secondBit(value: boolean) {
-    $.Struct.setBit(1, value, this, TestFieldZeroIsBit._capnp.defaultSecondBit);
+    $.utils.setBit(1, value, this, TestFieldZeroIsBit._capnp.defaultSecondBit);
   }
   get thirdField(): number {
-    return $.Struct.getUint8(1, this, TestFieldZeroIsBit._capnp.defaultThirdField);
+    return $.utils.getUint8(1, this, TestFieldZeroIsBit._capnp.defaultThirdField);
   }
   set thirdField(value: number) {
-    $.Struct.setUint8(1, value, this, TestFieldZeroIsBit._capnp.defaultThirdField);
+    $.utils.setUint8(1, value, this, TestFieldZeroIsBit._capnp.defaultThirdField);
   }
   toString(): string {
     return "TestFieldZeroIsBit_" + super.toString();
@@ -3012,22 +3012,22 @@ export class TestListDefaults extends $.Struct {
     defaultLists: $.readRawPointer(new Uint8Array([0x10, 0x88, 0x40, 0x0a, 0x11, 0x25, 0x07, 0x11, 0x25, 0x27, 0x11, 0x35, 0x17, 0x11, 0x3d, 0x17, 0x11, 0x45, 0x17, 0x11, 0x4d, 0x17, 0x11, 0x55, 0x17, 0x11, 0x65, 0x1e, 0x11, 0x7d, 0x1e, 0x11, 0xad, 0x16, 0x01, 0x08, 0x11, 0x10, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x11, 0x08, 0x01, 0x01, 0x7b, 0x01, 0x2d, 0x11, 0x08, 0x01, 0x03, 0x39, 0x30, 0x03, 0x85, 0x1a, 0x11, 0x08, 0x01, 0x0f, 0x15, 0xcd, 0x5b, 0x07, 0x0f, 0xd2, 0x38, 0xfb, 0x0d, 0x11, 0x08, 0x01, 0x7f, 0xc0, 0xba, 0x8a, 0x3c, 0xd5, 0x62, 0x04, 0x7f, 0x87, 0x4b, 0xaa, 0xed, 0x61, 0x55, 0x08, 0x41, 0x08, 0x01, 0x11, 0x05, 0x22, 0x11, 0x05, 0x22, 0x07, 0x66, 0x6f, 0x6f, 0x07, 0x62, 0x61, 0x72, 0x11, 0x09, 0x1c, 0x11, 0x0d, 0x14, 0x11, 0x0d, 0x0c, 0x11, 0x01, 0x02, 0x01, 0x03, 0x11, 0x04, 0x05, 0x07, 0xf2, 0x4f, 0xbc, 0x11, 0x09, 0x16, 0x11, 0x15, 0x0e, 0x11, 0x19, 0x16, 0x11, 0x05, 0x22, 0x11, 0x05, 0x22, 0x07, 0x66, 0x6f, 0x6f, 0x07, 0x62, 0x61, 0x72, 0x11, 0x01, 0x22, 0x07, 0x62, 0x61, 0x7a, 0x11, 0x05, 0x22, 0x11, 0x05, 0x32, 0x07, 0x71, 0x75, 0x78, 0x1f, 0x63, 0x6f, 0x72, 0x67, 0x65, 0x31, 0x05, 0xa7, 0x01, 0x11, 0xd5, 0xd7, 0x51, 0x08, 0x06, 0x14, 0x10, 0x7b, 0x00, 0x18, 0x30, 0xc8, 0x01, 0x00, 0x18, 0x51, 0x04, 0x06, 0x14, 0x30, 0x15, 0x03, 0x00, 0x18]).buffer)
   };
   adoptLists(value: $.Orphan<TestLists>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownLists(): $.Orphan<TestLists> {
-    return $.Struct.disown(this.lists);
+    return $.utils.disown(this.lists);
   }
   get lists(): TestLists {
-    return $.Struct.getStruct(0, TestLists, this, TestListDefaults._capnp.defaultLists);
+    return $.utils.getStruct(0, TestLists, this, TestListDefaults._capnp.defaultLists);
   }
   hasLists(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initLists(): TestLists {
-    return $.Struct.initStructAt(0, TestLists, this);
+    return $.utils.initStructAt(0, TestLists, this);
   }
   set lists(value: TestLists) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestListDefaults_" + super.toString();
@@ -3049,57 +3049,57 @@ export class TestLateUnion_TheUnion extends $.Struct {
     size: new $.ObjectSize(24, 3)
   };
   get qux(): string {
-    $.Struct.testWhich("qux", $.Struct.getUint16(6, this), 0, this);
-    return $.Struct.getText(1, this);
+    $.utils.testWhich("qux", $.utils.getUint16(6, this), 0, this);
+    return $.utils.getText(1, this);
   }
   isQux(): boolean {
-    return $.Struct.getUint16(6, this) === 0;
+    return $.utils.getUint16(6, this) === 0;
   }
   set qux(value: string) {
-    $.Struct.setUint16(6, 0, this);
-    $.Struct.setText(1, value, this);
+    $.utils.setUint16(6, 0, this);
+    $.utils.setText(1, value, this);
   }
   adoptCorge(value: $.Orphan<$.List<number>>): void {
-    $.Struct.setUint16(6, 1, this);
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.setUint16(6, 1, this);
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownCorge(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.corge);
+    return $.utils.disown(this.corge);
   }
   get corge(): $.List<number> {
-    $.Struct.testWhich("corge", $.Struct.getUint16(6, this), 1, this);
-    return $.Struct.getList(1, $.Int32List, this);
+    $.utils.testWhich("corge", $.utils.getUint16(6, this), 1, this);
+    return $.utils.getList(1, $.Int32List, this);
   }
   hasCorge(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initCorge(length: number): $.List<number> {
-    $.Struct.setUint16(6, 1, this);
-    return $.Struct.initList(1, $.Int32List, length, this);
+    $.utils.setUint16(6, 1, this);
+    return $.utils.initList(1, $.Int32List, length, this);
   }
   isCorge(): boolean {
-    return $.Struct.getUint16(6, this) === 1;
+    return $.utils.getUint16(6, this) === 1;
   }
   set corge(value: $.List<number>) {
-    $.Struct.setUint16(6, 1, this);
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.setUint16(6, 1, this);
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   get grault(): number {
-    $.Struct.testWhich("grault", $.Struct.getUint16(6, this), 2, this);
-    return $.Struct.getFloat32(8, this);
+    $.utils.testWhich("grault", $.utils.getUint16(6, this), 2, this);
+    return $.utils.getFloat32(8, this);
   }
   isGrault(): boolean {
-    return $.Struct.getUint16(6, this) === 2;
+    return $.utils.getUint16(6, this) === 2;
   }
   set grault(value: number) {
-    $.Struct.setUint16(6, 2, this);
-    $.Struct.setFloat32(8, value, this);
+    $.utils.setUint16(6, 2, this);
+    $.utils.setFloat32(8, value, this);
   }
   toString(): string {
     return "TestLateUnion_TheUnion_" + super.toString();
   }
   which(): TestLateUnion_TheUnion_Which {
-    return $.Struct.getUint16(6, this) as TestLateUnion_TheUnion_Which;
+    return $.utils.getUint16(6, this) as TestLateUnion_TheUnion_Which;
   }
 }
 export const TestLateUnion_AnotherUnion_Which = {
@@ -3118,57 +3118,57 @@ export class TestLateUnion_AnotherUnion extends $.Struct {
     size: new $.ObjectSize(24, 3)
   };
   get qux(): string {
-    $.Struct.testWhich("qux", $.Struct.getUint16(12, this), 0, this);
-    return $.Struct.getText(2, this);
+    $.utils.testWhich("qux", $.utils.getUint16(12, this), 0, this);
+    return $.utils.getText(2, this);
   }
   isQux(): boolean {
-    return $.Struct.getUint16(12, this) === 0;
+    return $.utils.getUint16(12, this) === 0;
   }
   set qux(value: string) {
-    $.Struct.setUint16(12, 0, this);
-    $.Struct.setText(2, value, this);
+    $.utils.setUint16(12, 0, this);
+    $.utils.setText(2, value, this);
   }
   adoptCorge(value: $.Orphan<$.List<number>>): void {
-    $.Struct.setUint16(12, 1, this);
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.setUint16(12, 1, this);
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownCorge(): $.Orphan<$.List<number>> {
-    return $.Struct.disown(this.corge);
+    return $.utils.disown(this.corge);
   }
   get corge(): $.List<number> {
-    $.Struct.testWhich("corge", $.Struct.getUint16(12, this), 1, this);
-    return $.Struct.getList(2, $.Int32List, this);
+    $.utils.testWhich("corge", $.utils.getUint16(12, this), 1, this);
+    return $.utils.getList(2, $.Int32List, this);
   }
   hasCorge(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initCorge(length: number): $.List<number> {
-    $.Struct.setUint16(12, 1, this);
-    return $.Struct.initList(2, $.Int32List, length, this);
+    $.utils.setUint16(12, 1, this);
+    return $.utils.initList(2, $.Int32List, length, this);
   }
   isCorge(): boolean {
-    return $.Struct.getUint16(12, this) === 1;
+    return $.utils.getUint16(12, this) === 1;
   }
   set corge(value: $.List<number>) {
-    $.Struct.setUint16(12, 1, this);
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.setUint16(12, 1, this);
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   get grault(): number {
-    $.Struct.testWhich("grault", $.Struct.getUint16(12, this), 2, this);
-    return $.Struct.getFloat32(16, this);
+    $.utils.testWhich("grault", $.utils.getUint16(12, this), 2, this);
+    return $.utils.getFloat32(16, this);
   }
   isGrault(): boolean {
-    return $.Struct.getUint16(12, this) === 2;
+    return $.utils.getUint16(12, this) === 2;
   }
   set grault(value: number) {
-    $.Struct.setUint16(12, 2, this);
-    $.Struct.setFloat32(16, value, this);
+    $.utils.setUint16(12, 2, this);
+    $.utils.setFloat32(16, value, this);
   }
   toString(): string {
     return "TestLateUnion_AnotherUnion_" + super.toString();
   }
   which(): TestLateUnion_AnotherUnion_Which {
-    return $.Struct.getUint16(12, this) as TestLateUnion_AnotherUnion_Which;
+    return $.utils.getUint16(12, this) as TestLateUnion_AnotherUnion_Which;
   }
 }
 export class TestLateUnion extends $.Struct {
@@ -3178,34 +3178,34 @@ export class TestLateUnion extends $.Struct {
     size: new $.ObjectSize(24, 3)
   };
   get foo(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set foo(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get bar(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set bar(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get baz(): number {
-    return $.Struct.getInt16(4, this);
+    return $.utils.getInt16(4, this);
   }
   set baz(value: number) {
-    $.Struct.setInt16(4, value, this);
+    $.utils.setInt16(4, value, this);
   }
   get theUnion(): TestLateUnion_TheUnion {
-    return $.Struct.getAs(TestLateUnion_TheUnion, this);
+    return $.utils.getAs(TestLateUnion_TheUnion, this);
   }
   initTheUnion(): TestLateUnion_TheUnion {
-    return $.Struct.getAs(TestLateUnion_TheUnion, this);
+    return $.utils.getAs(TestLateUnion_TheUnion, this);
   }
   get anotherUnion(): TestLateUnion_AnotherUnion {
-    return $.Struct.getAs(TestLateUnion_AnotherUnion, this);
+    return $.utils.getAs(TestLateUnion_AnotherUnion, this);
   }
   initAnotherUnion(): TestLateUnion_AnotherUnion {
-    return $.Struct.getAs(TestLateUnion_AnotherUnion, this);
+    return $.utils.getAs(TestLateUnion_AnotherUnion, this);
   }
   toString(): string {
     return "TestLateUnion_" + super.toString();
@@ -3218,34 +3218,34 @@ export class TestOldVersion extends $.Struct {
     size: new $.ObjectSize(8, 2)
   };
   get old1(): bigint {
-    return $.Struct.getInt64(0, this);
+    return $.utils.getInt64(0, this);
   }
   set old1(value: bigint) {
-    $.Struct.setInt64(0, value, this);
+    $.utils.setInt64(0, value, this);
   }
   get old2(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set old2(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   adoptOld3(value: $.Orphan<TestOldVersion>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownOld3(): $.Orphan<TestOldVersion> {
-    return $.Struct.disown(this.old3);
+    return $.utils.disown(this.old3);
   }
   get old3(): TestOldVersion {
-    return $.Struct.getStruct(1, TestOldVersion, this);
+    return $.utils.getStruct(1, TestOldVersion, this);
   }
   hasOld3(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initOld3(): TestOldVersion {
-    return $.Struct.initStructAt(1, TestOldVersion, this);
+    return $.utils.initStructAt(1, TestOldVersion, this);
   }
   set old3(value: TestOldVersion) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestOldVersion_" + super.toString();
@@ -3260,46 +3260,46 @@ export class TestNewVersion extends $.Struct {
     defaultNew2: "baz"
   };
   get old1(): bigint {
-    return $.Struct.getInt64(0, this);
+    return $.utils.getInt64(0, this);
   }
   set old1(value: bigint) {
-    $.Struct.setInt64(0, value, this);
+    $.utils.setInt64(0, value, this);
   }
   get old2(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set old2(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   adoptOld3(value: $.Orphan<TestNewVersion>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownOld3(): $.Orphan<TestNewVersion> {
-    return $.Struct.disown(this.old3);
+    return $.utils.disown(this.old3);
   }
   get old3(): TestNewVersion {
-    return $.Struct.getStruct(1, TestNewVersion, this);
+    return $.utils.getStruct(1, TestNewVersion, this);
   }
   hasOld3(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initOld3(): TestNewVersion {
-    return $.Struct.initStructAt(1, TestNewVersion, this);
+    return $.utils.initStructAt(1, TestNewVersion, this);
   }
   set old3(value: TestNewVersion) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   get new1(): bigint {
-    return $.Struct.getInt64(8, this, TestNewVersion._capnp.defaultNew1);
+    return $.utils.getInt64(8, this, TestNewVersion._capnp.defaultNew1);
   }
   set new1(value: bigint) {
-    $.Struct.setInt64(8, value, this, TestNewVersion._capnp.defaultNew1);
+    $.utils.setInt64(8, value, this, TestNewVersion._capnp.defaultNew1);
   }
   get new2(): string {
-    return $.Struct.getText(2, this, TestNewVersion._capnp.defaultNew2);
+    return $.utils.getText(2, this, TestNewVersion._capnp.defaultNew2);
   }
   set new2(value: string) {
-    $.Struct.setText(2, value, this);
+    $.utils.setText(2, value, this);
   }
   toString(): string {
     return "TestNewVersion_" + super.toString();
@@ -3319,27 +3319,27 @@ export class TestOldUnionVersion extends $.Struct {
     size: new $.ObjectSize(16, 0)
   };
   isA(): boolean {
-    return $.Struct.getUint16(0, this) === 0;
+    return $.utils.getUint16(0, this) === 0;
   }
   set a(_: true) {
-    $.Struct.setUint16(0, 0, this);
+    $.utils.setUint16(0, 0, this);
   }
   get b(): bigint {
-    $.Struct.testWhich("b", $.Struct.getUint16(0, this), 1, this);
-    return $.Struct.getUint64(8, this);
+    $.utils.testWhich("b", $.utils.getUint16(0, this), 1, this);
+    return $.utils.getUint64(8, this);
   }
   isB(): boolean {
-    return $.Struct.getUint16(0, this) === 1;
+    return $.utils.getUint16(0, this) === 1;
   }
   set b(value: bigint) {
-    $.Struct.setUint16(0, 1, this);
-    $.Struct.setUint64(8, value, this);
+    $.utils.setUint16(0, 1, this);
+    $.utils.setUint64(8, value, this);
   }
   toString(): string {
     return "TestOldUnionVersion_" + super.toString();
   }
   which(): TestOldUnionVersion_Which {
-    return $.Struct.getUint16(0, this) as TestOldUnionVersion_Which;
+    return $.utils.getUint16(0, this) as TestOldUnionVersion_Which;
   }
 }
 export const TestNewUnionVersion_A_Which = {
@@ -3356,27 +3356,27 @@ export class TestNewUnionVersion_A extends $.Struct {
     size: new $.ObjectSize(24, 0)
   };
   isA0(): boolean {
-    return $.Struct.getUint16(8, this) === 0;
+    return $.utils.getUint16(8, this) === 0;
   }
   set a0(_: true) {
-    $.Struct.setUint16(8, 0, this);
+    $.utils.setUint16(8, 0, this);
   }
   get a1(): bigint {
-    $.Struct.testWhich("a1", $.Struct.getUint16(8, this), 1, this);
-    return $.Struct.getUint64(16, this);
+    $.utils.testWhich("a1", $.utils.getUint16(8, this), 1, this);
+    return $.utils.getUint64(16, this);
   }
   isA1(): boolean {
-    return $.Struct.getUint16(8, this) === 1;
+    return $.utils.getUint16(8, this) === 1;
   }
   set a1(value: bigint) {
-    $.Struct.setUint16(8, 1, this);
-    $.Struct.setUint64(16, value, this);
+    $.utils.setUint16(8, 1, this);
+    $.utils.setUint64(16, value, this);
   }
   toString(): string {
     return "TestNewUnionVersion_A_" + super.toString();
   }
   which(): TestNewUnionVersion_A_Which {
-    return $.Struct.getUint16(8, this) as TestNewUnionVersion_A_Which;
+    return $.utils.getUint16(8, this) as TestNewUnionVersion_A_Which;
   }
 }
 export const TestNewUnionVersion_Which = {
@@ -3393,35 +3393,35 @@ export class TestNewUnionVersion extends $.Struct {
     size: new $.ObjectSize(24, 0)
   };
   get a(): TestNewUnionVersion_A {
-    $.Struct.testWhich("a", $.Struct.getUint16(0, this), 0, this);
-    return $.Struct.getAs(TestNewUnionVersion_A, this);
+    $.utils.testWhich("a", $.utils.getUint16(0, this), 0, this);
+    return $.utils.getAs(TestNewUnionVersion_A, this);
   }
   initA(): TestNewUnionVersion_A {
-    $.Struct.setUint16(0, 0, this);
-    return $.Struct.getAs(TestNewUnionVersion_A, this);
+    $.utils.setUint16(0, 0, this);
+    return $.utils.getAs(TestNewUnionVersion_A, this);
   }
   isA(): boolean {
-    return $.Struct.getUint16(0, this) === 0;
+    return $.utils.getUint16(0, this) === 0;
   }
   set a(_: true) {
-    $.Struct.setUint16(0, 0, this);
+    $.utils.setUint16(0, 0, this);
   }
   get b(): bigint {
-    $.Struct.testWhich("b", $.Struct.getUint16(0, this), 1, this);
-    return $.Struct.getUint64(8, this);
+    $.utils.testWhich("b", $.utils.getUint16(0, this), 1, this);
+    return $.utils.getUint64(8, this);
   }
   isB(): boolean {
-    return $.Struct.getUint16(0, this) === 1;
+    return $.utils.getUint16(0, this) === 1;
   }
   set b(value: bigint) {
-    $.Struct.setUint16(0, 1, this);
-    $.Struct.setUint64(8, value, this);
+    $.utils.setUint16(0, 1, this);
+    $.utils.setUint64(8, value, this);
   }
   toString(): string {
     return "TestNewUnionVersion_" + super.toString();
   }
   which(): TestNewUnionVersion_Which {
-    return $.Struct.getUint16(0, this) as TestNewUnionVersion_Which;
+    return $.utils.getUint16(0, this) as TestNewUnionVersion_Which;
   }
 }
 export class TestStructUnion_SomeStruct extends $.Struct {
@@ -3431,16 +3431,16 @@ export class TestStructUnion_SomeStruct extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   get someText(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set someText(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get moreText(): string {
-    return $.Struct.getText(1, this);
+    return $.utils.getText(1, this);
   }
   set moreText(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "TestStructUnion_SomeStruct_" + super.toString();
@@ -3460,60 +3460,60 @@ export class TestStructUnion_Un extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   adoptStruct(value: $.Orphan<TestStructUnion_SomeStruct>): void {
-    $.Struct.setUint16(0, 0, this);
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 0, this);
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownStruct(): $.Orphan<TestStructUnion_SomeStruct> {
-    return $.Struct.disown(this.struct);
+    return $.utils.disown(this.struct);
   }
   get struct(): TestStructUnion_SomeStruct {
-    $.Struct.testWhich("struct", $.Struct.getUint16(0, this), 0, this);
-    return $.Struct.getStruct(0, TestStructUnion_SomeStruct, this);
+    $.utils.testWhich("struct", $.utils.getUint16(0, this), 0, this);
+    return $.utils.getStruct(0, TestStructUnion_SomeStruct, this);
   }
   hasStruct(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initStruct(): TestStructUnion_SomeStruct {
-    $.Struct.setUint16(0, 0, this);
-    return $.Struct.initStructAt(0, TestStructUnion_SomeStruct, this);
+    $.utils.setUint16(0, 0, this);
+    return $.utils.initStructAt(0, TestStructUnion_SomeStruct, this);
   }
   isStruct(): boolean {
-    return $.Struct.getUint16(0, this) === 0;
+    return $.utils.getUint16(0, this) === 0;
   }
   set struct(value: TestStructUnion_SomeStruct) {
-    $.Struct.setUint16(0, 0, this);
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 0, this);
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptObject(value: $.Orphan<TestAnyPointer>): void {
-    $.Struct.setUint16(0, 1, this);
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 1, this);
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownObject(): $.Orphan<TestAnyPointer> {
-    return $.Struct.disown(this.object);
+    return $.utils.disown(this.object);
   }
   get object(): TestAnyPointer {
-    $.Struct.testWhich("object", $.Struct.getUint16(0, this), 1, this);
-    return $.Struct.getStruct(0, TestAnyPointer, this);
+    $.utils.testWhich("object", $.utils.getUint16(0, this), 1, this);
+    return $.utils.getStruct(0, TestAnyPointer, this);
   }
   hasObject(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initObject(): TestAnyPointer {
-    $.Struct.setUint16(0, 1, this);
-    return $.Struct.initStructAt(0, TestAnyPointer, this);
+    $.utils.setUint16(0, 1, this);
+    return $.utils.initStructAt(0, TestAnyPointer, this);
   }
   isObject(): boolean {
-    return $.Struct.getUint16(0, this) === 1;
+    return $.utils.getUint16(0, this) === 1;
   }
   set object(value: TestAnyPointer) {
-    $.Struct.setUint16(0, 1, this);
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 1, this);
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestStructUnion_Un_" + super.toString();
   }
   which(): TestStructUnion_Un_Which {
-    return $.Struct.getUint16(0, this) as TestStructUnion_Un_Which;
+    return $.utils.getUint16(0, this) as TestStructUnion_Un_Which;
   }
 }
 export class TestStructUnion extends $.Struct {
@@ -3524,10 +3524,10 @@ export class TestStructUnion extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get un(): TestStructUnion_Un {
-    return $.Struct.getAs(TestStructUnion_Un, this);
+    return $.utils.getAs(TestStructUnion_Un, this);
   }
   initUn(): TestStructUnion_Un {
-    return $.Struct.getAs(TestStructUnion_Un, this);
+    return $.utils.getAs(TestStructUnion_Un, this);
   }
   toString(): string {
     return "TestStructUnion_" + super.toString();
@@ -3540,16 +3540,16 @@ export class TestPrintInlineStructs_InlineStruct extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get int32Field(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set int32Field(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get textField(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set textField(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestPrintInlineStructs_InlineStruct_" + super.toString();
@@ -3564,28 +3564,28 @@ export class TestPrintInlineStructs extends $.Struct {
   };
   static _StructList: $.ListCtor<TestPrintInlineStructs_InlineStruct>;
   get someText(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set someText(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   adoptStructList(value: $.Orphan<$.List<TestPrintInlineStructs_InlineStruct>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownStructList(): $.Orphan<$.List<TestPrintInlineStructs_InlineStruct>> {
-    return $.Struct.disown(this.structList);
+    return $.utils.disown(this.structList);
   }
   get structList(): $.List<TestPrintInlineStructs_InlineStruct> {
-    return $.Struct.getList(1, TestPrintInlineStructs._StructList, this);
+    return $.utils.getList(1, TestPrintInlineStructs._StructList, this);
   }
   hasStructList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initStructList(length: number): $.List<TestPrintInlineStructs_InlineStruct> {
-    return $.Struct.initList(1, TestPrintInlineStructs._StructList, length, this);
+    return $.utils.initList(1, TestPrintInlineStructs._StructList, length, this);
   }
   set structList(value: $.List<TestPrintInlineStructs_InlineStruct>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestPrintInlineStructs_" + super.toString();
@@ -3602,16 +3602,16 @@ export class TestWholeFloatDefault extends $.Struct {
     defaultBigField: $.getFloat32Mask(2.0000000300949324e+30)
   };
   get field(): number {
-    return $.Struct.getFloat32(0, this, TestWholeFloatDefault._capnp.defaultField);
+    return $.utils.getFloat32(0, this, TestWholeFloatDefault._capnp.defaultField);
   }
   set field(value: number) {
-    $.Struct.setFloat32(0, value, this, TestWholeFloatDefault._capnp.defaultField);
+    $.utils.setFloat32(0, value, this, TestWholeFloatDefault._capnp.defaultField);
   }
   get bigField(): number {
-    return $.Struct.getFloat32(4, this, TestWholeFloatDefault._capnp.defaultBigField);
+    return $.utils.getFloat32(4, this, TestWholeFloatDefault._capnp.defaultBigField);
   }
   set bigField(value: number) {
-    $.Struct.setFloat32(4, value, this, TestWholeFloatDefault._capnp.defaultBigField);
+    $.utils.setFloat32(4, value, this, TestWholeFloatDefault._capnp.defaultBigField);
   }
   toString(): string {
     return "TestWholeFloatDefault_" + super.toString();
@@ -3624,34 +3624,34 @@ export class TestGenerics_Inner extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   adoptFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set foo(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptBar(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownBar(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.bar);
+    return $.utils.disown(this.bar);
   }
   get bar(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasBar(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set bar(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestGenerics_Inner_" + super.toString();
@@ -3750,64 +3750,64 @@ export class TestGenerics_Inner2_DeepNest extends $.Struct {
     size: new $.ObjectSize(0, 4)
   };
   adoptFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set foo(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptBar(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownBar(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.bar);
+    return $.utils.disown(this.bar);
   }
   get bar(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasBar(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set bar(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptBaz(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownBaz(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.baz);
+    return $.utils.disown(this.baz);
   }
   get baz(): $.Pointer {
-    return $.Struct.getPointer(2, this);
+    return $.utils.getPointer(2, this);
   }
   hasBaz(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   set baz(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptQux(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownQux(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.qux);
+    return $.utils.disown(this.qux);
   }
   get qux(): $.Pointer {
-    return $.Struct.getPointer(3, this);
+    return $.utils.getPointer(3, this);
   }
   hasQux(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   set qux(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   toString(): string {
     return "TestGenerics_Inner2_DeepNest_" + super.toString();
@@ -3821,70 +3821,70 @@ export class TestGenerics_Inner2 extends $.Struct {
     size: new $.ObjectSize(0, 4)
   };
   adoptBar(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownBar(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.bar);
+    return $.utils.disown(this.bar);
   }
   get bar(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasBar(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set bar(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptBaz(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownBaz(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.baz);
+    return $.utils.disown(this.baz);
   }
   get baz(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasBaz(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set baz(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptInnerBound(value: $.Orphan<TestGenerics_Inner>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownInnerBound(): $.Orphan<TestGenerics_Inner> {
-    return $.Struct.disown(this.innerBound);
+    return $.utils.disown(this.innerBound);
   }
   get innerBound(): TestGenerics_Inner {
-    return $.Struct.getStruct(2, TestGenerics_Inner, this);
+    return $.utils.getStruct(2, TestGenerics_Inner, this);
   }
   hasInnerBound(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initInnerBound(): TestGenerics_Inner {
-    return $.Struct.initStructAt(2, TestGenerics_Inner, this);
+    return $.utils.initStructAt(2, TestGenerics_Inner, this);
   }
   set innerBound(value: TestGenerics_Inner) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptInnerUnbound(value: $.Orphan<TestGenerics_Inner>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownInnerUnbound(): $.Orphan<TestGenerics_Inner> {
-    return $.Struct.disown(this.innerUnbound);
+    return $.utils.disown(this.innerUnbound);
   }
   get innerUnbound(): TestGenerics_Inner {
-    return $.Struct.getStruct(3, TestGenerics_Inner, this);
+    return $.utils.getStruct(3, TestGenerics_Inner, this);
   }
   hasInnerUnbound(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initInnerUnbound(): TestGenerics_Inner {
-    return $.Struct.initStructAt(3, TestGenerics_Inner, this);
+    return $.utils.initStructAt(3, TestGenerics_Inner, this);
   }
   set innerUnbound(value: TestGenerics_Inner) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   toString(): string {
     return "TestGenerics_Inner2_" + super.toString();
@@ -3897,37 +3897,37 @@ export class TestGenerics_Interface_Call$Results extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   adoptQux(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownQux(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.qux);
+    return $.utils.disown(this.qux);
   }
   get qux(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasQux(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set qux(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptGen(value: $.Orphan<TestGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownGen(): $.Orphan<TestGenerics> {
-    return $.Struct.disown(this.gen);
+    return $.utils.disown(this.gen);
   }
   get gen(): TestGenerics {
-    return $.Struct.getStruct(1, TestGenerics, this);
+    return $.utils.getStruct(1, TestGenerics, this);
   }
   hasGen(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initGen(): TestGenerics {
-    return $.Struct.initStructAt(1, TestGenerics, this);
+    return $.utils.initStructAt(1, TestGenerics, this);
   }
   set gen(value: TestGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestGenerics_Interface_Call$Results_" + super.toString();
@@ -4005,106 +4005,106 @@ export class TestGenerics_UseAliases extends $.Struct {
     size: new $.ObjectSize(0, 6)
   };
   adoptFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set foo(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptInner(value: $.Orphan<TestGenerics_Inner>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownInner(): $.Orphan<TestGenerics_Inner> {
-    return $.Struct.disown(this.inner);
+    return $.utils.disown(this.inner);
   }
   get inner(): TestGenerics_Inner {
-    return $.Struct.getStruct(1, TestGenerics_Inner, this);
+    return $.utils.getStruct(1, TestGenerics_Inner, this);
   }
   hasInner(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initInner(): TestGenerics_Inner {
-    return $.Struct.initStructAt(1, TestGenerics_Inner, this);
+    return $.utils.initStructAt(1, TestGenerics_Inner, this);
   }
   set inner(value: TestGenerics_Inner) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptInner2(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownInner2(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.inner2);
+    return $.utils.disown(this.inner2);
   }
   get inner2(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(2, TestGenerics_Inner2, this);
+    return $.utils.getStruct(2, TestGenerics_Inner2, this);
   }
   hasInner2(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initInner2(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(2, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(2, TestGenerics_Inner2, this);
   }
   set inner2(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptInner2Bind(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownInner2Bind(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.inner2Bind);
+    return $.utils.disown(this.inner2Bind);
   }
   get inner2Bind(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(3, TestGenerics_Inner2, this);
+    return $.utils.getStruct(3, TestGenerics_Inner2, this);
   }
   hasInner2Bind(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initInner2Bind(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(3, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(3, TestGenerics_Inner2, this);
   }
   set inner2Bind(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   adoptInner2Text(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(4, this));
+    $.utils.adopt(value, $.utils.getPointer(4, this));
   }
   disownInner2Text(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.inner2Text);
+    return $.utils.disown(this.inner2Text);
   }
   get inner2Text(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(4, TestGenerics_Inner2, this);
+    return $.utils.getStruct(4, TestGenerics_Inner2, this);
   }
   hasInner2Text(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(4, this));
+    return !$.utils.isNull($.utils.getPointer(4, this));
   }
   initInner2Text(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(4, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(4, TestGenerics_Inner2, this);
   }
   set inner2Text(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(4, this));
+    $.utils.copyFrom(value, $.utils.getPointer(4, this));
   }
   adoptRevFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(5, this));
+    $.utils.adopt(value, $.utils.getPointer(5, this));
   }
   disownRevFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.revFoo);
+    return $.utils.disown(this.revFoo);
   }
   get revFoo(): $.Pointer {
-    return $.Struct.getPointer(5, this);
+    return $.utils.getPointer(5, this);
   }
   hasRevFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(5, this));
+    return !$.utils.isNull($.utils.getPointer(5, this));
   }
   set revFoo(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(5, this));
+    $.utils.copyFrom(value, $.utils.getPointer(5, this));
   }
   toString(): string {
     return "TestGenerics_UseAliases_" + super.toString();
@@ -4117,10 +4117,10 @@ export class TestGenerics_Ug extends $.Struct {
     size: new $.ObjectSize(8, 2)
   };
   get ugfoo(): number {
-    return $.Struct.getInt32(4, this);
+    return $.utils.getInt32(4, this);
   }
   set ugfoo(value: number) {
-    $.Struct.setInt32(4, value, this);
+    $.utils.setInt32(4, value, this);
   }
   toString(): string {
     return "TestGenerics_Ug_" + super.toString();
@@ -4144,63 +4144,63 @@ export class TestGenerics extends $.Struct {
     size: new $.ObjectSize(8, 2)
   };
   adoptFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set foo(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptRev(value: $.Orphan<TestGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownRev(): $.Orphan<TestGenerics> {
-    return $.Struct.disown(this.rev);
+    return $.utils.disown(this.rev);
   }
   get rev(): TestGenerics {
-    return $.Struct.getStruct(1, TestGenerics, this);
+    return $.utils.getStruct(1, TestGenerics, this);
   }
   hasRev(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initRev(): TestGenerics {
-    return $.Struct.initStructAt(1, TestGenerics, this);
+    return $.utils.initStructAt(1, TestGenerics, this);
   }
   set rev(value: TestGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   isUv(): boolean {
-    return $.Struct.getUint16(0, this) === 0;
+    return $.utils.getUint16(0, this) === 0;
   }
   set uv(_: true) {
-    $.Struct.setUint16(0, 0, this);
+    $.utils.setUint16(0, 0, this);
   }
   get ug(): TestGenerics_Ug {
-    $.Struct.testWhich("ug", $.Struct.getUint16(0, this), 1, this);
-    return $.Struct.getAs(TestGenerics_Ug, this);
+    $.utils.testWhich("ug", $.utils.getUint16(0, this), 1, this);
+    return $.utils.getAs(TestGenerics_Ug, this);
   }
   initUg(): TestGenerics_Ug {
-    $.Struct.setUint16(0, 1, this);
-    return $.Struct.getAs(TestGenerics_Ug, this);
+    $.utils.setUint16(0, 1, this);
+    return $.utils.getAs(TestGenerics_Ug, this);
   }
   isUg(): boolean {
-    return $.Struct.getUint16(0, this) === 1;
+    return $.utils.getUint16(0, this) === 1;
   }
   set ug(_: true) {
-    $.Struct.setUint16(0, 1, this);
+    $.utils.setUint16(0, 1, this);
   }
   toString(): string {
     return "TestGenerics_" + super.toString();
   }
   which(): TestGenerics_Which {
-    return $.Struct.getUint16(0, this) as TestGenerics_Which;
+    return $.utils.getUint16(0, this) as TestGenerics_Which;
   }
 }
 export class TestGenericsWrapper extends $.Struct {
@@ -4210,22 +4210,22 @@ export class TestGenericsWrapper extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptValue(value: $.Orphan<TestGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownValue(): $.Orphan<TestGenerics> {
-    return $.Struct.disown(this.value);
+    return $.utils.disown(this.value);
   }
   get value(): TestGenerics {
-    return $.Struct.getStruct(0, TestGenerics, this);
+    return $.utils.getStruct(0, TestGenerics, this);
   }
   hasValue(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initValue(): TestGenerics {
-    return $.Struct.initStructAt(0, TestGenerics, this);
+    return $.utils.initStructAt(0, TestGenerics, this);
   }
   set value(value: TestGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestGenericsWrapper_" + super.toString();
@@ -4238,22 +4238,22 @@ export class TestGenericsWrapper2 extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptValue(value: $.Orphan<TestGenericsWrapper>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownValue(): $.Orphan<TestGenericsWrapper> {
-    return $.Struct.disown(this.value);
+    return $.utils.disown(this.value);
   }
   get value(): TestGenericsWrapper {
-    return $.Struct.getStruct(0, TestGenericsWrapper, this);
+    return $.utils.getStruct(0, TestGenericsWrapper, this);
   }
   hasValue(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initValue(): TestGenericsWrapper {
-    return $.Struct.initStructAt(0, TestGenericsWrapper, this);
+    return $.utils.initStructAt(0, TestGenericsWrapper, this);
   }
   set value(value: TestGenericsWrapper) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestGenericsWrapper2_" + super.toString();
@@ -4266,34 +4266,34 @@ export class TestImplicitMethodParams_Call$Params extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   adoptFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set foo(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptBar(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownBar(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.bar);
+    return $.utils.disown(this.bar);
   }
   get bar(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasBar(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set bar(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestImplicitMethodParams_Call$Params_" + super.toString();
@@ -4371,34 +4371,34 @@ export class TestImplicitMethodParamsInGeneric_Call$Params extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   adoptFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set foo(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptBar(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownBar(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.bar);
+    return $.utils.disown(this.bar);
   }
   get bar(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasBar(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set bar(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestImplicitMethodParamsInGeneric_Call$Params_" + super.toString();
@@ -4474,52 +4474,52 @@ export class TestGenericsUnion extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   adoptFoo(value: $.Orphan<$.Pointer>): void {
-    $.Struct.setUint16(0, 0, this);
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 0, this);
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): $.Pointer {
-    $.Struct.testWhich("foo", $.Struct.getUint16(0, this), 0, this);
-    return $.Struct.getPointer(0, this);
+    $.utils.testWhich("foo", $.utils.getUint16(0, this), 0, this);
+    return $.utils.getPointer(0, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   isFoo(): boolean {
-    return $.Struct.getUint16(0, this) === 0;
+    return $.utils.getUint16(0, this) === 0;
   }
   set foo(value: $.Pointer) {
-    $.Struct.setUint16(0, 0, this);
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 0, this);
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptBar(value: $.Orphan<$.Pointer>): void {
-    $.Struct.setUint16(0, 1, this);
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 1, this);
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownBar(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.bar);
+    return $.utils.disown(this.bar);
   }
   get bar(): $.Pointer {
-    $.Struct.testWhich("bar", $.Struct.getUint16(0, this), 1, this);
-    return $.Struct.getPointer(0, this);
+    $.utils.testWhich("bar", $.utils.getUint16(0, this), 1, this);
+    return $.utils.getPointer(0, this);
   }
   hasBar(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   isBar(): boolean {
-    return $.Struct.getUint16(0, this) === 1;
+    return $.utils.getUint16(0, this) === 1;
   }
   set bar(value: $.Pointer) {
-    $.Struct.setUint16(0, 1, this);
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(0, 1, this);
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestGenericsUnion_" + super.toString();
   }
   which(): TestGenericsUnion_Which {
-    return $.Struct.getUint16(0, this) as TestGenericsUnion_Which;
+    return $.utils.getUint16(0, this) as TestGenericsUnion_Which;
   }
 }
 export class TestUseGenerics extends $.Struct {
@@ -4541,340 +4541,340 @@ export class TestUseGenerics extends $.Struct {
     defaultUseAliases: $.readRawPointer(new Uint8Array([0x10, 0xa1, 0x40, 0x06, 0x51, 0x14, 0x06, 0x14, 0x41, 0x78, 0x02, 0x41, 0xe4, 0x04, 0x43, 0x60, 0x01, 0x04, 0x43, 0xe0, 0x01, 0x04, 0x13, 0x61, 0x02, 0x1c, 0x04, 0x7b, 0x00, 0x18, 0x51, 0x04, 0x06, 0x14, 0x00, 0x00, 0x04, 0x7b, 0x00, 0x1a, 0x41, 0x04, 0x02, 0x00, 0x00, 0x51, 0x04, 0x06, 0x14, 0x00, 0x00, 0x04, 0x7b, 0x00, 0x19, 0x11, 0x09, 0x2a, 0x41, 0x08, 0x02, 0x00, 0x00, 0x0f, 0x74, 0x65, 0x78, 0x74, 0x51, 0x04, 0x06, 0x14, 0x00, 0x00, 0x04, 0x7b, 0x00, 0x19, 0x11, 0x09, 0x2a, 0x41, 0x08, 0x02, 0x00, 0x00, 0x0f, 0x74, 0x65, 0x78, 0x74, 0x51, 0x04, 0x06, 0x14, 0x00, 0x00, 0x04, 0x7b, 0x00, 0x18, 0x11, 0x0c, 0x22, 0x01, 0x38]).buffer)
   };
   adoptBasic(value: $.Orphan<TestGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownBasic(): $.Orphan<TestGenerics> {
-    return $.Struct.disown(this.basic);
+    return $.utils.disown(this.basic);
   }
   get basic(): TestGenerics {
-    return $.Struct.getStruct(0, TestGenerics, this);
+    return $.utils.getStruct(0, TestGenerics, this);
   }
   hasBasic(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initBasic(): TestGenerics {
-    return $.Struct.initStructAt(0, TestGenerics, this);
+    return $.utils.initStructAt(0, TestGenerics, this);
   }
   set basic(value: TestGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptInner(value: $.Orphan<TestGenerics_Inner>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownInner(): $.Orphan<TestGenerics_Inner> {
-    return $.Struct.disown(this.inner);
+    return $.utils.disown(this.inner);
   }
   get inner(): TestGenerics_Inner {
-    return $.Struct.getStruct(1, TestGenerics_Inner, this);
+    return $.utils.getStruct(1, TestGenerics_Inner, this);
   }
   hasInner(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initInner(): TestGenerics_Inner {
-    return $.Struct.initStructAt(1, TestGenerics_Inner, this);
+    return $.utils.initStructAt(1, TestGenerics_Inner, this);
   }
   set inner(value: TestGenerics_Inner) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptInner2(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownInner2(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.inner2);
+    return $.utils.disown(this.inner2);
   }
   get inner2(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(2, TestGenerics_Inner2, this);
+    return $.utils.getStruct(2, TestGenerics_Inner2, this);
   }
   hasInner2(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initInner2(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(2, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(2, TestGenerics_Inner2, this);
   }
   set inner2(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptUnspecified(value: $.Orphan<TestGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownUnspecified(): $.Orphan<TestGenerics> {
-    return $.Struct.disown(this.unspecified);
+    return $.utils.disown(this.unspecified);
   }
   get unspecified(): TestGenerics {
-    return $.Struct.getStruct(3, TestGenerics, this);
+    return $.utils.getStruct(3, TestGenerics, this);
   }
   hasUnspecified(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initUnspecified(): TestGenerics {
-    return $.Struct.initStructAt(3, TestGenerics, this);
+    return $.utils.initStructAt(3, TestGenerics, this);
   }
   set unspecified(value: TestGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   adoptUnspecifiedInner(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(4, this));
+    $.utils.adopt(value, $.utils.getPointer(4, this));
   }
   disownUnspecifiedInner(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.unspecifiedInner);
+    return $.utils.disown(this.unspecifiedInner);
   }
   get unspecifiedInner(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(4, TestGenerics_Inner2, this);
+    return $.utils.getStruct(4, TestGenerics_Inner2, this);
   }
   hasUnspecifiedInner(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(4, this));
+    return !$.utils.isNull($.utils.getPointer(4, this));
   }
   initUnspecifiedInner(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(4, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(4, TestGenerics_Inner2, this);
   }
   set unspecifiedInner(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(4, this));
+    $.utils.copyFrom(value, $.utils.getPointer(4, this));
   }
   adoptWrapper(value: $.Orphan<TestGenericsWrapper>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(8, this));
+    $.utils.adopt(value, $.utils.getPointer(8, this));
   }
   disownWrapper(): $.Orphan<TestGenericsWrapper> {
-    return $.Struct.disown(this.wrapper);
+    return $.utils.disown(this.wrapper);
   }
   get wrapper(): TestGenericsWrapper {
-    return $.Struct.getStruct(8, TestGenericsWrapper, this);
+    return $.utils.getStruct(8, TestGenericsWrapper, this);
   }
   hasWrapper(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(8, this));
+    return !$.utils.isNull($.utils.getPointer(8, this));
   }
   initWrapper(): TestGenericsWrapper {
-    return $.Struct.initStructAt(8, TestGenericsWrapper, this);
+    return $.utils.initStructAt(8, TestGenericsWrapper, this);
   }
   set wrapper(value: TestGenericsWrapper) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(8, this));
+    $.utils.copyFrom(value, $.utils.getPointer(8, this));
   }
   adoptCap(value: $.Orphan<TestGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(18, this));
+    $.utils.adopt(value, $.utils.getPointer(18, this));
   }
   disownCap(): $.Orphan<TestGenerics> {
-    return $.Struct.disown(this.cap);
+    return $.utils.disown(this.cap);
   }
   get cap(): TestGenerics {
-    return $.Struct.getStruct(18, TestGenerics, this);
+    return $.utils.getStruct(18, TestGenerics, this);
   }
   hasCap(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(18, this));
+    return !$.utils.isNull($.utils.getPointer(18, this));
   }
   initCap(): TestGenerics {
-    return $.Struct.initStructAt(18, TestGenerics, this);
+    return $.utils.initStructAt(18, TestGenerics, this);
   }
   set cap(value: TestGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(18, this));
+    $.utils.copyFrom(value, $.utils.getPointer(18, this));
   }
   get genericCap(): TestGenerics_Interface$Client {
-    return new TestGenerics_Interface$Client($.Struct.getInterfaceClientOrNullAt(19, this));
+    return new TestGenerics_Interface$Client($.utils.getInterfaceClientOrNullAt(19, this));
   }
   set genericCap(value: TestGenerics_Interface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(19, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(19, this));
   }
   adoptDefault(value: $.Orphan<TestGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(5, this));
+    $.utils.adopt(value, $.utils.getPointer(5, this));
   }
   disownDefault(): $.Orphan<TestGenerics> {
-    return $.Struct.disown(this.default);
+    return $.utils.disown(this.default);
   }
   get default(): TestGenerics {
-    return $.Struct.getStruct(5, TestGenerics, this, TestUseGenerics._capnp.defaultDefault);
+    return $.utils.getStruct(5, TestGenerics, this, TestUseGenerics._capnp.defaultDefault);
   }
   hasDefault(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(5, this));
+    return !$.utils.isNull($.utils.getPointer(5, this));
   }
   initDefault(): TestGenerics {
-    return $.Struct.initStructAt(5, TestGenerics, this);
+    return $.utils.initStructAt(5, TestGenerics, this);
   }
   set default(value: TestGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(5, this));
+    $.utils.copyFrom(value, $.utils.getPointer(5, this));
   }
   adoptDefaultInner(value: $.Orphan<TestGenerics_Inner>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(6, this));
+    $.utils.adopt(value, $.utils.getPointer(6, this));
   }
   disownDefaultInner(): $.Orphan<TestGenerics_Inner> {
-    return $.Struct.disown(this.defaultInner);
+    return $.utils.disown(this.defaultInner);
   }
   get defaultInner(): TestGenerics_Inner {
-    return $.Struct.getStruct(6, TestGenerics_Inner, this, TestUseGenerics._capnp.defaultDefaultInner);
+    return $.utils.getStruct(6, TestGenerics_Inner, this, TestUseGenerics._capnp.defaultDefaultInner);
   }
   hasDefaultInner(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(6, this));
+    return !$.utils.isNull($.utils.getPointer(6, this));
   }
   initDefaultInner(): TestGenerics_Inner {
-    return $.Struct.initStructAt(6, TestGenerics_Inner, this);
+    return $.utils.initStructAt(6, TestGenerics_Inner, this);
   }
   set defaultInner(value: TestGenerics_Inner) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(6, this));
+    $.utils.copyFrom(value, $.utils.getPointer(6, this));
   }
   adoptDefaultUser(value: $.Orphan<TestUseGenerics>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(7, this));
+    $.utils.adopt(value, $.utils.getPointer(7, this));
   }
   disownDefaultUser(): $.Orphan<TestUseGenerics> {
-    return $.Struct.disown(this.defaultUser);
+    return $.utils.disown(this.defaultUser);
   }
   get defaultUser(): TestUseGenerics {
-    return $.Struct.getStruct(7, TestUseGenerics, this, TestUseGenerics._capnp.defaultDefaultUser);
+    return $.utils.getStruct(7, TestUseGenerics, this, TestUseGenerics._capnp.defaultDefaultUser);
   }
   hasDefaultUser(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(7, this));
+    return !$.utils.isNull($.utils.getPointer(7, this));
   }
   initDefaultUser(): TestUseGenerics {
-    return $.Struct.initStructAt(7, TestUseGenerics, this);
+    return $.utils.initStructAt(7, TestUseGenerics, this);
   }
   set defaultUser(value: TestUseGenerics) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(7, this));
+    $.utils.copyFrom(value, $.utils.getPointer(7, this));
   }
   adoptDefaultWrapper(value: $.Orphan<TestGenericsWrapper>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(9, this));
+    $.utils.adopt(value, $.utils.getPointer(9, this));
   }
   disownDefaultWrapper(): $.Orphan<TestGenericsWrapper> {
-    return $.Struct.disown(this.defaultWrapper);
+    return $.utils.disown(this.defaultWrapper);
   }
   get defaultWrapper(): TestGenericsWrapper {
-    return $.Struct.getStruct(9, TestGenericsWrapper, this, TestUseGenerics._capnp.defaultDefaultWrapper);
+    return $.utils.getStruct(9, TestGenericsWrapper, this, TestUseGenerics._capnp.defaultDefaultWrapper);
   }
   hasDefaultWrapper(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(9, this));
+    return !$.utils.isNull($.utils.getPointer(9, this));
   }
   initDefaultWrapper(): TestGenericsWrapper {
-    return $.Struct.initStructAt(9, TestGenericsWrapper, this);
+    return $.utils.initStructAt(9, TestGenericsWrapper, this);
   }
   set defaultWrapper(value: TestGenericsWrapper) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(9, this));
+    $.utils.copyFrom(value, $.utils.getPointer(9, this));
   }
   adoptDefaultWrapper2(value: $.Orphan<TestGenericsWrapper2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(10, this));
+    $.utils.adopt(value, $.utils.getPointer(10, this));
   }
   disownDefaultWrapper2(): $.Orphan<TestGenericsWrapper2> {
-    return $.Struct.disown(this.defaultWrapper2);
+    return $.utils.disown(this.defaultWrapper2);
   }
   get defaultWrapper2(): TestGenericsWrapper2 {
-    return $.Struct.getStruct(10, TestGenericsWrapper2, this, TestUseGenerics._capnp.defaultDefaultWrapper2);
+    return $.utils.getStruct(10, TestGenericsWrapper2, this, TestUseGenerics._capnp.defaultDefaultWrapper2);
   }
   hasDefaultWrapper2(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(10, this));
+    return !$.utils.isNull($.utils.getPointer(10, this));
   }
   initDefaultWrapper2(): TestGenericsWrapper2 {
-    return $.Struct.initStructAt(10, TestGenericsWrapper2, this);
+    return $.utils.initStructAt(10, TestGenericsWrapper2, this);
   }
   set defaultWrapper2(value: TestGenericsWrapper2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(10, this));
+    $.utils.copyFrom(value, $.utils.getPointer(10, this));
   }
   adoptAliasFoo(value: $.Orphan<TestAllTypes>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(11, this));
+    $.utils.adopt(value, $.utils.getPointer(11, this));
   }
   disownAliasFoo(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.aliasFoo);
+    return $.utils.disown(this.aliasFoo);
   }
   get aliasFoo(): TestAllTypes {
-    return $.Struct.getStruct(11, TestAllTypes, this, TestUseGenerics._capnp.defaultAliasFoo);
+    return $.utils.getStruct(11, TestAllTypes, this, TestUseGenerics._capnp.defaultAliasFoo);
   }
   hasAliasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(11, this));
+    return !$.utils.isNull($.utils.getPointer(11, this));
   }
   initAliasFoo(): TestAllTypes {
-    return $.Struct.initStructAt(11, TestAllTypes, this);
+    return $.utils.initStructAt(11, TestAllTypes, this);
   }
   set aliasFoo(value: TestAllTypes) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(11, this));
+    $.utils.copyFrom(value, $.utils.getPointer(11, this));
   }
   adoptAliasInner(value: $.Orphan<TestGenerics_Inner>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(12, this));
+    $.utils.adopt(value, $.utils.getPointer(12, this));
   }
   disownAliasInner(): $.Orphan<TestGenerics_Inner> {
-    return $.Struct.disown(this.aliasInner);
+    return $.utils.disown(this.aliasInner);
   }
   get aliasInner(): TestGenerics_Inner {
-    return $.Struct.getStruct(12, TestGenerics_Inner, this, TestUseGenerics._capnp.defaultAliasInner);
+    return $.utils.getStruct(12, TestGenerics_Inner, this, TestUseGenerics._capnp.defaultAliasInner);
   }
   hasAliasInner(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(12, this));
+    return !$.utils.isNull($.utils.getPointer(12, this));
   }
   initAliasInner(): TestGenerics_Inner {
-    return $.Struct.initStructAt(12, TestGenerics_Inner, this);
+    return $.utils.initStructAt(12, TestGenerics_Inner, this);
   }
   set aliasInner(value: TestGenerics_Inner) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(12, this));
+    $.utils.copyFrom(value, $.utils.getPointer(12, this));
   }
   adoptAliasInner2(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(13, this));
+    $.utils.adopt(value, $.utils.getPointer(13, this));
   }
   disownAliasInner2(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.aliasInner2);
+    return $.utils.disown(this.aliasInner2);
   }
   get aliasInner2(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(13, TestGenerics_Inner2, this, TestUseGenerics._capnp.defaultAliasInner2);
+    return $.utils.getStruct(13, TestGenerics_Inner2, this, TestUseGenerics._capnp.defaultAliasInner2);
   }
   hasAliasInner2(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(13, this));
+    return !$.utils.isNull($.utils.getPointer(13, this));
   }
   initAliasInner2(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(13, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(13, TestGenerics_Inner2, this);
   }
   set aliasInner2(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(13, this));
+    $.utils.copyFrom(value, $.utils.getPointer(13, this));
   }
   adoptAliasInner2Bind(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(14, this));
+    $.utils.adopt(value, $.utils.getPointer(14, this));
   }
   disownAliasInner2Bind(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.aliasInner2Bind);
+    return $.utils.disown(this.aliasInner2Bind);
   }
   get aliasInner2Bind(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(14, TestGenerics_Inner2, this, TestUseGenerics._capnp.defaultAliasInner2Bind);
+    return $.utils.getStruct(14, TestGenerics_Inner2, this, TestUseGenerics._capnp.defaultAliasInner2Bind);
   }
   hasAliasInner2Bind(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(14, this));
+    return !$.utils.isNull($.utils.getPointer(14, this));
   }
   initAliasInner2Bind(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(14, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(14, TestGenerics_Inner2, this);
   }
   set aliasInner2Bind(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(14, this));
+    $.utils.copyFrom(value, $.utils.getPointer(14, this));
   }
   adoptAliasInner2Text(value: $.Orphan<TestGenerics_Inner2>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(15, this));
+    $.utils.adopt(value, $.utils.getPointer(15, this));
   }
   disownAliasInner2Text(): $.Orphan<TestGenerics_Inner2> {
-    return $.Struct.disown(this.aliasInner2Text);
+    return $.utils.disown(this.aliasInner2Text);
   }
   get aliasInner2Text(): TestGenerics_Inner2 {
-    return $.Struct.getStruct(15, TestGenerics_Inner2, this, TestUseGenerics._capnp.defaultAliasInner2Text);
+    return $.utils.getStruct(15, TestGenerics_Inner2, this, TestUseGenerics._capnp.defaultAliasInner2Text);
   }
   hasAliasInner2Text(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(15, this));
+    return !$.utils.isNull($.utils.getPointer(15, this));
   }
   initAliasInner2Text(): TestGenerics_Inner2 {
-    return $.Struct.initStructAt(15, TestGenerics_Inner2, this);
+    return $.utils.initStructAt(15, TestGenerics_Inner2, this);
   }
   set aliasInner2Text(value: TestGenerics_Inner2) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(15, this));
+    $.utils.copyFrom(value, $.utils.getPointer(15, this));
   }
   get aliasRev(): string {
-    return $.Struct.getText(16, this, TestUseGenerics._capnp.defaultAliasRev);
+    return $.utils.getText(16, this, TestUseGenerics._capnp.defaultAliasRev);
   }
   set aliasRev(value: string) {
-    $.Struct.setText(16, value, this);
+    $.utils.setText(16, value, this);
   }
   adoptUseAliases(value: $.Orphan<TestGenerics_UseAliases>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(17, this));
+    $.utils.adopt(value, $.utils.getPointer(17, this));
   }
   disownUseAliases(): $.Orphan<TestGenerics_UseAliases> {
-    return $.Struct.disown(this.useAliases);
+    return $.utils.disown(this.useAliases);
   }
   get useAliases(): TestGenerics_UseAliases {
-    return $.Struct.getStruct(17, TestGenerics_UseAliases, this, TestUseGenerics._capnp.defaultUseAliases);
+    return $.utils.getStruct(17, TestGenerics_UseAliases, this, TestUseGenerics._capnp.defaultUseAliases);
   }
   hasUseAliases(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(17, this));
+    return !$.utils.isNull($.utils.getPointer(17, this));
   }
   initUseAliases(): TestGenerics_UseAliases {
-    return $.Struct.initStructAt(17, TestGenerics_UseAliases, this);
+    return $.utils.initStructAt(17, TestGenerics_UseAliases, this);
   }
   set useAliases(value: TestGenerics_UseAliases) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(17, this));
+    $.utils.copyFrom(value, $.utils.getPointer(17, this));
   }
   toString(): string {
     return "TestUseGenerics_" + super.toString();
@@ -4939,64 +4939,64 @@ export class TestAnyPointerConstants extends $.Struct {
     size: new $.ObjectSize(0, 4)
   };
   adoptAnyKindAsStruct(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownAnyKindAsStruct(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.anyKindAsStruct);
+    return $.utils.disown(this.anyKindAsStruct);
   }
   get anyKindAsStruct(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasAnyKindAsStruct(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set anyKindAsStruct(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptAnyStructAsStruct(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownAnyStructAsStruct(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.anyStructAsStruct);
+    return $.utils.disown(this.anyStructAsStruct);
   }
   get anyStructAsStruct(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasAnyStructAsStruct(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set anyStructAsStruct(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptAnyKindAsList(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownAnyKindAsList(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.anyKindAsList);
+    return $.utils.disown(this.anyKindAsList);
   }
   get anyKindAsList(): $.Pointer {
-    return $.Struct.getPointer(2, this);
+    return $.utils.getPointer(2, this);
   }
   hasAnyKindAsList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   set anyKindAsList(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptAnyListAsList(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownAnyListAsList(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.anyListAsList);
+    return $.utils.disown(this.anyListAsList);
   }
   get anyListAsList(): $.Pointer {
-    return $.Struct.getPointer(3, this);
+    return $.utils.getPointer(3, this);
   }
   hasAnyListAsList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   set anyListAsList(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   toString(): string {
     return "TestAnyPointerConstants_" + super.toString();
@@ -5009,16 +5009,16 @@ export class TestInterface_Foo$Params extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get i(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set i(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   get j(): boolean {
-    return $.Struct.getBit(32, this);
+    return $.utils.getBit(32, this);
   }
   set j(value: boolean) {
-    $.Struct.setBit(32, value, this);
+    $.utils.setBit(32, value, this);
   }
   toString(): string {
     return "TestInterface_Foo$Params_" + super.toString();
@@ -5031,10 +5031,10 @@ export class TestInterface_Foo$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get x(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set x(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestInterface_Foo$Results_" + super.toString();
@@ -5085,22 +5085,22 @@ export class TestInterface_Baz$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptS(value: $.Orphan<TestAllTypes>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownS(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.s);
+    return $.utils.disown(this.s);
   }
   get s(): TestAllTypes {
-    return $.Struct.getStruct(0, TestAllTypes, this);
+    return $.utils.getStruct(0, TestAllTypes, this);
   }
   hasS(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initS(): TestAllTypes {
-    return $.Struct.initStructAt(0, TestAllTypes, this);
+    return $.utils.initStructAt(0, TestAllTypes, this);
   }
   set s(value: TestAllTypes) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestInterface_Baz$Params_" + super.toString();
@@ -5431,10 +5431,10 @@ export class TestPipeline_Box extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestPipeline_Box_" + super.toString();
@@ -5447,19 +5447,19 @@ export class TestPipeline_AnyBox extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptCap(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownCap(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.cap);
+    return $.utils.disown(this.cap);
   }
   get cap(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasCap(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set cap(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestPipeline_AnyBox_" + super.toString();
@@ -5472,16 +5472,16 @@ export class TestPipeline_GetCap$Params extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get n(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set n(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   get inCap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set inCap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestPipeline_GetCap$Params_" + super.toString();
@@ -5494,28 +5494,28 @@ export class TestPipeline_GetCap$Results extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   get s(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set s(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   adoptOutBox(value: $.Orphan<TestPipeline_Box>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownOutBox(): $.Orphan<TestPipeline_Box> {
-    return $.Struct.disown(this.outBox);
+    return $.utils.disown(this.outBox);
   }
   get outBox(): TestPipeline_Box {
-    return $.Struct.getStruct(1, TestPipeline_Box, this);
+    return $.utils.getStruct(1, TestPipeline_Box, this);
   }
   hasOutBox(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initOutBox(): TestPipeline_Box {
-    return $.Struct.initStructAt(1, TestPipeline_Box, this);
+    return $.utils.initStructAt(1, TestPipeline_Box, this);
   }
   set outBox(value: TestPipeline_Box) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestPipeline_GetCap$Results_" + super.toString();
@@ -5537,43 +5537,43 @@ export class TestPipeline_TestPointers$Params extends $.Struct {
     size: new $.ObjectSize(0, 3)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   adoptObj(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownObj(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.obj);
+    return $.utils.disown(this.obj);
   }
   get obj(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasObj(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set obj(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptList(value: $.Orphan<$.List<TestInterface>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownList(): $.Orphan<$.List<TestInterface>> {
-    return $.Struct.disown(this.list);
+    return $.utils.disown(this.list);
   }
   get list(): $.List<TestInterface> {
-    return $.Struct.getList(2, $.InterfaceList, this);
+    return $.utils.getList(2, $.InterfaceList, this);
   }
   hasList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initList(length: number): $.List<TestInterface> {
-    return $.Struct.initList(2, $.InterfaceList, length, this);
+    return $.utils.initList(2, $.InterfaceList, length, this);
   }
   set list(value: $.List<TestInterface>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   toString(): string {
     return "TestPipeline_TestPointers$Params_" + super.toString();
@@ -5605,25 +5605,25 @@ export class TestPipeline_GetAnyCap$Params extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get n(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set n(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   adoptInCap(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownInCap(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.inCap);
+    return $.utils.disown(this.inCap);
   }
   get inCap(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasInCap(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set inCap(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestPipeline_GetAnyCap$Params_" + super.toString();
@@ -5636,28 +5636,28 @@ export class TestPipeline_GetAnyCap$Results extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   get s(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set s(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   adoptOutBox(value: $.Orphan<TestPipeline_AnyBox>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownOutBox(): $.Orphan<TestPipeline_AnyBox> {
-    return $.Struct.disown(this.outBox);
+    return $.utils.disown(this.outBox);
   }
   get outBox(): TestPipeline_AnyBox {
-    return $.Struct.getStruct(1, TestPipeline_AnyBox, this);
+    return $.utils.getStruct(1, TestPipeline_AnyBox, this);
   }
   hasOutBox(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initOutBox(): TestPipeline_AnyBox {
-    return $.Struct.initStructAt(1, TestPipeline_AnyBox, this);
+    return $.utils.initStructAt(1, TestPipeline_AnyBox, this);
   }
   set outBox(value: TestPipeline_AnyBox) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestPipeline_GetAnyCap$Results_" + super.toString();
@@ -5781,10 +5781,10 @@ export class TestCallOrder_GetCallSequence$Params extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get expected(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set expected(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   toString(): string {
     return "TestCallOrder_GetCallSequence$Params_" + super.toString();
@@ -5797,10 +5797,10 @@ export class TestCallOrder_GetCallSequence$Results extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get n(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set n(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   toString(): string {
     return "TestCallOrder_GetCallSequence$Results_" + super.toString();
@@ -5878,22 +5878,22 @@ export class TestTailCallee_TailResult extends $.Struct {
     size: new $.ObjectSize(8, 2)
   };
   get i(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set i(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   get t(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set t(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get c(): TestCallOrder$Client {
-    return new TestCallOrder$Client($.Struct.getInterfaceClientOrNullAt(1, this));
+    return new TestCallOrder$Client($.utils.getInterfaceClientOrNullAt(1, this));
   }
   set c(value: TestCallOrder$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(1, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestTailCallee_TailResult_" + super.toString();
@@ -5906,16 +5906,16 @@ export class TestTailCallee_Foo$Params extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get i(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set i(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get t(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set t(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestTailCallee_Foo$Params_" + super.toString();
@@ -5997,16 +5997,16 @@ export class TestTailCaller_Foo$Params extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get i(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set i(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get callee(): TestTailCallee$Client {
-    return new TestTailCallee$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestTailCallee$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set callee(value: TestTailCallee$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestTailCaller_Foo$Params_" + super.toString();
@@ -6107,10 +6107,10 @@ export class TestMoreStuff_CallFoo$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_CallFoo$Params_" + super.toString();
@@ -6123,10 +6123,10 @@ export class TestMoreStuff_CallFoo$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get s(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set s(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestMoreStuff_CallFoo$Results_" + super.toString();
@@ -6148,10 +6148,10 @@ export class TestMoreStuff_CallFooWhenResolved$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_CallFooWhenResolved$Params_" + super.toString();
@@ -6164,10 +6164,10 @@ export class TestMoreStuff_CallFooWhenResolved$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get s(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set s(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestMoreStuff_CallFooWhenResolved$Results_" + super.toString();
@@ -6189,10 +6189,10 @@ export class TestMoreStuff_NeverReturn$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_NeverReturn$Params_" + super.toString();
@@ -6205,10 +6205,10 @@ export class TestMoreStuff_NeverReturn$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get capCopy(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set capCopy(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_NeverReturn$Results_" + super.toString();
@@ -6233,10 +6233,10 @@ export class TestMoreStuff_Hold$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_Hold$Params_" + super.toString();
@@ -6278,10 +6278,10 @@ export class TestMoreStuff_CallHeld$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get s(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set s(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestMoreStuff_CallHeld$Results_" + super.toString();
@@ -6313,10 +6313,10 @@ export class TestMoreStuff_GetHeld$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_GetHeld$Results_" + super.toString();
@@ -6341,10 +6341,10 @@ export class TestMoreStuff_Echo$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestCallOrder$Client {
-    return new TestCallOrder$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestCallOrder$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestCallOrder$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_Echo$Params_" + super.toString();
@@ -6357,10 +6357,10 @@ export class TestMoreStuff_Echo$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestCallOrder$Client {
-    return new TestCallOrder$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestCallOrder$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestCallOrder$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_Echo$Results_" + super.toString();
@@ -6385,10 +6385,10 @@ export class TestMoreStuff_ExpectCancel$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_ExpectCancel$Params_" + super.toString();
@@ -6422,22 +6422,22 @@ export class TestMoreStuff_MethodWithDefaults$Params extends $.Struct {
     defaultC: "foo"
   };
   get a(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set a(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get b(): number {
-    return $.Struct.getUint32(0, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultB);
+    return $.utils.getUint32(0, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultB);
   }
   set b(value: number) {
-    $.Struct.setUint32(0, value, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultB);
+    $.utils.setUint32(0, value, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultB);
   }
   get c(): string {
-    return $.Struct.getText(1, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultC);
+    return $.utils.getText(1, this, TestMoreStuff_MethodWithDefaults$Params._capnp.defaultC);
   }
   set c(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "TestMoreStuff_MethodWithDefaults$Params_" + super.toString();
@@ -6451,16 +6451,16 @@ export class TestMoreStuff_MethodWithDefaults$Results extends $.Struct {
     defaultE: "bar"
   };
   get d(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set d(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get e(): string {
-    return $.Struct.getText(1, this, TestMoreStuff_MethodWithDefaults$Results._capnp.defaultE);
+    return $.utils.getText(1, this, TestMoreStuff_MethodWithDefaults$Results._capnp.defaultE);
   }
   set e(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "TestMoreStuff_MethodWithDefaults$Results_" + super.toString();
@@ -6492,10 +6492,10 @@ export class TestMoreStuff_GetHandle$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get handle(): TestHandle$Client {
-    return new TestHandle$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestHandle$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set handle(value: TestHandle$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_GetHandle$Results_" + super.toString();
@@ -6530,10 +6530,10 @@ export class TestMoreStuff_GetNull$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get nullCap(): TestMoreStuff$Client {
-    return new TestMoreStuff$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestMoreStuff$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set nullCap(value: TestMoreStuff$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMoreStuff_GetNull$Results_" + super.toString();
@@ -6568,10 +6568,10 @@ export class TestMoreStuff_GetEnormousString$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get str(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set str(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestMoreStuff_GetEnormousString$Results_" + super.toString();
@@ -6594,16 +6594,16 @@ export class TestMoreStuff_MethodWithNullDefault$Params extends $.Struct {
     defaultB: $.readRawPointer(new Uint8Array([0x10, 0x01, 0x00, 0x00]).buffer)
   };
   get a(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set a(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get b(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(1, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(1, this));
   }
   set b(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(1, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestMoreStuff_MethodWithNullDefault$Params_" + super.toString();
@@ -6965,10 +6965,10 @@ export class TestMembrane_Result extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get text(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set text(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestMembrane_Result_" + super.toString();
@@ -7088,10 +7088,10 @@ export class TestMembrane_MakeThing$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get thing(): TestMembrane_Thing$Client {
-    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestMembrane_Thing$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set thing(value: TestMembrane_Thing$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMembrane_MakeThing$Results_" + super.toString();
@@ -7116,16 +7116,16 @@ export class TestMembrane_CallPassThrough$Params extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get thing(): TestMembrane_Thing$Client {
-    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestMembrane_Thing$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set thing(value: TestMembrane_Thing$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   get tailCall(): boolean {
-    return $.Struct.getBit(0, this);
+    return $.utils.getBit(0, this);
   }
   set tailCall(value: boolean) {
-    $.Struct.setBit(0, value, this);
+    $.utils.setBit(0, value, this);
   }
   toString(): string {
     return "TestMembrane_CallPassThrough$Params_" + super.toString();
@@ -7138,16 +7138,16 @@ export class TestMembrane_CallIntercept$Params extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get thing(): TestMembrane_Thing$Client {
-    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestMembrane_Thing$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set thing(value: TestMembrane_Thing$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   get tailCall(): boolean {
-    return $.Struct.getBit(0, this);
+    return $.utils.getBit(0, this);
   }
   set tailCall(value: boolean) {
-    $.Struct.setBit(0, value, this);
+    $.utils.setBit(0, value, this);
   }
   toString(): string {
     return "TestMembrane_CallIntercept$Params_" + super.toString();
@@ -7160,10 +7160,10 @@ export class TestMembrane_Loopback$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get thing(): TestMembrane_Thing$Client {
-    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestMembrane_Thing$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set thing(value: TestMembrane_Thing$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMembrane_Loopback$Params_" + super.toString();
@@ -7176,10 +7176,10 @@ export class TestMembrane_Loopback$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get thing(): TestMembrane_Thing$Client {
-    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestMembrane_Thing$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set thing(value: TestMembrane_Thing$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestMembrane_Loopback$Results_" + super.toString();
@@ -7328,28 +7328,28 @@ export class TestContainMembrane extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   get cap(): TestMembrane_Thing$Client {
-    return new TestMembrane_Thing$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new TestMembrane_Thing$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set cap(value: TestMembrane_Thing$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   adoptList(value: $.Orphan<$.List<TestMembrane_Thing>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownList(): $.Orphan<$.List<TestMembrane_Thing>> {
-    return $.Struct.disown(this.list);
+    return $.utils.disown(this.list);
   }
   get list(): $.List<TestMembrane_Thing> {
-    return $.Struct.getList(1, $.InterfaceList, this);
+    return $.utils.getList(1, $.InterfaceList, this);
   }
   hasList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initList(length: number): $.List<TestMembrane_Thing> {
-    return $.Struct.initList(1, $.InterfaceList, length, this);
+    return $.utils.initList(1, $.InterfaceList, length, this);
   }
   set list(value: $.List<TestMembrane_Thing>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestContainMembrane_" + super.toString();
@@ -7362,16 +7362,16 @@ export class TestTransferCap_Element extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   get text(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set text(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get cap(): TestInterface$Client {
-    return new TestInterface$Client($.Struct.getInterfaceClientOrNullAt(1, this));
+    return new TestInterface$Client($.utils.getInterfaceClientOrNullAt(1, this));
   }
   set cap(value: TestInterface$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(1, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestTransferCap_Element_" + super.toString();
@@ -7386,22 +7386,22 @@ export class TestTransferCap extends $.Struct {
   };
   static _List: $.ListCtor<TestTransferCap_Element>;
   adoptList(value: $.Orphan<$.List<TestTransferCap_Element>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownList(): $.Orphan<$.List<TestTransferCap_Element>> {
-    return $.Struct.disown(this.list);
+    return $.utils.disown(this.list);
   }
   get list(): $.List<TestTransferCap_Element> {
-    return $.Struct.getList(0, TestTransferCap._List, this);
+    return $.utils.getList(0, TestTransferCap._List, this);
   }
   hasList(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initList(length: number): $.List<TestTransferCap_Element> {
-    return $.Struct.initList(0, TestTransferCap._List, length, this);
+    return $.utils.initList(0, TestTransferCap._List, length, this);
   }
   set list(value: $.List<TestTransferCap_Element>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestTransferCap_" + super.toString();
@@ -7662,19 +7662,19 @@ export class TestAuthenticatedBootstrap_GetCallerId$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptCaller(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownCaller(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.caller);
+    return $.utils.disown(this.caller);
   }
   get caller(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasCaller(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set caller(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestAuthenticatedBootstrap_GetCallerId$Results_" + super.toString();
@@ -7752,37 +7752,37 @@ export class TestSturdyRef extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   adoptHostId(value: $.Orphan<TestSturdyRefHostId>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownHostId(): $.Orphan<TestSturdyRefHostId> {
-    return $.Struct.disown(this.hostId);
+    return $.utils.disown(this.hostId);
   }
   get hostId(): TestSturdyRefHostId {
-    return $.Struct.getStruct(0, TestSturdyRefHostId, this);
+    return $.utils.getStruct(0, TestSturdyRefHostId, this);
   }
   hasHostId(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initHostId(): TestSturdyRefHostId {
-    return $.Struct.initStructAt(0, TestSturdyRefHostId, this);
+    return $.utils.initStructAt(0, TestSturdyRefHostId, this);
   }
   set hostId(value: TestSturdyRefHostId) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptObjectId(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownObjectId(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.objectId);
+    return $.utils.disown(this.objectId);
   }
   get objectId(): $.Pointer {
-    return $.Struct.getPointer(1, this);
+    return $.utils.getPointer(1, this);
   }
   hasObjectId(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   set objectId(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   toString(): string {
     return "TestSturdyRef_" + super.toString();
@@ -7795,10 +7795,10 @@ export class TestSturdyRefHostId extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get host(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set host(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   toString(): string {
     return "TestSturdyRefHostId_" + super.toString();
@@ -7821,10 +7821,10 @@ export class TestSturdyRefObjectId extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get tag(): TestSturdyRefObjectId_Tag {
-    return $.Struct.getUint16(0, this) as TestSturdyRefObjectId_Tag;
+    return $.utils.getUint16(0, this) as TestSturdyRefObjectId_Tag;
   }
   set tag(value: TestSturdyRefObjectId_Tag) {
-    $.Struct.setUint16(0, value, this);
+    $.utils.setUint16(0, value, this);
   }
   toString(): string {
     return "TestSturdyRefObjectId_" + super.toString();
@@ -7890,28 +7890,28 @@ export class TestNameAnnotation_NestedStruct extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get badNestedFieldName(): boolean {
-    return $.Struct.getBit(0, this);
+    return $.utils.getBit(0, this);
   }
   set badNestedFieldName(value: boolean) {
-    $.Struct.setBit(0, value, this);
+    $.utils.setBit(0, value, this);
   }
   adoptAnotherBadNestedFieldName(value: $.Orphan<TestNameAnnotation_NestedStruct>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownAnotherBadNestedFieldName(): $.Orphan<TestNameAnnotation_NestedStruct> {
-    return $.Struct.disown(this.anotherBadNestedFieldName);
+    return $.utils.disown(this.anotherBadNestedFieldName);
   }
   get anotherBadNestedFieldName(): TestNameAnnotation_NestedStruct {
-    return $.Struct.getStruct(0, TestNameAnnotation_NestedStruct, this);
+    return $.utils.getStruct(0, TestNameAnnotation_NestedStruct, this);
   }
   hasAnotherBadNestedFieldName(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initAnotherBadNestedFieldName(): TestNameAnnotation_NestedStruct {
-    return $.Struct.initStructAt(0, TestNameAnnotation_NestedStruct, this);
+    return $.utils.initStructAt(0, TestNameAnnotation_NestedStruct, this);
   }
   set anotherBadNestedFieldName(value: TestNameAnnotation_NestedStruct) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestNameAnnotation_NestedStruct_" + super.toString();
@@ -7941,49 +7941,49 @@ export class TestNameAnnotation_BadlyNamedUnion extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get badlyNamedGroup(): TestNameAnnotation_BadlyNamedUnion_BadlyNamedGroup {
-    $.Struct.testWhich("badlyNamedGroup", $.Struct.getUint16(6, this), 0, this);
-    return $.Struct.getAs(TestNameAnnotation_BadlyNamedUnion_BadlyNamedGroup, this);
+    $.utils.testWhich("badlyNamedGroup", $.utils.getUint16(6, this), 0, this);
+    return $.utils.getAs(TestNameAnnotation_BadlyNamedUnion_BadlyNamedGroup, this);
   }
   initBadlyNamedGroup(): TestNameAnnotation_BadlyNamedUnion_BadlyNamedGroup {
-    $.Struct.setUint16(6, 0, this);
-    return $.Struct.getAs(TestNameAnnotation_BadlyNamedUnion_BadlyNamedGroup, this);
+    $.utils.setUint16(6, 0, this);
+    return $.utils.getAs(TestNameAnnotation_BadlyNamedUnion_BadlyNamedGroup, this);
   }
   isBadlyNamedGroup(): boolean {
-    return $.Struct.getUint16(6, this) === 0;
+    return $.utils.getUint16(6, this) === 0;
   }
   set badlyNamedGroup(_: true) {
-    $.Struct.setUint16(6, 0, this);
+    $.utils.setUint16(6, 0, this);
   }
   adoptBaz(value: $.Orphan<TestNameAnnotation_NestedStruct>): void {
-    $.Struct.setUint16(6, 1, this);
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(6, 1, this);
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownBaz(): $.Orphan<TestNameAnnotation_NestedStruct> {
-    return $.Struct.disown(this.baz);
+    return $.utils.disown(this.baz);
   }
   get baz(): TestNameAnnotation_NestedStruct {
-    $.Struct.testWhich("baz", $.Struct.getUint16(6, this), 1, this);
-    return $.Struct.getStruct(0, TestNameAnnotation_NestedStruct, this);
+    $.utils.testWhich("baz", $.utils.getUint16(6, this), 1, this);
+    return $.utils.getStruct(0, TestNameAnnotation_NestedStruct, this);
   }
   hasBaz(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initBaz(): TestNameAnnotation_NestedStruct {
-    $.Struct.setUint16(6, 1, this);
-    return $.Struct.initStructAt(0, TestNameAnnotation_NestedStruct, this);
+    $.utils.setUint16(6, 1, this);
+    return $.utils.initStructAt(0, TestNameAnnotation_NestedStruct, this);
   }
   isBaz(): boolean {
-    return $.Struct.getUint16(6, this) === 1;
+    return $.utils.getUint16(6, this) === 1;
   }
   set baz(value: TestNameAnnotation_NestedStruct) {
-    $.Struct.setUint16(6, 1, this);
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.setUint16(6, 1, this);
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "TestNameAnnotation_BadlyNamedUnion_" + super.toString();
   }
   which(): TestNameAnnotation_BadlyNamedUnion_Which {
-    return $.Struct.getUint16(6, this) as TestNameAnnotation_BadlyNamedUnion_Which;
+    return $.utils.getUint16(6, this) as TestNameAnnotation_BadlyNamedUnion_Which;
   }
 }
 export const TestNameAnnotation_Which = {
@@ -8002,44 +8002,44 @@ export class TestNameAnnotation extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   get badFieldName(): boolean {
-    $.Struct.testWhich("badFieldName", $.Struct.getUint16(2, this), 0, this);
-    return $.Struct.getBit(0, this);
+    $.utils.testWhich("badFieldName", $.utils.getUint16(2, this), 0, this);
+    return $.utils.getBit(0, this);
   }
   isBadFieldName(): boolean {
-    return $.Struct.getUint16(2, this) === 0;
+    return $.utils.getUint16(2, this) === 0;
   }
   set badFieldName(value: boolean) {
-    $.Struct.setUint16(2, 0, this);
-    $.Struct.setBit(0, value, this);
+    $.utils.setUint16(2, 0, this);
+    $.utils.setBit(0, value, this);
   }
   get bar(): number {
-    $.Struct.testWhich("bar", $.Struct.getUint16(2, this), 1, this);
-    return $.Struct.getInt8(0, this);
+    $.utils.testWhich("bar", $.utils.getUint16(2, this), 1, this);
+    return $.utils.getInt8(0, this);
   }
   isBar(): boolean {
-    return $.Struct.getUint16(2, this) === 1;
+    return $.utils.getUint16(2, this) === 1;
   }
   set bar(value: number) {
-    $.Struct.setUint16(2, 1, this);
-    $.Struct.setInt8(0, value, this);
+    $.utils.setUint16(2, 1, this);
+    $.utils.setInt8(0, value, this);
   }
   get anotherBadFieldName(): TestNameAnnotation_BadlyNamedEnum {
-    return $.Struct.getUint16(4, this) as TestNameAnnotation_BadlyNamedEnum;
+    return $.utils.getUint16(4, this) as TestNameAnnotation_BadlyNamedEnum;
   }
   set anotherBadFieldName(value: TestNameAnnotation_BadlyNamedEnum) {
-    $.Struct.setUint16(4, value, this);
+    $.utils.setUint16(4, value, this);
   }
   get badlyNamedUnion(): TestNameAnnotation_BadlyNamedUnion {
-    return $.Struct.getAs(TestNameAnnotation_BadlyNamedUnion, this);
+    return $.utils.getAs(TestNameAnnotation_BadlyNamedUnion, this);
   }
   initBadlyNamedUnion(): TestNameAnnotation_BadlyNamedUnion {
-    return $.Struct.getAs(TestNameAnnotation_BadlyNamedUnion, this);
+    return $.utils.getAs(TestNameAnnotation_BadlyNamedUnion, this);
   }
   toString(): string {
     return "TestNameAnnotation_" + super.toString();
   }
   which(): TestNameAnnotation_Which {
-    return $.Struct.getUint16(2, this) as TestNameAnnotation_Which;
+    return $.utils.getUint16(2, this) as TestNameAnnotation_Which;
   }
 }
 export class TestNameAnnotationInterface_BadlyNamedMethod$Params extends $.Struct {
@@ -8049,10 +8049,10 @@ export class TestNameAnnotationInterface_BadlyNamedMethod$Params extends $.Struc
     size: new $.ObjectSize(8, 0)
   };
   get badlyNamedParam(): number {
-    return $.Struct.getUint8(0, this);
+    return $.utils.getUint8(0, this);
   }
   set badlyNamedParam(value: number) {
-    $.Struct.setUint8(0, value, this);
+    $.utils.setUint8(0, value, this);
   }
   toString(): string {
     return "TestNameAnnotationInterface_BadlyNamedMethod$Params_" + super.toString();

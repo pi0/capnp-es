@@ -3,7 +3,7 @@
 import { ListElementSize } from "../../list-element-size";
 import { _ListCtor, List, type ListCtor } from "./list";
 import { Struct, StructCtor } from "../struct";
-import { copyFrom } from "../pointer";
+import { copyFrom } from "../pointer.utils";
 
 export function CompositeList<T extends Struct>(
   CompositeClass: StructCtor<T>,

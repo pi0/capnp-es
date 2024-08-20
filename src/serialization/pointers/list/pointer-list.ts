@@ -2,7 +2,8 @@
 
 import { ListElementSize } from "../../list-element-size";
 import { _ListCtor, List, type ListCtor } from "./list";
-import { Pointer, PointerCtor, getContent, copyFrom } from "../pointer";
+import { Pointer, PointerCtor } from "../pointer";
+import { getContent, copyFrom } from "../pointer.utils";
 
 export function PointerList<T extends Pointer>(
   PointerClass: PointerCtor<T>,

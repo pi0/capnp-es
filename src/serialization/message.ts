@@ -18,8 +18,9 @@ import {
 import { pack, unpack } from "./packing";
 import { Pointer, StructCtor, PointerType, Struct } from "./pointers";
 import { Segment } from "./segment";
-import { getTargetStructSize, validate } from "./pointers/pointer";
-import { resize, initStruct } from "./pointers/struct";
+import { getTargetStructSize, validate } from "./pointers/pointer.utils";
+import { resize, initStruct } from "./pointers/struct.utils";
+import { copyFrom } from "./pointers/pointer.utils";
 
 export interface _Message {
   readonly arena: AnyArena;
@@ -448,7 +449,7 @@ export function readRawPointer(data: ArrayBuffer): Pointer {
 }
 
 export function setRoot(src: Pointer, m: Message): void {
-  Pointer.copyFrom(src, new Pointer(m.getSegment(0), 0));
+  copyFrom(src, new Pointer(m.getSegment(0), 0));
 }
 
 export function toArrayBuffer(m: Message): ArrayBuffer {

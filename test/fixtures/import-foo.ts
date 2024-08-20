@@ -10,22 +10,22 @@ export class Foo extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptBaz(value: $.Orphan<Baz>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownBaz(): $.Orphan<Baz> {
-    return $.Struct.disown(this.baz);
+    return $.utils.disown(this.baz);
   }
   get baz(): Baz {
-    return $.Struct.getStruct(0, Baz, this);
+    return $.utils.getStruct(0, Baz, this);
   }
   hasBaz(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initBaz(): Baz {
-    return $.Struct.initStructAt(0, Baz, this);
+    return $.utils.initStructAt(0, Baz, this);
   }
   set baz(value: Baz) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "Foo_" + super.toString();

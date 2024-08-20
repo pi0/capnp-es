@@ -17,22 +17,22 @@ const capnp_ts_1 = require("capnp-ts");
 exports._capnpFileId = BigInt("0xb597bf4897e54f89");
 class AddressBook extends capnp_ts_1.Struct {
   adoptPeople(value) {
-    capnp_ts_1.Struct.adopt(value, capnp_ts_1.Struct.getPointer(0, this));
+    capnp_ts_1.utils.adopt(value, capnp_ts_1.utils.getPointer(0, this));
   }
   disownPeople() {
-    return capnp_ts_1.Struct.disown(this.getPeople());
+    return capnp_ts_1.utils.disown(this.getPeople());
   }
   getPeople() {
-    return capnp_ts_1.Struct.getList(0, AddressBook._People, this);
+    return capnp_ts_1.utils.getList(0, AddressBook._People, this);
   }
   hasPeople() {
-    return !capnp_ts_1.Struct.isNull(capnp_ts_1.Struct.getPointer(0, this));
+    return !capnp_ts_1.utils.isNull(capnp_ts_1.utils.getPointer(0, this));
   }
   initPeople(length) {
-    return capnp_ts_1.Struct.initList(0, AddressBook._People, length, this);
+    return capnp_ts_1.utils.initList(0, AddressBook._People, length, this);
   }
   setPeople(value) {
-    capnp_ts_1.Struct.copyFrom(value, capnp_ts_1.Struct.getPointer(0, this));
+    capnp_ts_1.utils.copyFrom(value, capnp_ts_1.utils.getPointer(0, this));
   }
   toString() {
     return "AddressBook_" + super.toString();
@@ -55,16 +55,16 @@ var Person_PhoneNumber_Type;
 );
 class Person_PhoneNumber extends capnp_ts_1.Struct {
   getNumber() {
-    return capnp_ts_1.Struct.getText(0, this);
+    return capnp_ts_1.utils.getText(0, this);
   }
   setNumber(value) {
-    capnp_ts_1.Struct.setText(0, value, this);
+    capnp_ts_1.utils.setText(0, value, this);
   }
   getType() {
-    return capnp_ts_1.Struct.getUint16(0, this);
+    return capnp_ts_1.utils.getUint16(0, this);
   }
   setType(value) {
-    capnp_ts_1.Struct.setUint16(0, value, this);
+    capnp_ts_1.utils.setUint16(0, value, this);
   }
   toString() {
     return "Person_PhoneNumber_" + super.toString();
@@ -92,74 +92,74 @@ var Person_Employment_Which;
 );
 class Person_Employment extends capnp_ts_1.Struct {
   getEmployer() {
-    capnp_ts_1.Struct.testWhich(
+    capnp_ts_1.utils.testWhich(
       "employer",
-      capnp_ts_1.Struct.getUint16(6, this),
+      capnp_ts_1.utils.getUint16(6, this),
       1,
       this,
     );
-    return capnp_ts_1.Struct.getText(3, this);
+    return capnp_ts_1.utils.getText(3, this);
   }
   isEmployer() {
-    return capnp_ts_1.Struct.getUint16(6, this) === 1;
+    return capnp_ts_1.utils.getUint16(6, this) === 1;
   }
   setEmployer(value) {
-    capnp_ts_1.Struct.setUint16(6, 1, this);
-    capnp_ts_1.Struct.setText(3, value, this);
+    capnp_ts_1.utils.setUint16(6, 1, this);
+    capnp_ts_1.utils.setText(3, value, this);
   }
   getSchool() {
-    capnp_ts_1.Struct.testWhich(
+    capnp_ts_1.utils.testWhich(
       "school",
-      capnp_ts_1.Struct.getUint16(6, this),
+      capnp_ts_1.utils.getUint16(6, this),
       2,
       this,
     );
-    return capnp_ts_1.Struct.getText(3, this);
+    return capnp_ts_1.utils.getText(3, this);
   }
   isSchool() {
-    return capnp_ts_1.Struct.getUint16(6, this) === 2;
+    return capnp_ts_1.utils.getUint16(6, this) === 2;
   }
   setSchool(value) {
-    capnp_ts_1.Struct.setUint16(6, 2, this);
-    capnp_ts_1.Struct.setText(3, value, this);
+    capnp_ts_1.utils.setUint16(6, 2, this);
+    capnp_ts_1.utils.setText(3, value, this);
   }
   getUnemployed() {
-    capnp_ts_1.Struct.testWhich(
+    capnp_ts_1.utils.testWhich(
       "unemployed",
-      capnp_ts_1.Struct.getUint16(6, this),
+      capnp_ts_1.utils.getUint16(6, this),
       0,
       this,
     );
-    return capnp_ts_1.Struct.getBit(32, this);
+    return capnp_ts_1.utils.getBit(32, this);
   }
   isUnemployed() {
-    return capnp_ts_1.Struct.getUint16(6, this) === 0;
+    return capnp_ts_1.utils.getUint16(6, this) === 0;
   }
   setUnemployed(value) {
-    capnp_ts_1.Struct.setUint16(6, 0, this);
-    capnp_ts_1.Struct.setBit(32, value, this);
+    capnp_ts_1.utils.setUint16(6, 0, this);
+    capnp_ts_1.utils.setBit(32, value, this);
   }
   getSelfEmployed() {
-    capnp_ts_1.Struct.testWhich(
+    capnp_ts_1.utils.testWhich(
       "selfEmployed",
-      capnp_ts_1.Struct.getUint16(6, this),
+      capnp_ts_1.utils.getUint16(6, this),
       3,
       this,
     );
-    return capnp_ts_1.Struct.getBit(32, this);
+    return capnp_ts_1.utils.getBit(32, this);
   }
   isSelfEmployed() {
-    return capnp_ts_1.Struct.getUint16(6, this) === 3;
+    return capnp_ts_1.utils.getUint16(6, this) === 3;
   }
   setSelfEmployed(value) {
-    capnp_ts_1.Struct.setUint16(6, 3, this);
-    capnp_ts_1.Struct.setBit(32, value, this);
+    capnp_ts_1.utils.setUint16(6, 3, this);
+    capnp_ts_1.utils.setBit(32, value, this);
   }
   toString() {
     return "Person_Employment_" + super.toString();
   }
   which() {
-    return capnp_ts_1.Struct.getUint16(6, this);
+    return capnp_ts_1.utils.getUint16(6, this);
   }
 }
 exports.Person_Employment = Person_Employment;
@@ -174,46 +174,46 @@ Person_Employment._capnp = {
 };
 class Person extends capnp_ts_1.Struct {
   getId() {
-    return capnp_ts_1.Struct.getUint32(0, this);
+    return capnp_ts_1.utils.getUint32(0, this);
   }
   setId(value) {
-    capnp_ts_1.Struct.setUint32(0, value, this);
+    capnp_ts_1.utils.setUint32(0, value, this);
   }
   getName() {
-    return capnp_ts_1.Struct.getText(0, this);
+    return capnp_ts_1.utils.getText(0, this);
   }
   setName(value) {
-    capnp_ts_1.Struct.setText(0, value, this);
+    capnp_ts_1.utils.setText(0, value, this);
   }
   getEmail() {
-    return capnp_ts_1.Struct.getText(1, this);
+    return capnp_ts_1.utils.getText(1, this);
   }
   setEmail(value) {
-    capnp_ts_1.Struct.setText(1, value, this);
+    capnp_ts_1.utils.setText(1, value, this);
   }
   adoptPhones(value) {
-    capnp_ts_1.Struct.adopt(value, capnp_ts_1.Struct.getPointer(2, this));
+    capnp_ts_1.utils.adopt(value, capnp_ts_1.utils.getPointer(2, this));
   }
   disownPhones() {
-    return capnp_ts_1.Struct.disown(this.getPhones());
+    return capnp_ts_1.utils.disown(this.getPhones());
   }
   getPhones() {
-    return capnp_ts_1.Struct.getList(2, Person._Phones, this);
+    return capnp_ts_1.utils.getList(2, Person._Phones, this);
   }
   hasPhones() {
-    return !capnp_ts_1.Struct.isNull(capnp_ts_1.Struct.getPointer(2, this));
+    return !capnp_ts_1.utils.isNull(capnp_ts_1.utils.getPointer(2, this));
   }
   initPhones(length) {
-    return capnp_ts_1.Struct.initList(2, Person._Phones, length, this);
+    return capnp_ts_1.utils.initList(2, Person._Phones, length, this);
   }
   setPhones(value) {
-    capnp_ts_1.Struct.copyFrom(value, capnp_ts_1.Struct.getPointer(2, this));
+    capnp_ts_1.utils.copyFrom(value, capnp_ts_1.utils.getPointer(2, this));
   }
   getEmployment() {
-    return capnp_ts_1.Struct.getAs(Person_Employment, this);
+    return capnp_ts_1.utils.getAs(Person_Employment, this);
   }
   initEmployment() {
-    return capnp_ts_1.Struct.getAs(Person_Employment, this);
+    return capnp_ts_1.utils.getAs(Person_Employment, this);
   }
   toString() {
     return "Person_" + super.toString();

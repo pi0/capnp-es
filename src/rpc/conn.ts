@@ -55,6 +55,7 @@ import {
   ServerTarget,
 } from "../serialization/pointers/interface";
 import { Server } from "./server";
+import { getAs } from "../serialization/pointers/struct.utils";
 
 type QuestionSlot = Question<any, any> | null;
 
@@ -288,7 +289,7 @@ export class Conn {
     const call: Call<any, any> = {
       method,
 
-      params: Struct.getAs(method.ParamsClass, paramContent),
+      params: getAs(method.ParamsClass, paramContent),
     };
     try {
       this.routeCallMessage(a, mt, call);

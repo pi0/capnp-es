@@ -10,28 +10,28 @@ export class BigIntBag extends $.Struct {
     defaultDefaultUnsigned: $.getUint64Mask(BigInt("0xdb4da5f7ef412b1"))
   };
   get signed(): bigint {
-    return $.Struct.getInt64(0, this);
+    return $.utils.getInt64(0, this);
   }
   set signed(value: bigint) {
-    $.Struct.setInt64(0, value, this);
+    $.utils.setInt64(0, value, this);
   }
   get unsigned(): bigint {
-    return $.Struct.getUint64(8, this);
+    return $.utils.getUint64(8, this);
   }
   set unsigned(value: bigint) {
-    $.Struct.setUint64(8, value, this);
+    $.utils.setUint64(8, value, this);
   }
   get defaultSigned(): bigint {
-    return $.Struct.getInt64(16, this, BigIntBag._capnp.defaultDefaultSigned);
+    return $.utils.getInt64(16, this, BigIntBag._capnp.defaultDefaultSigned);
   }
   set defaultSigned(value: bigint) {
-    $.Struct.setInt64(16, value, this, BigIntBag._capnp.defaultDefaultSigned);
+    $.utils.setInt64(16, value, this, BigIntBag._capnp.defaultDefaultSigned);
   }
   get defaultUnsigned(): bigint {
-    return $.Struct.getUint64(24, this, BigIntBag._capnp.defaultDefaultUnsigned);
+    return $.utils.getUint64(24, this, BigIntBag._capnp.defaultDefaultUnsigned);
   }
   set defaultUnsigned(value: bigint) {
-    $.Struct.setUint64(24, value, this, BigIntBag._capnp.defaultDefaultUnsigned);
+    $.utils.setUint64(24, value, this, BigIntBag._capnp.defaultDefaultUnsigned);
   }
   toString(): string {
     return "BigIntBag_" + super.toString();

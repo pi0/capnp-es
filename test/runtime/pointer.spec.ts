@@ -2,7 +2,7 @@
 
 import { test, assert as t } from "vitest";
 
-import { Message, Pointer } from "capnp-es";
+import { Message, Pointer, utils } from "capnp-es";
 import * as C from "src/constants";
 
 test("new Pointer()", () => {
@@ -60,12 +60,12 @@ test("Pointer.adopt(), Pointer.disown()", () => {
   s.setUint32(0, 0x00_00_00_01);
   s.setUint32(4, 0x00_00_00_01);
 
-  const o = Pointer.disown(p);
+  const o = utils.disown(p);
 
   t.equal(s.getUint32(0), 0x00_00_00_00);
   t.equal(s.getUint32(4), 0x00_00_00_00);
 
-  Pointer.adopt(o, p);
+  utils.adopt(o, p);
 
   t.equal(s.getUint32(0), 0x00_00_00_01);
   t.equal(s.getUint32(4), 0x00_00_00_01);
@@ -79,7 +79,7 @@ test("Pointer.dump()", () => {
   s.setUint32(0, 0x00_00_00_01);
   s.setUint32(4, 0x00_00_00_02);
 
-  t.equal(Pointer.dump(p), "[01 00 00 00 02 00 00 00]");
+  t.equal(utils.dump(p), "[01 00 00 00 02 00 00 00]");
 });
 
 test("Pointer.toString()", () => {

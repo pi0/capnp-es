@@ -265,7 +265,7 @@ struct Enumerant {
 
   codeOrder @1 :UInt16;
   # Specifies order in which the enumerants were declared in the code.
-  # Like Struct.Field.codeOrder.
+  # Like utils.Field.codeOrder.
 
   annotations @2 :List(Annotation);
 }
@@ -282,7 +282,7 @@ struct Method {
 
   codeOrder @1 :UInt16;
   # Specifies order in which the methods were declared in the code.
-  # Like Struct.Field.codeOrder.
+  # Like utils.Field.codeOrder.
 
   implicitParameters @7 :List(Node.Parameter);
   # The parameters listed in [] (typically, type / generic parameters), whose bindings are intended

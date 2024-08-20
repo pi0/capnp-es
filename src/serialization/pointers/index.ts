@@ -3,11 +3,13 @@
 export { Data } from "./data";
 export { Interface } from "./interface";
 export { Orphan } from "./orphan";
-export { PointerType } from "./pointer";
-export { Pointer } from "./pointer";
-export { type _StructCtor, Struct, type StructCtor } from "./struct";
 export { Text } from "./text";
 export { Void, VOID } from "./void";
+export { Pointer, PointerType } from "./pointer";
+export { type _StructCtor, Struct, type StructCtor } from "./struct";
+
+// Utils
+export * as utils from "./utils";
 
 // List
 export { List, type ListCtor } from "./list/list";

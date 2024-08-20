@@ -7,19 +7,19 @@ export class Persistent_SaveParams extends $.Struct {
     size: new $.ObjectSize(0, 1),
   };
   adoptSealFor(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownSealFor(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.sealFor);
+    return $.utils.disown(this.sealFor);
   }
   get sealFor(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasSealFor(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set sealFor(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "Persistent_SaveParams_" + super.toString();
@@ -32,19 +32,19 @@ export class Persistent_SaveResults extends $.Struct {
     size: new $.ObjectSize(0, 1),
   };
   adoptSturdyRef(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownSturdyRef(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.sturdyRef);
+    return $.utils.disown(this.sturdyRef);
   }
   get sturdyRef(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasSturdyRef(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set sturdyRef(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "Persistent_SaveResults_" + super.toString();

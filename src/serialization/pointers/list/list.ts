@@ -10,14 +10,14 @@ import { format } from "../../../util";
 import { ListElementSize } from "../../list-element-size";
 import { ObjectSize, padToWord, getByteLength } from "../../object-size";
 import { Segment } from "../../segment";
+import { Pointer } from "../pointer";
 import {
-  Pointer,
   getTargetListLength,
   getListElementByteLength,
   setStructPointer,
   setListPointer,
   initPointer,
-} from "../pointer";
+} from "../pointer.utils";
 
 export interface _ListCtor {
   readonly compositeSize?: ObjectSize;
@@ -51,7 +51,6 @@ export class List<T> extends Pointer implements Array<T> {
     displayName: "List<Generic>" as string,
     size: ListElementSize.VOID,
   };
-  static readonly initList = initList;
 
   [n: number]: T;
 

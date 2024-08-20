@@ -8,16 +8,16 @@ export class SimpleInterface_Subtract$Params extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get a(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set a(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   get b(): number {
-    return $.Struct.getInt32(4, this);
+    return $.utils.getInt32(4, this);
   }
   set b(value: number) {
-    $.Struct.setInt32(4, value, this);
+    $.utils.setInt32(4, value, this);
   }
   toString(): string {
     return "SimpleInterface_Subtract$Params_" + super.toString();
@@ -30,10 +30,10 @@ export class SimpleInterface_Subtract$Results extends $.Struct {
     size: new $.ObjectSize(8, 0)
   };
   get result(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set result(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   toString(): string {
     return "SimpleInterface_Subtract$Results_" + super.toString();

@@ -3,7 +3,7 @@
 import { ListElementSize } from "../../list-element-size";
 import { _ListCtor, List } from "./list";
 import { Text } from "../text";
-import { getContent } from "../pointer";
+import { getContent } from "../pointer.utils";
 
 export class TextList extends List<string> {
   static readonly _capnp: _ListCtor = {

@@ -5,7 +5,8 @@ import type { ObjectSize } from "../object-size";
 import type { Segment } from "../segment";
 import { format } from "../../util";
 import { MAX_DEPTH } from "../../constants";
-import { Pointer, PointerType, getTargetPointerType } from "./pointer";
+import { Pointer, PointerType } from "./pointer";
+import { getTargetPointerType } from "./pointer.utils";
 
 export type ServerTarget<S extends InterfaceCtor<unknown, Server>> =
   ConstructorParameters<S["Server"]>[0];

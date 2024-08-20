@@ -9,28 +9,28 @@ export class TestImport extends $.Struct {
     size: new $.ObjectSize(8, 1)
   };
   adoptField(value: $.Orphan<TestAllTypes>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownField(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.field);
+    return $.utils.disown(this.field);
   }
   get field(): TestAllTypes {
-    return $.Struct.getStruct(0, TestAllTypes, this);
+    return $.utils.getStruct(0, TestAllTypes, this);
   }
   hasField(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initField(): TestAllTypes {
-    return $.Struct.initStructAt(0, TestAllTypes, this);
+    return $.utils.initStructAt(0, TestAllTypes, this);
   }
   set field(value: TestAllTypes) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   get enumField(): TestEnum {
-    return $.Struct.getUint16(0, this) as TestEnum;
+    return $.utils.getUint16(0, this) as TestEnum;
   }
   set enumField(value: TestEnum) {
-    $.Struct.setUint16(0, value, this);
+    $.utils.setUint16(0, value, this);
   }
   toString(): string {
     return "TestImport_" + super.toString();

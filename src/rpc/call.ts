@@ -4,6 +4,7 @@ import { Struct } from "../serialization/pointers/struct";
 import { Pointer } from "../serialization/pointers/pointer";
 import { Message } from "../serialization/message";
 import { Method } from "./method";
+import { initStruct } from "../serialization/pointers/struct.utils";
 
 // The Call type holds the record for an outgoing interface call.
 export type Call<P extends Struct, R extends Struct> =
@@ -84,7 +85,7 @@ export function placeParams<P extends Struct, R extends Struct>(
     const msg = new Message();
     p = new call.method.ParamsClass(msg.getSegment(0), 0);
   }
-  Struct.initStruct(call.method.ParamsClass._capnp.size, p);
+  initStruct(call.method.ParamsClass._capnp.size, p);
   if (call.paramsFunc) {
     call.paramsFunc(p);
   }

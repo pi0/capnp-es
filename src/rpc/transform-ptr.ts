@@ -1,7 +1,7 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import { Pointer } from "../serialization/pointers/pointer";
-import { Struct } from "../serialization/pointers/struct";
+import { utils } from "../serialization/pointers";
 import { pointerToStruct } from "./pointer-to-struct";
 import { PipelineOp } from "./pipeline-op";
 
@@ -17,7 +17,7 @@ export function transformPtr(p: Pointer, transform: PipelineOp[]): Pointer {
   }
 
   for (const op of transform) {
-    s = Struct.getPointer(op.field, s);
+    s = utils.getPointer(op.field, s);
   }
 
   return s;

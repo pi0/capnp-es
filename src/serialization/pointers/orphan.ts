@@ -8,7 +8,6 @@ import { ListElementSize } from "../list-element-size";
 import { ObjectSize, getWordLength } from "../object-size";
 import { Segment } from "../segment";
 import {
-  Pointer,
   getTargetListLength,
   getTargetStructSize,
   getTargetPointerType,
@@ -23,8 +22,8 @@ import {
   setListPointer,
   setInterfacePointer,
   getListByteLength,
-} from "./pointer";
-import { PointerType } from "./pointer";
+} from "./pointer.utils";
+import { Pointer, PointerType } from "./pointer";
 
 export interface _Orphan {
   capId: number;

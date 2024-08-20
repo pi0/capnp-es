@@ -29,7 +29,7 @@ import {
   READONLY,
   STATIC,
   STRING_TYPE,
-  STRUCT,
+  UTILS,
   THIS,
   TS_FILE_ID,
   VALUE,
@@ -326,15 +326,15 @@ export function generateStructFieldMethods(
   const union = discriminantValue !== s.Field.NO_DISCRIMINANT;
   const offset = (field.isSlot() && field.slot.offset) || 0;
   const offsetLiteral = f.createNumericLiteral(offset.toString());
-  /** $.Struct.getPointer(0, this) */
+  /** $.utils.getPointer(0, this) */
   const getPointer = f.createCallExpression(
-    f.createPropertyAccessExpression(STRUCT, "getPointer"),
+    f.createPropertyAccessExpression(UTILS, "getPointer"),
     undefined,
     [offsetLiteral, THIS],
   );
-  /** $.Struct.copyFrom(value, $.Struct.getPointer(0, this)) */
+  /** $.utils.copyFrom(value, $.utils.getPointer(0, this)) */
   const copyFromValue = f.createCallExpression(
-    f.createPropertyAccessExpression(STRUCT, "copyFrom"),
+    f.createPropertyAccessExpression(UTILS, "copyFrom"),
     undefined,
     [VALUE, getPointer],
   );
@@ -346,15 +346,15 @@ export function generateStructFieldMethods(
   const discriminantValueLiteral = f.createNumericLiteral(
     discriminantValue.toString(),
   );
-  /** $.Struct.getUint16(0, this) */
+  /** $.utils.getUint16(0, this) */
   const getDiscriminant = f.createCallExpression(
-    f.createPropertyAccessExpression(STRUCT, "getUint16"),
+    f.createPropertyAccessExpression(UTILS, "getUint16"),
     undefined,
     [discriminantOffsetLiteral, THIS],
   );
-  /** $.Struct.setUint16(0, this) */
+  /** $.utils.setUint16(0, this) */
   const setDiscriminant = f.createCallExpression(
-    f.createPropertyAccessExpression(STRUCT, "setUint16"),
+    f.createPropertyAccessExpression(UTILS, "setUint16"),
     undefined,
     [discriminantOffsetLiteral, discriminantValueLiteral, THIS],
   );
@@ -381,16 +381,16 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** $.Struct.getPointer(0, this) */
+      /** $.utils.getPointer(0, this) */
       get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getPointer"),
+        f.createPropertyAccessExpression(UTILS, "getPointer"),
         undefined,
         getArgs,
       );
       has = true;
-      /** $.Struct.copyFrom(value, $.Struct.getPointer(0, this)) */
+      /** $.utils.copyFrom(value, $.utils.getPointer(0, this)) */
       set = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "copyFrom"),
+        f.createPropertyAccessExpression(UTILS, "copyFrom"),
         undefined,
         [VALUE, get],
       );
@@ -423,15 +423,15 @@ export function generateStructFieldMethods(
         setArgs.push(defaultValue);
       }
 
-      /** $.Struct.getXYZ(0, this) */
+      /** $.utils.getXYZ(0, this) */
       get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, getter),
+        f.createPropertyAccessExpression(UTILS, getter),
         undefined,
         getArgs,
       );
-      /** $.Struct.setXYZ(0, value, this) */
+      /** $.utils.setXYZ(0, value, this) */
       set = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, setter),
+        f.createPropertyAccessExpression(UTILS, setter),
         undefined,
         setArgs,
       );
@@ -449,16 +449,16 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** $.Struct.getData(0, this) */
+      /** $.utils.getData(0, this) */
       get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getData"),
+        f.createPropertyAccessExpression(UTILS, "getData"),
         undefined,
         getArgs,
       );
       has = true;
-      /** $.Struct.initData(0, length, this) */
+      /** $.utils.initData(0, length, this) */
       init = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "initData"),
+        f.createPropertyAccessExpression(UTILS, "initData"),
         undefined,
         [offsetLiteral, LENGTH, THIS],
       );
@@ -471,10 +471,7 @@ export function generateStructFieldMethods(
       // new SomeInterface$Client(undefinedS.getInterfaceClientOrNullAt(0, this));
       {
         const client = f.createCallExpression(
-          f.createPropertyAccessExpression(
-            STRUCT,
-            "getInterfaceClientOrNullAt",
-          ),
+          f.createPropertyAccessExpression(UTILS, "getInterfaceClientOrNullAt"),
           undefined, // typeParams
           [offsetLiteral, THIS],
         );
@@ -502,13 +499,13 @@ export function generateStructFieldMethods(
           ],
         );
         const ptr = f.createCallExpression(
-          f.createPropertyAccessExpression(STRUCT, "getPointer"),
+          f.createPropertyAccessExpression(UTILS, "getPointer"),
           undefined, // typeParams
           [offsetLiteral, THIS],
         );
 
         set = f.createCallExpression(
-          f.createPropertyAccessExpression(STRUCT, "setInterfacePointer"),
+          f.createPropertyAccessExpression(UTILS, "setInterfacePointer"),
           undefined, // typeParams
           [capId, ptr],
         );
@@ -540,9 +537,9 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** $.Struct.getList(0, MyStruct._Foo, this) */
+      /** $.utils.getList(0, Myutils._Foo, this) */
       get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getList"),
+        f.createPropertyAccessExpression(UTILS, "getList"),
         undefined,
         getArgs,
       );
@@ -550,9 +547,9 @@ export function generateStructFieldMethods(
         get = f.createAsExpression(get, jsTypeReference);
       }
       has = true;
-      /** $.Struct.initList(0, MyStruct._Foo, length, this) */
+      /** $.utils.initList(0, Myutils._Foo, length, this) */
       init = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "initList"),
+        f.createPropertyAccessExpression(UTILS, "initList"),
         undefined,
         [
           offsetLiteral,
@@ -579,16 +576,16 @@ export function generateStructFieldMethods(
 
       adopt = true;
       disown = true;
-      /** $.Struct.getStruct(0, Foo, this) */
+      /** $.utils.getStruct(0, Foo, this) */
       get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getStruct"),
+        f.createPropertyAccessExpression(UTILS, "getStruct"),
         undefined,
         getArgs,
       );
       has = true;
-      /** $.Struct.initStruct(0, Foo, this) */
+      /** $.utils.initStruct(0, Foo, this) */
       init = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "initStructAt"),
+        f.createPropertyAccessExpression(UTILS, "initStructAt"),
         undefined,
         [offsetLiteral, structType, THIS],
       );
@@ -601,15 +598,15 @@ export function generateStructFieldMethods(
 
       if (defaultValue) getArgs.push(defaultValue);
 
-      /** $.Struct.getText(0, this) */
+      /** $.utils.getText(0, this) */
       get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getText"),
+        f.createPropertyAccessExpression(UTILS, "getText"),
         undefined,
         getArgs,
       );
-      /** $.Struct.setText(0, value, this) */
+      /** $.utils.setText(0, value, this) */
       set = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "setText"),
+        f.createPropertyAccessExpression(UTILS, "setText"),
         undefined,
         [offsetLiteral, VALUE, THIS],
       );
@@ -628,9 +625,9 @@ export function generateStructFieldMethods(
 
       const groupType = f.createIdentifier(jsType);
 
-      /** $.Struct.getAs(Foo, this); */
+      /** $.utils.getAs(Foo, this); */
       get = f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getAs"),
+        f.createPropertyAccessExpression(UTILS, "getAs"),
         undefined,
         [groupType, THIS],
       );
@@ -645,7 +642,7 @@ export function generateStructFieldMethods(
     }
   }
 
-  // adoptFoo(value: capnp.Orphan<Foo>): void { $.Struct.adopt(value, this._getPointer(3)); }}
+  // adoptFoo(value: capnp.Orphan<Foo>): void { $.utils.adopt(value, this._getPointer(3)); }}
   if (adopt) {
     const parameters = [
       f.createParameterDeclaration(
@@ -659,7 +656,7 @@ export function generateStructFieldMethods(
     ];
     const expressions = [
       f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "adopt"),
+        f.createPropertyAccessExpression(UTILS, "adopt"),
         undefined,
         [VALUE, getPointer],
       ),
@@ -672,12 +669,12 @@ export function generateStructFieldMethods(
     );
   }
 
-  // disownFoo(): capnp.Orphan<Foo> { return $.Struct.disown(this.getFoo()); }
+  // disownFoo(): capnp.Orphan<Foo> { return $.utils.disown(this.getFoo()); }
   if (disown) {
     const getter = f.createPropertyAccessExpression(THIS, name);
     const expressions = [
       f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "disown"),
+        f.createPropertyAccessExpression(UTILS, "disown"),
         undefined,
         [getter],
       ),
@@ -695,7 +692,7 @@ export function generateStructFieldMethods(
     if (union) {
       expressions.unshift(
         f.createCallExpression(
-          f.createPropertyAccessExpression(STRUCT, "testWhich"),
+          f.createPropertyAccessExpression(UTILS, "testWhich"),
           undefined,
           [
             f.createStringLiteral(name),
@@ -720,11 +717,11 @@ export function generateStructFieldMethods(
 
   // hasFoo(): boolean { ... }
   if (has) {
-    // !$.Struct.isNull(this._getPointer(8));
+    // !$.utils.isNull(this._getPointer(8));
     const expressions = [
       f.createLogicalNot(
         f.createCallExpression(
-          f.createPropertyAccessExpression(STRUCT, "isNull"),
+          f.createPropertyAccessExpression(UTILS, "isNull"),
           undefined,
           [getPointer],
         ),
@@ -768,7 +765,7 @@ export function generateStructFieldMethods(
   // isFoo(): boolean { ... }
   if (union) {
     const left = f.createCallExpression(
-      f.createPropertyAccessExpression(STRUCT, "getUint16"),
+      f.createPropertyAccessExpression(UTILS, "getUint16"),
       undefined,
       [discriminantOffsetLiteral, THIS],
     );
@@ -959,10 +956,10 @@ export function generateStructNode(
   members.push(createMethod("toString", [], STRING_TYPE, [toStringExpression]));
 
   if (hasUnnamedUnion) {
-    // which(): MyStruct_Which { return $.Struct.getUint16(12, this); }
+    // which(): MyStruct_Which { return $.utils.getUint16(12, this); }
     const whichExpression = f.createAsExpression(
       f.createCallExpression(
-        f.createPropertyAccessExpression(STRUCT, "getUint16"),
+        f.createPropertyAccessExpression(UTILS, "getUint16"),
         undefined,
         [f.createNumericLiteral((discriminantOffset * 2).toString()), THIS],
       ),

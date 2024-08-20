@@ -8,16 +8,16 @@ export class Foo extends $.Struct {
     size: new $.ObjectSize(0, 2)
   };
   get bar(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set bar(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get baz(): string {
-    return $.Struct.getText(1, this);
+    return $.utils.getText(1, this);
   }
   set baz(value: string) {
-    $.Struct.setText(1, value, this);
+    $.utils.setText(1, value, this);
   }
   toString(): string {
     return "Foo_" + super.toString();

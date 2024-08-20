@@ -1,15 +1,13 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import { FixedAnswer } from "./fixed-answer";
-import {
-  Struct,
-  getInterfaceClientOrNull,
-} from "../serialization/pointers/struct";
+import { Struct } from "../serialization/pointers/struct";
 import { PipelineOp } from "./pipeline-op";
 import { Client } from "./client";
 import { transformPtr } from "./transform-ptr";
 import { Call } from "./call";
 import { Answer } from "./answer";
+import { getInterfaceClientOrNull } from "../serialization/pointers/struct.utils";
 
 export class ImmediateAnswer<R extends Struct> extends FixedAnswer<R> {
   s: R;

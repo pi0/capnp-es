@@ -9,6 +9,11 @@ import { READONLY, STATIC, VOID_TYPE, CAPNP } from "./constants";
 import * as E from "./errors";
 import { getDisplayNamePrefix, getFullClassName, getJsType } from "./file";
 import * as util from "./util";
+import {
+  getPointer,
+  getUint16,
+  testWhich,
+} from "../serialization/pointers/struct.utils";
 
 export function createClassExtends(identifierText: string): ts.HeritageClause {
   const types = [
@@ -197,13 +202,8 @@ export function createValueExpression(value: s.Value): ts.Expression {
     }
 
     case s.Value.INTERFACE: {
-      capnp.Struct.testWhich(
-        "interface",
-        capnp.Struct.getUint16(0, value),
-        17,
-        value,
-      );
-      p = capnp.Struct.getPointer(0, value);
+      testWhich("interface", getUint16(0, value), 17, value);
+      p = getPointer(0, value);
 
       break;
     }

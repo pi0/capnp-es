@@ -33,7 +33,7 @@ test("schema upgrade with legacy data", () => {
 
   // t.comment("should null out the self-reference pointers");
   t.ok(
-    capnp.Pointer.isNull(v1Child),
+    capnp.utils.isNull(v1Child),
     "should null out the self-reference pointer",
   );
   t.ok(
@@ -64,7 +64,7 @@ test("schema upgrade with legacy data", () => {
   }, "should be able to set new child fields");
 
   t.ok(
-    capnp.Pointer.isNull(v1Child),
+    capnp.utils.isNull(v1Child),
     "should not be able to access the old child",
   );
   t.equal(v2Child.legacyId, 0x66_66, "should preserve the child's legacy id");

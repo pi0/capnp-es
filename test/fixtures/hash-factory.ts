@@ -18,10 +18,10 @@ export class HashFactory_NewSha1$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   get hash(): Hash$Client {
-    return new Hash$Client($.Struct.getInterfaceClientOrNullAt(0, this));
+    return new Hash$Client($.utils.getInterfaceClientOrNullAt(0, this));
   }
   set hash(value: Hash$Client) {
-    $.Struct.setInterfacePointer(this.segment.message.addCap(value.client), $.Struct.getPointer(0, this));
+    $.utils.setInterfacePointer(this.segment.message.addCap(value.client), $.utils.getPointer(0, this));
   }
   toString(): string {
     return "HashFactory_NewSha1$Results_" + super.toString();
@@ -102,22 +102,22 @@ export class Hash_Write$Params extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptData(value: $.Orphan<$.Data>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownData(): $.Orphan<$.Data> {
-    return $.Struct.disown(this.data);
+    return $.utils.disown(this.data);
   }
   get data(): $.Data {
-    return $.Struct.getData(0, this);
+    return $.utils.getData(0, this);
   }
   hasData(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initData(length: number): $.Data {
-    return $.Struct.initData(0, length, this);
+    return $.utils.initData(0, length, this);
   }
   set data(value: $.Data) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "Hash_Write$Params_" + super.toString();
@@ -159,22 +159,22 @@ export class Hash_Sum$Results extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   adoptHash(value: $.Orphan<$.Data>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownHash(): $.Orphan<$.Data> {
-    return $.Struct.disown(this.hash);
+    return $.utils.disown(this.hash);
   }
   get hash(): $.Data {
-    return $.Struct.getData(0, this);
+    return $.utils.getData(0, this);
   }
   hasHash(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initHash(length: number): $.Data {
-    return $.Struct.initData(0, length, this);
+    return $.utils.initData(0, length, this);
   }
   set hash(value: $.Data) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "Hash_Sum$Results_" + super.toString();

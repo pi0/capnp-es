@@ -2,7 +2,7 @@
 
 import { test, assert as t } from "vitest";
 
-import { Message, ObjectSize, Orphan, Struct } from "capnp-es";
+import { Message, ObjectSize, Orphan, Struct, utils } from "capnp-es";
 import { Int32List } from "src/serialization";
 
 /** Just a silly struct that holds a single pointer to... itself? */
@@ -15,47 +15,47 @@ class TestStruct extends Struct {
   };
 
   adoptTest(value: Orphan<TestStruct>): void {
-    Struct.adopt(value, Struct.getPointer(0, this));
+    utils.adopt(value, utils.getPointer(0, this));
   }
 
   disownTest(): Orphan<TestStruct> {
-    return Struct.disown(this.getTest());
+    return utils.disown(this.getTest());
   }
 
   getTest(): TestStruct {
-    return Struct.getPointerAs(0, TestStruct, this);
+    return utils.getPointerAs(0, TestStruct, this);
   }
 
   hasTest(): boolean {
-    return !Struct.isNull(Struct.getPointer(0, this));
+    return !utils.isNull(utils.getPointer(0, this));
   }
 
   initTest(): TestStruct {
-    return Struct.initStructAt(0, TestStruct, this);
+    return utils.initStructAt(0, TestStruct, this);
   }
 
   setTest(value: TestStruct): void {
-    Struct.copyFrom(value, Struct.getPointer(0, this));
+    utils.copyFrom(value, utils.getPointer(0, this));
   }
 
   getFoo(): number {
-    return Struct.getUint32(0, this);
+    return utils.getUint32(0, this);
   }
 
   setFoo(value: number): void {
-    Struct.setUint32(0, value, this);
+    utils.setUint32(0, value, this);
   }
 
   disownList(): Orphan<Int32List> {
-    return Struct.disown(this.getList());
+    return utils.disown(this.getList());
   }
 
   getList(): Int32List {
-    return Struct.getPointerAs(1, Int32List, this);
+    return utils.getPointerAs(1, Int32List, this);
   }
 
   initList(length: number): Int32List {
-    return Struct.initList(1, Int32List, length, this);
+    return utils.initList(1, Int32List, length, this);
   }
 }
 
@@ -80,7 +80,7 @@ test("new Orphan()", () => {
     "should copy the pointer count",
   );
 
-  t.ok(Struct.isNull(root), "should zero out the struct pointer");
+  t.ok(utils.isNull(root), "should zero out the struct pointer");
 
   const list = new Message().initRoot(TestStruct).initList(2);
 
@@ -97,7 +97,7 @@ test("new Orphan()", () => {
     "should copy the list element size",
   );
 
-  t.ok(Struct.isNull(list), "should zero out the list pointer");
+  t.ok(utils.isNull(list), "should zero out the list pointer");
 });
 
 test("Orphan._moveTo()", () => {

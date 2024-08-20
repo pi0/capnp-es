@@ -12,6 +12,7 @@ import { newMessage } from "./capability";
 import { transformToPromisedAnswer } from "./promised-answer";
 import { Pointer } from "../serialization/pointers/pointer";
 import { NOT_IMPLEMENTED, RPC_FULFILL_ALREADY_CALLED } from "../errors";
+import { getAs } from "../serialization/pointers/struct.utils";
 
 export enum QuestionState {
   IN_PROGRESS,
@@ -55,7 +56,7 @@ export class Question<P extends Struct, R extends Struct> implements Answer<R> {
     }
     // eslint-disable-next-line unicorn/prefer-ternary
     if (this.method) {
-      this.obj = Struct.getAs(this.method.ResultsClass, obj);
+      this.obj = getAs(this.method.ResultsClass, obj);
     } else {
       // ugly, but when bootstrapping, method is null
       this.obj = obj as R;

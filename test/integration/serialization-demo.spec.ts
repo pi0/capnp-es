@@ -9,6 +9,7 @@ import {
   Person,
   Person_Employment_Which,
 } from "test/fixtures/serialization-demo";
+import { isNull } from "src/serialization/pointers/pointer.utils";
 
 const SERIALIZATION_DEMO = readFileBuffer(
   "test/fixtures/data/serialization-demo.bin",
@@ -170,7 +171,7 @@ test("adoption", () => {
     "should not wipe out the composite list tag word",
   );
   t.notOk(s.isWordZero(0x40), "should not touch the content");
-  t.ok(capnp.Pointer.isNull(people1), "should null the original pointer");
+  t.ok(isNull(people1), "should null the original pointer");
 
   addressBook.adoptPeople(o);
 

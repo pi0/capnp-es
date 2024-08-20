@@ -2,8 +2,8 @@
 
 import { ListElementSize } from "../list-element-size";
 import { List } from "./list/list";
-import { Pointer, validate, getContent } from "./pointer";
-import { PointerType } from "./pointer";
+import { validate, getContent } from "./pointer.utils";
+import { Pointer, PointerType } from "./pointer";
 
 /**
  * A generic blob of bytes. Can be converted to a DataView or Uint8Array to access its contents using `toDataView()` and

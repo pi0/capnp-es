@@ -42,6 +42,7 @@ export {
   PointerType,
   Pointer,
   Struct,
+  utils,
   Text,
   TextList,
   Uint16List,

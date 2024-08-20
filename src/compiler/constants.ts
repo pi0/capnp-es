@@ -169,8 +169,8 @@ export const QUESTION_TOKEN = f.createToken(ts.SyntaxKind.QuestionToken);
 
 export const STRING_TYPE = f.createTypeReferenceNode("string");
 
-/** Struct */
-export const STRUCT = f.createIdentifier("$.Struct");
+/** utils */
+export const UTILS = f.createIdentifier("$.utils");
 
 /** this */
 

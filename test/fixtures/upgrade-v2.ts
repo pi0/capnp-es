@@ -9,64 +9,64 @@ export class Upgrade extends $.Struct {
   };
   static _SelfReferences: $.ListCtor<Upgrade>;
   get legacyName(): string {
-    return $.Struct.getText(0, this);
+    return $.utils.getText(0, this);
   }
   set legacyName(value: string) {
-    $.Struct.setText(0, value, this);
+    $.utils.setText(0, value, this);
   }
   get legacyId(): number {
-    return $.Struct.getInt32(0, this);
+    return $.utils.getInt32(0, this);
   }
   set legacyId(value: number) {
-    $.Struct.setInt32(0, value, this);
+    $.utils.setInt32(0, value, this);
   }
   adoptSelfReference(value: $.Orphan<Upgrade>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownSelfReference(): $.Orphan<Upgrade> {
-    return $.Struct.disown(this.selfReference);
+    return $.utils.disown(this.selfReference);
   }
   get selfReference(): Upgrade {
-    return $.Struct.getStruct(1, Upgrade, this);
+    return $.utils.getStruct(1, Upgrade, this);
   }
   hasSelfReference(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initSelfReference(): Upgrade {
-    return $.Struct.initStructAt(1, Upgrade, this);
+    return $.utils.initStructAt(1, Upgrade, this);
   }
   set selfReference(value: Upgrade) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptSelfReferences(value: $.Orphan<$.List<Upgrade>>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownSelfReferences(): $.Orphan<$.List<Upgrade>> {
-    return $.Struct.disown(this.selfReferences);
+    return $.utils.disown(this.selfReferences);
   }
   get selfReferences(): $.List<Upgrade> {
-    return $.Struct.getList(2, Upgrade._SelfReferences, this);
+    return $.utils.getList(2, Upgrade._SelfReferences, this);
   }
   hasSelfReferences(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initSelfReferences(length: number): $.List<Upgrade> {
-    return $.Struct.initList(2, Upgrade._SelfReferences, length, this);
+    return $.utils.initList(2, Upgrade._SelfReferences, length, this);
   }
   set selfReferences(value: $.List<Upgrade>) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   get newHotnessName(): string {
-    return $.Struct.getText(3, this);
+    return $.utils.getText(3, this);
   }
   set newHotnessName(value: string) {
-    $.Struct.setText(3, value, this);
+    $.utils.setText(3, value, this);
   }
   get newHotnessId(): number {
-    return $.Struct.getInt32(4, this);
+    return $.utils.getInt32(4, this);
   }
   set newHotnessId(value: number) {
-    $.Struct.setInt32(4, value, this);
+    $.utils.setInt32(4, value, this);
   }
   toString(): string {
     return "Upgrade_" + super.toString();

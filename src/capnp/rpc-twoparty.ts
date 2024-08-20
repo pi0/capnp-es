@@ -12,10 +12,10 @@ export class VatId extends $.Struct {
     size: new $.ObjectSize(8, 0),
   };
   get side(): Side {
-    return $.Struct.getUint16(0, this) as Side;
+    return $.utils.getUint16(0, this) as Side;
   }
   set side(value: Side) {
-    $.Struct.setUint16(0, value, this);
+    $.utils.setUint16(0, value, this);
   }
   toString(): string {
     return "VatId_" + super.toString();
@@ -28,10 +28,10 @@ export class ProvisionId extends $.Struct {
     size: new $.ObjectSize(8, 0),
   };
   get joinId(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set joinId(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   toString(): string {
     return "ProvisionId_" + super.toString();
@@ -64,22 +64,22 @@ export class JoinKeyPart extends $.Struct {
     size: new $.ObjectSize(8, 0),
   };
   get joinId(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set joinId(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   get partCount(): number {
-    return $.Struct.getUint16(4, this);
+    return $.utils.getUint16(4, this);
   }
   set partCount(value: number) {
-    $.Struct.setUint16(4, value, this);
+    $.utils.setUint16(4, value, this);
   }
   get partNum(): number {
-    return $.Struct.getUint16(6, this);
+    return $.utils.getUint16(6, this);
   }
   set partNum(value: number) {
-    $.Struct.setUint16(6, value, this);
+    $.utils.setUint16(6, value, this);
   }
   toString(): string {
     return "JoinKeyPart_" + super.toString();
@@ -92,31 +92,31 @@ export class JoinResult extends $.Struct {
     size: new $.ObjectSize(8, 1),
   };
   get joinId(): number {
-    return $.Struct.getUint32(0, this);
+    return $.utils.getUint32(0, this);
   }
   set joinId(value: number) {
-    $.Struct.setUint32(0, value, this);
+    $.utils.setUint32(0, value, this);
   }
   get succeeded(): boolean {
-    return $.Struct.getBit(32, this);
+    return $.utils.getBit(32, this);
   }
   set succeeded(value: boolean) {
-    $.Struct.setBit(32, value, this);
+    $.utils.setBit(32, value, this);
   }
   adoptCap(value: $.Orphan<$.Pointer>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownCap(): $.Orphan<$.Pointer> {
-    return $.Struct.disown(this.cap);
+    return $.utils.disown(this.cap);
   }
   get cap(): $.Pointer {
-    return $.Struct.getPointer(0, this);
+    return $.utils.getPointer(0, this);
   }
   hasCap(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set cap(value: $.Pointer) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   toString(): string {
     return "JoinResult_" + super.toString();

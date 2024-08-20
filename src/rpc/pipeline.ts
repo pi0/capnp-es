@@ -6,6 +6,8 @@ import { Answer } from "./answer";
 import { PipelineOp } from "./pipeline-op";
 import { transformPtr } from "./transform-ptr";
 import { Pointer } from "../serialization/pointers/pointer";
+import { copyFrom } from "../serialization/pointers/pointer.utils";
+import { getAs, initStruct } from "../serialization/pointers/struct.utils";
 
 // TODO: figure out if we can respect no-any.
 // It doesn't appear so because PipelineOp has just
@@ -60,12 +62,12 @@ export class Pipeline<
     const t = transformPtr(s, this.transform());
     if (!t) {
       if (this.op.defaultValue) {
-        Pointer.copyFrom(this.op.defaultValue, t);
+        copyFrom(this.op.defaultValue, t);
       } else {
-        Struct.initStruct(this.ResultsClass._capnp.size, t);
+        initStruct(this.ResultsClass._capnp.size, t);
       }
     }
-    return Struct.getAs(this.ResultsClass, t);
+    return getAs(this.ResultsClass, t);
   }
 
   // client returns the client version of this pipeline

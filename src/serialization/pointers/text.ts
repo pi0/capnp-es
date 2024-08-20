@@ -2,8 +2,8 @@
 
 import { ListElementSize } from "../list-element-size";
 import { List, initList } from "./list/list";
-import { Pointer, validate, isNull, getContent, erase } from "./pointer";
-import { PointerType } from "./pointer";
+import { validate, isNull, getContent, erase } from "./pointer.utils";
+import { Pointer, PointerType } from "./pointer";
 
 const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder();

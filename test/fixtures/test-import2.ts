@@ -11,136 +11,136 @@ export class TestImport2 extends $.Struct {
     size: new $.ObjectSize(8, 7)
   };
   adoptFoo(value: $.Orphan<TestAllTypes>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(0, this));
+    $.utils.adopt(value, $.utils.getPointer(0, this));
   }
   disownFoo(): $.Orphan<TestAllTypes> {
-    return $.Struct.disown(this.foo);
+    return $.utils.disown(this.foo);
   }
   get foo(): TestAllTypes {
-    return $.Struct.getStruct(0, TestAllTypes, this);
+    return $.utils.getStruct(0, TestAllTypes, this);
   }
   hasFoo(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(0, this));
+    return !$.utils.isNull($.utils.getPointer(0, this));
   }
   initFoo(): TestAllTypes {
-    return $.Struct.initStructAt(0, TestAllTypes, this);
+    return $.utils.initStructAt(0, TestAllTypes, this);
   }
   set foo(value: TestAllTypes) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
+    $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
   adoptBar(value: $.Orphan<Node>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(1, this));
+    $.utils.adopt(value, $.utils.getPointer(1, this));
   }
   disownBar(): $.Orphan<Node> {
-    return $.Struct.disown(this.bar);
+    return $.utils.disown(this.bar);
   }
   get bar(): Node {
-    return $.Struct.getStruct(1, Node, this);
+    return $.utils.getStruct(1, Node, this);
   }
   hasBar(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(1, this));
+    return !$.utils.isNull($.utils.getPointer(1, this));
   }
   initBar(): Node {
-    return $.Struct.initStructAt(1, Node, this);
+    return $.utils.initStructAt(1, Node, this);
   }
   set bar(value: Node) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(1, this));
+    $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
   adoptBaz(value: $.Orphan<TestImport>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(2, this));
+    $.utils.adopt(value, $.utils.getPointer(2, this));
   }
   disownBaz(): $.Orphan<TestImport> {
-    return $.Struct.disown(this.baz);
+    return $.utils.disown(this.baz);
   }
   get baz(): TestImport {
-    return $.Struct.getStruct(2, TestImport, this);
+    return $.utils.getStruct(2, TestImport, this);
   }
   hasBaz(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(2, this));
+    return !$.utils.isNull($.utils.getPointer(2, this));
   }
   initBaz(): TestImport {
-    return $.Struct.initStructAt(2, TestImport, this);
+    return $.utils.initStructAt(2, TestImport, this);
   }
   set baz(value: TestImport) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
+    $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
   adoptBox(value: $.Orphan<Node_Parameter>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(3, this));
+    $.utils.adopt(value, $.utils.getPointer(3, this));
   }
   disownBox(): $.Orphan<Node_Parameter> {
-    return $.Struct.disown(this.box);
+    return $.utils.disown(this.box);
   }
   get box(): Node_Parameter {
-    return $.Struct.getStruct(3, Node_Parameter, this);
+    return $.utils.getStruct(3, Node_Parameter, this);
   }
   hasBox(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(3, this));
+    return !$.utils.isNull($.utils.getPointer(3, this));
   }
   initBox(): Node_Parameter {
-    return $.Struct.initStructAt(3, Node_Parameter, this);
+    return $.utils.initStructAt(3, Node_Parameter, this);
   }
   set box(value: Node_Parameter) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(3, this));
+    $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
   adoptBee(value: $.Orphan<Node_NestedNode>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(4, this));
+    $.utils.adopt(value, $.utils.getPointer(4, this));
   }
   disownBee(): $.Orphan<Node_NestedNode> {
-    return $.Struct.disown(this.bee);
+    return $.utils.disown(this.bee);
   }
   get bee(): Node_NestedNode {
-    return $.Struct.getStruct(4, Node_NestedNode, this);
+    return $.utils.getStruct(4, Node_NestedNode, this);
   }
   hasBee(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(4, this));
+    return !$.utils.isNull($.utils.getPointer(4, this));
   }
   initBee(): Node_NestedNode {
-    return $.Struct.initStructAt(4, Node_NestedNode, this);
+    return $.utils.initStructAt(4, Node_NestedNode, this);
   }
   set bee(value: Node_NestedNode) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(4, this));
+    $.utils.copyFrom(value, $.utils.getPointer(4, this));
   }
   adoptBok(value: $.Orphan<Brand_Scope>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(5, this));
+    $.utils.adopt(value, $.utils.getPointer(5, this));
   }
   disownBok(): $.Orphan<Brand_Scope> {
-    return $.Struct.disown(this.bok);
+    return $.utils.disown(this.bok);
   }
   get bok(): Brand_Scope {
-    return $.Struct.getStruct(5, Brand_Scope, this);
+    return $.utils.getStruct(5, Brand_Scope, this);
   }
   hasBok(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(5, this));
+    return !$.utils.isNull($.utils.getPointer(5, this));
   }
   initBok(): Brand_Scope {
-    return $.Struct.initStructAt(5, Brand_Scope, this);
+    return $.utils.initStructAt(5, Brand_Scope, this);
   }
   set bok(value: Brand_Scope) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(5, this));
+    $.utils.copyFrom(value, $.utils.getPointer(5, this));
   }
   adoptBip(value: $.Orphan<Brand_Binding>): void {
-    $.Struct.adopt(value, $.Struct.getPointer(6, this));
+    $.utils.adopt(value, $.utils.getPointer(6, this));
   }
   disownBip(): $.Orphan<Brand_Binding> {
-    return $.Struct.disown(this.bip);
+    return $.utils.disown(this.bip);
   }
   get bip(): Brand_Binding {
-    return $.Struct.getStruct(6, Brand_Binding, this);
+    return $.utils.getStruct(6, Brand_Binding, this);
   }
   hasBip(): boolean {
-    return !$.Struct.isNull($.Struct.getPointer(6, this));
+    return !$.utils.isNull($.utils.getPointer(6, this));
   }
   initBip(): Brand_Binding {
-    return $.Struct.initStructAt(6, Brand_Binding, this);
+    return $.utils.initStructAt(6, Brand_Binding, this);
   }
   set bip(value: Brand_Binding) {
-    $.Struct.copyFrom(value, $.Struct.getPointer(6, this));
+    $.utils.copyFrom(value, $.utils.getPointer(6, this));
   }
   get bep(): ElementSize {
-    return $.Struct.getUint16(0, this) as ElementSize;
+    return $.utils.getUint16(0, this) as ElementSize;
   }
   set bep(value: ElementSize) {
-    $.Struct.setUint16(0, value, this);
+    $.utils.setUint16(0, value, this);
   }
   toString(): string {
     return "TestImport2_" + super.toString();

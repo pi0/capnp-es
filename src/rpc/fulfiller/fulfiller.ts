@@ -20,7 +20,7 @@ import { Interface } from "../../serialization/pointers/interface";
 
 const callQueueSize = 64;
 
-// Fulfiller is a promise for a Struct. It starts out
+// Fulfiller is a promise for a utils. It starts out
 // as an unresolved answer. A Fulfiller is considered to be resolved
 // once fulfill or reject is called. Calls to the fulfiller will queue
 // up until it is resolved.
