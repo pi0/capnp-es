@@ -44,7 +44,7 @@ export class Text extends List<string> {
    * @returns {number} The number of bytes allocated for the text.
    */
 
-  getLength(): number {
+  get length(): number {
     return super.length - 1;
   }
 
