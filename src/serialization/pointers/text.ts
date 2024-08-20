@@ -1,9 +1,9 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import { ListElementSize } from "../list-element-size";
-import { List, initList } from "./list";
+import { List, initList } from "./list/list";
 import { Pointer, validate, isNull, getContent, erase } from "./pointer";
-import { PointerType } from "./pointer-type";
+import { PointerType } from "./pointer";
 
 const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder();

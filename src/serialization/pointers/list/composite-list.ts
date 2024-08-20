@@ -1,9 +1,9 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
-import { ListElementSize } from "../list-element-size";
+import { ListElementSize } from "../../list-element-size";
 import { _ListCtor, List, type ListCtor } from "./list";
-import { Struct, StructCtor } from "./struct";
-import { copyFrom } from "./pointer";
+import { Struct, StructCtor } from "../struct";
+import { copyFrom } from "../pointer";
 
 export function CompositeList<T extends Struct>(
   CompositeClass: StructCtor<T>,

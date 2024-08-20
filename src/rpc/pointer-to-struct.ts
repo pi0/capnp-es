@@ -5,7 +5,7 @@ import {
   getTargetPointerType,
 } from "../serialization/pointers/pointer";
 import { Struct } from "../serialization/pointers/struct";
-import { PointerType } from "../serialization/pointers/pointer-type";
+import { PointerType } from "../serialization/pointers/pointer";
 
 // TODO: this was ported from the Go codebase, is it really needed?
 export function pointerToStruct(p: Pointer): Struct | null {

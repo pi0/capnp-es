@@ -26,13 +26,13 @@ import { PipelineOp } from "./pipeline-op";
 import { ImportClient } from "./import-client";
 import { Call, placeParams } from "./call";
 import { Segment } from "../serialization/segment";
-import { List } from "../serialization/pointers/list";
+import { List } from "../serialization/pointers/list/list";
 import { Ref } from "./ref";
 import { PipelineClient } from "./pipeline-client";
 import { FixedAnswer } from "./fixed-answer";
 import { LocalAnswerClient } from "./local-answer-client";
 import { Finalize } from "./finalize";
-import { RPCMessage } from "./rpc-message";
+import { Message as RPCMessage } from "../std/rpc";
 import { MethodError } from "./method-error";
 import { Registry } from "./registry";
 import { joinAnswer } from "./join";
@@ -49,7 +49,7 @@ import {
 } from "../errors";
 import { format } from "../util";
 import { Interface, Message } from "../serialization";
-import { AnyStruct } from "../serialization/pointers/any-struct";
+import { AnyStruct } from "../serialization/pointers/struct";
 import {
   InterfaceCtor,
   ServerTarget,

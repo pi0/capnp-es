@@ -1,6 +1,6 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
-import { RPCMessage } from "../rpc-message";
+import { Message as RPCMessage } from "../../std/rpc";
 
 export * from "./deferred-transport";
 

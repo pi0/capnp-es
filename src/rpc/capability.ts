@@ -1,6 +1,6 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
-import { RPCMessage } from "./rpc-message";
+import { Message as RPCMessage } from "../std/rpc";
 import { Message } from "../serialization/message";
 import { Return, Exception, Disembargo_Context_Which } from "../std/rpc";
 import { toException } from "./rpc-error";

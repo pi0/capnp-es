@@ -2,7 +2,7 @@
 
 import { PipelineOp } from "./pipeline-op";
 import { PromisedAnswer, PromisedAnswer_Op } from "../std/rpc";
-import { List } from "../serialization/pointers/list";
+import { List } from "../serialization/pointers/list/list";
 
 export function transformToPromisedAnswer(
   answer: PromisedAnswer,

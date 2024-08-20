@@ -1,13 +1,11 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz and fasterthanlime)
-
-import { format } from "../../util";
-import { MAX_DEPTH } from "../../constants";
-import { Pointer, getTargetPointerType } from "./pointer";
-import { PointerType } from "./pointer-type";
 import type { CapabilityID } from "../../rpc/capability";
 import type { Client, Server } from "../../rpc";
 import type { ObjectSize } from "../object-size";
 import type { Segment } from "../segment";
+import { format } from "../../util";
+import { MAX_DEPTH } from "../../constants";
+import { Pointer, PointerType, getTargetPointerType } from "./pointer";
 
 export type ServerTarget<S extends InterfaceCtor<unknown, Server>> =
   ConstructorParameters<S["Server"]>[0];

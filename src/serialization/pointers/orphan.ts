@@ -24,7 +24,7 @@ import {
   setInterfacePointer,
   getListByteLength,
 } from "./pointer";
-import { PointerType } from "./pointer-type";
+import { PointerType } from "./pointer";
 
 export interface _Orphan {
   capId: number;

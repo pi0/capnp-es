@@ -17,8 +17,6 @@ import {
 } from "../object-size";
 import { Segment } from "../segment";
 import { Orphan } from "./orphan";
-import { PointerAllocationResult } from "./pointer-allocation-result";
-import { PointerType } from "./pointer-type";
 import { Message } from "../message";
 import {
   PTR_TRAVERSAL_LIMIT_EXCEEDED,
@@ -41,6 +39,13 @@ export interface PointerCtor<T extends Pointer> {
   readonly _capnp: _PointerCtor;
 
   new (segment: Segment, byteOffset: number, depthLimit?: number): T;
+}
+
+export enum PointerType {
+  STRUCT = 0,
+  LIST = 1,
+  FAR = 2,
+  OTHER = 3,
 }
 
 export interface _Pointer {
@@ -1189,5 +1194,26 @@ export function trackPointerAllocation(message: Message, p: Pointer): void {
 
   if (message._capnp.traversalLimit <= 0) {
     throw new Error(format(PTR_TRAVERSAL_LIMIT_EXCEEDED, p));
+  }
+}
+
+/**
+ * This is used as the return value for `Pointer.prototype.initPointer`. Turns out using a class in V8 for multiple
+ * return values is faster than using an array or anonymous object.
+ *
+ * http://jsben.ch/#/zTdbD
+ *
+ * @export
+ * @class PointerAllocationResult
+ */
+
+export class PointerAllocationResult {
+  readonly offsetWords: number;
+
+  readonly pointer: Pointer;
+
+  constructor(pointer: Pointer, offsetWords: number) {
+    this.pointer = pointer;
+    this.offsetWords = offsetWords;
   }
 }

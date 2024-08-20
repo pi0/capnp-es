@@ -3,7 +3,7 @@
 import { MessagePort, MessageChannel } from "node:worker_threads";
 import { Deferred, Conn } from "src/rpc";
 import { Message } from "capnp-es";
-import { RPCMessage } from "src/rpc";
+import { Message as RPCMessage } from "src/std/rpc";
 import { DeferredTransport } from "src/rpc/transport/deferred-transport";
 
 export class TestRPC {

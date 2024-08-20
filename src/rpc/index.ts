@@ -9,6 +9,6 @@ export * from "./error-client";
 export * from "./method";
 export * from "./pipeline";
 export * from "./registry";
-export * from "./rpc-message";
+// export * from "./rpc-message";
 export * from "./server";
 export * from "./transport";

@@ -1,8 +1,8 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
-import { ListElementSize } from "../list-element-size";
+import { ListElementSize } from "../../list-element-size";
 import { _ListCtor, List } from "./list";
-import { getContent } from "./pointer";
+import { getContent } from "../pointer";
 
 export class Float64List extends List<number> {
   static readonly _capnp: _ListCtor = {

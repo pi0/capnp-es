@@ -11,7 +11,7 @@ import {
 } from "../object-size";
 import { Segment } from "../segment";
 import { Data } from "./data";
-import { List, type ListCtor } from "./list";
+import { List, type ListCtor } from "./list/list";
 import { Orphan } from "./orphan";
 import { type Client } from "../../rpc/client";
 import { clientOrNull } from "../../rpc/error-client";
@@ -38,7 +38,7 @@ import {
   validate,
   copyFrom,
 } from "./pointer";
-import { PointerType } from "./pointer-type";
+import { PointerType } from "./pointer";
 import { Text } from "./text";
 import {
   PTR_INIT_COMPOSITE_STRUCT,
@@ -1372,4 +1372,12 @@ export function checkPointerBounds(index: number, s: Struct): void {
       format(PTR_STRUCT_POINTER_OUT_OF_BOUNDS, s, index, pointerLength),
     );
   }
+}
+
+export class AnyStruct extends Struct {
+  static readonly _capnp = {
+    displayName: "AnyStruct",
+    id: "0",
+    size: new ObjectSize(0, 0),
+  };
 }
