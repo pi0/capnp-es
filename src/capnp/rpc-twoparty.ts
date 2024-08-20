@@ -5,6 +5,9 @@ export const Side = {
   CLIENT: 1,
 } as const;
 export type Side = (typeof Side)[keyof typeof Side];
+/**
+ * Schema for a field of a struct.
+ * */
 export class VatId extends $.Struct {
   static readonly _capnp = {
     displayName: "VatId",
@@ -21,12 +24,19 @@ export class VatId extends $.Struct {
     return "VatId_" + super.toString();
   }
 }
+/**
+ * Describes an annotation applied to a declaration.  Note AnnotationNode describes the
+ * annotation's declaration, while this describes a use of the annotation.
+ * */
 export class ProvisionId extends $.Struct {
   static readonly _capnp = {
     displayName: "ProvisionId",
     id: "b88d09a9c5f39817",
     size: new $.ObjectSize(8, 0),
   };
+  /**
+   * ID of the annotation node.
+   * */
   get joinId(): number {
     return $.utils.getUint32(0, this);
   }
@@ -37,6 +47,10 @@ export class ProvisionId extends $.Struct {
     return "ProvisionId_" + super.toString();
   }
 }
+/**
+ * Specifies bindings for parameters of generics. Since these bindings turn a generic into a
+ * non-generic, we call it the "brand".
+ * */
 export class RecipientId extends $.Struct {
   static readonly _capnp = {
     displayName: "RecipientId",
@@ -57,6 +71,10 @@ export class ThirdPartyCapId extends $.Struct {
     return "ThirdPartyCapId_" + super.toString();
   }
 }
+/**
+ * This is actually a reference to an implicit (generic) parameter of a method. The only
+ * legal context for this type to appear is inside Method.paramBrand or Method.resultBrand.
+ * */
 export class JoinKeyPart extends $.Struct {
   static readonly _capnp = {
     displayName: "JoinKeyPart",
@@ -85,12 +103,19 @@ export class JoinKeyPart extends $.Struct {
     return "JoinKeyPart_" + super.toString();
   }
 }
+/**
+ * Possible element sizes for encoded lists.  These correspond exactly to the possible values of
+ * the 3-bit element size component of a list pointer.
+ * */
 export class JoinResult extends $.Struct {
   static readonly _capnp = {
     displayName: "JoinResult",
     id: "9d263a3630b7ebee",
     size: new $.ObjectSize(8, 1),
   };
+  /**
+   * aka "void", but that's a keyword.
+   * */
   get joinId(): number {
     return $.utils.getUint32(0, this);
   }

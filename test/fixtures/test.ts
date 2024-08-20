@@ -1752,6 +1752,10 @@ export const TestUnnamedUnion_Which = {
   BAR: 1
 } as const;
 export type TestUnnamedUnion_Which = (typeof TestUnnamedUnion_Which)[keyof typeof TestUnnamedUnion_Which];
+/**
+* At one point, these failed to compile in C++ because it would produce literals like "123f",
+* which is not valid; it needs to be "123.0f".
+* */
 export class TestUnnamedUnion extends $.Struct {
   static readonly FOO = TestUnnamedUnion_Which.FOO;
   static readonly BAR = TestUnnamedUnion_Which.BAR;
@@ -1966,6 +1970,9 @@ export class TestGroups_Groups_Baz extends $.Struct {
     return "TestGroups_Groups_Baz_" + super.toString();
   }
 }
+/**
+* A superset of TestOldVersion.
+* */
 export class TestGroups_Groups_Bar extends $.Struct {
   static readonly _capnp = {
     displayName: "bar",
@@ -2294,6 +2301,10 @@ export class TestInterleavedGroups_Group2 extends $.Struct {
     return $.utils.getUint16(30, this) as TestInterleavedGroups_Group2_Which;
   }
 }
+/**
+* Test what happens if the unions are not the first ordinals in the struct.  At one point this
+* was broken for the dynamic API.
+* */
 export class TestInterleavedGroups extends $.Struct {
   static readonly _capnp = {
     displayName: "TestInterleavedGroups",
@@ -2694,6 +2705,9 @@ export class TestLists_Struct16c extends $.Struct {
     return "TestLists_Struct16c_" + super.toString();
   }
 }
+/**
+* A subset of TestNewVersion.
+* */
 export class TestLists_Struct32c extends $.Struct {
   static readonly _capnp = {
     displayName: "Struct32c",
@@ -2974,6 +2988,9 @@ export class TestLists extends $.Struct {
     return "TestLists_" + super.toString();
   }
 }
+/**
+* Represents a type expression.
+* */
 export class TestFieldZeroIsBit extends $.Struct {
   static readonly _capnp = {
     displayName: "TestFieldZeroIsBit",
@@ -3004,6 +3021,10 @@ export class TestFieldZeroIsBit extends $.Struct {
     return "TestFieldZeroIsBit_" + super.toString();
   }
 }
+/**
+* Describes an annotation applied to a declaration.  Note AnnotationNode describes the
+* annotation's declaration, while this describes a use of the annotation.
+* */
 export class TestListDefaults extends $.Struct {
   static readonly _capnp = {
     displayName: "TestListDefaults",
@@ -3017,6 +3038,9 @@ export class TestListDefaults extends $.Struct {
   disownLists(): $.Orphan<TestLists> {
     return $.utils.disown(this.lists);
   }
+  /**
+  * ID of the annotation node.
+  * */
   get lists(): TestLists {
     return $.utils.getStruct(0, TestLists, this, TestListDefaults._capnp.defaultLists);
   }
@@ -3211,6 +3235,9 @@ export class TestLateUnion extends $.Struct {
     return "TestLateUnion_" + super.toString();
   }
 }
+/**
+* There is no reason to ever do this.
+* */
 export class TestOldVersion extends $.Struct {
   static readonly _capnp = {
     displayName: "TestOldVersion",
@@ -3384,6 +3411,9 @@ export const TestNewUnionVersion_Which = {
   B: 1
 } as const;
 export type TestNewUnionVersion_Which = (typeof TestNewUnionVersion_Which)[keyof typeof TestNewUnionVersion_Which];
+/**
+* At one point this failed to compile.
+* */
 export class TestNewUnionVersion extends $.Struct {
   static readonly A = TestNewUnionVersion_Which.A;
   static readonly B = TestNewUnionVersion_Which.B;
@@ -3644,6 +3674,12 @@ export class TestGenerics_Inner extends $.Struct {
   disownBar(): $.Orphan<$.Pointer> {
     return $.utils.disown(this.bar);
   }
+  /**
+  * Name to present to humans to identify this Node.  You should not attempt to parse this.  Its
+  * format could change.  It is not guaranteed to be unique.
+  *
+  * (On Zooko's triangle, this is the node's nickname.)
+  * */
   get bar(): $.Pointer {
     return $.utils.getPointer(1, this);
   }
@@ -3657,6 +3693,9 @@ export class TestGenerics_Inner extends $.Struct {
     return "TestGenerics_Inner_" + super.toString();
   }
 }
+/**
+* Schema for method of an interface.
+* */
 export class TestGenerics_Inner2_DeepNest_DeepNestInterface_Call$Params extends $.Struct {
   static readonly _capnp = {
     displayName: "call$Params",
@@ -3826,6 +3865,11 @@ export class TestGenerics_Inner2 extends $.Struct {
   disownBar(): $.Orphan<$.Pointer> {
     return $.utils.disown(this.bar);
   }
+  /**
+  * Unqualified symbol name.  Unlike Node.displayName, this *can* be used programmatically.
+  *
+  * (On Zooko's triangle, this is the node's petname according to its parent scope.)
+  * */
   get bar(): $.Pointer {
     return $.utils.getPointer(0, this);
   }
@@ -3841,6 +3885,10 @@ export class TestGenerics_Inner2 extends $.Struct {
   disownBaz(): $.Orphan<$.Pointer> {
     return $.utils.disown(this.baz);
   }
+  /**
+  * ID of the nested node.  Typically, the target node's scopeId points back to this node, but
+  * robust code should avoid relying on this.
+  * */
   get baz(): $.Pointer {
     return $.utils.getPointer(1, this);
   }
@@ -4116,6 +4164,9 @@ export class TestGenerics_Ug extends $.Struct {
     id: "b46a779beaf3384e",
     size: new $.ObjectSize(8, 2)
   };
+  /**
+  * Methods ordered by ordinal.
+  * */
   get ugfoo(): number {
     return $.utils.getInt32(4, this);
   }
@@ -4203,6 +4254,9 @@ export class TestGenerics extends $.Struct {
     return $.utils.getUint16(0, this) as TestGenerics_Which;
   }
 }
+/**
+* Schema for member of an enum.
+* */
 export class TestGenericsWrapper extends $.Struct {
   static readonly _capnp = {
     displayName: "TestGenericsWrapper",
@@ -4600,6 +4654,9 @@ export class TestUseGenerics extends $.Struct {
   disownUnspecified(): $.Orphan<TestGenerics> {
     return $.utils.disown(this.unspecified);
   }
+  /**
+  * Pack union 0 under ideal conditions: there is no unused padding space prior to it.
+  * */
   get unspecified(): TestGenerics {
     return $.utils.getStruct(3, TestGenerics, this);
   }
@@ -4618,6 +4675,9 @@ export class TestUseGenerics extends $.Struct {
   disownUnspecifiedInner(): $.Orphan<TestGenerics_Inner2> {
     return $.utils.disown(this.unspecifiedInner);
   }
+  /**
+  * Pack pathologically bad case.  Each field takes up new space.
+  * */
   get unspecifiedInner(): TestGenerics_Inner2 {
     return $.utils.getStruct(4, TestGenerics_Inner2, this);
   }
@@ -4890,6 +4950,9 @@ export class TestEmptyStruct extends $.Struct {
     return "TestEmptyStruct_" + super.toString();
   }
 }
+/**
+* A group.
+* */
 export class TestConstants extends $.Struct {
   static readonly VOID_CONST = undefined;
   static readonly BOOL_CONST = true;
@@ -5049,6 +5112,10 @@ export class TestInterface_Foo$Results$Promise {
     return await this.pipeline.struct();
   }
 }
+/**
+* This is actually a reference to an implicit (generic) parameter of a method. The only
+* legal context for this type to appear is inside Method.paramBrand or Method.resultBrand.
+* */
 export class TestInterface_Bar$Params extends $.Struct {
   static readonly _capnp = {
     displayName: "bar$Params",
@@ -5059,6 +5126,9 @@ export class TestInterface_Bar$Params extends $.Struct {
     return "TestInterface_Bar$Params_" + super.toString();
   }
 }
+/**
+* This is actually a reference to a type parameter defined within this scope.
+* */
 export class TestInterface_Bar$Results extends $.Struct {
   static readonly _capnp = {
     displayName: "bar$Results",
@@ -5235,6 +5305,9 @@ export class TestExtends_Qux$Params extends $.Struct {
     return "TestExtends_Qux$Params_" + super.toString();
   }
 }
+/**
+* Schema for a field of a struct.
+* */
 export class TestExtends_Qux$Results extends $.Struct {
   static readonly _capnp = {
     displayName: "qux$Results",
@@ -5254,6 +5327,10 @@ export class TestExtends_Qux$Results$Promise {
     return await this.pipeline.struct();
   }
 }
+/**
+* Small structs, when encoded as list, will be encoded as primitive lists rather than struct
+* lists, to save space.
+* */
 export class TestExtends_Corge$Results extends $.Struct {
   static readonly _capnp = {
     displayName: "corge$Results",
@@ -5780,6 +5857,9 @@ export class TestCallOrder_GetCallSequence$Params extends $.Struct {
     id: "8f1e8cd56ceb74dc",
     size: new $.ObjectSize(8, 0)
   };
+  /**
+  * Size of the data section, in words.
+  * */
   get expected(): number {
     return $.utils.getUint32(0, this);
   }
@@ -6334,6 +6414,9 @@ export class TestMoreStuff_GetHeld$Results$Promise {
     return await this.pipeline.struct();
   }
 }
+/**
+* Doesn't return.  You should cancel it.
+* */
 export class TestMoreStuff_Echo$Params extends $.Struct {
   static readonly _capnp = {
     displayName: "echo$Params",
@@ -6350,6 +6433,9 @@ export class TestMoreStuff_Echo$Params extends $.Struct {
     return "TestMoreStuff_Echo$Params_" + super.toString();
   }
 }
+/**
+* Returns the capability previously held using `hold` (and keeps holding it).
+* */
 export class TestMoreStuff_Echo$Results extends $.Struct {
   static readonly _capnp = {
     displayName: "echo$Results",
@@ -6394,6 +6480,8 @@ export class TestMoreStuff_ExpectCancel$Params extends $.Struct {
     return "TestMoreStuff_ExpectCancel$Params_" + super.toString();
   }
 }
+/**
+*                                                         */
 export class TestMoreStuff_ExpectCancel$Results extends $.Struct {
   static readonly _capnp = {
     displayName: "expectCancel$Results",

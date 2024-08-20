@@ -21,7 +21,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-@0xbdf87d7bb8304e81;
+@0xbdf87d7bb8304e82;
+# original: @0xbdf87d7bb8304e81;
 $namespace("capnp::annotations");
 
 annotation namespace(file): Text;

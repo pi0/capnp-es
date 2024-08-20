@@ -1,5 +1,9 @@
 import * as $ from "../serialization";
 export const _capnpFileId = BigInt("0xa93fc509624c72d9");
+/**
+ * This is actually a reference to an implicit (generic) parameter of a method. The only
+ * legal context for this type to appear is inside Method.paramBrand or Method.resultBrand.
+ * */
 export class Node_Parameter extends $.Struct {
   static readonly _capnp = {
     displayName: "Parameter",
@@ -22,12 +26,18 @@ export class Node_NestedNode extends $.Struct {
     id: "debf55bbfa0fc242",
     size: new $.ObjectSize(8, 1),
   };
+  /**
+   * ID of the scope to which these params apply.
+   * */
   get name(): string {
     return $.utils.getText(0, this);
   }
   set name(value: string) {
     $.utils.setText(0, value, this);
   }
+  /**
+   * List of parameter bindings.
+   * */
   get id(): bigint {
     return $.utils.getUint64(0, this);
   }
@@ -54,6 +64,10 @@ export class Node_SourceInfo_Member extends $.Struct {
     return "Node_SourceInfo_Member_" + super.toString();
   }
 }
+/**
+ * Describes an annotation applied to a declaration.  Note AnnotationNode describes the
+ * annotation's declaration, while this describes a use of the annotation.
+ * */
 export class Node_SourceInfo extends $.Struct {
   static readonly Member = Node_SourceInfo_Member;
   static readonly _capnp = {
@@ -62,6 +76,9 @@ export class Node_SourceInfo extends $.Struct {
     size: new $.ObjectSize(8, 2),
   };
   static _Members: $.ListCtor<Node_SourceInfo_Member>;
+  /**
+   * ID of the annotation node.
+   * */
   get id(): bigint {
     return $.utils.getUint64(0, this);
   }
@@ -80,6 +97,11 @@ export class Node_SourceInfo extends $.Struct {
   disownMembers(): $.Orphan<$.List<Node_SourceInfo_Member>> {
     return $.utils.disown(this.members);
   }
+  /**
+   * Brand of the annotation.
+   *
+   * Note that the annotation itself is not allowed to be parameterized, but its scope might be.
+   * */
   get members(): $.List<Node_SourceInfo_Member> {
     return $.utils.getList(1, Node_SourceInfo._Members, this);
   }
@@ -174,6 +196,9 @@ export class Node_Enum extends $.Struct {
   disownEnumerants(): $.Orphan<$.List<Enumerant>> {
     return $.utils.disown(this.enumerants);
   }
+  /**
+   * Size of the data section, in words.
+   * */
   get enumerants(): $.List<Enumerant> {
     return $.utils.getList(3, Node_Enum._Enumerants, this);
   }
@@ -190,6 +215,9 @@ export class Node_Enum extends $.Struct {
     return "Node_Enum_" + super.toString();
   }
 }
+/**
+ * Schema for a field of a struct.
+ * */
 export class Node_Interface extends $.Struct {
   static readonly _capnp = {
     displayName: "interface",
@@ -222,6 +250,14 @@ export class Node_Interface extends $.Struct {
   disownSuperclasses(): $.Orphan<$.List<Superclass>> {
     return $.utils.disown(this.superclasses);
   }
+  /**
+   * Indicates where this member appeared in the code, relative to other members.
+   * Code ordering may have semantic relevance -- programmers tend to place related fields
+   * together.  So, using code ordering makes sense in human-readable formats where ordering is
+   * otherwise irrelevant, like JSON.  The values of codeOrder are tightly-packed, so the maximum
+   * value is count(members) - 1.  Fields that are members of a union are only ordered relative to
+   * the other members of that union, so the maximum value there is count(union.members).
+   * */
   get superclasses(): $.List<Superclass> {
     return $.utils.getList(4, Node_Interface._Superclasses, this);
   }
@@ -308,30 +344,53 @@ export class Node_Annotation extends $.Struct {
   set type(value: Type) {
     $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
+  /**
+   * Name to present to humans to identify this Node.  You should not attempt to parse this.  Its
+   * format could change.  It is not guaranteed to be unique.
+   *
+   * (On Zooko's triangle, this is the node's nickname.)
+   * */
   get targetsFile(): boolean {
     return $.utils.getBit(112, this);
   }
   set targetsFile(value: boolean) {
     $.utils.setBit(112, value, this);
   }
+  /**
+   * If you want a shorter version of `displayName` (just naming this node, without its surrounding
+   * scope), chop off this many characters from the beginning of `displayName`.
+   * */
   get targetsConst(): boolean {
     return $.utils.getBit(113, this);
   }
   set targetsConst(value: boolean) {
     $.utils.setBit(113, value, this);
   }
+  /**
+   * ID of the lexical parent node.  Typically, the scope node will have a NestedNode pointing back
+   * at this node, but robust code should avoid relying on this (and, in fact, group nodes are not
+   * listed in the outer struct's nestedNodes, since they are listed in the fields).  `scopeId` is
+   * zero if the node has no parent, which is normally only the case with files, but should be
+   * allowed for any kind of node (in order to make runtime type generation easier).
+   * */
   get targetsEnum(): boolean {
     return $.utils.getBit(114, this);
   }
   set targetsEnum(value: boolean) {
     $.utils.setBit(114, value, this);
   }
+  /**
+   * List of nodes nested within this node, along with the names under which they were declared.
+   * */
   get targetsEnumerant(): boolean {
     return $.utils.getBit(115, this);
   }
   set targetsEnumerant(value: boolean) {
     $.utils.setBit(115, value, this);
   }
+  /**
+   * Annotations applied to this node.
+   * */
   get targetsStruct(): boolean {
     return $.utils.getBit(116, this);
   }
@@ -374,6 +433,9 @@ export class Node_Annotation extends $.Struct {
   set targetsParam(value: boolean) {
     $.utils.setBit(122, value, this);
   }
+  /**
+   * If this node is parameterized (generic), the list of parameters. Empty for non-generic types.
+   * */
   get targetsAnnotation(): boolean {
     return $.utils.getBit(123, this);
   }
@@ -411,6 +473,9 @@ export class Node extends $.Struct {
   static _Parameters: $.ListCtor<Node_Parameter>;
   static _NestedNodes: $.ListCtor<Node_NestedNode>;
   static _Annotations: $.ListCtor<Annotation>;
+  /**
+   * Doc comment on the member.
+   * */
   get id(): bigint {
     return $.utils.getUint64(0, this);
   }
@@ -584,6 +649,13 @@ export class Field_Slot extends $.Struct {
     id: "c42305476bb4746f",
     size: new $.ObjectSize(24, 4),
   };
+  /**
+   * A regular AnyPointer.
+   *
+   * The name "unconstrained" means as opposed to constraining it to match a type parameter.
+   * In retrospect this name is probably a poor choice given that it may still be constrained
+   * to be a struct, list, or capability.
+   * */
   get offset(): number {
     return $.utils.getUint32(4, this);
   }
@@ -596,6 +668,9 @@ export class Field_Slot extends $.Struct {
   disownType(): $.Orphan<Type> {
     return $.utils.disown(this.type);
   }
+  /**
+   * This is actually a reference to a type parameter defined within this scope.
+   * */
   get type(): Type {
     return $.utils.getStruct(2, Type, this);
   }
@@ -614,6 +689,10 @@ export class Field_Slot extends $.Struct {
   disownDefaultValue(): $.Orphan<Value> {
     return $.utils.disown(this.defaultValue);
   }
+  /**
+   * This is actually a reference to an implicit (generic) parameter of a method. The only
+   * legal context for this type to appear is inside Method.paramBrand or Method.resultBrand.
+   * */
   get defaultValue(): Value {
     return $.utils.getStruct(3, Value, this);
   }
@@ -636,6 +715,9 @@ export class Field_Slot extends $.Struct {
     return "Field_Slot_" + super.toString();
   }
 }
+/**
+ * Represents a type expression.
+ * */
 export class Field_Group extends $.Struct {
   static readonly _capnp = {
     displayName: "group",
@@ -695,6 +777,12 @@ export const Field_Which = {
   GROUP: 1,
 } as const;
 export type Field_Which = (typeof Field_Which)[keyof typeof Field_Which];
+/**
+ * Additional information about a node which is not needed at runtime, but may be useful for
+ * documentation or debugging purposes. This is kept in a separate struct to make sure it
+ * doesn't accidentally get included in contexts where it is not needed. The
+ * `CodeGeneratorRequest` includes this information in a separate array.
+ * */
 export class Field extends $.Struct {
   static readonly NO_DISCRIMINANT = 65_535;
   static readonly SLOT = Field_Which.SLOT;
@@ -706,12 +794,18 @@ export class Field extends $.Struct {
     defaultDiscriminantValue: $.getUint16Mask(65_535),
   };
   static _Annotations: $.ListCtor<Annotation>;
+  /**
+   * ID of the Node which this info describes.
+   * */
   get name(): string {
     return $.utils.getText(0, this);
   }
   set name(value: string) {
     $.utils.setText(0, value, this);
   }
+  /**
+   * The top-level doc comment for the Node.
+   * */
   get codeOrder(): number {
     return $.utils.getUint16(0, this);
   }
@@ -724,6 +818,13 @@ export class Field extends $.Struct {
   disownAnnotations(): $.Orphan<$.List<Annotation>> {
     return $.utils.disown(this.annotations);
   }
+  /**
+   * Information about each member -- i.e. fields (for structs), enumerants (for enums), or
+   * methods (for interfaces).
+   *
+   * This list is the same length and order as the corresponding list in the Node, i.e.
+   * Node.struct.fields, Node.enum.enumerants, or Node.interface.methods.
+   * */
   get annotations(): $.List<Annotation> {
     return $.utils.getList(1, Field._Annotations, this);
   }
@@ -824,6 +925,9 @@ export class Enumerant extends $.Struct {
     return "Enumerant_" + super.toString();
   }
 }
+/**
+ * Schema for member of an enum.
+ * */
 export class Superclass extends $.Struct {
   static readonly _capnp = {
     displayName: "Superclass",
@@ -842,6 +946,10 @@ export class Superclass extends $.Struct {
   disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
+  /**
+   * Specifies order in which the enumerants were declared in the code.
+   * Like utils.Field.codeOrder.
+   * */
   get brand(): Brand {
     return $.utils.getStruct(0, Brand, this);
   }
@@ -858,6 +966,9 @@ export class Superclass extends $.Struct {
     return "Superclass_" + super.toString();
   }
 }
+/**
+ * Schema for method of an interface.
+ * */
 export class Method extends $.Struct {
   static readonly _capnp = {
     displayName: "Method",
@@ -872,6 +983,10 @@ export class Method extends $.Struct {
   set name(value: string) {
     $.utils.setText(0, value, this);
   }
+  /**
+   * Specifies order in which the methods were declared in the code.
+   * Like utils.Field.codeOrder.
+   * */
   get codeOrder(): number {
     return $.utils.getUint16(0, this);
   }
@@ -884,6 +999,15 @@ export class Method extends $.Struct {
   disownImplicitParameters(): $.Orphan<$.List<Node_Parameter>> {
     return $.utils.disown(this.implicitParameters);
   }
+  /**
+   * ID of the parameter struct type.  If a named parameter list was specified in the method
+   * declaration (rather than a single struct parameter type) then a corresponding struct type is
+   * auto-generated.  Such an auto-generated type will not be listed in the interface's
+   * `nestedNodes` and its `scopeId` will be zero -- it is completely detached from the namespace.
+   * (Awkwardly, it does of course inherit generic parameters from the method's scope, which makes
+   * this a situation where you can't just climb the scope chain to find where a particular
+   * generic parameter was introduced. Making the `scopeId` zero was a mistake.)
+   * */
   get implicitParameters(): $.List<Node_Parameter> {
     return $.utils.getList(4, Method._ImplicitParameters, this);
   }
@@ -896,6 +1020,9 @@ export class Method extends $.Struct {
   set implicitParameters(value: $.List<Node_Parameter>) {
     $.utils.copyFrom(value, $.utils.getPointer(4, this));
   }
+  /**
+   * ID of the return struct type; similar to `paramStructType`.
+   * */
   get paramStructType(): bigint {
     return $.utils.getUint64(8, this);
   }
@@ -920,6 +1047,9 @@ export class Method extends $.Struct {
   set paramBrand(value: Brand) {
     $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
+  /**
+   * Brand of param struct type.
+   * */
   get resultStructType(): bigint {
     return $.utils.getUint64(16, this);
   }
@@ -932,6 +1062,9 @@ export class Method extends $.Struct {
   disownResultBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.resultBrand);
   }
+  /**
+   * Brand of result struct type.
+   * */
   get resultBrand(): Brand {
     return $.utils.getStruct(3, Brand, this);
   }
@@ -950,6 +1083,10 @@ export class Method extends $.Struct {
   disownAnnotations(): $.Orphan<$.List<Annotation>> {
     return $.utils.disown(this.annotations);
   }
+  /**
+   * The parameters listed in [] (typically, type / generic parameters), whose bindings are intended
+   * to be inferred rather than specified explicitly, although not all languages support this.
+   * */
   get annotations(): $.List<Annotation> {
     return $.utils.getList(1, Method._Annotations, this);
   }
@@ -1028,12 +1165,19 @@ export class Type_Enum extends $.Struct {
     return "Type_Enum_" + super.toString();
   }
 }
+/**
+ * This is actually a reference to a type parameter defined within this scope.
+ * */
 export class Type_Struct extends $.Struct {
   static readonly _capnp = {
     displayName: "struct",
     id: "ac3a6f60ef4cc6d3",
     size: new $.ObjectSize(24, 1),
   };
+  /**
+   * ID of the generic type whose parameter we're referencing. This should be a parent of the
+   * current scope.
+   * */
   get typeId(): bigint {
     return $.utils.getUint64(8, this);
   }
@@ -1046,6 +1190,9 @@ export class Type_Struct extends $.Struct {
   disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
+  /**
+   * Index of the parameter within the generic type's parameter list.
+   * */
   get brand(): Brand {
     return $.utils.getStruct(0, Brand, this);
   }
@@ -1062,12 +1209,22 @@ export class Type_Struct extends $.Struct {
     return "Type_Struct_" + super.toString();
   }
 }
+/**
+ * A regular AnyPointer.
+ *
+ * The name "unconstrained" means as opposed to constraining it to match a type parameter.
+ * In retrospect this name is probably a poor choice given that it may still be constrained
+ * to be a struct, list, or capability.
+ * */
 export class Type_Interface extends $.Struct {
   static readonly _capnp = {
     displayName: "interface",
     id: "ed8bca69f7fb0cbf",
     size: new $.ObjectSize(24, 1),
   };
+  /**
+   * truly AnyPointer
+   * */
   get typeId(): bigint {
     return $.utils.getUint64(8, this);
   }
@@ -1080,6 +1237,9 @@ export class Type_Interface extends $.Struct {
   disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
+  /**
+   * AnyStruct
+   * */
   get brand(): Brand {
     return $.utils.getStruct(0, Brand, this);
   }
@@ -1145,12 +1305,18 @@ export class Type_AnyPointer_Unconstrained extends $.Struct {
     return $.utils.getUint16(10, this) as Type_AnyPointer_Unconstrained_Which;
   }
 }
+/**
+ * A group.
+ * */
 export class Type_AnyPointer_Parameter extends $.Struct {
   static readonly _capnp = {
     displayName: "parameter",
     id: "9dd1f724f4614a85",
     size: new $.ObjectSize(24, 1),
   };
+  /**
+   * The ID of the group's node.
+   * */
   get scopeId(): bigint {
     return $.utils.getUint64(16, this);
   }
@@ -1276,6 +1442,10 @@ export const Type_Which = {
   ANY_POINTER: 18,
 } as const;
 export type Type_Which = (typeof Type_Which)[keyof typeof Type_Which];
+/**
+ * Possible element sizes for encoded lists.  These correspond exactly to the possible values of
+ * the 3-bit element size component of a list pointer.
+ * */
 export class Type extends $.Struct {
   static readonly VOID = Type_Which.VOID;
   static readonly BOOL = Type_Which.BOOL;
@@ -1490,6 +1660,12 @@ export class Brand_Scope extends $.Struct {
   disownBind(): $.Orphan<$.List<Brand_Binding>> {
     return $.utils.disown(this.bind);
   }
+  /**
+   * The original ordinal number given to the field.  You probably should NOT use this; if you need
+   * a numeric identifier for a field, use its position within the field array for its scope.
+   * The ordinal is given here mainly just so that the original schema text can be reproduced given
+   * the compiled version -- i.e. so that `capnp compile -ocapnp` can do its job.
+   * */
   get bind(): $.List<Brand_Binding> {
     $.utils.testWhich("bind", $.utils.getUint16(8, this), 0, this);
     return $.utils.getList(0, Brand_Scope._Bind, this);
@@ -1527,6 +1703,9 @@ export const Brand_Binding_Which = {
 } as const;
 export type Brand_Binding_Which =
   (typeof Brand_Binding_Which)[keyof typeof Brand_Binding_Which];
+/**
+ * A regular, non-group, non-fixed-list field.
+ * */
 export class Brand_Binding extends $.Struct {
   static readonly UNBOUND = Brand_Binding_Which.UNBOUND;
   static readonly TYPE = Brand_Binding_Which.TYPE;
@@ -1588,6 +1767,9 @@ export class Brand extends $.Struct {
   disownScopes(): $.Orphan<$.List<Brand_Scope>> {
     return $.utils.disown(this.scopes);
   }
+  /**
+   * Enumerants ordered by numeric value (ordinal).
+   * */
   get scopes(): $.List<Brand_Scope> {
     return $.utils.getList(0, Brand._Scopes, this);
   }
@@ -1626,6 +1808,9 @@ export const Value_Which = {
   ANY_POINTER: 18,
 } as const;
 export type Value_Which = (typeof Value_Which)[keyof typeof Value_Which];
+/**
+ * Information about one of the node's parameters.
+ * */
 export class Value extends $.Struct {
   static readonly VOID = Value_Which.VOID;
   static readonly BOOL = Value_Which.BOOL;
@@ -1907,6 +2092,11 @@ export class Annotation extends $.Struct {
     id: "f1c8950dab257542",
     size: new $.ObjectSize(8, 2),
   };
+  /**
+   * Unqualified symbol name.  Unlike Node.displayName, this *can* be used programmatically.
+   *
+   * (On Zooko's triangle, this is the node's petname according to its parent scope.)
+   * */
   get id(): bigint {
     return $.utils.getUint64(0, this);
   }
@@ -1919,6 +2109,10 @@ export class Annotation extends $.Struct {
   disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
+  /**
+   * ID of the nested node.  Typically, the target node's scopeId points back to this node, but
+   * robust code should avoid relying on this.
+   * */
   get brand(): Brand {
     return $.utils.getStruct(1, Brand, this);
   }
@@ -1982,6 +2176,9 @@ export class CapnpVersion extends $.Struct {
   set minor(value: number) {
     $.utils.setUint8(2, value, this);
   }
+  /**
+   * Represents a value, e.g. a field default value, constant value, or annotation value.
+   * */
   get micro(): number {
     return $.utils.getUint8(3, this);
   }
@@ -2014,6 +2211,9 @@ export class CodeGeneratorRequest_RequestedFile_Import extends $.Struct {
     return "CodeGeneratorRequest_RequestedFile_Import_" + super.toString();
   }
 }
+/**
+ * Represents a value, e.g. a field default value, constant value, or annotation value.
+ * */
 export class CodeGeneratorRequest_RequestedFile extends $.Struct {
   static readonly Import = CodeGeneratorRequest_RequestedFile_Import;
   static readonly _capnp = {
@@ -2069,6 +2269,10 @@ export class CodeGeneratorRequest_RequestedFile extends $.Struct {
     return "CodeGeneratorRequest_RequestedFile_" + super.toString();
   }
 }
+/**
+ * Specifies bindings for parameters of generics. Since these bindings turn a generic into a
+ * non-generic, we call it the "brand".
+ * */
 export class CodeGeneratorRequest extends $.Struct {
   static readonly RequestedFile = CodeGeneratorRequest_RequestedFile;
   static readonly _capnp = {
@@ -2085,6 +2289,11 @@ export class CodeGeneratorRequest extends $.Struct {
   disownCapnpVersion(): $.Orphan<CapnpVersion> {
     return $.utils.disown(this.capnpVersion);
   }
+  /**
+   * For each of the target type and each of its parent scopes, a parameterization may be included
+   * in this list. If no parameterization is included for a particular relevant scope, then either
+   * that scope has no parameters or all parameters should be considered to be `AnyPointer`.
+   * */
   get capnpVersion(): CapnpVersion {
     return $.utils.getStruct(2, CapnpVersion, this);
   }

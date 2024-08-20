@@ -48,6 +48,7 @@ import {
   getUnnamedUnionFields,
   hasNode,
   lookupNode,
+  lookupNodeSourceInfo,
   needsConcreteListClass,
 } from "./file";
 import * as util from "./util";
@@ -295,6 +296,7 @@ export function generateStructFieldMethods(
   members: ts.ClassElement[],
   node: s.Node,
   field: s.Field,
+  fieldIndex: number,
 ): void {
   let jsType: string;
   let whichType: s.Type_Which | string;
@@ -685,7 +687,7 @@ export function generateStructFieldMethods(
     );
   }
 
-  // getFoo(): FooType { ... }
+  // get foo(): FooType { ... }
   if (get) {
     const expressions = [get];
 
@@ -704,15 +706,21 @@ export function generateStructFieldMethods(
       );
     }
 
-    members.push(
-      f.createGetAccessorDeclaration(
-        [],
-        name,
-        [],
-        jsTypeReference,
-        createExpressionBlock(expressions, true),
-      ),
+    const d = f.createGetAccessorDeclaration(
+      [],
+      name,
+      [],
+      jsTypeReference,
+      createExpressionBlock(expressions, true),
     );
+
+    try {
+      attachJSDocs(d, lookupNodeSourceInfo(ctx, node)?.members.at(fieldIndex));
+    } catch {
+      // ignore
+    }
+
+    members.push(d);
   }
 
   // hasFoo(): boolean { ... }
@@ -942,9 +950,10 @@ export function generateStructNode(
   // private static _ConcreteListClass: MyStruct_ConcreteListClass;
   members.push(...concreteLists.map((f) => createConcreteListProperty(ctx, f)));
 
-  // getFoo() { ... } initFoo() { ... } setFoo() { ... }
+  // get foo() { ... } initFoo() { ... } set foo() { ... }
+  let fieldIndex = 0;
   for (const f of fields) {
-    generateStructFieldMethods(ctx, members, node, f);
+    generateStructFieldMethods(ctx, members, node, f, fieldIndex++);
   }
 
   // toString(): string { return 'MyStruct_' + super.toString(); }
@@ -982,6 +991,13 @@ export function generateStructNode(
     [createClassExtends(interfaceNode ? "$.Interface" : "$.Struct")],
     members,
   );
+
+  // Add jsdoc comments to the class.
+  try {
+    attachJSDocs(c, lookupNodeSourceInfo(ctx, node));
+  } catch {
+    // Ignore
+  }
 
   // Make sure the interface classes are generated first.
 
@@ -1065,6 +1081,27 @@ export function getImportNodes(
       .filter(
         (n) => lookupNode(ctx, n).isStruct() || lookupNode(ctx, n).isEnum(),
       )
+  );
+}
+
+function attachJSDocs(
+  d: ts.Declaration,
+  sourceInfo?: s.Node_SourceInfo | s.Node_SourceInfo_Member,
+) {
+  const docComment = sourceInfo?.docComment;
+  if (!docComment) {
+    return;
+  }
+  ts.addSyntheticLeadingComment(
+    d,
+    ts.SyntaxKind.MultiLineCommentTrivia,
+    "*\n" +
+      docComment
+        .toString()
+        .split("\n")
+        .map((l) => `* ${l}`)
+        .join("\n"),
+    true,
   );
 }
 
