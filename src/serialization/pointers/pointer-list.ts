@@ -26,7 +26,7 @@ export function PointerList<T extends Pointer>(
       copyFrom(value, this.get(index));
     }
 
-    toString(): string {
+    [Symbol.toStringTag](): string {
       return `Pointer_${super.toString()},cls:${PointerClass.toString()}`;
     }
   };

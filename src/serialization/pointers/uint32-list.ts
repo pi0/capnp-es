@@ -20,7 +20,7 @@ export class Uint32List extends List<number> {
     c.segment.setUint32(c.byteOffset + index * 4, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Uint32_${super.toString()}`;
   }
 }

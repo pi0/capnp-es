@@ -50,7 +50,7 @@ export class Interface extends Pointer {
     return getClient(this);
   }
 
-  toString(): string {
+  [Symbol.for("nodejs.util.inspect.custom")](): string {
     return format(
       "Interface_%d@%a,%d,limit:%x",
       this.segment.id,

@@ -110,6 +110,10 @@ export class Pointer<T extends _Pointer = _Pointer> {
     }
   }
 
+  [Symbol.toStringTag](): string {
+    return format("Pointer_%d", this.segment.id);
+  }
+
   toString(): string {
     return format("->%d@%a%s", this.segment.id, this.byteOffset, dump(this));
   }
@@ -709,7 +713,7 @@ export function getTargetPointerType(p: Pointer): PointerType {
 /**
  * Get the size of the struct referenced by a pointer, following far pointers if necessary.
  *
- * @param {Pointer} p The poiner to read from.
+ * @param {Pointer} p The pointer to read from.
  * @returns {ObjectSize} The size of the struct referenced by this pointer.
  */
 

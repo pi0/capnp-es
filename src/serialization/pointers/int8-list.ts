@@ -20,7 +20,7 @@ export class Int8List extends List<number> {
     c.segment.setInt8(c.byteOffset + index, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Int8_${super.toString()}`;
   }
 }

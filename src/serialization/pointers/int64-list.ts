@@ -20,7 +20,7 @@ export class Int64List extends List<bigint> {
     c.segment.setInt64(c.byteOffset + index * 8, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Int64_${super.toString()}`;
   }
 }

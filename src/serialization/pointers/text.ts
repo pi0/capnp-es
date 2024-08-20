@@ -99,6 +99,18 @@ export class Text extends List<string> {
   }
 
   toString(): string {
+    return this.get();
+  }
+
+  toJSON(): string {
+    return this.get();
+  }
+
+  [Symbol.toPrimitive](): string {
+    return this.get();
+  }
+
+  [Symbol.toStringTag](): string {
     return `Text_${super.toString()}`;
   }
 }

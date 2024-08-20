@@ -116,7 +116,7 @@ export class Data extends List<number> {
     return new DataView(c.segment.buffer, c.byteOffset, this.length);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Data_${super.toString()}`;
   }
 

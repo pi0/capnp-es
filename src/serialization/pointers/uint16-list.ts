@@ -21,7 +21,7 @@ export class Uint16List extends List<number> {
     c.segment.setUint16(c.byteOffset + index * 2, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Uint16_${super.toString()}`;
   }
 }

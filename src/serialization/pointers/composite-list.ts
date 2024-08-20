@@ -28,7 +28,7 @@ export function CompositeList<T extends Struct>(
       copyFrom(value, this.get(index));
     }
 
-    toString(): string {
+    [Symbol.toStringTag](): string {
       return `Composite_${super.toString()},cls:${CompositeClass.toString()}`;
     }
   };

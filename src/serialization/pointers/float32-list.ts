@@ -22,7 +22,7 @@ export class Float32List extends List<number> {
     c.segment.setFloat32(c.byteOffset + index * 4, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Float32_${super.toString()}`;
   }
 }

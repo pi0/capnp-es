@@ -361,8 +361,8 @@ export class List<T> extends Pointer implements Array<T> {
     return this.values();
   }
 
-  [Symbol.toStringTag]() {
-    return "[object Array]";
+  toJSON(): unknown {
+    return this.toArray();
   }
 
   toString(): string {
@@ -373,7 +373,11 @@ export class List<T> extends Pointer implements Array<T> {
     return this.toString();
   }
 
-  static toString(): string {
+  [Symbol.toStringTag]() {
+    return "[object Array]";
+  }
+
+  static [Symbol.toStringTag](): string {
     return this._capnp.displayName;
   }
 }

@@ -22,7 +22,7 @@ export class Float64List extends List<number> {
     c.segment.setFloat64(c.byteOffset + index * 8, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Float64_${super.toString()}`;
   }
 }

@@ -28,7 +28,7 @@ export class BoolList extends List<boolean> {
     c.segment.setUint8(byteOffset, value ? v | bitMask : v & ~bitMask);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Bool_${super.toString()}`;
   }
 }

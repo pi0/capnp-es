@@ -201,7 +201,7 @@ export class Orphan<T extends Pointer> {
     this._capnp = undefined;
   }
 
-  toString(): string {
+  [Symbol.for("nodejs.util.inspect.custom")](): string {
     return format(
       "Orphan_%d@%a,type:%s",
       this.segment.id,

@@ -22,7 +22,7 @@ export class Int16List extends List<number> {
     c.segment.setInt16(c.byteOffset + index * 2, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Int16_${super.toString()}`;
   }
 }

@@ -141,11 +141,11 @@ export class Struct extends Pointer<_Struct> {
     this._capnp.compositeList = compositeIndex !== undefined;
   }
 
-  static toString(): string {
+  static [Symbol.toStringTag](): string {
     return this._capnp.displayName;
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return (
       `Struct_${super.toString()}` +
       `${this._capnp.compositeIndex === undefined ? "" : `,ci:${this._capnp.compositeIndex}`}` +

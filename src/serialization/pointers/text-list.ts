@@ -27,7 +27,7 @@ export class TextList extends List<string> {
     Text.fromPointer(c).set(0, value);
   }
 
-  toString(): string {
+  [Symbol.toStringTag](): string {
     return `Text_${super.toString()}`;
   }
 }
