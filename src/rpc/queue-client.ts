@@ -16,7 +16,7 @@ import { ErrorAnswer } from "./error-answer";
 import { Queue } from "./queue";
 import { Qcalls, QCallSlot } from "./qcalls";
 import { RPC_CALL_QUEUE_FULL } from "../errors";
-import { MessageTarget, Disembargo_Context_Which } from "../std/rpc";
+import { MessageTarget, Disembargo_Context_Which } from "../capnp/rpc";
 import { newDisembargoMessage } from "./capability";
 import { joinAnswer } from "./join";
 

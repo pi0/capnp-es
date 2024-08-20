@@ -1,7 +1,7 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import ts, { factory as f } from "typescript";
-import * as s from "../std/schema";
+import * as s from "../capnp/schema";
 
 /** BigInt */
 

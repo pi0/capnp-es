@@ -7,7 +7,7 @@ export default defineBuildConfig({
     "./src/compiler/index.ts",
     "./src/compiler/main.ts",
     ...["cpp", "persistent", "rpc-twoparty", "rpc", "schema", "ts"].map(
-      (n) => `./src/std/${n}.ts`,
+      (n) => `./src/capnp/${n}.ts`,
     ),
   ],
 });

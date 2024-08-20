@@ -5,7 +5,7 @@ import { PipelineOp } from "./pipeline-op";
 import { Call, copyCall } from "./call";
 import { Conn } from "./conn";
 import { Deferred } from "./deferred";
-import { MessageTarget } from "../std/rpc";
+import { MessageTarget } from "../capnp/rpc";
 import { Fulfiller } from "./fulfiller/fulfiller";
 import { newReturnMessage, setReturnException } from "./capability";
 import { Pointer } from "../serialization/pointers/pointer";

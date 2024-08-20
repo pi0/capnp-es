@@ -1,7 +1,7 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import ts from "typescript";
-import * as s from "../std/schema";
+import * as s from "../capnp/schema";
 
 export class CodeGeneratorFileContext {
   concreteLists: Array<[string, s.Field]>;

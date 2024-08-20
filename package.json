@@ -15,9 +15,9 @@
       "types": "./dist/compiler/index.d.mts",
       "default": "./dist/compiler/index.mjs"
     },
-    "./std/*": {
-      "types": "./dist/std/*.d.mts",
-      "default": "./dist/std/*.mjs"
+    "./capnp/*": {
+      "types": "./dist/capnp/*.d.mts",
+      "default": "./dist/capnp/*.mjs"
     }
   },
   "main": "./dist/index.mjs",

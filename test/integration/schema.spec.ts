@@ -2,7 +2,7 @@
 
 import { test, assert as t } from "vitest";
 import * as capnp from "capnp-es";
-import { CodeGeneratorRequest } from "capnp-es/std/schema";
+import { CodeGeneratorRequest } from "src/capnp/schema";
 import { readFileBuffer } from "test/utils";
 
 const SCHEMA_MESSAGE = readFileBuffer("test/fixtures/data/schema.bin");

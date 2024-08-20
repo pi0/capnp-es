@@ -1,7 +1,7 @@
 import { test, expect } from "vitest";
 import ts from "typescript";
 import * as capnp from "capnp-es";
-import * as Schema from "src/std/schema.ts";
+import * as Schema from "src/capnp/schema";
 import { createValueExpression } from "src/compiler/ast-creators";
 import { readFileBuffer } from "./utils";
 

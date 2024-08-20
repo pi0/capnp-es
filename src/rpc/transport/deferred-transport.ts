@@ -1,7 +1,7 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import { Message } from "../../serialization/message";
-import { Message as RPCMessage } from "../../std/rpc";
+import { Message as RPCMessage } from "../../capnp/rpc";
 import { Deferred } from "../deferred";
 import { Transport } from "../transport";
 

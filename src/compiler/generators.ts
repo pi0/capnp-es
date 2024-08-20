@@ -1,7 +1,7 @@
 // Based on https://github.com/jdiaz5513/capnp-ts (MIT - Julián Díaz)
 
 import ts, { factory as f } from "typescript";
-import * as s from "../std/schema";
+import * as s from "../capnp/schema";
 import { format } from "../util";
 
 import {
@@ -86,7 +86,7 @@ export function generateNestedImports(ctx: CodeGeneratorFileContext): void {
     let importPath: string;
 
     if (name.startsWith("/capnp/")) {
-      importPath = `capnp-es/std/${name.slice(7).replace(/\.capnp$/, "")}`;
+      importPath = `capnp-es/capnp/${name.slice(7).replace(/\.capnp$/, "")}`;
     } else {
       importPath = name.replace(/\.capnp$/, ".js");
       if (importPath[0] !== ".") {

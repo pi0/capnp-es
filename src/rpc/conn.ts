@@ -5,7 +5,7 @@ import { RefCount } from "./refcount";
 import { Client, isSameClient, clientFromResolution } from "./client";
 import { Transport } from "./transport";
 import { Question, QuestionState } from "./question";
-import { Return, Payload, CapDescriptor, MessageTarget } from "../std/rpc";
+import { Return, Payload, CapDescriptor, MessageTarget } from "../capnp/rpc";
 import { RPCError } from "./rpc-error";
 import { AnswerEntry, Answer } from "./answer";
 import {
@@ -32,7 +32,7 @@ import { PipelineClient } from "./pipeline-client";
 import { FixedAnswer } from "./fixed-answer";
 import { LocalAnswerClient } from "./local-answer-client";
 import { Finalize } from "./finalize";
-import { Message as RPCMessage } from "../std/rpc";
+import { Message as RPCMessage } from "../capnp/rpc";
 import { MethodError } from "./method-error";
 import { Registry } from "./registry";
 import { joinAnswer } from "./join";
