@@ -166,10 +166,10 @@ export class JoinResult extends $.Struct {
   set succeeded(value: boolean) {
     $.utils.setBit(32, value, this);
   }
-  adoptCap(value: $.Orphan<$.Pointer>): void {
+  _adoptCap(value: $.Orphan<$.Pointer>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownCap(): $.Orphan<$.Pointer> {
+  _disownCap(): $.Orphan<$.Pointer> {
     return $.utils.disown(this.cap);
   }
   /**
@@ -178,7 +178,7 @@ export class JoinResult extends $.Struct {
   get cap(): $.Pointer {
     return $.utils.getPointer(0, this);
   }
-  hasCap(): boolean {
+  _hasCap(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
   set cap(value: $.Pointer) {

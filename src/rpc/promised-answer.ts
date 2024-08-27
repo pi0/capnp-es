@@ -8,7 +8,7 @@ export function transformToPromisedAnswer(
   answer: PromisedAnswer,
   transform: PipelineOp[],
 ): void {
-  const opList = answer.initTransform(transform.length);
+  const opList = answer._initTransform(transform.length);
   for (const [i, op] of transform.entries()) {
     opList.get(i).getPointerField = op.field;
   }

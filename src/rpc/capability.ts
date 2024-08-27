@@ -18,7 +18,7 @@ export function newFinishMessage(
   release: boolean,
 ): RPCMessage {
   const m = newMessage();
-  const f = m.initFinish();
+  const f = m._initFinish();
   f.questionId = questionID;
   f.releaseResultCaps = release;
   return m;
@@ -32,13 +32,13 @@ export function newUnimplementedMessage(m: RPCMessage): RPCMessage {
 
 export function newReturnMessage(id: number): RPCMessage {
   const m = newMessage();
-  const ret = m.initReturn();
+  const ret = m._initReturn();
   ret.answerId = id;
   return m;
 }
 
 export function setReturnException(ret: Return, err: Error): Exception {
-  const exc = ret.initException();
+  const exc = ret._initException();
   toException(exc, err);
   return exc;
 }
@@ -48,8 +48,8 @@ export function newDisembargoMessage(
   id: number,
 ): RPCMessage {
   const m = newMessage();
-  const dis = m.initDisembargo();
-  const ctx = dis.initContext();
+  const dis = m._initDisembargo();
+  const ctx = dis._initContext();
   switch (which) {
     case Disembargo_Context_Which.SENDER_LOOPBACK: {
       ctx.senderLoopback = id;

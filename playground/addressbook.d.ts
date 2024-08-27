@@ -40,15 +40,15 @@ export declare class Person_Employment extends $.Struct {
     id: string;
     size: $.ObjectSize;
   };
-  isUnemployed(): boolean;
+  get _isUnemployed(): boolean;
   set unemployed(_: true);
   get employer(): string;
-  isEmployer(): boolean;
+  get _isEmployer(): boolean;
   set employer(value: string);
   get school(): string;
-  isSchool(): boolean;
+  get _isSchool(): boolean;
   set school(value: string);
-  isSelfEmployed(): boolean;
+  get _isSelfEmployed(): boolean;
   set selfEmployed(_: true);
   toString(): string;
   which(): Person_Employment_Which;
@@ -67,14 +67,14 @@ export declare class Person extends $.Struct {
   set name(value: string);
   get email(): string;
   set email(value: string);
-  adoptPhones(value: $.Orphan<$.List<Person_PhoneNumber>>): void;
-  disownPhones(): $.Orphan<$.List<Person_PhoneNumber>>;
+  _adoptPhones(value: $.Orphan<$.List<Person_PhoneNumber>>): void;
+  _disownPhones(): $.Orphan<$.List<Person_PhoneNumber>>;
   get phones(): $.List<Person_PhoneNumber>;
-  hasPhones(): boolean;
-  initPhones(length: number): $.List<Person_PhoneNumber>;
+  _hasPhones(): boolean;
+  _initPhones(length: number): $.List<Person_PhoneNumber>;
   set phones(value: $.List<Person_PhoneNumber>);
   get employment(): Person_Employment;
-  initEmployment(): Person_Employment;
+  _initEmployment(): Person_Employment;
   toString(): string;
 }
 export declare class AddressBook extends $.Struct {
@@ -84,11 +84,11 @@ export declare class AddressBook extends $.Struct {
     size: $.ObjectSize;
   };
   static _People: $.ListCtor<Person>;
-  adoptPeople(value: $.Orphan<$.List<Person>>): void;
-  disownPeople(): $.Orphan<$.List<Person>>;
+  _adoptPeople(value: $.Orphan<$.List<Person>>): void;
+  _disownPeople(): $.Orphan<$.List<Person>>;
   get people(): $.List<Person>;
-  hasPeople(): boolean;
-  initPeople(length: number): $.List<Person>;
+  _hasPeople(): boolean;
+  _initPeople(length: number): $.List<Person>;
   set people(value: $.List<Person>);
   toString(): string;
 }

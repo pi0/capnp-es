@@ -13,7 +13,7 @@ test("loop de loop", () => {
     const m = new capnp.Message();
     const listMania = m.initRoot(ListMania);
 
-    listMania.initCompositeList(1);
+    listMania._initCompositeList(1);
 
     const compositeList = listMania.compositeList;
     // TODO: Interfaces are not implemented yet.
@@ -36,22 +36,22 @@ test("1 of each list", () => {
     const m = new capnp.Message();
     const listMania = m.initRoot(ListMania);
 
-    listMania.initBoolList(1);
-    listMania.initCompositeList(1);
-    listMania.initDataList(1);
-    listMania.initFloat32List(1);
-    listMania.initFloat64List(1);
-    listMania.initInt8List(1);
-    listMania.initInt16List(1);
-    listMania.initInt32List(1);
-    listMania.initInt64List(1);
-    listMania.initInterfaceList(1);
-    listMania.initTextList(1);
-    listMania.initUint8List(1);
-    listMania.initUint16List(1);
-    listMania.initUint32List(1);
-    listMania.initUint64List(1);
-    listMania.initVoidList(1);
+    listMania._initBoolList(1);
+    listMania._initCompositeList(1);
+    listMania._initDataList(1);
+    listMania._initFloat32List(1);
+    listMania._initFloat64List(1);
+    listMania._initInt8List(1);
+    listMania._initInt16List(1);
+    listMania._initInt32List(1);
+    listMania._initInt64List(1);
+    listMania._initInterfaceList(1);
+    listMania._initTextList(1);
+    listMania._initUint8List(1);
+    listMania._initUint16List(1);
+    listMania._initUint32List(1);
+    listMania._initUint64List(1);
+    listMania._initVoidList(1);
 
     const boolList = listMania.boolList;
     const compositeList = listMania.compositeList;

@@ -102,10 +102,10 @@ export class Node_SourceInfo extends $.Struct {
   set docComment(value: string) {
     $.utils.setText(0, value, this);
   }
-  adoptMembers(value: $.Orphan<$.List<Node_SourceInfo_Member>>): void {
+  _adoptMembers(value: $.Orphan<$.List<Node_SourceInfo_Member>>): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownMembers(): $.Orphan<$.List<Node_SourceInfo_Member>> {
+  _disownMembers(): $.Orphan<$.List<Node_SourceInfo_Member>> {
     return $.utils.disown(this.members);
   }
   /**
@@ -118,10 +118,10 @@ export class Node_SourceInfo extends $.Struct {
   get members(): $.List<Node_SourceInfo_Member> {
     return $.utils.getList(1, Node_SourceInfo._Members, this);
   }
-  hasMembers(): boolean {
+  _hasMembers(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initMembers(length: number): $.List<Node_SourceInfo_Member> {
+  _initMembers(length: number): $.List<Node_SourceInfo_Member> {
     return $.utils.initList(1, Node_SourceInfo._Members, length, this);
   }
   set members(value: $.List<Node_SourceInfo_Member>) {
@@ -213,10 +213,10 @@ export class Node_Struct extends $.Struct {
   set discriminantOffset(value: number) {
     $.utils.setUint32(32, value, this);
   }
-  adoptFields(value: $.Orphan<$.List<Field>>): void {
+  _adoptFields(value: $.Orphan<$.List<Field>>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownFields(): $.Orphan<$.List<Field>> {
+  _disownFields(): $.Orphan<$.List<Field>> {
     return $.utils.disown(this.fields);
   }
   /**
@@ -233,10 +233,10 @@ export class Node_Struct extends $.Struct {
   get fields(): $.List<Field> {
     return $.utils.getList(3, Node_Struct._Fields, this);
   }
-  hasFields(): boolean {
+  _hasFields(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initFields(length: number): $.List<Field> {
+  _initFields(length: number): $.List<Field> {
     return $.utils.initList(3, Node_Struct._Fields, length, this);
   }
   set fields(value: $.List<Field>) {
@@ -253,10 +253,10 @@ export class Node_Enum extends $.Struct {
     size: new $.ObjectSize(40, 6),
   };
   static _Enumerants: $.ListCtor<Enumerant>;
-  adoptEnumerants(value: $.Orphan<$.List<Enumerant>>): void {
+  _adoptEnumerants(value: $.Orphan<$.List<Enumerant>>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownEnumerants(): $.Orphan<$.List<Enumerant>> {
+  _disownEnumerants(): $.Orphan<$.List<Enumerant>> {
     return $.utils.disown(this.enumerants);
   }
   /**
@@ -265,10 +265,10 @@ export class Node_Enum extends $.Struct {
   get enumerants(): $.List<Enumerant> {
     return $.utils.getList(3, Node_Enum._Enumerants, this);
   }
-  hasEnumerants(): boolean {
+  _hasEnumerants(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initEnumerants(length: number): $.List<Enumerant> {
+  _initEnumerants(length: number): $.List<Enumerant> {
     return $.utils.initList(3, Node_Enum._Enumerants, length, this);
   }
   set enumerants(value: $.List<Enumerant>) {
@@ -286,10 +286,10 @@ export class Node_Interface extends $.Struct {
   };
   static _Methods: $.ListCtor<Method>;
   static _Superclasses: $.ListCtor<Superclass>;
-  adoptMethods(value: $.Orphan<$.List<Method>>): void {
+  _adoptMethods(value: $.Orphan<$.List<Method>>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownMethods(): $.Orphan<$.List<Method>> {
+  _disownMethods(): $.Orphan<$.List<Method>> {
     return $.utils.disown(this.methods);
   }
   /**
@@ -298,19 +298,19 @@ export class Node_Interface extends $.Struct {
   get methods(): $.List<Method> {
     return $.utils.getList(3, Node_Interface._Methods, this);
   }
-  hasMethods(): boolean {
+  _hasMethods(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initMethods(length: number): $.List<Method> {
+  _initMethods(length: number): $.List<Method> {
     return $.utils.initList(3, Node_Interface._Methods, length, this);
   }
   set methods(value: $.List<Method>) {
     $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
-  adoptSuperclasses(value: $.Orphan<$.List<Superclass>>): void {
+  _adoptSuperclasses(value: $.Orphan<$.List<Superclass>>): void {
     $.utils.adopt(value, $.utils.getPointer(4, this));
   }
-  disownSuperclasses(): $.Orphan<$.List<Superclass>> {
+  _disownSuperclasses(): $.Orphan<$.List<Superclass>> {
     return $.utils.disown(this.superclasses);
   }
   /**
@@ -319,10 +319,10 @@ export class Node_Interface extends $.Struct {
   get superclasses(): $.List<Superclass> {
     return $.utils.getList(4, Node_Interface._Superclasses, this);
   }
-  hasSuperclasses(): boolean {
+  _hasSuperclasses(): boolean {
     return !$.utils.isNull($.utils.getPointer(4, this));
   }
-  initSuperclasses(length: number): $.List<Superclass> {
+  _initSuperclasses(length: number): $.List<Superclass> {
     return $.utils.initList(4, Node_Interface._Superclasses, length, this);
   }
   set superclasses(value: $.List<Superclass>) {
@@ -338,37 +338,37 @@ export class Node_Const extends $.Struct {
     id: "b18aa5ac7a0d9420",
     size: new $.ObjectSize(40, 6),
   };
-  adoptType(value: $.Orphan<Type>): void {
+  _adoptType(value: $.Orphan<Type>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownType(): $.Orphan<Type> {
+  _disownType(): $.Orphan<Type> {
     return $.utils.disown(this.type);
   }
   get type(): Type {
     return $.utils.getStruct(3, Type, this);
   }
-  hasType(): boolean {
+  _hasType(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initType(): Type {
+  _initType(): Type {
     return $.utils.initStructAt(3, Type, this);
   }
   set type(value: Type) {
     $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
-  adoptValue(value: $.Orphan<Value>): void {
+  _adoptValue(value: $.Orphan<Value>): void {
     $.utils.adopt(value, $.utils.getPointer(4, this));
   }
-  disownValue(): $.Orphan<Value> {
+  _disownValue(): $.Orphan<Value> {
     return $.utils.disown(this.value);
   }
   get value(): Value {
     return $.utils.getStruct(4, Value, this);
   }
-  hasValue(): boolean {
+  _hasValue(): boolean {
     return !$.utils.isNull($.utils.getPointer(4, this));
   }
-  initValue(): Value {
+  _initValue(): Value {
     return $.utils.initStructAt(4, Value, this);
   }
   set value(value: Value) {
@@ -384,19 +384,19 @@ export class Node_Annotation extends $.Struct {
     id: "ec1619d4400a0290",
     size: new $.ObjectSize(40, 6),
   };
-  adoptType(value: $.Orphan<Type>): void {
+  _adoptType(value: $.Orphan<Type>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownType(): $.Orphan<Type> {
+  _disownType(): $.Orphan<Type> {
     return $.utils.disown(this.type);
   }
   get type(): Type {
     return $.utils.getStruct(3, Type, this);
   }
-  hasType(): boolean {
+  _hasType(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initType(): Type {
+  _initType(): Type {
     return $.utils.initStructAt(3, Type, this);
   }
   set type(value: Type) {
@@ -546,10 +546,10 @@ export class Node extends $.Struct {
   set scopeId(value: bigint) {
     $.utils.setUint64(16, value, this);
   }
-  adoptParameters(value: $.Orphan<$.List<Node_Parameter>>): void {
+  _adoptParameters(value: $.Orphan<$.List<Node_Parameter>>): void {
     $.utils.adopt(value, $.utils.getPointer(5, this));
   }
-  disownParameters(): $.Orphan<$.List<Node_Parameter>> {
+  _disownParameters(): $.Orphan<$.List<Node_Parameter>> {
     return $.utils.disown(this.parameters);
   }
   /**
@@ -558,10 +558,10 @@ export class Node extends $.Struct {
   get parameters(): $.List<Node_Parameter> {
     return $.utils.getList(5, Node._Parameters, this);
   }
-  hasParameters(): boolean {
+  _hasParameters(): boolean {
     return !$.utils.isNull($.utils.getPointer(5, this));
   }
-  initParameters(length: number): $.List<Node_Parameter> {
+  _initParameters(length: number): $.List<Node_Parameter> {
     return $.utils.initList(5, Node._Parameters, length, this);
   }
   set parameters(value: $.List<Node_Parameter>) {
@@ -576,43 +576,43 @@ export class Node extends $.Struct {
   set isGeneric(value: boolean) {
     $.utils.setBit(288, value, this);
   }
-  adoptNestedNodes(value: $.Orphan<$.List<Node_NestedNode>>): void {
+  _adoptNestedNodes(value: $.Orphan<$.List<Node_NestedNode>>): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownNestedNodes(): $.Orphan<$.List<Node_NestedNode>> {
+  _disownNestedNodes(): $.Orphan<$.List<Node_NestedNode>> {
     return $.utils.disown(this.nestedNodes);
   }
   get nestedNodes(): $.List<Node_NestedNode> {
     return $.utils.getList(1, Node._NestedNodes, this);
   }
-  hasNestedNodes(): boolean {
+  _hasNestedNodes(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initNestedNodes(length: number): $.List<Node_NestedNode> {
+  _initNestedNodes(length: number): $.List<Node_NestedNode> {
     return $.utils.initList(1, Node._NestedNodes, length, this);
   }
   set nestedNodes(value: $.List<Node_NestedNode>) {
     $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
-  adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
+  _adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
     $.utils.adopt(value, $.utils.getPointer(2, this));
   }
-  disownAnnotations(): $.Orphan<$.List<Annotation>> {
+  _disownAnnotations(): $.Orphan<$.List<Annotation>> {
     return $.utils.disown(this.annotations);
   }
   get annotations(): $.List<Annotation> {
     return $.utils.getList(2, Node._Annotations, this);
   }
-  hasAnnotations(): boolean {
+  _hasAnnotations(): boolean {
     return !$.utils.isNull($.utils.getPointer(2, this));
   }
-  initAnnotations(length: number): $.List<Annotation> {
+  _initAnnotations(length: number): $.List<Annotation> {
     return $.utils.initList(2, Node._Annotations, length, this);
   }
   set annotations(value: $.List<Annotation>) {
     $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
-  isFile(): boolean {
+  get _isFile(): boolean {
     return $.utils.getUint16(12, this) === 0;
   }
   set file(_: true) {
@@ -622,11 +622,11 @@ export class Node extends $.Struct {
     $.utils.testWhich("struct", $.utils.getUint16(12, this), 1, this);
     return $.utils.getAs(Node_Struct, this);
   }
-  initStruct(): Node_Struct {
+  _initStruct(): Node_Struct {
     $.utils.setUint16(12, 1, this);
     return $.utils.getAs(Node_Struct, this);
   }
-  isStruct(): boolean {
+  get _isStruct(): boolean {
     return $.utils.getUint16(12, this) === 1;
   }
   set struct(_: true) {
@@ -636,11 +636,11 @@ export class Node extends $.Struct {
     $.utils.testWhich("enum", $.utils.getUint16(12, this), 2, this);
     return $.utils.getAs(Node_Enum, this);
   }
-  initEnum(): Node_Enum {
+  _initEnum(): Node_Enum {
     $.utils.setUint16(12, 2, this);
     return $.utils.getAs(Node_Enum, this);
   }
-  isEnum(): boolean {
+  get _isEnum(): boolean {
     return $.utils.getUint16(12, this) === 2;
   }
   set enum(_: true) {
@@ -650,11 +650,11 @@ export class Node extends $.Struct {
     $.utils.testWhich("interface", $.utils.getUint16(12, this), 3, this);
     return $.utils.getAs(Node_Interface, this);
   }
-  initInterface(): Node_Interface {
+  _initInterface(): Node_Interface {
     $.utils.setUint16(12, 3, this);
     return $.utils.getAs(Node_Interface, this);
   }
-  isInterface(): boolean {
+  get _isInterface(): boolean {
     return $.utils.getUint16(12, this) === 3;
   }
   set interface(_: true) {
@@ -667,11 +667,11 @@ export class Node extends $.Struct {
     $.utils.testWhich("const", $.utils.getUint16(12, this), 4, this);
     return $.utils.getAs(Node_Const, this);
   }
-  initConst(): Node_Const {
+  _initConst(): Node_Const {
     $.utils.setUint16(12, 4, this);
     return $.utils.getAs(Node_Const, this);
   }
-  isConst(): boolean {
+  get _isConst(): boolean {
     return $.utils.getUint16(12, this) === 4;
   }
   set const(_: true) {
@@ -685,11 +685,11 @@ export class Node extends $.Struct {
     $.utils.testWhich("annotation", $.utils.getUint16(12, this), 5, this);
     return $.utils.getAs(Node_Annotation, this);
   }
-  initAnnotation(): Node_Annotation {
+  _initAnnotation(): Node_Annotation {
     $.utils.setUint16(12, 5, this);
     return $.utils.getAs(Node_Annotation, this);
   }
-  isAnnotation(): boolean {
+  get _isAnnotation(): boolean {
     return $.utils.getUint16(12, this) === 5;
   }
   set annotation(_: true) {
@@ -722,37 +722,37 @@ export class Field_Slot extends $.Struct {
   set offset(value: number) {
     $.utils.setUint32(4, value, this);
   }
-  adoptType(value: $.Orphan<Type>): void {
+  _adoptType(value: $.Orphan<Type>): void {
     $.utils.adopt(value, $.utils.getPointer(2, this));
   }
-  disownType(): $.Orphan<Type> {
+  _disownType(): $.Orphan<Type> {
     return $.utils.disown(this.type);
   }
   get type(): Type {
     return $.utils.getStruct(2, Type, this);
   }
-  hasType(): boolean {
+  _hasType(): boolean {
     return !$.utils.isNull($.utils.getPointer(2, this));
   }
-  initType(): Type {
+  _initType(): Type {
     return $.utils.initStructAt(2, Type, this);
   }
   set type(value: Type) {
     $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
-  adoptDefaultValue(value: $.Orphan<Value>): void {
+  _adoptDefaultValue(value: $.Orphan<Value>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownDefaultValue(): $.Orphan<Value> {
+  _disownDefaultValue(): $.Orphan<Value> {
     return $.utils.disown(this.defaultValue);
   }
   get defaultValue(): Value {
     return $.utils.getStruct(3, Value, this);
   }
-  hasDefaultValue(): boolean {
+  _hasDefaultValue(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initDefaultValue(): Value {
+  _initDefaultValue(): Value {
     return $.utils.initStructAt(3, Value, this);
   }
   set defaultValue(value: Value) {
@@ -810,7 +810,7 @@ export class Field_Ordinal extends $.Struct {
     id: "bb90d5c287870be6",
     size: new $.ObjectSize(24, 4),
   };
-  isImplicit(): boolean {
+  get _isImplicit(): boolean {
     return $.utils.getUint16(10, this) === 0;
   }
   set implicit(_: true) {
@@ -826,7 +826,7 @@ export class Field_Ordinal extends $.Struct {
     $.utils.testWhich("explicit", $.utils.getUint16(10, this), 1, this);
     return $.utils.getUint16(12, this);
   }
-  isExplicit(): boolean {
+  get _isExplicit(): boolean {
     return $.utils.getUint16(10, this) === 1;
   }
   set explicit(value: number) {
@@ -879,19 +879,19 @@ export class Field extends $.Struct {
   set codeOrder(value: number) {
     $.utils.setUint16(0, value, this);
   }
-  adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
+  _adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownAnnotations(): $.Orphan<$.List<Annotation>> {
+  _disownAnnotations(): $.Orphan<$.List<Annotation>> {
     return $.utils.disown(this.annotations);
   }
   get annotations(): $.List<Annotation> {
     return $.utils.getList(1, Field._Annotations, this);
   }
-  hasAnnotations(): boolean {
+  _hasAnnotations(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initAnnotations(length: number): $.List<Annotation> {
+  _initAnnotations(length: number): $.List<Annotation> {
     return $.utils.initList(1, Field._Annotations, length, this);
   }
   set annotations(value: $.List<Annotation>) {
@@ -914,11 +914,11 @@ export class Field extends $.Struct {
     $.utils.testWhich("slot", $.utils.getUint16(8, this), 0, this);
     return $.utils.getAs(Field_Slot, this);
   }
-  initSlot(): Field_Slot {
+  _initSlot(): Field_Slot {
     $.utils.setUint16(8, 0, this);
     return $.utils.getAs(Field_Slot, this);
   }
-  isSlot(): boolean {
+  get _isSlot(): boolean {
     return $.utils.getUint16(8, this) === 0;
   }
   set slot(_: true) {
@@ -931,11 +931,11 @@ export class Field extends $.Struct {
     $.utils.testWhich("group", $.utils.getUint16(8, this), 1, this);
     return $.utils.getAs(Field_Group, this);
   }
-  initGroup(): Field_Group {
+  _initGroup(): Field_Group {
     $.utils.setUint16(8, 1, this);
     return $.utils.getAs(Field_Group, this);
   }
-  isGroup(): boolean {
+  get _isGroup(): boolean {
     return $.utils.getUint16(8, this) === 1;
   }
   set group(_: true) {
@@ -944,7 +944,7 @@ export class Field extends $.Struct {
   get ordinal(): Field_Ordinal {
     return $.utils.getAs(Field_Ordinal, this);
   }
-  initOrdinal(): Field_Ordinal {
+  _initOrdinal(): Field_Ordinal {
     return $.utils.getAs(Field_Ordinal, this);
   }
   toString(): string {
@@ -980,19 +980,19 @@ export class Enumerant extends $.Struct {
   set codeOrder(value: number) {
     $.utils.setUint16(0, value, this);
   }
-  adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
+  _adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownAnnotations(): $.Orphan<$.List<Annotation>> {
+  _disownAnnotations(): $.Orphan<$.List<Annotation>> {
     return $.utils.disown(this.annotations);
   }
   get annotations(): $.List<Annotation> {
     return $.utils.getList(1, Enumerant._Annotations, this);
   }
-  hasAnnotations(): boolean {
+  _hasAnnotations(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initAnnotations(length: number): $.List<Annotation> {
+  _initAnnotations(length: number): $.List<Annotation> {
     return $.utils.initList(1, Enumerant._Annotations, length, this);
   }
   set annotations(value: $.List<Annotation>) {
@@ -1014,19 +1014,19 @@ export class Superclass extends $.Struct {
   set id(value: bigint) {
     $.utils.setUint64(0, value, this);
   }
-  adoptBrand(value: $.Orphan<Brand>): void {
+  _adoptBrand(value: $.Orphan<Brand>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownBrand(): $.Orphan<Brand> {
+  _disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
   get brand(): Brand {
     return $.utils.getStruct(0, Brand, this);
   }
-  hasBrand(): boolean {
+  _hasBrand(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initBrand(): Brand {
+  _initBrand(): Brand {
     return $.utils.initStructAt(0, Brand, this);
   }
   set brand(value: Brand) {
@@ -1063,10 +1063,10 @@ export class Method extends $.Struct {
   set codeOrder(value: number) {
     $.utils.setUint16(0, value, this);
   }
-  adoptImplicitParameters(value: $.Orphan<$.List<Node_Parameter>>): void {
+  _adoptImplicitParameters(value: $.Orphan<$.List<Node_Parameter>>): void {
     $.utils.adopt(value, $.utils.getPointer(4, this));
   }
-  disownImplicitParameters(): $.Orphan<$.List<Node_Parameter>> {
+  _disownImplicitParameters(): $.Orphan<$.List<Node_Parameter>> {
     return $.utils.disown(this.implicitParameters);
   }
   /**
@@ -1081,10 +1081,10 @@ export class Method extends $.Struct {
   get implicitParameters(): $.List<Node_Parameter> {
     return $.utils.getList(4, Method._ImplicitParameters, this);
   }
-  hasImplicitParameters(): boolean {
+  _hasImplicitParameters(): boolean {
     return !$.utils.isNull($.utils.getPointer(4, this));
   }
-  initImplicitParameters(length: number): $.List<Node_Parameter> {
+  _initImplicitParameters(length: number): $.List<Node_Parameter> {
     return $.utils.initList(4, Method._ImplicitParameters, length, this);
   }
   set implicitParameters(value: $.List<Node_Parameter>) {
@@ -1099,19 +1099,19 @@ export class Method extends $.Struct {
   set paramStructType(value: bigint) {
     $.utils.setUint64(8, value, this);
   }
-  adoptParamBrand(value: $.Orphan<Brand>): void {
+  _adoptParamBrand(value: $.Orphan<Brand>): void {
     $.utils.adopt(value, $.utils.getPointer(2, this));
   }
-  disownParamBrand(): $.Orphan<Brand> {
+  _disownParamBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.paramBrand);
   }
   get paramBrand(): Brand {
     return $.utils.getStruct(2, Brand, this);
   }
-  hasParamBrand(): boolean {
+  _hasParamBrand(): boolean {
     return !$.utils.isNull($.utils.getPointer(2, this));
   }
-  initParamBrand(): Brand {
+  _initParamBrand(): Brand {
     return $.utils.initStructAt(2, Brand, this);
   }
   set paramBrand(value: Brand) {
@@ -1126,10 +1126,10 @@ export class Method extends $.Struct {
   set resultStructType(value: bigint) {
     $.utils.setUint64(16, value, this);
   }
-  adoptResultBrand(value: $.Orphan<Brand>): void {
+  _adoptResultBrand(value: $.Orphan<Brand>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownResultBrand(): $.Orphan<Brand> {
+  _disownResultBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.resultBrand);
   }
   /**
@@ -1138,19 +1138,19 @@ export class Method extends $.Struct {
   get resultBrand(): Brand {
     return $.utils.getStruct(3, Brand, this);
   }
-  hasResultBrand(): boolean {
+  _hasResultBrand(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initResultBrand(): Brand {
+  _initResultBrand(): Brand {
     return $.utils.initStructAt(3, Brand, this);
   }
   set resultBrand(value: Brand) {
     $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
-  adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
+  _adoptAnnotations(value: $.Orphan<$.List<Annotation>>): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownAnnotations(): $.Orphan<$.List<Annotation>> {
+  _disownAnnotations(): $.Orphan<$.List<Annotation>> {
     return $.utils.disown(this.annotations);
   }
   /**
@@ -1160,10 +1160,10 @@ export class Method extends $.Struct {
   get annotations(): $.List<Annotation> {
     return $.utils.getList(1, Method._Annotations, this);
   }
-  hasAnnotations(): boolean {
+  _hasAnnotations(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initAnnotations(length: number): $.List<Annotation> {
+  _initAnnotations(length: number): $.List<Annotation> {
     return $.utils.initList(1, Method._Annotations, length, this);
   }
   set annotations(value: $.List<Annotation>) {
@@ -1179,19 +1179,19 @@ export class Type_List extends $.Struct {
     id: "87e739250a60ea97",
     size: new $.ObjectSize(24, 1),
   };
-  adoptElementType(value: $.Orphan<Type>): void {
+  _adoptElementType(value: $.Orphan<Type>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownElementType(): $.Orphan<Type> {
+  _disownElementType(): $.Orphan<Type> {
     return $.utils.disown(this.elementType);
   }
   get elementType(): Type {
     return $.utils.getStruct(0, Type, this);
   }
-  hasElementType(): boolean {
+  _hasElementType(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initElementType(): Type {
+  _initElementType(): Type {
     return $.utils.initStructAt(0, Type, this);
   }
   set elementType(value: Type) {
@@ -1213,19 +1213,19 @@ export class Type_Enum extends $.Struct {
   set typeId(value: bigint) {
     $.utils.setUint64(8, value, this);
   }
-  adoptBrand(value: $.Orphan<Brand>): void {
+  _adoptBrand(value: $.Orphan<Brand>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownBrand(): $.Orphan<Brand> {
+  _disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
   get brand(): Brand {
     return $.utils.getStruct(0, Brand, this);
   }
-  hasBrand(): boolean {
+  _hasBrand(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initBrand(): Brand {
+  _initBrand(): Brand {
     return $.utils.initStructAt(0, Brand, this);
   }
   set brand(value: Brand) {
@@ -1247,19 +1247,19 @@ export class Type_Struct extends $.Struct {
   set typeId(value: bigint) {
     $.utils.setUint64(8, value, this);
   }
-  adoptBrand(value: $.Orphan<Brand>): void {
+  _adoptBrand(value: $.Orphan<Brand>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownBrand(): $.Orphan<Brand> {
+  _disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
   get brand(): Brand {
     return $.utils.getStruct(0, Brand, this);
   }
-  hasBrand(): boolean {
+  _hasBrand(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initBrand(): Brand {
+  _initBrand(): Brand {
     return $.utils.initStructAt(0, Brand, this);
   }
   set brand(value: Brand) {
@@ -1281,19 +1281,19 @@ export class Type_Interface extends $.Struct {
   set typeId(value: bigint) {
     $.utils.setUint64(8, value, this);
   }
-  adoptBrand(value: $.Orphan<Brand>): void {
+  _adoptBrand(value: $.Orphan<Brand>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownBrand(): $.Orphan<Brand> {
+  _disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
   get brand(): Brand {
     return $.utils.getStruct(0, Brand, this);
   }
-  hasBrand(): boolean {
+  _hasBrand(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initBrand(): Brand {
+  _initBrand(): Brand {
     return $.utils.initStructAt(0, Brand, this);
   }
   set brand(value: Brand) {
@@ -1328,25 +1328,25 @@ export class Type_AnyPointer_Unconstrained extends $.Struct {
     id: "8e3b5f79fe593656",
     size: new $.ObjectSize(24, 1),
   };
-  isAnyKind(): boolean {
+  get _isAnyKind(): boolean {
     return $.utils.getUint16(10, this) === 0;
   }
   set anyKind(_: true) {
     $.utils.setUint16(10, 0, this);
   }
-  isStruct(): boolean {
+  get _isStruct(): boolean {
     return $.utils.getUint16(10, this) === 1;
   }
   set struct(_: true) {
     $.utils.setUint16(10, 1, this);
   }
-  isList(): boolean {
+  get _isList(): boolean {
     return $.utils.getUint16(10, this) === 2;
   }
   set list(_: true) {
     $.utils.setUint16(10, 2, this);
   }
-  isCapability(): boolean {
+  get _isCapability(): boolean {
     return $.utils.getUint16(10, this) === 3;
   }
   set capability(_: true) {
@@ -1439,11 +1439,11 @@ export class Type_AnyPointer extends $.Struct {
     $.utils.testWhich("unconstrained", $.utils.getUint16(8, this), 0, this);
     return $.utils.getAs(Type_AnyPointer_Unconstrained, this);
   }
-  initUnconstrained(): Type_AnyPointer_Unconstrained {
+  _initUnconstrained(): Type_AnyPointer_Unconstrained {
     $.utils.setUint16(8, 0, this);
     return $.utils.getAs(Type_AnyPointer_Unconstrained, this);
   }
-  isUnconstrained(): boolean {
+  get _isUnconstrained(): boolean {
     return $.utils.getUint16(8, this) === 0;
   }
   set unconstrained(_: true) {
@@ -1456,11 +1456,11 @@ export class Type_AnyPointer extends $.Struct {
     $.utils.testWhich("parameter", $.utils.getUint16(8, this), 1, this);
     return $.utils.getAs(Type_AnyPointer_Parameter, this);
   }
-  initParameter(): Type_AnyPointer_Parameter {
+  _initParameter(): Type_AnyPointer_Parameter {
     $.utils.setUint16(8, 1, this);
     return $.utils.getAs(Type_AnyPointer_Parameter, this);
   }
-  isParameter(): boolean {
+  get _isParameter(): boolean {
     return $.utils.getUint16(8, this) === 1;
   }
   set parameter(_: true) {
@@ -1479,11 +1479,11 @@ export class Type_AnyPointer extends $.Struct {
     );
     return $.utils.getAs(Type_AnyPointer_ImplicitMethodParameter, this);
   }
-  initImplicitMethodParameter(): Type_AnyPointer_ImplicitMethodParameter {
+  _initImplicitMethodParameter(): Type_AnyPointer_ImplicitMethodParameter {
     $.utils.setUint16(8, 2, this);
     return $.utils.getAs(Type_AnyPointer_ImplicitMethodParameter, this);
   }
-  isImplicitMethodParameter(): boolean {
+  get _isImplicitMethodParameter(): boolean {
     return $.utils.getUint16(8, this) === 2;
   }
   set implicitMethodParameter(_: true) {
@@ -1546,85 +1546,85 @@ export class Type extends $.Struct {
     id: "d07378ede1f9cc60",
     size: new $.ObjectSize(24, 1),
   };
-  isVoid(): boolean {
+  get _isVoid(): boolean {
     return $.utils.getUint16(0, this) === 0;
   }
   set void(_: true) {
     $.utils.setUint16(0, 0, this);
   }
-  isBool(): boolean {
+  get _isBool(): boolean {
     return $.utils.getUint16(0, this) === 1;
   }
   set bool(_: true) {
     $.utils.setUint16(0, 1, this);
   }
-  isInt8(): boolean {
+  get _isInt8(): boolean {
     return $.utils.getUint16(0, this) === 2;
   }
   set int8(_: true) {
     $.utils.setUint16(0, 2, this);
   }
-  isInt16(): boolean {
+  get _isInt16(): boolean {
     return $.utils.getUint16(0, this) === 3;
   }
   set int16(_: true) {
     $.utils.setUint16(0, 3, this);
   }
-  isInt32(): boolean {
+  get _isInt32(): boolean {
     return $.utils.getUint16(0, this) === 4;
   }
   set int32(_: true) {
     $.utils.setUint16(0, 4, this);
   }
-  isInt64(): boolean {
+  get _isInt64(): boolean {
     return $.utils.getUint16(0, this) === 5;
   }
   set int64(_: true) {
     $.utils.setUint16(0, 5, this);
   }
-  isUint8(): boolean {
+  get _isUint8(): boolean {
     return $.utils.getUint16(0, this) === 6;
   }
   set uint8(_: true) {
     $.utils.setUint16(0, 6, this);
   }
-  isUint16(): boolean {
+  get _isUint16(): boolean {
     return $.utils.getUint16(0, this) === 7;
   }
   set uint16(_: true) {
     $.utils.setUint16(0, 7, this);
   }
-  isUint32(): boolean {
+  get _isUint32(): boolean {
     return $.utils.getUint16(0, this) === 8;
   }
   set uint32(_: true) {
     $.utils.setUint16(0, 8, this);
   }
-  isUint64(): boolean {
+  get _isUint64(): boolean {
     return $.utils.getUint16(0, this) === 9;
   }
   set uint64(_: true) {
     $.utils.setUint16(0, 9, this);
   }
-  isFloat32(): boolean {
+  get _isFloat32(): boolean {
     return $.utils.getUint16(0, this) === 10;
   }
   set float32(_: true) {
     $.utils.setUint16(0, 10, this);
   }
-  isFloat64(): boolean {
+  get _isFloat64(): boolean {
     return $.utils.getUint16(0, this) === 11;
   }
   set float64(_: true) {
     $.utils.setUint16(0, 11, this);
   }
-  isText(): boolean {
+  get _isText(): boolean {
     return $.utils.getUint16(0, this) === 12;
   }
   set text(_: true) {
     $.utils.setUint16(0, 12, this);
   }
-  isData(): boolean {
+  get _isData(): boolean {
     return $.utils.getUint16(0, this) === 13;
   }
   set data(_: true) {
@@ -1634,11 +1634,11 @@ export class Type extends $.Struct {
     $.utils.testWhich("list", $.utils.getUint16(0, this), 14, this);
     return $.utils.getAs(Type_List, this);
   }
-  initList(): Type_List {
+  _initList(): Type_List {
     $.utils.setUint16(0, 14, this);
     return $.utils.getAs(Type_List, this);
   }
-  isList(): boolean {
+  get _isList(): boolean {
     return $.utils.getUint16(0, this) === 14;
   }
   set list(_: true) {
@@ -1648,11 +1648,11 @@ export class Type extends $.Struct {
     $.utils.testWhich("enum", $.utils.getUint16(0, this), 15, this);
     return $.utils.getAs(Type_Enum, this);
   }
-  initEnum(): Type_Enum {
+  _initEnum(): Type_Enum {
     $.utils.setUint16(0, 15, this);
     return $.utils.getAs(Type_Enum, this);
   }
-  isEnum(): boolean {
+  get _isEnum(): boolean {
     return $.utils.getUint16(0, this) === 15;
   }
   set enum(_: true) {
@@ -1662,11 +1662,11 @@ export class Type extends $.Struct {
     $.utils.testWhich("struct", $.utils.getUint16(0, this), 16, this);
     return $.utils.getAs(Type_Struct, this);
   }
-  initStruct(): Type_Struct {
+  _initStruct(): Type_Struct {
     $.utils.setUint16(0, 16, this);
     return $.utils.getAs(Type_Struct, this);
   }
-  isStruct(): boolean {
+  get _isStruct(): boolean {
     return $.utils.getUint16(0, this) === 16;
   }
   set struct(_: true) {
@@ -1676,11 +1676,11 @@ export class Type extends $.Struct {
     $.utils.testWhich("interface", $.utils.getUint16(0, this), 17, this);
     return $.utils.getAs(Type_Interface, this);
   }
-  initInterface(): Type_Interface {
+  _initInterface(): Type_Interface {
     $.utils.setUint16(0, 17, this);
     return $.utils.getAs(Type_Interface, this);
   }
-  isInterface(): boolean {
+  get _isInterface(): boolean {
     return $.utils.getUint16(0, this) === 17;
   }
   set interface(_: true) {
@@ -1690,11 +1690,11 @@ export class Type extends $.Struct {
     $.utils.testWhich("anyPointer", $.utils.getUint16(0, this), 18, this);
     return $.utils.getAs(Type_AnyPointer, this);
   }
-  initAnyPointer(): Type_AnyPointer {
+  _initAnyPointer(): Type_AnyPointer {
     $.utils.setUint16(0, 18, this);
     return $.utils.getAs(Type_AnyPointer, this);
   }
-  isAnyPointer(): boolean {
+  get _isAnyPointer(): boolean {
     return $.utils.getUint16(0, this) === 18;
   }
   set anyPointer(_: true) {
@@ -1731,11 +1731,11 @@ export class Brand_Scope extends $.Struct {
   set scopeId(value: bigint) {
     $.utils.setUint64(0, value, this);
   }
-  adoptBind(value: $.Orphan<$.List<Brand_Binding>>): void {
+  _adoptBind(value: $.Orphan<$.List<Brand_Binding>>): void {
     $.utils.setUint16(8, 0, this);
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownBind(): $.Orphan<$.List<Brand_Binding>> {
+  _disownBind(): $.Orphan<$.List<Brand_Binding>> {
     return $.utils.disown(this.bind);
   }
   /**
@@ -1745,21 +1745,21 @@ export class Brand_Scope extends $.Struct {
     $.utils.testWhich("bind", $.utils.getUint16(8, this), 0, this);
     return $.utils.getList(0, Brand_Scope._Bind, this);
   }
-  hasBind(): boolean {
+  _hasBind(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initBind(length: number): $.List<Brand_Binding> {
+  _initBind(length: number): $.List<Brand_Binding> {
     $.utils.setUint16(8, 0, this);
     return $.utils.initList(0, Brand_Scope._Bind, length, this);
   }
-  isBind(): boolean {
+  get _isBind(): boolean {
     return $.utils.getUint16(8, this) === 0;
   }
   set bind(value: $.List<Brand_Binding>) {
     $.utils.setUint16(8, 0, this);
     $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
-  isInherit(): boolean {
+  get _isInherit(): boolean {
     return $.utils.getUint16(8, this) === 1;
   }
   set inherit(_: true) {
@@ -1786,31 +1786,31 @@ export class Brand_Binding extends $.Struct {
     id: "c863cd16969ee7fc",
     size: new $.ObjectSize(8, 1),
   };
-  isUnbound(): boolean {
+  get _isUnbound(): boolean {
     return $.utils.getUint16(0, this) === 0;
   }
   set unbound(_: true) {
     $.utils.setUint16(0, 0, this);
   }
-  adoptType(value: $.Orphan<Type>): void {
+  _adoptType(value: $.Orphan<Type>): void {
     $.utils.setUint16(0, 1, this);
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownType(): $.Orphan<Type> {
+  _disownType(): $.Orphan<Type> {
     return $.utils.disown(this.type);
   }
   get type(): Type {
     $.utils.testWhich("type", $.utils.getUint16(0, this), 1, this);
     return $.utils.getStruct(0, Type, this);
   }
-  hasType(): boolean {
+  _hasType(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initType(): Type {
+  _initType(): Type {
     $.utils.setUint16(0, 1, this);
     return $.utils.initStructAt(0, Type, this);
   }
-  isType(): boolean {
+  get _isType(): boolean {
     return $.utils.getUint16(0, this) === 1;
   }
   set type(value: Type) {
@@ -1837,10 +1837,10 @@ export class Brand extends $.Struct {
     size: new $.ObjectSize(0, 1),
   };
   static _Scopes: $.ListCtor<Brand_Scope>;
-  adoptScopes(value: $.Orphan<$.List<Brand_Scope>>): void {
+  _adoptScopes(value: $.Orphan<$.List<Brand_Scope>>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownScopes(): $.Orphan<$.List<Brand_Scope>> {
+  _disownScopes(): $.Orphan<$.List<Brand_Scope>> {
     return $.utils.disown(this.scopes);
   }
   /**
@@ -1851,10 +1851,10 @@ export class Brand extends $.Struct {
   get scopes(): $.List<Brand_Scope> {
     return $.utils.getList(0, Brand._Scopes, this);
   }
-  hasScopes(): boolean {
+  _hasScopes(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initScopes(length: number): $.List<Brand_Scope> {
+  _initScopes(length: number): $.List<Brand_Scope> {
     return $.utils.initList(0, Brand._Scopes, length, this);
   }
   set scopes(value: $.List<Brand_Scope>) {
@@ -1914,7 +1914,7 @@ export class Value extends $.Struct {
     id: "ce23dcd2d7b00c9b",
     size: new $.ObjectSize(16, 1),
   };
-  isVoid(): boolean {
+  get _isVoid(): boolean {
     return $.utils.getUint16(0, this) === 0;
   }
   set void(_: true) {
@@ -1924,7 +1924,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("bool", $.utils.getUint16(0, this), 1, this);
     return $.utils.getBit(16, this);
   }
-  isBool(): boolean {
+  get _isBool(): boolean {
     return $.utils.getUint16(0, this) === 1;
   }
   set bool(value: boolean) {
@@ -1935,7 +1935,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("int8", $.utils.getUint16(0, this), 2, this);
     return $.utils.getInt8(2, this);
   }
-  isInt8(): boolean {
+  get _isInt8(): boolean {
     return $.utils.getUint16(0, this) === 2;
   }
   set int8(value: number) {
@@ -1946,7 +1946,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("int16", $.utils.getUint16(0, this), 3, this);
     return $.utils.getInt16(2, this);
   }
-  isInt16(): boolean {
+  get _isInt16(): boolean {
     return $.utils.getUint16(0, this) === 3;
   }
   set int16(value: number) {
@@ -1957,7 +1957,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("int32", $.utils.getUint16(0, this), 4, this);
     return $.utils.getInt32(4, this);
   }
-  isInt32(): boolean {
+  get _isInt32(): boolean {
     return $.utils.getUint16(0, this) === 4;
   }
   set int32(value: number) {
@@ -1968,7 +1968,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("int64", $.utils.getUint16(0, this), 5, this);
     return $.utils.getInt64(8, this);
   }
-  isInt64(): boolean {
+  get _isInt64(): boolean {
     return $.utils.getUint16(0, this) === 5;
   }
   set int64(value: bigint) {
@@ -1979,7 +1979,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("uint8", $.utils.getUint16(0, this), 6, this);
     return $.utils.getUint8(2, this);
   }
-  isUint8(): boolean {
+  get _isUint8(): boolean {
     return $.utils.getUint16(0, this) === 6;
   }
   set uint8(value: number) {
@@ -1990,7 +1990,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("uint16", $.utils.getUint16(0, this), 7, this);
     return $.utils.getUint16(2, this);
   }
-  isUint16(): boolean {
+  get _isUint16(): boolean {
     return $.utils.getUint16(0, this) === 7;
   }
   set uint16(value: number) {
@@ -2001,7 +2001,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("uint32", $.utils.getUint16(0, this), 8, this);
     return $.utils.getUint32(4, this);
   }
-  isUint32(): boolean {
+  get _isUint32(): boolean {
     return $.utils.getUint16(0, this) === 8;
   }
   set uint32(value: number) {
@@ -2012,7 +2012,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("uint64", $.utils.getUint16(0, this), 9, this);
     return $.utils.getUint64(8, this);
   }
-  isUint64(): boolean {
+  get _isUint64(): boolean {
     return $.utils.getUint16(0, this) === 9;
   }
   set uint64(value: bigint) {
@@ -2023,7 +2023,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("float32", $.utils.getUint16(0, this), 10, this);
     return $.utils.getFloat32(4, this);
   }
-  isFloat32(): boolean {
+  get _isFloat32(): boolean {
     return $.utils.getUint16(0, this) === 10;
   }
   set float32(value: number) {
@@ -2034,7 +2034,7 @@ export class Value extends $.Struct {
     $.utils.testWhich("float64", $.utils.getUint16(0, this), 11, this);
     return $.utils.getFloat64(8, this);
   }
-  isFloat64(): boolean {
+  get _isFloat64(): boolean {
     return $.utils.getUint16(0, this) === 11;
   }
   set float64(value: number) {
@@ -2045,53 +2045,53 @@ export class Value extends $.Struct {
     $.utils.testWhich("text", $.utils.getUint16(0, this), 12, this);
     return $.utils.getText(0, this);
   }
-  isText(): boolean {
+  get _isText(): boolean {
     return $.utils.getUint16(0, this) === 12;
   }
   set text(value: string) {
     $.utils.setUint16(0, 12, this);
     $.utils.setText(0, value, this);
   }
-  adoptData(value: $.Orphan<$.Data>): void {
+  _adoptData(value: $.Orphan<$.Data>): void {
     $.utils.setUint16(0, 13, this);
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownData(): $.Orphan<$.Data> {
+  _disownData(): $.Orphan<$.Data> {
     return $.utils.disown(this.data);
   }
   get data(): $.Data {
     $.utils.testWhich("data", $.utils.getUint16(0, this), 13, this);
     return $.utils.getData(0, this);
   }
-  hasData(): boolean {
+  _hasData(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initData(length: number): $.Data {
+  _initData(length: number): $.Data {
     $.utils.setUint16(0, 13, this);
     return $.utils.initData(0, length, this);
   }
-  isData(): boolean {
+  get _isData(): boolean {
     return $.utils.getUint16(0, this) === 13;
   }
   set data(value: $.Data) {
     $.utils.setUint16(0, 13, this);
     $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
-  adoptList(value: $.Orphan<$.Pointer>): void {
+  _adoptList(value: $.Orphan<$.Pointer>): void {
     $.utils.setUint16(0, 14, this);
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownList(): $.Orphan<$.Pointer> {
+  _disownList(): $.Orphan<$.Pointer> {
     return $.utils.disown(this.list);
   }
   get list(): $.Pointer {
     $.utils.testWhich("list", $.utils.getUint16(0, this), 14, this);
     return $.utils.getPointer(0, this);
   }
-  hasList(): boolean {
+  _hasList(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  isList(): boolean {
+  get _isList(): boolean {
     return $.utils.getUint16(0, this) === 14;
   }
   set list(value: $.Pointer) {
@@ -2102,55 +2102,55 @@ export class Value extends $.Struct {
     $.utils.testWhich("enum", $.utils.getUint16(0, this), 15, this);
     return $.utils.getUint16(2, this);
   }
-  isEnum(): boolean {
+  get _isEnum(): boolean {
     return $.utils.getUint16(0, this) === 15;
   }
   set enum(value: number) {
     $.utils.setUint16(0, 15, this);
     $.utils.setUint16(2, value, this);
   }
-  adoptStruct(value: $.Orphan<$.Pointer>): void {
+  _adoptStruct(value: $.Orphan<$.Pointer>): void {
     $.utils.setUint16(0, 16, this);
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownStruct(): $.Orphan<$.Pointer> {
+  _disownStruct(): $.Orphan<$.Pointer> {
     return $.utils.disown(this.struct);
   }
   get struct(): $.Pointer {
     $.utils.testWhich("struct", $.utils.getUint16(0, this), 16, this);
     return $.utils.getPointer(0, this);
   }
-  hasStruct(): boolean {
+  _hasStruct(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  isStruct(): boolean {
+  get _isStruct(): boolean {
     return $.utils.getUint16(0, this) === 16;
   }
   set struct(value: $.Pointer) {
     $.utils.setUint16(0, 16, this);
     $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
-  isInterface(): boolean {
+  get _isInterface(): boolean {
     return $.utils.getUint16(0, this) === 17;
   }
   set interface(_: true) {
     $.utils.setUint16(0, 17, this);
   }
-  adoptAnyPointer(value: $.Orphan<$.Pointer>): void {
+  _adoptAnyPointer(value: $.Orphan<$.Pointer>): void {
     $.utils.setUint16(0, 18, this);
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownAnyPointer(): $.Orphan<$.Pointer> {
+  _disownAnyPointer(): $.Orphan<$.Pointer> {
     return $.utils.disown(this.anyPointer);
   }
   get anyPointer(): $.Pointer {
     $.utils.testWhich("anyPointer", $.utils.getUint16(0, this), 18, this);
     return $.utils.getPointer(0, this);
   }
-  hasAnyPointer(): boolean {
+  _hasAnyPointer(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  isAnyPointer(): boolean {
+  get _isAnyPointer(): boolean {
     return $.utils.getUint16(0, this) === 18;
   }
   set anyPointer(value: $.Pointer) {
@@ -2183,28 +2183,28 @@ export class Annotation extends $.Struct {
   set id(value: bigint) {
     $.utils.setUint64(0, value, this);
   }
-  adoptBrand(value: $.Orphan<Brand>): void {
+  _adoptBrand(value: $.Orphan<Brand>): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownBrand(): $.Orphan<Brand> {
+  _disownBrand(): $.Orphan<Brand> {
     return $.utils.disown(this.brand);
   }
   get brand(): Brand {
     return $.utils.getStruct(1, Brand, this);
   }
-  hasBrand(): boolean {
+  _hasBrand(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initBrand(): Brand {
+  _initBrand(): Brand {
     return $.utils.initStructAt(1, Brand, this);
   }
   set brand(value: Brand) {
     $.utils.copyFrom(value, $.utils.getPointer(1, this));
   }
-  adoptValue(value: $.Orphan<Value>): void {
+  _adoptValue(value: $.Orphan<Value>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownValue(): $.Orphan<Value> {
+  _disownValue(): $.Orphan<Value> {
     return $.utils.disown(this.value);
   }
   /**
@@ -2215,10 +2215,10 @@ export class Annotation extends $.Struct {
   get value(): Value {
     return $.utils.getStruct(0, Value, this);
   }
-  hasValue(): boolean {
+  _hasValue(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initValue(): Value {
+  _initValue(): Value {
     return $.utils.initStructAt(0, Value, this);
   }
   set value(value: Value) {
@@ -2327,12 +2327,14 @@ export class CodeGeneratorRequest_RequestedFile extends $.Struct {
   set filename(value: string) {
     $.utils.setText(0, value, this);
   }
-  adoptImports(
+  _adoptImports(
     value: $.Orphan<$.List<CodeGeneratorRequest_RequestedFile_Import>>,
   ): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownImports(): $.Orphan<$.List<CodeGeneratorRequest_RequestedFile_Import>> {
+  _disownImports(): $.Orphan<
+    $.List<CodeGeneratorRequest_RequestedFile_Import>
+  > {
     return $.utils.disown(this.imports);
   }
   /**
@@ -2345,10 +2347,10 @@ export class CodeGeneratorRequest_RequestedFile extends $.Struct {
       this,
     );
   }
-  hasImports(): boolean {
+  _hasImports(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initImports(
+  _initImports(
     length: number,
   ): $.List<CodeGeneratorRequest_RequestedFile_Import> {
     return $.utils.initList(
@@ -2375,10 +2377,10 @@ export class CodeGeneratorRequest extends $.Struct {
   static _Nodes: $.ListCtor<Node>;
   static _SourceInfo: $.ListCtor<Node_SourceInfo>;
   static _RequestedFiles: $.ListCtor<CodeGeneratorRequest_RequestedFile>;
-  adoptCapnpVersion(value: $.Orphan<CapnpVersion>): void {
+  _adoptCapnpVersion(value: $.Orphan<CapnpVersion>): void {
     $.utils.adopt(value, $.utils.getPointer(2, this));
   }
-  disownCapnpVersion(): $.Orphan<CapnpVersion> {
+  _disownCapnpVersion(): $.Orphan<CapnpVersion> {
     return $.utils.disown(this.capnpVersion);
   }
   /**
@@ -2388,19 +2390,19 @@ export class CodeGeneratorRequest extends $.Struct {
   get capnpVersion(): CapnpVersion {
     return $.utils.getStruct(2, CapnpVersion, this);
   }
-  hasCapnpVersion(): boolean {
+  _hasCapnpVersion(): boolean {
     return !$.utils.isNull($.utils.getPointer(2, this));
   }
-  initCapnpVersion(): CapnpVersion {
+  _initCapnpVersion(): CapnpVersion {
     return $.utils.initStructAt(2, CapnpVersion, this);
   }
   set capnpVersion(value: CapnpVersion) {
     $.utils.copyFrom(value, $.utils.getPointer(2, this));
   }
-  adoptNodes(value: $.Orphan<$.List<Node>>): void {
+  _adoptNodes(value: $.Orphan<$.List<Node>>): void {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownNodes(): $.Orphan<$.List<Node>> {
+  _disownNodes(): $.Orphan<$.List<Node>> {
     return $.utils.disown(this.nodes);
   }
   /**
@@ -2409,19 +2411,19 @@ export class CodeGeneratorRequest extends $.Struct {
   get nodes(): $.List<Node> {
     return $.utils.getList(0, CodeGeneratorRequest._Nodes, this);
   }
-  hasNodes(): boolean {
+  _hasNodes(): boolean {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initNodes(length: number): $.List<Node> {
+  _initNodes(length: number): $.List<Node> {
     return $.utils.initList(0, CodeGeneratorRequest._Nodes, length, this);
   }
   set nodes(value: $.List<Node>) {
     $.utils.copyFrom(value, $.utils.getPointer(0, this));
   }
-  adoptSourceInfo(value: $.Orphan<$.List<Node_SourceInfo>>): void {
+  _adoptSourceInfo(value: $.Orphan<$.List<Node_SourceInfo>>): void {
     $.utils.adopt(value, $.utils.getPointer(3, this));
   }
-  disownSourceInfo(): $.Orphan<$.List<Node_SourceInfo>> {
+  _disownSourceInfo(): $.Orphan<$.List<Node_SourceInfo>> {
     return $.utils.disown(this.sourceInfo);
   }
   /**
@@ -2435,21 +2437,23 @@ export class CodeGeneratorRequest extends $.Struct {
   get sourceInfo(): $.List<Node_SourceInfo> {
     return $.utils.getList(3, CodeGeneratorRequest._SourceInfo, this);
   }
-  hasSourceInfo(): boolean {
+  _hasSourceInfo(): boolean {
     return !$.utils.isNull($.utils.getPointer(3, this));
   }
-  initSourceInfo(length: number): $.List<Node_SourceInfo> {
+  _initSourceInfo(length: number): $.List<Node_SourceInfo> {
     return $.utils.initList(3, CodeGeneratorRequest._SourceInfo, length, this);
   }
   set sourceInfo(value: $.List<Node_SourceInfo>) {
     $.utils.copyFrom(value, $.utils.getPointer(3, this));
   }
-  adoptRequestedFiles(
+  _adoptRequestedFiles(
     value: $.Orphan<$.List<CodeGeneratorRequest_RequestedFile>>,
   ): void {
     $.utils.adopt(value, $.utils.getPointer(1, this));
   }
-  disownRequestedFiles(): $.Orphan<$.List<CodeGeneratorRequest_RequestedFile>> {
+  _disownRequestedFiles(): $.Orphan<
+    $.List<CodeGeneratorRequest_RequestedFile>
+  > {
     return $.utils.disown(this.requestedFiles);
   }
   /**
@@ -2459,10 +2463,10 @@ export class CodeGeneratorRequest extends $.Struct {
   get requestedFiles(): $.List<CodeGeneratorRequest_RequestedFile> {
     return $.utils.getList(1, CodeGeneratorRequest._RequestedFiles, this);
   }
-  hasRequestedFiles(): boolean {
+  _hasRequestedFiles(): boolean {
     return !$.utils.isNull($.utils.getPointer(1, this));
   }
-  initRequestedFiles(
+  _initRequestedFiles(
     length: number,
   ): $.List<CodeGeneratorRequest_RequestedFile> {
     return $.utils.initList(

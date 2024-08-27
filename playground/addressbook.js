@@ -45,7 +45,7 @@ export class Person_Employment extends $.Struct {
     id: "e88780a90af3da0c",
     size: new $.ObjectSize(8, 4)
   };
-  isUnemployed() {
+  get _isUnemployed() {
     return $.utils.getUint16(4, this) === 0;
   }
   set unemployed(_) {
@@ -55,7 +55,7 @@ export class Person_Employment extends $.Struct {
     $.utils.testWhich("employer", $.utils.getUint16(4, this), 1, this);
     return $.utils.getText(3, this);
   }
-  isEmployer() {
+  get _isEmployer() {
     return $.utils.getUint16(4, this) === 1;
   }
   set employer(value) {
@@ -66,14 +66,14 @@ export class Person_Employment extends $.Struct {
     $.utils.testWhich("school", $.utils.getUint16(4, this), 2, this);
     return $.utils.getText(3, this);
   }
-  isSchool() {
+  get _isSchool() {
     return $.utils.getUint16(4, this) === 2;
   }
   set school(value) {
     $.utils.setUint16(4, 2, this);
     $.utils.setText(3, value, this);
   }
-  isSelfEmployed() {
+  get _isSelfEmployed() {
     return $.utils.getUint16(4, this) === 3;
   }
   set selfEmployed(_) {
@@ -112,19 +112,19 @@ export class Person extends $.Struct {
   set email(value) {
     $.utils.setText(1, value, this);
   }
-  adoptPhones(value) {
+  _adoptPhones(value) {
     $.utils.adopt(value, $.utils.getPointer(2, this));
   }
-  disownPhones() {
+  _disownPhones() {
     return $.utils.disown(this.phones);
   }
   get phones() {
     return $.utils.getList(2, Person._Phones, this);
   }
-  hasPhones() {
+  _hasPhones() {
     return !$.utils.isNull($.utils.getPointer(2, this));
   }
-  initPhones(length) {
+  _initPhones(length) {
     return $.utils.initList(2, Person._Phones, length, this);
   }
   set phones(value) {
@@ -133,7 +133,7 @@ export class Person extends $.Struct {
   get employment() {
     return $.utils.getAs(Person_Employment, this);
   }
-  initEmployment() {
+  _initEmployment() {
     return $.utils.getAs(Person_Employment, this);
   }
   toString() {
@@ -147,19 +147,19 @@ export class AddressBook extends $.Struct {
     size: new $.ObjectSize(0, 1)
   };
   static _People;
-  adoptPeople(value) {
+  _adoptPeople(value) {
     $.utils.adopt(value, $.utils.getPointer(0, this));
   }
-  disownPeople() {
+  _disownPeople() {
     return $.utils.disown(this.people);
   }
   get people() {
     return $.utils.getList(0, AddressBook._People, this);
   }
-  hasPeople() {
+  _hasPeople() {
     return !$.utils.isNull($.utils.getPointer(0, this));
   }
-  initPeople(length) {
+  _initPeople(length) {
     return $.utils.initList(0, AddressBook._People, length, this);
   }
   set people(value) {

@@ -231,7 +231,7 @@ export function generateNode(
 
   /** An array of group structs formed as children of this struct. They appear before the struct node in the file. */
   const groupNodes = ctx.nodes.filter(
-    (n) => n.scopeId === nodeId && n.isStruct() && n.struct.isGroup,
+    (n) => n.scopeId === nodeId && n._isStruct && n.struct.isGroup,
   );
   /**
    * An array of nodes that are nested within this node; these must appear first since those symbols will be
@@ -301,11 +301,11 @@ export function generateStructFieldMethods(
   let jsType: string;
   let whichType: s.Type_Which | string;
 
-  if (field.isSlot()) {
+  if (field._isSlot) {
     const slotType = field.slot.type;
     jsType = getJsType(ctx, slotType, false);
     whichType = slotType.which();
-  } else if (field.isGroup()) {
+  } else if (field._isGroup) {
     jsType = getFullClassName(lookupNode(ctx, field.group.typeId));
     whichType = "group";
   } else {
@@ -322,11 +322,11 @@ export function generateStructFieldMethods(
   const discriminantOffset = node.struct.discriminantOffset;
   const name = field.name;
   const properName = util.c2t(name);
-  const hadExplicitDefault = field.isSlot() && field.slot.hadExplicitDefault;
+  const hadExplicitDefault = field._isSlot && field.slot.hadExplicitDefault;
   const discriminantValue = field.discriminantValue;
   const fullClassName = getFullClassName(node);
   const union = discriminantValue !== s.Field.NO_DISCRIMINANT;
-  const offset = (field.isSlot() && field.slot.offset) || 0;
+  const offset = (field._isSlot && field.slot.offset) || 0;
   const offsetLiteral = f.createNumericLiteral(offset.toString());
   /** $.utils.getPointer(0, this) */
   const getPointer = f.createCallExpression(
@@ -644,7 +644,7 @@ export function generateStructFieldMethods(
     }
   }
 
-  // adoptFoo(value: capnp.Orphan<Foo>): void { $.utils.adopt(value, this._getPointer(3)); }}
+  // _adoptFoo(value: capnp.Orphan<Foo>): void { $.utils.adopt(value, this._getPointer(3)); }}
   if (adopt) {
     const parameters = [
       f.createParameterDeclaration(
@@ -667,11 +667,11 @@ export function generateStructFieldMethods(
     if (union) expressions.unshift(setDiscriminant);
 
     members.push(
-      createMethod(`adopt${properName}`, parameters, VOID_TYPE, expressions),
+      createMethod(`_adopt${properName}`, parameters, VOID_TYPE, expressions),
     );
   }
 
-  // disownFoo(): capnp.Orphan<Foo> { return $.utils.disown(this.getFoo()); }
+  // _disownFoo(): capnp.Orphan<Foo> { return $.utils.disown(this.foo); }
   if (disown) {
     const getter = f.createPropertyAccessExpression(THIS, name);
     const expressions = [
@@ -683,7 +683,7 @@ export function generateStructFieldMethods(
     ];
 
     members.push(
-      createMethod(`disown${properName}`, [], orphanType, expressions),
+      createMethod(`_disown${properName}`, [], orphanType, expressions),
     );
   }
 
@@ -737,11 +737,11 @@ export function generateStructFieldMethods(
     ];
 
     members.push(
-      createMethod(`has${properName}`, [], BOOLEAN_TYPE, expressions),
+      createMethod(`_has${properName}`, [], BOOLEAN_TYPE, expressions),
     );
   }
 
-  // initFoo(): FooType { ... } / initFoo(length: number): $.List<FooElementType> { ... }
+  // _initFoo(): FooType { ... } / _initFoo(length: number): $.List<FooElementType> { ... }
   if (init) {
     const parameters =
       whichType === s.Type.DATA || whichType === s.Type.LIST
@@ -762,7 +762,7 @@ export function generateStructFieldMethods(
 
     members.push(
       createMethod(
-        `init${properName}`,
+        `_init${properName}`,
         parameters,
         jsTypeReference,
         expressions,
@@ -786,12 +786,22 @@ export function generateStructFieldMethods(
       ),
     ];
 
+    // members.push(
+    //   createMethod(`is${properName}`, [], BOOLEAN_TYPE, expressions),
+    // );
+    // get isFoo() { return $.utils.getUint16(12, this) === 1; }
     members.push(
-      createMethod(`is${properName}`, [], BOOLEAN_TYPE, expressions),
+      f.createGetAccessorDeclaration(
+        [],
+        `_is${properName}`,
+        [],
+        BOOLEAN_TYPE,
+        createExpressionBlock(expressions, true),
+      ),
     );
   }
 
-  // setFoo(value: FooType): void { ... }
+  // set foo(value: FooType): void { ... }
   if (set || union) {
     const expressions = [];
     const parameters = [];
@@ -847,7 +857,7 @@ export function generateStructNode(
   const fullClassName = getFullClassName(node);
   const nestedNodes = node.nestedNodes
     .map((n) => lookupNode(ctx, n))
-    .filter((n) => !n.isConst() && !n.isAnnotation());
+    .filter((n) => !n._isConst && !n._isAnnotation);
   const nodeId = node.id;
   const nodeIdHex = nodeId.toString(16);
   const struct = node.which() === s.Node.STRUCT ? node.struct : undefined;
@@ -863,7 +873,7 @@ export function generateStructNode(
   const concreteLists = fields
     .filter((f) => needsConcreteListClass(f))
     .sort(compareCodeOrder);
-  const consts = ctx.nodes.filter((n) => n.scopeId === nodeId && n.isConst());
+  const consts = ctx.nodes.filter((n) => n.scopeId === nodeId && n._isConst);
   // const groups = ctx.nodes.filter(
   //   (n) => n.getScopeId().equals(nodeId) && n.isStruct() && n.getStruct().getIsGroup());
   const hasUnnamedUnion = discriminantCount !== 0;
@@ -911,7 +921,7 @@ export function generateStructNode(
   // eslint-disable-next-line unicorn/no-array-reduce
   const defaultValues = fields.reduce(
     (acc, f) =>
-      f.isSlot() &&
+      f._isSlot &&
       f.slot.hadExplicitDefault &&
       f.slot.type.which() !== s.Type.VOID
         ? [...acc, generateDefaultValue(f)]
@@ -1078,9 +1088,7 @@ export function getImportNodes(
         (a, n) => [...a, n, ...getImportNodes(ctx, n)],
         new Array<s.Node>(),
       )
-      .filter(
-        (n) => lookupNode(ctx, n).isStruct() || lookupNode(ctx, n).isEnum(),
-      )
+      .filter((n) => lookupNode(ctx, n)._isStruct || lookupNode(ctx, n)._isEnum)
   );
 }
 
@@ -1485,7 +1493,7 @@ export function generateResultPromise(
     let isInterface = false;
     let slot: s.Field_Slot;
 
-    if (field.isSlot()) {
+    if (field._isSlot) {
       slot = field.slot;
       const slotType = slot.type;
       if (slotType.which() !== s.Type.INTERFACE) {
@@ -1494,7 +1502,7 @@ export function generateResultPromise(
       }
       isInterface = true;
       jsType = getJsType(ctx, slotType, false);
-    } else if (field.isGroup()) {
+    } else if (field._isGroup) {
       // TODO: how should groups be handled?
       return;
     } else {

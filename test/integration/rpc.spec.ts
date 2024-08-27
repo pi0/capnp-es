@@ -54,7 +54,7 @@ describe("rpc", () => {
           const hs = new Hash.Server({
             async sum(_, r) {
               const digest = hash.digest();
-              return r.initHash(digest.length).copyBuffer(digest);
+              return r._initHash(digest.length).copyBuffer(digest);
             },
 
             write: (p) =>
@@ -74,11 +74,11 @@ describe("rpc", () => {
       const hash = rpc.connect().bootstrap(HashFactory).newSha1().getHash();
       hash.write((p) => {
         const buf = encodeUtf8("hello ");
-        p.initData(buf.byteLength).copyBuffer(buf);
+        p._initData(buf.byteLength).copyBuffer(buf);
       });
       hash.write((p) => {
         const buf = encodeUtf8("world");
-        p.initData(buf.byteLength).copyBuffer(buf);
+        p._initData(buf.byteLength).copyBuffer(buf);
       });
       const sum = await hash.sum().promise();
       return sum.hash.toUint8Array();

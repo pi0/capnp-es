@@ -21,11 +21,11 @@ test("schema upgrade with legacy data", () => {
   u1.legacyId = 0x55_55;
   u1.legacyName = "hi";
 
-  const v1Child = u1.initSelfReference();
+  const v1Child = u1._initSelfReference();
   v1Child.legacyId = 0x66_66;
   v1Child.legacyName = "hihi";
 
-  const v1ListChild = u1.initSelfReferences(1).get(0);
+  const v1ListChild = u1._initSelfReferences(1).get(0);
   v1ListChild.legacyId = 0x99_99;
   v1ListChild.legacyName = "hihihi";
 

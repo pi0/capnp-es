@@ -105,15 +105,15 @@ export class Question<P extends Struct, R extends Struct> implements Answer<R> {
 
     const pipeq = this.conn.newQuestion(ccall.method);
     const msg = newMessage();
-    const msgCall = msg.initCall();
+    const msgCall = msg._initCall();
     msgCall.questionId = pipeq.id;
     msgCall.interfaceId = ccall.method.interfaceId;
     msgCall.methodId = ccall.method.methodId;
-    const target = msgCall.initTarget();
-    const a = target.initPromisedAnswer();
+    const target = msgCall._initTarget();
+    const a = target._initPromisedAnswer();
     a.questionId = this.id;
     transformToPromisedAnswer(a, transform);
-    const payload = msgCall.initParams();
+    const payload = msgCall._initParams();
     this.conn.fillParams(payload, ccall);
     this.conn.sendMessage(msg);
     this.addPromise(transform);

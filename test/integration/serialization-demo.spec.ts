@@ -21,7 +21,7 @@ test("write address book", () => {
 
   // t.type(addressBook, AddressBook);
 
-  const people = addressBook.initPeople(2);
+  const people = addressBook._initPeople(2);
 
   // t.type(people, AddressBook.people);
 
@@ -34,7 +34,7 @@ test("write address book", () => {
 
   // t.comment("should not crash while calling setters");
 
-  const alicePhones = alice.initPhones(1);
+  const alicePhones = alice._initPhones(1);
 
   // t.type(alicePhones, Person.phones);
 
@@ -59,7 +59,7 @@ test("write address book", () => {
   //   "should not crash while calling setters on composite struct with nonzero index",
   // );
 
-  const bobPhones = bob.initPhones(2);
+  const bobPhones = bob._initPhones(2);
 
   // t.type(bobPhones, Person.phones);
 
@@ -104,7 +104,7 @@ test("read address book", () => {
   const aliceEmployment = alice.employment;
 
   t.equal(aliceEmployment.which(), Person_Employment_Which.SCHOOL);
-  t.ok(aliceEmployment.isSchool());
+  t.ok(aliceEmployment._isSchool);
   t.equal(aliceEmployment.school, "MIT");
 
   const bob = people.get(1);
@@ -125,13 +125,13 @@ test("read address book", () => {
   const bobEmployment = bob.employment;
 
   t.equal(bobEmployment.which(), Person_Employment_Which.UNEMPLOYED);
-  t.ok(bobEmployment.isUnemployed());
+  t.ok(bobEmployment._isUnemployed);
 });
 
 test("copy pointers from other message", () => {
   const message1 = new capnp.Message();
   const addressBook1 = message1.initRoot(AddressBook);
-  const people1 = addressBook1.initPeople(2);
+  const people1 = addressBook1._initPeople(2);
   const alice1 = people1.get(1);
 
   alice1.name = "Alice";
@@ -156,14 +156,14 @@ test("adoption", () => {
   const m = new capnp.Message();
   const s = m.getSegment(0);
   const addressBook = m.initRoot(AddressBook);
-  const people1 = addressBook.initPeople(1);
+  const people1 = addressBook._initPeople(1);
   const alice1 = people1.get(0);
 
   alice1.name = "Alice";
   alice1.email = "alice@example.com";
   alice1.id = 456;
 
-  const o = addressBook.disownPeople();
+  const o = addressBook._disownPeople();
 
   t.ok(s.isWordZero(0x08), "should null the pointer");
   t.notOk(
@@ -173,7 +173,7 @@ test("adoption", () => {
   t.notOk(s.isWordZero(0x40), "should not touch the content");
   t.ok(isNull(people1), "should null the original pointer");
 
-  addressBook.adoptPeople(o);
+  addressBook._adoptPeople(o);
 
   const people2 = addressBook.people;
   const alice2 = people2.get(0);
@@ -184,7 +184,7 @@ test("adoption", () => {
   t.equal(alice1.id, 456);
 
   t.throws(
-    () => addressBook.adoptPeople(o),
+    () => addressBook._adoptPeople(o),
     // "should not allow multiple adoption",
   );
 });
@@ -193,14 +193,14 @@ test("overwrite", () => {
   const m = new capnp.Message();
   const s = m.getSegment(0);
   const addressBook = m.initRoot(AddressBook);
-  const alice = addressBook.initPeople(1).get(0);
+  const alice = addressBook._initPeople(1).get(0);
 
   alice.name = "Alex";
   alice.name = "Alice";
 
   t.ok(s.isWordZero(0x40), "should zero out the old string");
 
-  addressBook.initPeople(1);
+  addressBook._initPeople(1);
 
   t.ok(s.isWordZero(0x40), "should zero out every string");
   t.ok(s.isWordZero(0x48), "should zero out every string");

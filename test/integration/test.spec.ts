@@ -57,48 +57,48 @@ test("TestAllTypes", () => {
   allTypes.textField = "text";
   t.equal(allTypes.textField, "text");
 
-  allTypes.initStructField().int32Field = -999;
+  allTypes._initStructField().int32Field = -999;
   t.equal(allTypes.structField.int32Field, -999);
 
   allTypes.enumField = T.TestEnum.CORGE;
   t.equal(allTypes.enumField, T.TestEnum.CORGE);
 
-  allTypes.initVoidList(10);
+  allTypes._initVoidList(10);
   t.equal(allTypes.voidList.length, 10);
 
-  allTypes.initBoolList(2).set(1, true);
+  allTypes._initBoolList(2).set(1, true);
   t.equal(allTypes.boolList.get(1), true);
 
-  allTypes.initInt8List(3).set(2, -8);
+  allTypes._initInt8List(3).set(2, -8);
   t.equal(allTypes.int8List.get(2), -8);
 
-  allTypes.initInt16List(3).set(2, -88);
+  allTypes._initInt16List(3).set(2, -88);
   t.equal(allTypes.int16List.get(2), -88);
 
-  allTypes.initInt32List(3).set(2, -888);
+  allTypes._initInt32List(3).set(2, -888);
   t.equal(allTypes.int32List.get(2), -888);
 
-  allTypes.initInt64List(3).set(2, BigInt(-8888));
+  allTypes._initInt64List(3).set(2, BigInt(-8888));
   t.equal(allTypes.int64List.get(2), BigInt(-8888));
 
-  allTypes.initUInt8List(3).set(2, 8);
+  allTypes._initUInt8List(3).set(2, 8);
   t.equal(allTypes.uInt8List.get(2), 8);
 
-  allTypes.initUInt16List(3).set(2, 88);
+  allTypes._initUInt16List(3).set(2, 88);
   t.equal(allTypes.uInt16List.get(2), 88);
 
-  allTypes.initUInt32List(3).set(2, 888);
+  allTypes._initUInt32List(3).set(2, 888);
   t.equal(allTypes.uInt32List.get(2), 888);
 
-  allTypes.initUInt64List(3).set(2, BigInt(8888));
+  allTypes._initUInt64List(3).set(2, BigInt(8888));
   t.equal(allTypes.uInt64List.get(2), BigInt(8888));
 
-  allTypes.initTextList(4).set(2, "hi");
+  allTypes._initTextList(4).set(2, "hi");
   t.equal(allTypes.textList.get(2), "hi");
 
-  allTypes.initStructList(3).get(1).uInt32Field = 9999;
+  allTypes._initStructList(3).get(1).uInt32Field = 9999;
   t.equal(allTypes.structList.get(1).uInt32Field, 9999);
 
-  allTypes.initEnumList(2).set(1, T.TestEnum.FOO);
+  allTypes._initEnumList(2).set(1, T.TestEnum.FOO);
   t.equal(allTypes.enumList.get(1), T.TestEnum.FOO);
 });

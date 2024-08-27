@@ -19,7 +19,7 @@ export function getConcreteListType(
   ctx: CodeGeneratorFileContext,
   type: s.Type,
 ): string {
-  if (!type.isList()) return getJsType(ctx, type, false);
+  if (!type._isList) return getJsType(ctx, type, false);
 
   const elementType = type.list.elementType;
   const elementTypeWhich = elementType.which();
@@ -122,7 +122,7 @@ export function getJsType(
 }
 
 export function getUnnamedUnionFields(node: s.Node): s.Field[] {
-  if (!node.isStruct()) return [];
+  if (!node._isStruct) return [];
 
   return node.struct.fields.filter(
     (f) => f.discriminantValue !== s.Field.NO_DISCRIMINANT,
@@ -182,13 +182,13 @@ export function lookupNodeSourceInfo(
  */
 
 export function needsConcreteListClass(field: s.Field): boolean {
-  if (!field.isSlot()) return false;
+  if (!field._isSlot) return false;
 
   const slotType = field.slot.type;
 
-  if (!slotType.isList()) return false;
+  if (!slotType._isList) return false;
 
   const elementType = slotType.list.elementType;
 
-  return elementType.isStruct() || elementType.isList();
+  return elementType._isStruct || elementType._isList;
 }
