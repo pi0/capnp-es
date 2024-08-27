@@ -30,7 +30,6 @@ jobs:
           rm -rf capnproto-c++-1.0.2.tar.gz capnproto-c++-1.0.2
       - run: pnpm install
       - run: pnpm lint
-      - run: pnpm build --stub
       - run: pnpm build
       - run: pnpm vitest --coverage
       - run: pnpm test:types
