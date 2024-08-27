@@ -1,6 +1,6 @@
 {
   "name": "capnp-es",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TypeScript implementation of the Cap'n Proto serialization.",
   "repository": "pi0/capnp-es",
   "license": "MIT",

@@ -1,5 +1,32 @@
 # Changelog
 
+## v0.0.4
+
+[compare changes](https://github.com/pi0/capnp-es/compare/v0.0.3...v0.0.4)
+
+### 🚀 Enhancements
+
+- **cli:** Allow passing more options ([f794de7](https://github.com/pi0/capnp-es/commit/f794de7))
+- Prefix `_init`, `_is`, `_disown` and `_has` ([1cbf9d1](https://github.com/pi0/capnp-es/commit/1cbf9d1))
+
+### 🩹 Fixes
+
+- Fix source info matcher ([ff0bd2f](https://github.com/pi0/capnp-es/commit/ff0bd2f))
+- **cli:** Try to guess absolute paths ([06730e1](https://github.com/pi0/capnp-es/commit/06730e1))
+
+### 📦 Build
+
+- Fully auto generate std files ([e5b2eda](https://github.com/pi0/capnp-es/commit/e5b2eda))
+
+### 🏡 Chore
+
+- Update fixture ([82f85ee](https://github.com/pi0/capnp-es/commit/82f85ee))
+- Fix lint issues ([3c01fcc](https://github.com/pi0/capnp-es/commit/3c01fcc))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](http://github.com/pi0))
+
 ## v0.0.3
 
 [compare changes](https://github.com/pi0/capnp-es/compare/v0.0.2...v0.0.3)
