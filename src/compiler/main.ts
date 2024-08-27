@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { mkdir, writeFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { exec } from "node:child_process";
 import { compileAll } from "./compiler";
