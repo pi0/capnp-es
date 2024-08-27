@@ -168,9 +168,9 @@ export function lookupNodeSourceInfo(
   lookup: { readonly id: bigint } | bigint,
 ): s.Node_SourceInfo | undefined {
   const id = typeof lookup === "bigint" ? lookup : lookup.id;
-  const nodeIndex = ctx.nodes.findIndex((n) => n.id === id);
-  if (nodeIndex === -1) throw new Error(format(E.GEN_NODE_LOOKUP_FAIL, id));
-  return ctx.req.sourceInfo[nodeIndex];
+  const sourceInfo = ctx.req.sourceInfo.find((s) => s.id === id);
+  if (!sourceInfo) throw new Error(format(E.GEN_NODE_LOOKUP_FAIL, id));
+  return sourceInfo;
 }
 
 /**
