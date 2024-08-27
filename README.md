@@ -25,16 +25,12 @@ Make sure `capnpc` command is available. You can find install instructions [here
 Run the following to compile a schema file into typeScript/javascript source code:
 
 ```shell
-npx capnp-es path/to/myschema.capnp
+npx capnp-es path/to/myschema.capnp -ojs,ts,dts
 ```
 
-This will generate `path/to/myschema.{ext}`.
+This will generate `path/to/myschema.{js,ts,dts}`.
 
-Arguments:
-
-- `--ts`: Generate `.ts` schema (default)
-- `--js`: Generate `.js` transpiled schema (ESM)
-- `--dts`: Generate type declarations
+Use `npx capnp-es --help` for full usage info.
 
 See [playground](./playground/) for examples and learn more about `.capnp` schema in [language docs](https://capnproto.org/language.html).
 

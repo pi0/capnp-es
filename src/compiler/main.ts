@@ -1,49 +1,108 @@
 #!/usr/bin/env node
 
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { exec } from "node:child_process";
 import { compileAll } from "./compiler";
 
-try {
-  let dataBuf: Buffer = await readStdin();
-  if (dataBuf.byteLength === 0) {
-    const paths = process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
-    if (paths.length === 0) {
-      console.error("No input files specified or piped to stdin");
-      process.exit(1);
+const capnpcOptions = [
+  "-I",
+  "--import-path",
+  "-i",
+  "--generate-id",
+  "--no-standard-import",
+  "--src-prefix",
+  "--verbose",
+];
+
+const uage = `
+Usage: capnp-es [<option>...] <source>...
+
+Compiles Cap'n Proto schema files and generates corresponding source code for javascript and typescript.
+
+Options:
+    -o<lang>[:<dir>], --output=<lang>[:<dir>]
+        Specify the output language (js,ts,dts) and optional output directory.
+    -I<dir>, --import-path=<dir>
+        Add <dir> to the list of directories searched for non-relative imports.
+    -i, --generate-id
+        Generate a new 64-bit unique ID for use in a Cap'n Proto schema.
+    --no-standard-import
+        Do not add any default import paths; use only those specified by -I.
+    --src-prefix=<prefix>
+       Remove the prefix of output files.
+`;
+
+const sources: string[] = [];
+const options: string[] = [];
+
+let outFormats: string[] = ["js"];
+let outDir: string | undefined;
+
+for (const arg of process.argv.slice(2)) {
+  if (arg === "--help") {
+    console.log(uage);
+    process.exit(0);
+  }
+  if (!arg.startsWith("-")) {
+    // <source>
+    sources.push(arg);
+  } else if (arg.startsWith("--output=") || arg.startsWith("-o")) {
+    // --output=<lang>[:<dir>], -o<lang>[:<dir>]
+    const s = arg
+      .slice(arg.startsWith("-o") ? "-o".length : "--output=".length)
+      .split(":");
+    if (s[0] && s[0] !== "-") {
+      outFormats = s[0].split(",");
     }
-    const cmd = `capnpc -o- ${paths.map((p) => JSON.stringify(p)).join(" ")}`;
-    console.log(cmd);
+    if (s[1]) {
+      outDir = s[1];
+    }
+  } else if (capnpcOptions.some((opt) => arg.startsWith(opt))) {
+    options.push(arg);
+  }
+}
+
+try {
+  let dataBuf: Buffer = await readStdin(); // feed from stdin from capnpc
+  if (dataBuf.byteLength === 0) {
+    if (outDir) {
+      options.push(`-o-:${outDir}`);
+    } else {
+      options.push("-o-");
+    }
+    const cmd = `capnpc ${options.join(" ")} ${sources.join(" ")}`;
+    console.log(`[capnp-es] ${cmd}`);
     dataBuf = await new Promise<Buffer>((resolve) => {
-      exec(
-        cmd,
-        {
-          encoding: "buffer",
-        },
-        (error, stdout, stderr) => {
-          if (error) {
-            process.stderr.write(stderr);
-            process.exit(1);
-          } else {
-            resolve(stdout);
-          }
-        },
-      );
+      exec(cmd, { encoding: "buffer" }, (error, stdout, stderr) => {
+        if (stderr.length > 0) {
+          process.stderr.write(stderr);
+        }
+        if (error) {
+          process.exit(1);
+        }
+        resolve(stdout);
+      });
     });
   }
-
   const { files } = await compileAll(dataBuf, {
-    ts: process.argv.includes("--ts"),
-    js: process.argv.includes("--js"),
-    dts: process.argv.includes("--dts"),
+    ts: outFormats.includes("ts"),
+    js: outFormats.includes("js"),
+    dts: outFormats.includes("dts"),
   });
-  for (const [path, content] of files) {
-    console.log(`Compiled ${path}`);
+  for (const [fileName, content] of files) {
+    let filePath = fileName;
+    if (outDir) {
+      filePath = join(outDir, fileName);
+    }
+    await mkdir(dirname(filePath), { recursive: true });
     await writeFile(
-      path,
+      filePath,
       // https://github.com/microsoft/TypeScript/issues/54632
       content.replace(/^\s+/gm, (match) => " ".repeat(match.length / 2)),
     );
+    console.log(`[capnp-es] ${filePath}`);
   }
 } catch (error) {
   console.error(error);

@@ -40,6 +40,15 @@ export async function compileAll(
     tsCompile(files, opts?.tsconfig, opts?.dts);
   }
 
+  // Remove .ts entries if ts option was not set
+  if (!opts?.ts) {
+    for (const [fileName] of files) {
+      if (fileName.endsWith(".ts")) {
+        files.delete(fileName);
+      }
+    }
+  }
+
   return {
     ctx,
     files,
