@@ -4,6 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { exec } from "node:child_process";
 import { compileAll } from "./compiler";
+import { existsSync } from "node:fs";
 
 const capnpcOptions = [
   "-I",
@@ -92,6 +93,12 @@ try {
   });
   for (const [fileName, content] of files) {
     let filePath = fileName;
+    if (!existsSync(dirname(filePath))) {
+      const fullPath = `/${filePath}`;
+      if (existsSync(dirname(fullPath))) {
+        filePath = fullPath;
+      }
+    }
     if (outDir) {
       filePath = join(outDir, fileName);
     }
