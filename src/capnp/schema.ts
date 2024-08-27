@@ -849,14 +849,14 @@ export type Field_Which = (typeof Field_Which)[keyof typeof Field_Which];
  * Schema for a field of a struct.
  * */
 export class Field extends $.Struct {
-  static readonly NO_DISCRIMINANT = 65_535;
+  static readonly NO_DISCRIMINANT = 65535;
   static readonly SLOT = Field_Which.SLOT;
   static readonly GROUP = Field_Which.GROUP;
   static readonly _capnp = {
     displayName: "Field",
     id: "9aad50a41f4af45f",
     size: new $.ObjectSize(24, 4),
-    defaultDiscriminantValue: $.getUint16Mask(65_535),
+    defaultDiscriminantValue: $.getUint16Mask(65535),
   };
   static _Annotations: $.ListCtor<Annotation>;
   get name(): string {
