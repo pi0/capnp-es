@@ -263,12 +263,12 @@ export class List<T> extends Pointer implements Array<T> {
     return this;
   }
 
-  keys(): IterableIterator<number> {
+  keys(): ArrayIterator<number> {
     const length = this.length;
     return Array.from({ length }, (_, i) => i)[Symbol.iterator]();
   }
 
-  values(): IterableIterator<T> {
+  values(): ArrayIterator<T> {
     const length = this.length;
     let i = 0;
     return {
@@ -282,7 +282,7 @@ export class List<T> extends Pointer implements Array<T> {
     };
   }
 
-  entries(): IterableIterator<[number, T]> {
+  entries(): ArrayIterator<[number, T]> {
     const length = this.length;
     let i = 0;
     return {
@@ -356,7 +356,7 @@ export class List<T> extends Pointer implements Array<T> {
     return Array.prototype[Symbol.unscopables];
   }
 
-  [Symbol.iterator](): IterableIterator<T> {
+  [Symbol.iterator](): ArrayIterator<T> {
     return this.values();
   }
 
