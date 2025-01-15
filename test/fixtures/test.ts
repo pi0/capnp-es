@@ -7406,6 +7406,22 @@ export class TestContainMembrane extends $.Struct {
     return "TestContainMembrane_" + super.toString();
   }
 }
+export class TestContructorName extends $.Struct {
+  static readonly _capnp = {
+    displayName: "TestContructorName",
+    id: "c16f644772532755",
+    size: new $.ObjectSize(0, 1)
+  };
+  get $constructor(): string {
+    return $.utils.getText(0, this);
+  }
+  set $constructor(value: string) {
+    $.utils.setText(0, value, this);
+  }
+  toString(): string {
+    return "TestContructorName_" + super.toString();
+  }
+}
 export class TestTransferCap_Element extends $.Struct {
   static readonly _capnp = {
     displayName: "Element",
