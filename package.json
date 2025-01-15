@@ -65,7 +65,7 @@
     "mitata": "^0.1.11",
     "prettier": "^3.3.3",
     "protobufjs": "^7.3.2",
-    "typescript": "~5.6.3",
+    "typescript": "~5.7.3",
     "unbuild": "^3.0.0-rc.7",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
