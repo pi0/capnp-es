@@ -52,7 +52,7 @@
   "devDependencies": {
     "@types/benchmark": "^2.1.5",
     "@types/hex2dec": "^1.1.4",
-    "@types/node": "^22.1.0",
+    "@types/node": "^18.19.59",
     "@vitest/coverage-v8": "^2.0.5",
     "automd": "^0.3.8",
     "benchmark": "^2.1.4",
@@ -65,13 +65,13 @@
     "mitata": "^0.1.11",
     "prettier": "^3.3.3",
     "protobufjs": "^7.3.2",
-    "typescript": "^5.5.4",
+    "typescript": "~5.6.3",
     "unbuild": "^3.0.0-rc.7",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
   },
   "peerDependencies": {
-    "typescript": "^5.5.4"
+    "typescript": "~5.6.3"
   },
   "peerDependenciesMeta": {
     "typescript": {
