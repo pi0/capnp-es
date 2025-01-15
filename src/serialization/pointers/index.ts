@@ -5,7 +5,7 @@ export { Interface } from "./interface";
 export { Orphan } from "./orphan";
 export { Text } from "./text";
 export { Void, VOID } from "./void";
-export { Pointer, PointerType } from "./pointer";
+export { Pointer, PointerType, type _Pointer } from "./pointer";
 export { type _StructCtor, Struct, type StructCtor } from "./struct";
 
 // Utils

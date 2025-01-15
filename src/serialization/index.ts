@@ -51,4 +51,5 @@ export {
   Uint8List,
   VoidList,
   Void,
+  type _Pointer,
 } from "./pointers";
