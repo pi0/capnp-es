@@ -20,9 +20,16 @@ TypeScript implementation of the [Cap'n Proto](https://capnproto.org) serializat
 
 ### Compiling schema
 
-Make sure `capnpc` command is available. You can find install instructions [here](https://capnproto.org/install.html) to install it.
+> [!NOTE]
+> Make sure `capnpc` command is available. You can find install instructions [here](https://capnproto.org/install.html) to install it.
 
-Run the following to compile a schema file into typeScript/javascript source code:
+Install `capnp-es` dependency:
+
+```sh
+npx nypm install capnp-es
+```
+
+You can use `capnp-es` to compile a schema file into typeScript/javascript source code:
 
 ```shell
 npx capnp-es path/to/myschema.capnp -ojs,ts,dts
