@@ -708,7 +708,8 @@ export function generateStructFieldMethods(
 
     const d = f.createGetAccessorDeclaration(
       [],
-      name,
+      // Avoid generating invalid "get constructor()"
+      name === "constructor" ? `$${name}` : name,
       [],
       jsTypeReference,
       createExpressionBlock(expressions, true),
@@ -840,7 +841,7 @@ export function generateStructFieldMethods(
     members.push(
       f.createSetAccessorDeclaration(
         [],
-        name,
+        name === "constructor" ? `$${name}` : name,
         parameters,
         createExpressionBlock(expressions, false),
       ),

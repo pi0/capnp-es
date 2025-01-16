@@ -878,6 +878,10 @@ struct TestContainMembrane {
   list @1 :List(TestMembrane.Thing);
 }
 
+struct TestContructorName {
+  constructor @0 :Text;
+}
+
 struct TestTransferCap {
   list @0 :List(Element);
   struct Element {

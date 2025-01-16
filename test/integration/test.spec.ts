@@ -102,3 +102,13 @@ test("TestAllTypes", () => {
   allTypes._initEnumList(2).set(1, T.TestEnum.FOO);
   t.equal(allTypes.enumList.get(1), T.TestEnum.FOO);
 });
+
+test("TestConstructorName", () => {
+  const m = new capnp.Message();
+  const cls = m.initRoot(T.TestContructorName);
+
+  t.equal(cls.$constructor, "");
+  cls.$constructor = "hello";
+  t.equal(cls.$constructor, "hello");
+  t.doesNotThrow(() => m.toArrayBuffer());
+});
