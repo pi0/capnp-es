@@ -207,6 +207,7 @@ test("Message.onCreatePointer()", () => {
   t.throws(
     () => {
       for (let i = 0; i < 101 + 1; i++) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         p.phones;
       }
     },
