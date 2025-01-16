@@ -358,7 +358,7 @@ export class List<T> extends Pointer implements Array<T> {
     return Array.prototype[Symbol.unscopables];
   }
 
-  [Symbol.iterator](): IterableIterator<T> {
+  [Symbol.iterator](): ArrayIterator<T> {
     return this.values();
   }
 
