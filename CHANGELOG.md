@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.0.5
+
+[compare changes](https://github.com/pi0/capnp-es/compare/v0.0.4...v0.0.5)
+
+### 🩹 Fixes
+
+- Various fixes ([#10](https://github.com/pi0/capnp-es/pull/10))
+
+### 🏡 Chore
+
+- Fix ci ([2248360](https://github.com/pi0/capnp-es/commit/2248360))
+- Prettier ignore std files ([090c767](https://github.com/pi0/capnp-es/commit/090c767))
+- Fix build script ([f995c63](https://github.com/pi0/capnp-es/commit/f995c63))
+- Update deps ([12c4c58](https://github.com/pi0/capnp-es/commit/12c4c58))
+- Lint ([6a13e89](https://github.com/pi0/capnp-es/commit/6a13e89))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](http://github.com/pi0))
+- Somhairle MacLeòid ([@penalosa](http://github.com/penalosa))
+
 ## v0.0.4
 
 [compare changes](https://github.com/pi0/capnp-es/compare/v0.0.3...v0.0.4)
