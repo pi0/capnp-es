@@ -86,7 +86,7 @@ describe("rpc", () => {
 
     const [, result] = await Promise.all([server(), client()]);
     t.equal(
-      // @ts-ignore
+      // @ts-expect-error
       bufferToHex(result),
       "[2a ae 6c 35 c9 4f cf b4 15 db e9 5f 40 8b 9c e9 1e e8 46 ed]",
     );
