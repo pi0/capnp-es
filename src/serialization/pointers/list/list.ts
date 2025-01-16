@@ -263,37 +263,39 @@ export class List<T> extends Pointer implements Array<T> {
     return this;
   }
 
-  keys(): IterableIterator<number> {
+  keys(): ArrayIterator<number> {
     const length = this.length;
     return Array.from({ length }, (_, i) => i)[Symbol.iterator]();
   }
 
-  values(): IterableIterator<T> {
-    const length = this.length;
-    let i = 0;
-    return {
-      [Symbol.iterator]: () => this.values(),
-      next: () => {
-        if (i < length) {
-          return { value: this.at(i++), done: false };
-        }
-        return { value: undefined, done: true };
-      },
-    };
+  values(): ArrayIterator<T> {
+    return this.toArray().values();
+    // const length = this.length;
+    // let i = 0;
+    // return {
+    //   [Symbol.iterator]: () => this.values(),
+    //   next: () => {
+    //     if (i < length) {
+    //       return { value: this.at(i++), done: false };
+    //     }
+    //     return { value: undefined, done: true };
+    //   },
+    // };
   }
 
-  entries(): IterableIterator<[number, T]> {
-    const length = this.length;
-    let i = 0;
-    return {
-      [Symbol.iterator]: () => this.entries(),
-      next: () => {
-        if (i < length) {
-          return { value: [i, this.at(i++)], done: false };
-        }
-        return { value: undefined, done: true };
-      },
-    };
+  entries(): ArrayIterator<[number, T]> {
+    return this.toArray().entries();
+    // const length = this.length;
+    // let i = 0;
+    // return {
+    //   [Symbol.iterator]: () => this.entries(),
+    //   next: () => {
+    //     if (i < length) {
+    //       return { value: [i, this.at(i++)], done: false };
+    //     }
+    //     return { value: undefined, done: true };
+    //   },
+    // };
   }
 
   flat<A, D extends number = 1>(this: A, depth?: D): FlatArray<A, D>[] {
@@ -356,7 +358,7 @@ export class List<T> extends Pointer implements Array<T> {
     return Array.prototype[Symbol.unscopables];
   }
 
-  [Symbol.iterator](): IterableIterator<T> {
+  [Symbol.iterator](): ArrayIterator<T> {
     return this.values();
   }
 

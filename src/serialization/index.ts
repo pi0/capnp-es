@@ -23,6 +23,7 @@ export {
 export {
   type ListCtor,
   type StructCtor,
+  type _Pointer,
   AnyPointerList,
   BoolList,
   CompositeList,

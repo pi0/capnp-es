@@ -216,7 +216,10 @@ export function initMessage(
   let buf = src;
 
   if (isArrayBufferView(buf)) {
-    buf = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+    buf = buf.buffer.slice(
+      buf.byteOffset,
+      buf.byteOffset + buf.byteLength,
+    ) as ArrayBuffer;
   }
 
   if (packed) buf = unpack(buf);

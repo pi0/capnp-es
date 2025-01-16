@@ -163,7 +163,10 @@ function makeMaskTest<T>(
 ) {
   test(name, () => {
     for (const { mask, val } of testData) {
-      compareBuffers(fn(val).buffer, new Uint8Array(mask).buffer);
+      compareBuffers(
+        fn(val).buffer as ArrayBuffer,
+        new Uint8Array(mask).buffer,
+      );
     }
   });
 }
@@ -171,7 +174,7 @@ function makeMaskTest<T>(
 test("getBitMask()", () => {
   for (const { bitOffset, mask, val } of BIT_MASKS) {
     compareBuffers(
-      getBitMask(val, bitOffset).buffer,
+      getBitMask(val, bitOffset).buffer as ArrayBuffer,
       new Uint8Array(mask).buffer,
     );
   }
