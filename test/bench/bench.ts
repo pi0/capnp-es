@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { group, baseline, bench, run } from "mitata";
+import { group, bench, run, summary } from "mitata";
 import * as capnpES from "capnp-es";
 
 // JSON
@@ -149,24 +149,27 @@ if (fails.length > 0) {
 // Benchmarks
 
 group("parse data", () => {
-  for (const [name, s] of Object.entries(benchmarks)) {
-    const fn = name === "capnp-es" ? baseline : bench;
-    fn(name, () => s.parse());
-  }
+  summary(() => {
+    for (const [name, s] of Object.entries(benchmarks)) {
+      bench(name, () => s.parse());
+    }
+  });
 });
 
 group("check top level array length", () => {
-  for (const [name, s] of Object.entries(benchmarks)) {
-    const fn = name === "capnp-es" ? baseline : bench;
-    fn(name, () => s.length());
-  }
+  summary(() => {
+    for (const [name, s] of Object.entries(benchmarks)) {
+      bench(name, () => s.length());
+    }
+  });
 });
 
 group("traverse all nested properties", () => {
-  for (const [name, s] of Object.entries(benchmarks)) {
-    const fn = name === "capnp-es" ? baseline : bench;
-    fn(name, () => s.traverse());
-  }
+  summary(() => {
+    for (const [name, s] of Object.entries(benchmarks)) {
+      bench(name, () => s.traverse());
+    }
+  });
 });
 
 await run();
