@@ -23,6 +23,7 @@ export {
 export {
   type ListCtor,
   type StructCtor,
+  type _Pointer,
   AnyPointerList,
   BoolList,
   CompositeList,
@@ -51,5 +52,4 @@ export {
   Uint8List,
   VoidList,
   Void,
-  type _Pointer,
 } from "./pointers";
