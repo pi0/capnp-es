@@ -33,7 +33,7 @@
     "bench:bun": "bun run ./test/bench/bench.ts",
     "bench:node": "node --import jiti/register ./test/bench/bench.ts",
     "build": "pnpm build:std && unbuild",
-    "build:std": "unbuild --stub && pnpm capnp-es src/capnp/_capnp/*.capnp --src-prefix=src/capnp/_capnp -ots:./src/capnp",
+    "build:std": "unbuild --stub && pnpm capnp-es src/capnp/_capnp/*.capnp --src-prefix=src/capnp/_capnp -ots:./src/capnp && prettier -w ./src/capnp",
     "capnp-es": "node --import jiti/register ./src/compiler/main.ts",
     "dev": "vitest dev",
     "lint": "eslint . && prettier -c .",
