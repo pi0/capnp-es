@@ -59,11 +59,16 @@ import { getAs } from "../serialization/pointers/struct.utils";
 
 type QuestionSlot = Question<any, any> | null;
 
+// https://github.com/unjs/capnp-es/issues/7
+const ConnWeakRefRegistry = globalThis.FinalizationRegistry
+  ? new FinalizationRegistry<() => void>((cb) => cb())
+  : undefined;
+
+const ConDefaultFinalize: Finalize = (obj, finalizer): void => {
+  ConnWeakRefRegistry?.register(obj as object, finalizer);
+};
+
 export class Conn {
-  static weakRefRegistry = new FinalizationRegistry<() => void>((cb) => cb());
-  static defaultFinalize: Finalize = (obj, finalizer): void => {
-    Conn.weakRefRegistry.register(obj as object, finalizer);
-  };
   transport: Transport;
   finalize: Finalize;
 
@@ -91,7 +96,7 @@ export class Conn {
    * available.
    * @returns {Conn} A new connection.
    */
-  constructor(transport: Transport, finalize = Conn.defaultFinalize) {
+  constructor(transport: Transport, finalize = ConDefaultFinalize) {
     this.transport = transport;
     this.finalize = finalize;
     this.questionID = new IDGen();
