@@ -1,5 +1,27 @@
 # Changelog
 
+## v0.0.6
+
+[compare changes](https://github.com/unjs/capnp-es/compare/v0.0.5...v0.0.6)
+
+### 🩹 Fixes
+
+- **rpc:** Conditionally use `FinalizationRegistry` ([#7](https://github.com/unjs/capnp-es/pull/7))
+
+### 📖 Documentation
+
+- Update to use local install ([#9](https://github.com/unjs/capnp-es/pull/9))
+
+### 🏡 Chore
+
+- Update generate files ([3a53e7f](https://github.com/unjs/capnp-es/commit/3a53e7f))
+- Add codeowners ([5c768a8](https://github.com/unjs/capnp-es/commit/5c768a8))
+- Update refs to unjs/ ([d35918a](https://github.com/unjs/capnp-es/commit/d35918a))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](http://github.com/pi0))
+
 ## v0.0.5
 
 [compare changes](https://github.com/unjs/capnp-es/compare/v0.0.4...v0.0.5)
