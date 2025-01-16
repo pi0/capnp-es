@@ -708,6 +708,7 @@ export function generateStructFieldMethods(
 
     const d = f.createGetAccessorDeclaration(
       [],
+      // Avoid generating invalid "get constructor()"
       name === "constructor" ? `$${name}` : name,
       [],
       jsTypeReference,
