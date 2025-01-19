@@ -49,8 +49,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       mitata:
-        specifier: ^1.0.30
-        version: 1.0.30
+        specifier: ^1.0.31
+        version: 1.0.31
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
@@ -1767,8 +1767,8 @@ packages:
     resolution: {integrity: sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg==}
     engines: {node: '>= 8'}
 
-  mitata@1.0.30:
-    resolution: {integrity: sha512-zefhVHdXznlD92aojkn7sZ+ZUzvbG8vmFvLllIHZZoUwGlO+YMqMbnA3tcutwe/yAVdkL5/3z65isEfvdomoJQ==}
+  mitata@1.0.31:
+    resolution: {integrity: sha512-WHQaVvR1zQlAhYQhsGcXdlVMqzgvgscMQeXg7pxLh7t8kAH0BI4uD3MU3gVfJT+6jrQS37YhviXq1CAnhUl6Fg==}
 
   mkdirp@1.0.4:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
@@ -4207,7 +4207,7 @@ snapshots:
       minipass: 3.3.6
       yallist: 4.0.0
 
-  mitata@1.0.30: {}
+  mitata@1.0.31: {}
 
   mkdirp@1.0.4: {}
 
