@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.0.7
+
+[compare changes](https://github.com/unjs/capnp-es/compare/v0.0.6...v0.0.7)
+
+### 📦 Build
+
+- Inline self-imports ([754a910](https://github.com/unjs/capnp-es/commit/754a910))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](http://github.com/pi0))
+
 ## v0.0.6
 
 [compare changes](https://github.com/unjs/capnp-es/compare/v0.0.5...v0.0.6)
