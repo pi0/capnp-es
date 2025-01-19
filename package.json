@@ -62,7 +62,7 @@
     "eslint": "^9.18.0",
     "eslint-config-unjs": "^0.4.2",
     "jiti": "^2.4.2",
-    "mitata": "^1.0.30",
+    "mitata": "^1.0.31",
     "prettier": "^3.4.2",
     "protobufjs": "^7.4.0",
     "typescript": "^5.7.3",
