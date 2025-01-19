@@ -46,9 +46,6 @@
     "test": "pnpm lint && vitest run --coverage && pnpm test:types",
     "test:types": "tsc --noEmit --skipLibCheck"
   },
-  "dependencies": {
-    "hex2dec": "^1.1.2"
-  },
   "devDependencies": {
     "@types/benchmark": "^2.1.5",
     "@types/hex2dec": "^1.1.4",
@@ -61,6 +58,7 @@
     "esbuild": "^0.24.2",
     "eslint": "^9.18.0",
     "eslint-config-unjs": "^0.4.2",
+    "hex2dec": "^1.1.2",
     "jiti": "^2.4.2",
     "mitata": "^1.0.31",
     "prettier": "^3.4.2",
