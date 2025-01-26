@@ -49,24 +49,24 @@
   "devDependencies": {
     "@types/benchmark": "^2.1.5",
     "@types/hex2dec": "^1.1.4",
-    "@types/node": "^22.10.7",
-    "@vitest/coverage-v8": "^3.0.2",
+    "@types/node": "^22.10.10",
+    "@vitest/coverage-v8": "^3.0.4",
     "automd": "^0.3.12",
     "benchmark": "^2.1.4",
     "capnp-ts": "^0.7.0",
     "changelogen": "^0.5.7",
     "esbuild": "^0.24.2",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "eslint-config-unjs": "^0.4.2",
     "hex2dec": "^1.1.2",
     "jiti": "^2.4.2",
-    "mitata": "^1.0.31",
+    "mitata": "^1.0.32",
     "prettier": "^3.4.2",
     "protobufjs": "^7.4.0",
     "typescript": "^5.7.3",
     "unbuild": "^3.3.1",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.0.2"
+    "vitest": "^3.0.4"
   },
   "peerDependencies": {
     "typescript": "^5.7.3"
